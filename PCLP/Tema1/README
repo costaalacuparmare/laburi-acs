@@ -1,0 +1,21 @@
+Explicarea rezolvarii
+
+Legenda:
+num_count = numarul de numere;
+num = vectorul care contine numerele;
+op = sirul care contine operatorii;
+i = indexul in vector/sir (variabila implicita pentru for);
+pos = pozitia operatorului in sirul op;
+intr = pozitia de inceput pentru stergerea elementelor din sir si/sau vector;
+  
+Libraria tema1funct.h:
+Am creat o librarie care sa continta functia de stergere a unui element din vectorul de numere si de stergere a unui caracter din sirul de operanti. Acestea folosesc structura repetitiva 'for' pentru a suprascrie elementele unul peste celalalt. Ele sterg cate un element deodata, utilizatorul putand controla de la ce element pana la ce element se suprascriu. La finalul functiei, in cazul vectorului, numarul de numere scade, iar pentru sir, ultima valoarea se incarca cu 'NULL'. Am implementat aceste functii deoarece sunt folosite foarte des in cele 3 taskuri. Totodata, am definit ca mai multe constante atat operatorii, cat si o valoare maxima constanta pentru vector si sir.
+
+Task1:
+Acesta citeste numarul de numere, iar daca este 0, afiseaza 0, adica primul element din vectorul neincarcat. Altfel, citeste elementele din vector si, inainte de a citi operatorii, daca este un singur element, il afiseaza pe acela. Aceste verficari au fost facute folosind functia conditionala 'if'. Am folosit apoi functia 'switch case()' in interiorul unei functii repetitive cu numar nelimitat de pasi 'while', deoarece am considerat ca este mai simplu de folosit si de inteles decat o cascada de 'if'-uri. Mai mult, fiind vorba de 4 cazuri, am considerat ca nu este nevoie de 'if'. In urma verificarii operantului, se realizeaza operatia aferenta, apoi se sterge cel de al doilea numar care a luat parte la operatie. Inainte de a se reintoarce in 'while'-ul care verifica existenta operatorilor, sterge operatorul deja folosit din sir. La final, afiseaza primul element al vectorului de numere, care este rezultatul operatiilor cu numerele date, fara a tine cont de ordinea operatorilor.
+
+Task2:
+Similar task-ului 1, se citesc valorile si, in situatiile speciale de 1 si 0, afiseaza direct primul element al vectorului de numere. Se citeste apoi sirul de operatori. Am adaugat si in acest caz un 'while' pentru a lucra cat timp exista operatori. Pentru ca, in acest task, ordinea operatorilor conteaza, am decis sa folosesc un 'while' pentru fiecare operator si sa aranjez 'while'-urile aferente fiecaruia in functie de prioritatea operatorului. Astfel, toate operatiile cu operatorii '/' sau '*' sunt realizate inaintea celor cu '+' si '-'. Pentru a trece peste operatorii cu prioritate mai mica, in sirul de operatii, inainte de fiecare 'while', exista variabila de pozitie 'pos', care verifica pozitia operatiei cautate. Odata ce gaseste operatia, sterge operatia gasita din sirul de operatii, realizeaza operatia si o incarca in primul numar dintre cele doua cu care se efectueaza operatia, celalalt fiind sters din vectorul de numere. La final, se afiseaza primul element din vectorul de numere, care reprezinta rezultatul operatiilor cu numerele date, tinand cont de ordinea operatorilor.
+
+Task3:
+Apropape identic cu task-ul 2, exceptia fiind noul operator '#', pentru care se adauga un 'while' si o verificare a egalitatii cu caracterul din sirul de operatii in pozitia 'pos' prin 'if'. 'While'-ul aferent '#'-ului a fost plasat intre cele pentru '*','/' si '+','-', conform cerintei. La final, se afiseaza primul element din vectorul de numere, care reprezinta rezultatul operatiilor cu numerele date, tinand cont de ordinea operatorilor si de noul operator '#'.

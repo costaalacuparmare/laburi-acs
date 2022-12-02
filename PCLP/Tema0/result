@@ -1,0 +1,24 @@
+
+Run cpplint
+
+./lab3_ex1.c:3:  Extra space before ( in function call  [whitespace/parens] [4]
+./lab3_ex1.c:5:  Extra space after ( in function call  [whitespace/parens] [4]
+./lab3_ex1.c:5:  Extra space before ( in function call  [whitespace/parens] [4]
+./lab3_ex1.c:6:  Mismatching spaces inside () in while  [whitespace/parens] [5]
+./lab3_ex1.c:8:  Extra space for operator  ++   [whitespace/operators] [4]
+./lab3_ex1.c:10:  Extra space for operator  ++;  [whitespace/operators] [4]
+./lab3_ex1.c:12:  Extra space after ( in function call  [whitespace/parens] [4]
+./lab3_ex1.c:12:  Extra space before ( in function call  [whitespace/parens] [4]
+./lab3_ex1.c:14:  Extra space for operator  --;  [whitespace/operators] [4]
+./lab3_ex1.c:18:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+Done processing ./lab3_ex1.c
+Done processing ./tema0.c
+Done processing ./var.h
+Total errors found: 10
+
+Run clang-tidy
+
+7 warnings generated.
+14 warnings generated.
+Suppressed 14 warnings (14 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
