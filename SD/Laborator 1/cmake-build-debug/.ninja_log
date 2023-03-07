@@ -1,0 +1,5 @@
+# ninja log v5
+3	104	6997922380959157	CMakeFiles/Laborator_1.dir/main.c.obj	f95a4451bc03ec05
+2	171	6998976334811769	CMakeFiles/Laborator_1.dir/functiiLista.c.obj	462c23c135fd37cf
+172	503	6998976338057285	Laborator_1.exe	f00dba72beb9cafc
+2	164	6998977532610155	build.ninja	94131f4806246928
