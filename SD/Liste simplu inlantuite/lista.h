@@ -16,5 +16,5 @@ TLista AlocCelula(int elem);
 TLista CitireLista(int *dimLista);
 void AfisareLista(TLista L);
 void DistrugeLista(TLista* aL);
-void Ex1(TLista L);
-void Ex2(TLista L);
+void L1Ex1(TLista L);
+void L1Ex2(TLista L);

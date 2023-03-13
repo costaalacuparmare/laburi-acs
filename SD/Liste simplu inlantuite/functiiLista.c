@@ -56,8 +56,8 @@ void DistrugeLista(TLista* aL) {
         free(aux);
     }
 }
-/* Exercitii laborator */
-void Ex1(TLista L)
+/* Exercitii laborator1 */
+void L1Ex1(TLista L)
 {
     TLista aux = (TLista) malloc(sizeof(TLista));
     if(!aux) return;
@@ -71,7 +71,7 @@ void Ex1(TLista L)
     free(aux);
 }
 
-void Ex2(TLista L)
+void L1Ex2(TLista L)
 {
     TLista aux;
     int i, new_sec = 0, ind1 = 0;
@@ -89,3 +89,4 @@ void Ex2(TLista L)
         }
     }
 }
+

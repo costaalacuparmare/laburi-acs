@@ -5,8 +5,8 @@ int main(){
     TLista L = NULL;
 
     L = CitireLista(&lg);
-    //Ex1(L);
-    Ex2(L);
+    //L1Ex1(L);
+    L1Ex2(L);
     //printf("Dimensiune lista: %d\n", lg);
     //AfisareLista(L);
     //DistrugeLista(&L);
