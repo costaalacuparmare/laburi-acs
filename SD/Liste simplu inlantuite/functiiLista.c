@@ -171,10 +171,10 @@ void L1Ex2(TLista L)
 }
 
 /* Exercitii Laboratorul 2 */
-void L2Ex1 (TLista *L, int k)
+TLista L2Ex1 (TLista *L, int k, int *dim)
 {
     //functia face o noua lista prin mutare a ele, div cu k
-    TLista aux, Lnou, p;
+    TLista aux, Lnou, p, ant;
     for (aux = *L; aux->urm != NULL; aux = aux->urm)
         if (aux->info % k == 0) {
 
@@ -182,11 +182,14 @@ void L2Ex1 (TLista *L, int k)
                 InserareInceput(&Lnou, aux->info);
                 EliminaL(L, aux->info);
             } else {
-                for (p = Lnou; p->urm != NULL; p = p->urm)
-                    if (p->info > aux->info);
-
+                for(ant = NULL, p = Lnou; p && p->info < aux->info; ant = p, p = p->urm) {
+                    InserareInainte(&Lnou, aux->info, p->info);
+                    EliminaL(L,aux->info);
+                }
             }
+            (*dim++);
         }
+    return Lnou;
 }
 
 TLista L2Ex2 (TLista L, int a, int b, int *dim)

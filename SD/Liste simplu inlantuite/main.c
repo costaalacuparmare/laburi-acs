@@ -9,7 +9,7 @@ int main(){
     int dim = 0;
 
     /* comanda pentru exercitiul 1 de mutare */
-
+    AfisareLista(L2Ex1(&L,5,&dim));
 
     /* comanda pentru exercitiul 2 de copiere
     AfisareLista(L2Ex2(L,5,10,&dim));
