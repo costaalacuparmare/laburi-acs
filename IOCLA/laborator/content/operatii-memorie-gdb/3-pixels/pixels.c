@@ -13,7 +13,17 @@
  * linia n - 1, etc.
  */
 
-void reversePic(Picture *pic);
+void reversePic(Picture *pic)
+{
+    for (int i = 0; i < pic->height; ++i) {
+        for (int j = 0; j < pic->width; ++j) {
+            unsigned char cR = pic->pix_array[i][j].R;
+            unsigned char cG = pic->pix_array[i][j].G;
+            unsigned char cB = pic->pix_array[i][j].B;
+            pic->pix_array[i][j] = pic->pix_array[i-n][j-n];
+            pic->pix_array[i-n][j-n]
+                   pic->pix_array[i][j].G, pic->pix_array[i][j].B);
+}
 
 /*
  * TODO b
