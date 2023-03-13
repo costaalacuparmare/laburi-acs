@@ -5,10 +5,17 @@ int main(){
     TLista L = NULL;
 
     L = CitireLista(&lg);
-    //L1Ex1(L);
-    L1Ex2(L);
     //printf("Dimensiune lista: %d\n", lg);
-    //AfisareLista(L);
+    int dim = 0;
+
+    /* comanda pentru exercitiul 1 de mutare */
+
+
+    /* comanda pentru exercitiul 2 de copiere
+    AfisareLista(L2Ex2(L,5,10,&dim));
+    printf("%d\n",dim);
+     */
+
     //DistrugeLista(&L);
     return 0;
 }

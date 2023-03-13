@@ -56,6 +56,86 @@ void DistrugeLista(TLista* aL) {
         free(aux);
     }
 }
+
+/* Insereaza dupa o celula */
+int InserareDupa (TLista L, int x, int ref)
+{
+    TLista aux, p;
+    for (p = L; p != NULL; p = p->urm)
+        if(p->info == ref)
+            break;
+        if(!p) return 0;
+        aux = AlocCelula(x);
+        if(!aux) return 0;
+        aux->urm = p->urm;
+        p->urm = aux;
+        return 1;
+}
+
+/* Insereaza inaintea unei celule */
+int InserareInainte (TLista *L, int x, int ref)
+{
+    TLista aux, ant, p;
+    for (ant = NULL, p = *L; p != NULL; ant = p, p = p->urm)
+        if(p->info == ref)
+            break;
+    if(!p) return 0;
+    aux = AlocCelula(x);
+    if(!aux) return 0;
+    aux->urm = p;
+    if(ant == NULL)
+        *L = aux;
+    else
+        ant->urm = aux;
+    return 1;
+}
+
+/* Insereaza la inceputul listei */
+int InserareInceput (TLista *L, int x)
+{
+    TLista aux = AlocCelula(x);
+    if(!aux) return 0;
+    aux->urm = *L;
+    *L = aux;
+    return 1;
+}
+
+/* Insereaza la sfarsitul listei */
+int InserareSf (TLista *L, int x)
+{
+    TLista p, aux, ultim = NULL;
+    p = *L;
+    while(p!=NULL)
+    {
+        ultim = p;
+        p = p->urm;
+    }
+    aux = AlocCelula(x);
+    if(!aux) return 0;
+    if(ultim)
+        ultim->urm = aux;
+    else
+        *L = aux;
+    return 1;
+}
+
+/* eliminare element */
+int EliminaL (TLista *L, int x)
+{
+    TLista aux, ant;
+    for ( ant = NULL, aux = *L; aux != NULL; ant = aux, aux = aux->urm)
+        if(aux->info == x)
+            break;
+    if(aux == NULL)
+        return 0;
+    if(ant)
+        ant->urm = aux->urm;
+    else
+        *L = aux->urm;
+    free(aux);
+    return 1;
+}
+
 /* Exercitii laborator1 */
 void L1Ex1(TLista L)
 {
@@ -90,3 +170,44 @@ void L1Ex2(TLista L)
     }
 }
 
+/* Exercitii Laboratorul 2 */
+void L2Ex1 (TLista *L, int k)
+{
+    //functia face o noua lista prin mutare a ele, div cu k
+    TLista aux, Lnou, p;
+    for (aux = *L; aux->urm != NULL; aux = aux->urm)
+        if (aux->info % k == 0) {
+
+            if (Lnou == NULL) {
+                InserareInceput(&Lnou, aux->info);
+                EliminaL(L, aux->info);
+            } else {
+                for (p = Lnou; p->urm != NULL; p = p->urm)
+                    if (p->info > aux->info);
+
+            }
+        }
+}
+
+TLista L2Ex2 (TLista L, int a, int b, int *dim)
+{
+    TLista aux, Lnou = NULL, ant;
+    for (aux = L; aux->urm != NULL; aux = aux->urm) {
+        if (aux->info >= a && aux->info <= b) {
+            if (Lnou == NULL) {
+                InserareInceput(&Lnou, aux->info);
+                ant = aux;
+            } else {
+                InserareDupa(Lnou, aux->info, ant->info);
+                ant = aux;
+            }
+            (*dim)++;
+        }
+        if (aux->info >= b)
+            break;
+    }
+    if(!dim)
+        return NULL;
+    else
+        return Lnou;
+}
