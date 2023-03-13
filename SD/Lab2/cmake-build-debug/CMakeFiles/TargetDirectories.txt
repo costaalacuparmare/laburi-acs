@@ -1,0 +1,3 @@
+/home/turner/Desktop/UPB/SD/Lab2/cmake-build-debug/CMakeFiles/Laborator_1.dir
+/home/turner/Desktop/UPB/SD/Lab2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/turner/Desktop/UPB/SD/Lab2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
