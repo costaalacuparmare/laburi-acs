@@ -76,3 +76,22 @@ void DistrugeLista2(TLista2 *aL) {
     free(*aL);                  /* distrugere santinela */
     *aL = NULL;
 }
+
+// Lab3 Ex 2
+
+int InsrX (TLista2 *aL, int x, int ref)
+{
+    TLista2 aux, ant, p;
+    int nr = 0;
+    for (p = *aL; p != NULL; p = p->urm)
+        if(p->info == ref) {
+            aux = AlocCelula2(x);
+            if(!aux) return 0;
+            aux->urm = p;
+            aux->pre = p->pre;
+            p->pre->urm = aux;
+            aux->urm->pre = p;
+            nr++;
+        }
+    return nr;
+}

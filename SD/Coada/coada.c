@@ -80,6 +80,6 @@ TCoada *Qpar(TCoada *c)
     while(ExtrQ(c,&x)) {
         if (x % 2 == 0)
             IntrQ(r, x);
-        return r;
     }
+    return r;
 }

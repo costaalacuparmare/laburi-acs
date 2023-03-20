@@ -13,3 +13,4 @@ TLista2 InitLista2();
 TLista2 CitireLista2();
 void AfisareLista2(TLista2 L);
 void DistrugeLista2(TLista2 *aL);
+int InsrX (TLista2 *aL, int x, int ref);
