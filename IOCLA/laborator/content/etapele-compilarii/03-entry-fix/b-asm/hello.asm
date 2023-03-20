@@ -1,3 +1,4 @@
+global main
 extern puts
 
 section .rodata

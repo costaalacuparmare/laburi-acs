@@ -7,6 +7,10 @@ int main(void)
 	 * without directly calling a printing function from an existing
 	 * library(do NOT use printf, fprintf, fwrite, ...).
 	 */
+    extern int qty = 42;
+    set_price(21);
+    print_price();
+    print_quantity();
 
 	return 0;
 }

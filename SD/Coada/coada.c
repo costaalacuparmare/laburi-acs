@@ -31,8 +31,15 @@ int IntrQ(TCoada *c, int x)  /* adauga element la sfarsitul cozii */
 }
 
 int ExtrQ(TCoada *c, int *x)  /* extrage primul element din coada la adresa ae */
-{ 
-  return 1;                      
+{
+    TLista aux;
+    if(c->inc == NULL)
+        return 0;
+    aux = c->inc;
+    *x = c->inc->info;
+    c->inc = c->inc->urm;
+    free(aux);
+    return 1;
 }
 
 void DistrQ(TCoada **c) /* distruge coada */
@@ -61,4 +68,18 @@ void AfisareQ(TCoada *c)  /* afisare elementele cozii */
   for(p = c->inc; p != NULL; p = p->urm)
     printf("%d ", p->info);
   printf("\n");
+}
+
+//Lab 3, Ex1, b)
+TCoada *Qpar(TCoada *c)
+{
+    TCoada *r;
+    r = InitQ();
+    if(!r) return NULL;
+    int x = 0;
+    while(ExtrQ(c,&x)) {
+        if (x % 2 == 0)
+            IntrQ(r, x);
+        return r;
+    }
 }

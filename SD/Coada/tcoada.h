@@ -21,3 +21,4 @@ int IntrQ(TCoada *c, int x);
 void DistrQ(TCoada **c);
 
 void AfisareQ(TCoada *c);
+TCoada *Qpar(TCoada *c);
