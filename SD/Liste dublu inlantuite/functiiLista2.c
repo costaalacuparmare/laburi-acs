@@ -77,7 +77,7 @@ void DistrugeLista2(TLista2 *aL) {
     *aL = NULL;
 }
 
-// Lab3 Ex 2
+// Lab3 Ex 2 - inserare in fata celulei ref pentru toate celulele cu val ref
 
 int InsrX (TLista2 *aL, int x, int ref)
 {
