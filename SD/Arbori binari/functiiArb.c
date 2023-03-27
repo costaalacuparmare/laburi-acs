@@ -133,3 +133,38 @@ void AfiArb(TArb r) /*- afiseaza arborele r -*/
 	printf ("\n");
 }
 
+//Ex1 Lab4 - numara cate noduri sunt recursiv
+
+int Numara (TArb r) {
+    if (!r)
+        return 0;
+    if (r->dr != NULL && r->st != NULL) {
+        if (r->info > (r->dr->info + r->st->info) / 2)
+            return 1 + Numara(r->st) + Numara(r->dr);
+        return Numara(r->st) + Numara(r->dr);
+    }
+}
+
+//Ex2 Lab 4 - parcurgere sdr si nr cate noduri au doar un fiu pe dr
+
+void Parcurgere (TArb r, int *nr_info) {
+    if (!r)
+        return;
+    Parcurgere(r->st, nr_info);
+    Parcurgere(r->dr, nr_info);
+    if (r->st == NULL && r->dr != NULL) {
+        printf("nod: %d\n", r->info);
+        (*nr_info)++;
+    }
+}
+
+int Verifica (TArb r) {
+    if (!r)
+        return 0;
+    if ( !r->st && !r->dr)
+        return 1;
+    if(r->st && r->dr)
+        return 1 && Verifica(r->st) && Verifica(r->dr);
+    return 0;
+}
+

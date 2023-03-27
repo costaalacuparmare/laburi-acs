@@ -25,7 +25,9 @@ int NrNoduri(TArb);     /* numar noduri */
 
 /*-- Operatii suplimentare --*/
 void AfiArb(TArb r); /*- afiseaza arborele r -*/
-
+int Numara (TArb r);
+void Parcurgere (TArb r, int * nr_info);
+int Verifica (TArb r);
 #endif
 
 #ifndef _random_
