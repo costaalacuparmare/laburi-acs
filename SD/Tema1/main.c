@@ -5,6 +5,5 @@
 int main ()
 {
     printf("Deget e mouse in pula mea\n");
-    fun(5);
     return 0;
 }
