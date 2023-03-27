@@ -2,14 +2,21 @@
 
 int main(void)
 {
-	int v[] = {4, 1, 2, -17, 15, 22, 6, 2};
+	int v[] = {4, 1, 2, -17, 103, 22, 6, 2};
 	int max;
-	int i;
+	int i = 1;
+    int n = 7;
+    max = v[0];
 
-	/* TODO: Implement finding the maximum value in the vector */
-	max = v[0];
-	i = 1;
+for_label:
+    if (v[i] > max)
+        max = v[i];
+    i++;
+    if (i >= n)
+        goto exit;
+    goto for_label;
 
-	(void) i;
-	(void) max;
+exit:
+    printf("%d\n", max);
+    return 0;
 }

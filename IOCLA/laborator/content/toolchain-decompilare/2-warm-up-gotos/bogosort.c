@@ -30,19 +30,24 @@ static void shuffle(int a[], int n)
 int main(void)
 {
 	int numbers[] = {1, 13, 2,  5, 3, -7};
-	int i;
+	int i = 0;
 
 	while (1) {
 		shuffle(numbers, 6);
 
 		if (is_sorted(numbers, 6))
-			/* TODO use goto instead of break */
-			break;
+			goto for_label;
 	}
 
-	for (i = 0; i < 6; i++)
-		printf("%d ", numbers[i]);
-	printf("\n");
+for_label:
+	printf("%d ", numbers[i]);
+    i++;
+    if ( i >= 6) {
+        printf("\n");
+        goto exit;
+    }
+    goto for_label;
 
+exit:
 	return 0;
 }
