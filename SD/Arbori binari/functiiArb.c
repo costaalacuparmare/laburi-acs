@@ -158,6 +158,8 @@ void Parcurgere (TArb r, int *nr_info) {
     }
 }
 
+//Ex3 Lab 4 - afiseaza daca toate nodurile non-frunze au 2 fii
+
 int Verifica (TArb r) {
     if (!r)
         return 0;
