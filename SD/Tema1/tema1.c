@@ -2,31 +2,55 @@
 
 #include "tema1.h"
 
-/* Aloca un element de tip TCelula2 si returneaza pointerul aferent */
-TLista2 AlocCelula2(int x) {
-    TLista2 aux = (TLista2) malloc(sizeof(TCelula2));
+/* FUNCTIILE PENTRU BANDA */
+
+/* Aloca un element de tip TCelulaB si returneaza pointerul aferent */
+
+TBanda AlocCelulaB(char x) {
+    TBanda aux = (TBanda) malloc(sizeof(TCelulaB));
     if (!aux) {
         return NULL;
     }
-
     aux->info = x;
     aux->pre = aux->urm = NULL;
-
     return aux;
 }
 
-/* Creeaza santinela pentru lista folosita */
-TLista2 InitLista2() {
-    TLista2 aux = (TLista2) malloc(sizeof(TCelula2));
-    if (!aux) {
+/* Creeaza santinela pentru banda */
+
+TBanda InitBanda(TBanda *deget) {
+
+    /* creem banda returnand santinela si
+    inseram primul element # catre care va pointa degetul*/
+
+    TBanda aux = (TBanda) malloc(sizeof(TCelulaB));
+    if (!aux)
         return NULL;
-    }
+    TBanda aux2 = (TBanda) malloc(sizeof(TCelulaB));
+    if (!aux2)
+        return NULL;
 
-    aux->info = 0;                  /* informatia din santinela are valoarea 0 */
+    aux->info = 0;
     aux->pre = NULL;
-    aux->urm = NULL;
-
+    aux->urm = aux2;
+    aux2->info = '#';
+    aux2->pre = aux;
+    aux2->urm = NULL;
+    (*deget) = aux2;
     return aux;
+}
+
+TBanda CitireBanda(TBanda *deget) {
+
+    /* initializam banda si verificam */
+
+
+    //ultim = L;
+
+}
+
+void MOVE_LEFT(TBanda ) {
+
 }
 
 TCoada* InitQ ()  /* creeaza coada vida cu elemente de dimensiune d;

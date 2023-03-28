@@ -3,15 +3,20 @@
 #include <string.h>
 #include <stdlib.h>
 
-/* definire lista dublu inlantuita cu santinela */
+/* FUNCTIILE PENTRU BANDA */
+
+/* definirea benzii ca o lista dublu
+ inlantuita cu santinela */
 
 typedef struct celulaB {
     char info;
-    struct celula *pre, *urm;
+    struct celulaB *pre, *urm;
 } TCelulaB, *TBanda;
 
-TLista2 AlocCelula2(int x);
-TLista2 InitLista2();
+/* functiile folosite pentru crearea benzii */
+
+TBanda AlocCelulaB(char x);
+TBanda InitBanda(TBanda * deget);
 
 //COADA
 
