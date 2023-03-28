@@ -2,6 +2,16 @@
 
 #include "tema1.h"
 
+void Citire() {
+    char *cmd_arr = (char *) malloc(MAX*sizeof(char));
+    if (!cmd_arr) return;
+    int cmd_nr;
+    FILE *input = fopen("tema1.in","rt");
+    FILE *output = fopen("tema1.out","w+");
+    fscanf(input,"%d",&cmd_nr);
+    fprintf(output, "%d", cmd_nr);
+}
+
 /* FUNCTIILE PENTRU BANDA */
 
 /* Aloca un element de tip TCelulaB si returneaza pointerul aferent */
@@ -49,7 +59,69 @@ TBanda CitireBanda(TBanda *deget) {
 
 }
 
-void MOVE_LEFT(TBanda ) {
+void MOVE_LEFT(TBanda *deget) {
+    if ((*deget)->pre->pre == NULL)
+        return;
+    (*deget) = (*deget)->pre;
+}
+
+
+void MOVE_RIGHT(TBanda *deget) {
+    TBanda aux;
+    if((*deget)->urm == NULL) {
+        aux = AlocCelulaB('#');
+        if (!aux) return;
+        aux->urm = NULL;
+        aux->pre = (*deget);
+        (*deget)->urm = aux;
+    }
+    (*deget) = (*deget)->urm;
+}
+
+void MOVE_RIGHT_CHAR (TBanda *deget, char x) {
+    TBanda p, aux;
+    int verif = 0;
+    for(p = (*deget); p != NULL; p = p->pre)
+        if(p->info == x) {
+            (*deget) = p;
+            verif = 1;
+            break;
+        }
+    if(!verif) {
+        aux = AlocCelulaB('#');
+        if (!aux) return;
+        aux->urm = NULL;
+        aux->pre = (*deget);
+        (*deget)->urm = aux;
+        (*deget) = (*deget)->urm;
+    }
+}
+
+void MOVE_LEFT_CHAR (TBanda *deget, char c) {
+    TBanda p;
+    int verif = 0;
+    for(p = (*deget); p != NULL; p = p->urm)
+        if(p->info == c) {
+            (*deget) = p;
+            verif = 1;
+            break;
+        }
+    if(!verif)
+        printf("ERROR\n");
+}
+
+void WRITE (TBanda *deget, char c) {
+    (*deget)->info = c;
+}
+
+void INSERT_LEFT(TBanda *deget, char c) {
+    if((*deget)->pre->pre == NULL)
+        printf("ERROR\n");
+    TBanda aux = AlocCelulaB(c);
+    aux->urm = (*deget);
+    aux->pre = (*deget)->pre;
+    (*deget)->pre->urm = aux;
+    (*deget)->pre = aux;
 
 }
 

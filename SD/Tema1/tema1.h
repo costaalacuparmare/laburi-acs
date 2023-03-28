@@ -2,6 +2,7 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#define MAX 20
 
 /* FUNCTIILE PENTRU BANDA */
 
@@ -15,8 +16,17 @@ typedef struct celulaB {
 
 /* functiile folosite pentru crearea benzii */
 
+void Citire();
+
 TBanda AlocCelulaB(char x);
 TBanda InitBanda(TBanda * deget);
+
+void MOVE_LEFT(TBanda *deget);
+void MOVE_RIGHT(TBanda *deget);
+void MOVE_LEFT_CHAR(TBanda *deget, char x);
+void MOVE_RIGHT_CHAR(TBanda *deget, char x);
+void WRITE (TBanda *B, char x);
+void INSERT_LEFT(TBanda *deget, char c);
 
 //COADA
 
