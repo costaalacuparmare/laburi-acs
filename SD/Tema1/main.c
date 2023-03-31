@@ -4,19 +4,16 @@
 
 int main ()
 {
-    TBanda deget, B = NULL;
+    TBanda B;
+    TCoada Q;
+    TStiva Undo;
+    TStiva Redo;
+    TCmd *CMD;
 
-    char X;
+    Init(&B,&Q,&Undo,&Redo);
+    CMD = CitireFisier(&B,&Q,&Undo,&Redo);
+    Execute(&B,&Q,&Undo,&Redo,CMD);
+    Free(&B,&Q,&Undo,&Redo,CMD);
 
-    deget = (TBanda) malloc(sizeof(TCelulaB));
-    if (!deget) return 0;
-
-    B = InitBanda(&deget);
-    if (!B) return 0;
-    Citire();
-    printf("%c\n", deget->info);
-    INSERT_LEFT(&deget,X);
-    printf("%c\n",  deget->info);
-    printf("Deget e mouse in pula mea\n");
     return 0;
 }

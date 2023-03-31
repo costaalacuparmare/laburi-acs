@@ -2,24 +2,52 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+
 #define MAX 20
+/* MOVE_LEFT / 1
+ * MOVE_RIGHT / 2
+ * MOVE_LEFT_CHAR / 3 + param
+ * MOVE_RIGHT_CHAR / 4 + param
+ * INSERT_LEFT / 5 + param
+ * INSERT_RIGHT / 6 + param
+ * WRITE / 7 + param
+ * SHOW_CURRENT / 8
+ * SHOW / 9
+ * UNDO / 10
+ * REDO / 11
+*/
+
+/* FUNCTIILE PENTRU COMENZI */
+
+typedef struct cmd {
+    int cod;
+    char param;
+} TCmd;
+
+TCmd *Codificare(TCmd *CMD, char *cmd, int i);
 
 /* FUNCTIILE PENTRU BANDA */
 
 /* definirea benzii ca o lista dublu
- inlantuita cu santinela */
+ inlantuita cu santinela si un deget */
 
 typedef struct celulaB {
     char info;
     struct celulaB *pre, *urm;
-} TCelulaB, *TBanda;
+} TCelulaB, *TListaB;
+
+typedef struct banda {
+    TListaB santinela;
+    TListaB deget;
+} *TBanda;
+
 
 /* functiile folosite pentru crearea benzii */
 
-void Citire();
+void CitireFisier();
 
 TBanda AlocCelulaB(char x);
-TBanda InitBanda(TBanda * deget);
+TBanda InitB();
 
 void MOVE_LEFT(TBanda *deget);
 void MOVE_RIGHT(TBanda *deget);
@@ -27,25 +55,30 @@ void MOVE_LEFT_CHAR(TBanda *deget, char x);
 void MOVE_RIGHT_CHAR(TBanda *deget, char x);
 void WRITE (TBanda *B, char x);
 void INSERT_LEFT(TBanda *deget, char c);
+void SHOW_CURRENT(TBanda *deget);
 
-//COADA
+//FUNCTIILE PENTRU COADA
 
 #define _COADA_DINAMICA_
 
-typedef struct celula
-{
+typedef struct celula {
     char info;
     struct celula* urm;
 } TCelula, *TLista;
 
-typedef struct coada
-{
+typedef struct coada {
     TLista inc, sf;       /* adresa primei si ultimei celule */
-} TCoada;
+} *TCoada;
 
-TCoada* InitQ () ;
+TCoada InitQ ();
 int ExtrQ(TCoada*c, int *x);
 int IntrQ(TCoada *c, int x);
 void DistrQ(TCoada **c);
 
 void AfisareQ(TCoada *c);
+
+//STIVA
+
+typedef struct stiva {
+   TLista vf;
+} *TStiva;
