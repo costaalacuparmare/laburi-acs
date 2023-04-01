@@ -60,7 +60,7 @@ void SHOW_CURRENT(TBanda *deget);
 #define _COADA_DINAMICA_
 
 typedef struct celula {
-    char info;
+    TCmd info;
     struct celula* urm;
 } TCelula, *TLista;
 
@@ -71,7 +71,7 @@ typedef struct coada {
 TCoada InitQ ();
 
 int ExtrQ(TCoada*c, int *x);
-int IntrQ(TCoada *c, int x);
+int IntrQ(TCoada *c, TCmd x);
 void DistrQ(TCoada **c);
 
 void AfisareQ(TCoada *c);
@@ -88,4 +88,7 @@ TStiva InitS();
 
 void Init(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo);
 
-void CitireFisier(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo);
+void Run(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo);
+
+void Read(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo);
+

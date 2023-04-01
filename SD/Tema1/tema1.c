@@ -53,14 +53,14 @@ int Codificare(char *cmd, char **param) {
 
     char *p = (char *) malloc (MAX);
     strcpy(p,cmd);
-    if (strcmp(cmd,"MOVE_LEFT") == 0)
+    if (strcmp(cmd,"MOVE_LEFT\n") == 0)
         return 1;
-    if (strcmp(cmd,"MOVE_RIGHT") == 0)
+    if (strcmp(cmd,"MOVE_RIGHT\n") == 0)
         return 2;
-    if (cmd[MAX/2+1] == 'C') {
+    if (cmd[11] == 'C' || cmd[10] == 'C') {
         *param = strtok(p," ");
-        *param = strtok(NULL,"\0");
-        if(cmd[MAX/4] == 'L') {
+        *param = strtok(NULL,"\n");
+        if(cmd[5] == 'L') {
 
             return 3;
         }
@@ -69,7 +69,7 @@ int Codificare(char *cmd, char **param) {
     }
     if (cmd[0] == 'I') {
         *param = strtok(p, " ");
-        *param = strtok(NULL, "\0");
+        *param = strtok(NULL, "\n");
         if (cmd[7] == 'L') {
             return 5;
         } else
@@ -77,44 +77,61 @@ int Codificare(char *cmd, char **param) {
     }
     if (cmd[0] == 'W') { // de rez cu strchr
         *param = strtok(p," ");
-        *param = strtok(NULL,"\0");
+        *param = strtok(NULL,"\n");
         return 7;
     }
-    if (strcmp(cmd,"SHOW_CURRENT") == 0)
+    if (strcmp(cmd,"SHOW_CURRENT\n") == 0)
         return 8;
-    if (strcmp(cmd,"SHOW") == 0)
+    if (strcmp(cmd,"SHOW\n") == 0)
         return 9;
-    if (strcmp(cmd,"UNDO") == 0)
+    if (strcmp(cmd,"UNDO\n") == 0)
         return 10;
-    if (strcmp(cmd,"REDO") == 0)
+    if (strcmp(cmd,"REDO\n") == 0)
         return 11;
 }
 
+int IntrQ(TCoada *c, TCmd x)
+{
+    TLista aux;
+    aux = (TLista)malloc(sizeof(TCelula));
+    if (!aux) return 0;
+    aux->info = x;
+    printf("%d\n",aux->info->cod);
+    aux->urm = NULL;
+    /*if (*c->sf != NULL)
+        *c->sf->urm = aux;
+    else
+        *c->inc = aux;
+    *c->sf = aux;*/
+    return 1;
+}
+
 void CitireFisier(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
-    char *cmd = (char *) malloc(MAX*sizeof(char));
+    char *cmd = (char *) malloc(MAX * sizeof(char));
     if (!cmd) return;
 
     int cmd_nr = 0;
-    FILE *input = fopen("tema1.in","rt");
-    if (input == NULL) {
-        printf("WTF COAIE\n");
-        return;
-    }
-    FILE *output = fopen("tema1.out","w+");
-
-    fscanf(input,"%d",&cmd_nr);
+    FILE *input = fopen("tema1.in", "rt");
+    FILE *output = fopen("tema1.out", "w+");
+    fscanf(input, "%d", &cmd_nr);
     fprintf(output, "%d\n", cmd_nr);
 
     TCmd CMD = (TCmd) malloc(sizeof(TCmd));
-
-    for (int i = 0; i < cmd_nr; i++) {
-        fgets(cmd,MAX,input);
-        fscanf(input, "%s", cmd);
-        CMD->cod = Codificare(cmd,&CMD->param);
+    fgets(cmd, MAX, input);
+    int i ;
+    for (i = 0; i < cmd_nr; i++) {
+        fgets(cmd, MAX, input);
+        CMD->param = NULL;
+        CMD->cod = Codificare(cmd, &CMD->param);
+        IntrQ(Q,CMD);
         fprintf(output, "cod: %d, param: %s, cmd: %s\n", CMD->cod, CMD->param, cmd);
-        cmd = NULL;
     }
 }
+
+void Run(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
+    CitireFisier(B, Q, Undo, Redo);
+}
+
 /*
 /* FUNCTIILE PENTRU BANDA */
 
@@ -210,23 +227,6 @@ void INSERT_LEFT(TBanda *deget, char c) {
 
 void SHOW_CURRENT (TBanda *deget) {
     fprintf(output,"%c\n",(*deget)->info);
-}
-
-
-int IntrQ(TCoada *c, int x)
-{
-    TLista aux;
-    aux = (TLista)malloc(sizeof(TCelula));
-    if ( ! aux) return 0;
-
-    aux->info = x; aux->urm = NULL;
-
-    if (c->sf != NULL)
-        c->sf->urm = aux;
-    else
-        c->inc = aux;
-    c->sf = aux;
-    return 1;
 }
 
 int ExtrQ(TCoada *c, int *x)

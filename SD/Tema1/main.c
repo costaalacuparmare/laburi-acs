@@ -10,7 +10,7 @@ int main()
     TStiva Redo;
 
     Init(&B,&Q,&Undo,&Redo);
-    CitireFisier(&B,&Q,&Undo,&Redo);
+    Run(&B,&Q,&Undo,&Redo);
     /*Execute(&B,&Q,&Undo,&Redo,CMD);
     Free(&B,&Q,&Undo,&Redo,CMD);*/
     /*char *s = "MOVE_RIGHT";
