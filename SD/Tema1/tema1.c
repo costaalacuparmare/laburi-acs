@@ -46,17 +46,17 @@ TStiva InitS() {
     return s;
 }
 
-/*int Codificare(char *cmd, char *param) {
+int Codificare(char *cmd, char **param) {
 
-    char *p = (char *) malloc (sizeof(MAX));
+    char *p = (char *) malloc (MAX);
     strcpy(p,cmd);
     if (strcmp(cmd,"MOVE_LEFT") == 0)
         return 1;
     if (strcmp(cmd,"MOVE_RIGHT") == 0)
         return 2;
     if (cmd[MAX/2+1] == 'C') {
-        param = strtok(p," ");
-        param = strtok(NULL,"\0");
+        *param = strtok(p," ");
+        *param = strtok(NULL,"\0");
         if(cmd[MAX/4] == 'L') {
 
             return 3;
@@ -65,16 +65,16 @@ TStiva InitS() {
             return 4;
     }
     if (cmd[0] == 'I') {
-        param = strtok(p, " ");
-        param = strtok(NULL, "\0");
+        *param = strtok(p, " ");
+        *param = strtok(NULL, "\0");
         if (cmd[7] == 'L') {
             return 5;
         } else
             return 6;
     }
     if (cmd[0] == 'W') { // de rez cu strchr
-        *param = (char) strtok(p," ");
-        *param = (char) strtok(NULL,"\0");
+        *param = strtok(p," ");
+        *param = strtok(NULL,"\0");
         return 7;
     }
     if (strcmp(cmd,"SHOW_CURRENT") == 0)
@@ -85,7 +85,7 @@ TStiva InitS() {
         return 10;
     if (strcmp(cmd,"REDO") == 0)
         return 11;
-}*/
+}
 
 void CitireFisier(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
     char *cmd = (char *) malloc(MAX*sizeof(char));

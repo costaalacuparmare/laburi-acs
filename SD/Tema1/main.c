@@ -14,9 +14,9 @@ int main()
     Execute(&B,&Q,&Undo,&Redo,CMD);
     Free(&B,&Q,&Undo,&Redo,CMD);*/
     char *s = "WRITE X";
-   // printf("cod: %d, param: %s, cmd: %s\n",CMD->cod,CMD->param,s);
+    printf("cod: %d, param: %s, cmd: %s\n",CMD->cod,CMD->param,s);
     CMD->cod = Codificare(s,&CMD->param);
-    //printf("cod: %d, param: %, cmd: %s\n",CMD->cod,CMD->param,s);
+    printf("cod: %d, param: %s, cmd: %s\n",CMD->cod,CMD->param,s);
 
     return 0;
 }

@@ -21,10 +21,10 @@
 
 typedef struct command {
     int cod;
-    char param;
+    char *param;
 } *TCmd;
 
-int Codificare(char *cmd, char *param);
+int Codificare(char *cmd, char **param);
 
 /* FUNCTIILE PENTRU BANDA */
 
