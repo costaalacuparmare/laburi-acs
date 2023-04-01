@@ -30,37 +30,64 @@ TBanda InitB() {
     return aux;
 }
 
-void Codificare(TCmd *CMD, char *cmd, int i) {
-    if (!strcmp(cmd,"MOVE_LEFT"))
-        CMD[i]->cod = 1;
-    if (!strcmp(cmd,"MOVE_RIGHT"))
-        CMD[i]->cod = 2;
-    if (cmd[MAX/2] == 'C')) { // de rez cu strchr
-        if(cmd[MAX/4] == 'L') {
-            CMD[i]->cod = 3;
-        }
-        else
-            CMD[i]->cod = 4;
-    }
-    if (cmd[0] == 'I')) { // de rez cu strchr
-        if(cmd[7] == 'L') {
-            CMD[i]->cod = 5;
-        }
-        else
-            CMD[i]->cod = 6;
-    if (cmd[0] == 'W')) // de rez cu strchr
-        CMD[i]->cod = 7;
-    if (!strcmp(cmd,"SHOW_CURRENT"))
-        CMD[i]->cod = 8;
-    if (!strcmp(cmd,"SHOW"))
-        CMD[i]->cod = 9;
-    if (!strcmp(cmd,"UNDO"))
-        CMD[i]->cod = 10;
-    if (!strcmp(cmd,"REDO"))
-        CMD[i]->cod = 11;
+TCoada InitQ () {
+    TCoada c;
+    c = (TCoada) malloc(sizeof(TCoada));
+    if (!c) return NULL;
+    c->inc = c->sf = NULL;
+    return c;
 }
 
-void CitireFisier() {
+TStiva InitS() {
+    TStiva s;
+    s = (TStiva) malloc(sizeof(TStiva));
+    if (!s) return NULL;
+    s->vf = NULL;
+    return s;
+}
+
+/*int Codificare(char *cmd, char *param) {
+
+    char *p = (char *) malloc (sizeof(MAX));
+    strcpy(p,cmd);
+    if (strcmp(cmd,"MOVE_LEFT") == 0)
+        return 1;
+    if (strcmp(cmd,"MOVE_RIGHT") == 0)
+        return 2;
+    if (cmd[MAX/2+1] == 'C') {
+        param = strtok(p," ");
+        param = strtok(NULL,"\0");
+        if(cmd[MAX/4] == 'L') {
+
+            return 3;
+        }
+        else
+            return 4;
+    }
+    if (cmd[0] == 'I') {
+        param = strtok(p, " ");
+        param = strtok(NULL, "\0");
+        if (cmd[7] == 'L') {
+            return 5;
+        } else
+            return 6;
+    }
+    if (cmd[0] == 'W') { // de rez cu strchr
+        *param = (char) strtok(p," ");
+        *param = (char) strtok(NULL,"\0");
+        return 7;
+    }
+    if (strcmp(cmd,"SHOW_CURRENT") == 0)
+        return 8;
+    if (strcmp(cmd,"SHOW") == 0)
+        return 9;
+    if (strcmp(cmd,"UNDO") == 0)
+        return 10;
+    if (strcmp(cmd,"REDO") == 0)
+        return 11;
+}*/
+
+void CitireFisier(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
     char *cmd = (char *) malloc(MAX*sizeof(char));
     if (!cmd) return;
     int cmd_nr;
@@ -71,18 +98,18 @@ void CitireFisier() {
     fscanf(input,"%d",&cmd_nr);
     fprintf(output, "%d\n", cmd_nr);
 
-    TCoada *c = InitQ();
     for (int i = 0; i < cmd_nr; i++) {
         //fgets(cmd_arr,MAX,input);
-        fscanf(input,"%s",cmd);
+        fscanf(input, "%s", cmd);
         //if (strchr(cmd,'_')
-        fprintf(output,"%s\n",cmd);
+        fprintf(output, "%s\n", cmd);
+    }
 }
-
+/*
 /* FUNCTIILE PENTRU BANDA */
 
 /* Aloca un element de tip TCelulaB si returneaza pointerul aferent */
-
+/*
 TBanda AlocCelulaB(char x) {
     TBanda aux = (TBanda) malloc(sizeof(TBanda));
     if (!aux) {
@@ -96,7 +123,7 @@ TBanda AlocCelulaB(char x) {
 /* Creeaza santinela pentru banda */
 
 
-
+/*
 TBanda CitireBanda(TBanda *deget) {
 
     /* initializam banda si verificam */
@@ -104,8 +131,8 @@ TBanda CitireBanda(TBanda *deget) {
 
     //ultim = L;
 
-}
-
+//}
+/*
 void MOVE_LEFT(TBanda *deget) {
     if ((*deget)->pre->pre == NULL)
         return;
@@ -175,32 +202,24 @@ void SHOW_CURRENT (TBanda *deget) {
     fprintf(output,"%c\n",(*deget)->info);
 }
 
-TCoada InitQ ()
-{
-    TCoada c;
-    c = (TCoada) malloc(sizeof(TCoada));
-    if (!c) return NULL;
-    c->inc = c->sf = NULL;
-    return c;
-}
 
-int IntrQ(TCoada *c, int x)  /* adauga element la sfarsitul cozii */
+int IntrQ(TCoada *c, int x)
 {
     TLista aux;
-    aux = (TLista)malloc(sizeof(TCelula));      /* aloca o noua celula */
-    if ( ! aux) return 0;             /* alocare imposibila -> "esec" */
+    aux = (TLista)malloc(sizeof(TCelula));
+    if ( ! aux) return 0;
 
     aux->info = x; aux->urm = NULL;
 
-    if (c->sf != NULL)          /* coada nevida */
-        c->sf->urm = aux;                   /* -> leaga celula dupa ultima din coada */
-    else                              /* coada vida */
-        c->inc = aux;                    /* -> noua celula se afla la inceputul cozii */
-    c->sf = aux;  	            /* actualizeaza sfarsitul cozii */
-    return 1;                         /* operatie reusita -> "succes" */
+    if (c->sf != NULL)
+        c->sf->urm = aux;
+    else
+        c->inc = aux;
+    c->sf = aux;
+    return 1;
 }
 
-int ExtrQ(TCoada *c, int *x)  /* extrage primul element din coada la adresa ae */
+int ExtrQ(TCoada *c, int *x)
 {
     TLista aux;
     if(c->inc == NULL)
@@ -212,7 +231,7 @@ int ExtrQ(TCoada *c, int *x)  /* extrage primul element din coada la adresa ae *
     return 1;
 }
 
-void DistrQ(TCoada **c) /* distruge coada */
+void DistrQ(TCoada **c)
 {
     TLista p, aux;
     p = (*c)->inc;
@@ -226,10 +245,10 @@ void DistrQ(TCoada **c) /* distruge coada */
     *c = NULL;
 }
 
-void AfisareQ(TCoada *c)  /* afisare elementele cozii */
+void AfisareQ(TCoada *c)
 {
     TLista p;
-    if(c->inc == NULL)  /* coada vida */
+    if(c->inc == NULL)
     {
         printf("Coada vida\n");
         return;
@@ -239,3 +258,4 @@ void AfisareQ(TCoada *c)  /* afisare elementele cozii */
         printf("%d ", p->info);
     printf("\n");
 }
+ */

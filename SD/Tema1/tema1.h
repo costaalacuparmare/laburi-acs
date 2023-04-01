@@ -19,12 +19,12 @@
 
 /* FUNCTIILE PENTRU COMENZI */
 
-typedef struct cmd {
+typedef struct command {
     int cod;
     char param;
-} TCmd;
+} *TCmd;
 
-TCmd *Codificare(TCmd *CMD, char *cmd, int i);
+int Codificare(char *cmd, char *param);
 
 /* FUNCTIILE PENTRU BANDA */
 
@@ -43,8 +43,6 @@ typedef struct banda {
 
 
 /* functiile folosite pentru crearea benzii */
-
-void CitireFisier();
 
 TBanda AlocCelulaB(char x);
 TBanda InitB();
@@ -71,6 +69,7 @@ typedef struct coada {
 } *TCoada;
 
 TCoada InitQ ();
+
 int ExtrQ(TCoada*c, int *x);
 int IntrQ(TCoada *c, int x);
 void DistrQ(TCoada **c);
@@ -82,3 +81,11 @@ void AfisareQ(TCoada *c);
 typedef struct stiva {
    TLista vf;
 } *TStiva;
+
+TStiva InitS();
+
+//Functii
+
+void Init(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo);
+
+void CitireFisier(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo);
