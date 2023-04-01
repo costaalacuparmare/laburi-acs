@@ -17,7 +17,10 @@ TBanda InitB() {
     aux = (TBanda) malloc(sizeof(TBanda));
     if (!aux)
         return NULL;
-    TListaB aux2 = (TListaB) malloc(sizeof(TCelulaB));
+    aux->santinela = (TListaB) malloc(sizeof(TCelulaB));
+    if (!aux->santinela)
+        return NULL;
+    TListaB aux2= (TListaB) malloc(sizeof(TCelulaB));
     if (!aux2)
         return NULL;
 
@@ -90,19 +93,26 @@ int Codificare(char *cmd, char **param) {
 void CitireFisier(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
     char *cmd = (char *) malloc(MAX*sizeof(char));
     if (!cmd) return;
-    int cmd_nr;
 
+    int cmd_nr = 0;
     FILE *input = fopen("tema1.in","rt");
+    if (input == NULL) {
+        printf("WTF COAIE\n");
+        return;
+    }
     FILE *output = fopen("tema1.out","w+");
 
     fscanf(input,"%d",&cmd_nr);
     fprintf(output, "%d\n", cmd_nr);
 
+    TCmd CMD = (TCmd) malloc(sizeof(TCmd));
+
     for (int i = 0; i < cmd_nr; i++) {
-        //fgets(cmd_arr,MAX,input);
+        fgets(cmd,MAX,input);
         fscanf(input, "%s", cmd);
-        //if (strchr(cmd,'_')
-        fprintf(output, "%s\n", cmd);
+        CMD->cod = Codificare(cmd,&CMD->param);
+        fprintf(output, "cod: %d, param: %s, cmd: %s\n", CMD->cod, CMD->param, cmd);
+        cmd = NULL;
     }
 }
 /*
@@ -129,7 +139,7 @@ TBanda CitireBanda(TBanda *deget) {
     /* initializam banda si verificam */
 
 
-    //ultim = L;
+//ultim = L;
 
 //}
 /*

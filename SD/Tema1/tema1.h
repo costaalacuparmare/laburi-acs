@@ -79,7 +79,7 @@ void AfisareQ(TCoada *c);
 //STIVA
 
 typedef struct stiva {
-   TLista vf;
+    TLista vf;
 } *TStiva;
 
 TStiva InitS();

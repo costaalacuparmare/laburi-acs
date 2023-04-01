@@ -8,15 +8,15 @@ int main()
     TCoada Q;
     TStiva Undo;
     TStiva Redo;
-    TCmd CMD = (TCmd) malloc(sizeof(TCmd));
-    /*Init(&B,&Q,&Undo,&Redo);
-    CMD = CitireFisier(&B,&Q,&Undo,&Redo);
-    Execute(&B,&Q,&Undo,&Redo,CMD);
+
+    Init(&B,&Q,&Undo,&Redo);
+    CitireFisier(&B,&Q,&Undo,&Redo);
+    /*Execute(&B,&Q,&Undo,&Redo,CMD);
     Free(&B,&Q,&Undo,&Redo,CMD);*/
-    char *s = "WRITE X";
+    /*char *s = "MOVE_RIGHT";
     printf("cod: %d, param: %s, cmd: %s\n",CMD->cod,CMD->param,s);
     CMD->cod = Codificare(s,&CMD->param);
-    printf("cod: %d, param: %s, cmd: %s\n",CMD->cod,CMD->param,s);
+    printf("cod: %d, param: %s, cmd: %s\n",CMD->cod,CMD->param,s);*/
 
     return 0;
 }
