@@ -1,3 +1,6 @@
+/* CONSTANTINESCU Vlad 314CB */
+
+
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
@@ -104,7 +107,6 @@ TCoada InitQ ();
 void PopQ(TCoada *c);
 void PushQ(TCoada *c, TCmd x);
 void DistrQ(TCoada *c);
-void AfisareQ(TCoada *c);
 
 //Functii
 

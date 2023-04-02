@@ -139,11 +139,11 @@ void Execute(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo,
             break;
         }
         case TEN: {
-            //UNDO(B,Undo,Redo);
+            UNDO(B,Undo,Redo);
             break;
         }
         case ELEVEN: {
-            //REDO(B,Undo,Redo);
+            REDO(B,Undo,Redo);
             break;
         }
     }
@@ -236,22 +236,22 @@ void EXECUTE(TBanda *B, TCoada *Q, TStiva *Undo, FILE *output) {
 }
 
 void MOVE_LEFT(TBanda *B, TStiva *Undo) {
-    PushS(Undo, (*B)->deget);
     if ((*B)->deget->pre->pre == NULL) return;
     (*B)->deget = (*B)->deget->pre;
+    PushS(Undo, (*B)->deget->urm);
 }
 
 void MOVE_RIGHT(TBanda *B, TStiva *Undo) {
-    PushS(Undo, (*B)->deget);
     TListaB aux = NULL;
     if((*B)->deget->urm == NULL) {
         aux = PushB('#');
-        if (!aux) printf("pf\n"); //return;
+        if (!aux) return;
         aux->urm = NULL;
         aux->pre = (*B)->deget;
         (*B)->deget->urm = aux;
     }
     (*B)->deget = (*B)->deget->urm;
+    PushS(Undo, (*B)->deget->pre);
 }
 
 void MOVE_LEFT_CHAR (TBanda *B, char param, FILE *output) {
@@ -310,8 +310,16 @@ void INSERT_LEFT(TBanda *B, char param, FILE *output) {
 
 void INSERT_RIGHT(TBanda *B, char param) {
     TListaB aux = PushB(param);
-    (*B)->deget->urm = aux;
+    if ((*B)->deget->urm == NULL) {
+        (*B)->deget->urm = aux;
+        aux->pre = (*B)->deget;
+        (*B)->deget = aux;
+        return;
+    }
+    aux->urm = (*B)->deget->urm;
     aux->pre = (*B)->deget;
+    (*B)->deget->urm->pre = aux;
+    (*B)->deget->urm = aux;
     (*B)->deget = aux;
 }
 
@@ -329,6 +337,18 @@ void SHOW(TBanda *B, FILE *output) {
     fprintf(output, "\n");
 }
 
+void UNDO(TBanda *B, TStiva *Undo, TStiva *Redo) {
+    PushS(Redo,(*B)->deget);
+    (*B)->deget = (*Undo)->vf->info;
+    PopS(Undo);
+}
+
+void REDO(TBanda *B, TStiva *Undo, TStiva *Redo) {
+    //PushS(Undo,(*Redo)->vf->info);
+    (*B)->deget = (*Redo)->vf->info;
+    PopS(Redo);
+}
+
 void DistrQ(TCoada *Q)
 {
     TListaC p = NULL;
@@ -342,19 +362,6 @@ void DistrQ(TCoada *Q)
     }
     free(*Q);
     *Q = NULL;
-}
-
-void AfisareQ(TCoada *Q) {
-    TListaC p = NULL;
-    if((*Q)->inc == NULL)
-    {
-        printf("Coada vida\n");
-        return;
-    }
-    printf("Elementele cozii:\n");
-    for(p = (*Q)->inc; p != NULL; p = p->urm)
-        printf("cod: %d param: %c\n",p->info->cod, p->info->param);
-    printf("\n");
 }
 
 void Free(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {

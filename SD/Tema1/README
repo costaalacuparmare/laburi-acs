@@ -1,0 +1,13 @@
+/* CONSTANTINESCU Vlad 314CB */
+
+Continutul fisierelor:
+
+tema1.h: - macro-uri pentru fiecare cod al comenzilor,
+	 - structuri pentru definirea comenzilor, bandei,
+	 cozii de comenzi si stivelor de UNDO/REDO
+	 - antetul functiilor pentru manipularea structurilor
+	 de date aferente, precum si comenzile cerute si comenzi
+	 auxiliare
+
+main.c: - contine declararea si initializarea tuturor tipurilor
+	 de date necesare
