@@ -34,10 +34,10 @@
 
 typedef struct command {
     int cod;
-    char *param;
+    char param;
 } *TCmd;
 
-int Code(char *cmd, char **param);
+int Code(char *cmd, char *param);
 
 /* FUNCTIILE PENTRU BANDA */
 
@@ -84,7 +84,7 @@ typedef struct coada {
     TListaC inc, sf;       /* adresa primei si ultimei celule */
 } *TCoada;
 
-void EXECUTE(TBanda *B, TCoada *Q, TStiva *Undo,TCmd cmd, FILE *output);
+void EXECUTE(TBanda *B, TCoada *Q, TStiva *Undo, FILE *output);
 void MOVE_LEFT(TBanda *B, TStiva *Undo);
 void MOVE_RIGHT(TBanda *B, TStiva *Undo);
 void MOVE_LEFT_CHAR(TBanda *B, char param, FILE *output);
@@ -117,4 +117,5 @@ void Execute(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo,
 
 void Run(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo);
 
+void Free(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo);
 

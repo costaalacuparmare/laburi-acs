@@ -22,15 +22,8 @@
   <component name="ChangeListManager">
     <list default="true" id="46a78210-40e1-4426-8604-efba152de2e0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-d0ea4cc49750a6ca194a.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-04-01T15-14-04-0963.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Tema1.dir/main.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Tema1.dir/main.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Tema1.dir/tema1.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Tema1.dir/tema1.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Tema1" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Tema1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result" beforeDir="false" afterPath="$PROJECT_DIR$/result" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tema1" beforeDir="false" afterPath="$PROJECT_DIR$/tema1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tema1.c" beforeDir="false" afterPath="$PROJECT_DIR$/tema1.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tema1.h" beforeDir="false" afterPath="$PROJECT_DIR$/tema1.h" afterDir="false" />
@@ -97,7 +90,7 @@
       <updated>1680360555141</updated>
       <workItem from="1680360556760" duration="1375000" />
       <workItem from="1680362025501" duration="16927000" />
-      <workItem from="1680443053576" duration="9028000" />
+      <workItem from="1680443053576" duration="13977000" />
     </task>
     <servers />
   </component>

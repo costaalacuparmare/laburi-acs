@@ -42,19 +42,18 @@ TStiva InitS() {
     return s;
 }
 
-int Code(char *cmd, char **param) {
-
-    char *p = (char *) malloc (MAX);
-    strcpy(p,cmd);
-    if (strcmp(cmd,"EXECUTE\n") == ZERO)
+int Code(char *cmd, char *param) {
+    if (strcmp(cmd,"EXECUTE\n") == ZERO ||
+    strcmp(cmd,"EXECUTE") == ZERO)
         return ZERO;
-    if (strcmp(cmd,"MOVE_LEFT\n") == ZERO)
+    if (strcmp(cmd,"MOVE_LEFT\n") == ZERO ||
+    strcmp(cmd,"MOVE_LEFT") == ZERO)
         return ONE;
-    if (strcmp(cmd,"MOVE_RIGHT\n") == ZERO)
+    if (strcmp(cmd,"MOVE_RIGHT\n") == ZERO ||
+    strcmp(cmd,"MOVE_RIGHT") == ZERO)
         return TWO;
     if (cmd[TEN] == 'C' || cmd[ELEVEN] == 'C') {
-        *param = strtok(p," ");
-        *param = strtok(NULL,"\n");
+        *param = cmd[strlen(cmd) - TWO];
         if(cmd[FIVE] == 'L') {
 
             return THREE;
@@ -62,26 +61,28 @@ int Code(char *cmd, char **param) {
         else
             return FOUR;
     }
-    if (cmd[ZERO] == 'W') { // de rez cu strchr
-        *param = strtok(p," ");
-        *param = strtok(NULL,"\n");
+    if (cmd[ZERO] == 'W') {
+        *param = cmd[strlen(cmd) - TWO];
         return FIVE;
     }
     if (cmd[ZERO] == 'I') {
-        *param = strtok(p, " ");
-        *param = strtok(NULL, "\n");
+        *param = cmd[strlen(cmd) - TWO];
         if (cmd[SEVEN] == 'L') {
             return SIX;
         } else
             return SEVEN;
     }
-    if (strcmp(cmd,"SHOW_CURRENT\n") == ZERO)
+    if (strcmp(cmd,"SHOW_CURRENT\n") == ZERO ||
+    strcmp(cmd,"SHOW_CURRENT") == ZERO)
         return EIGHT;
-    if (strcmp(cmd,"SHOW\n") == ZERO)
+    if (strcmp(cmd,"SHOW\n") == ZERO ||
+    strcmp(cmd,"SHOW") == ZERO)
         return NINE;
-    if (strcmp(cmd,"UNDO\n") == ZERO)
+    if (strcmp(cmd,"UNDO\n") == ZERO ||
+    strcmp(cmd,"UNDO") == ZERO)
         return TEN;
-    if (strcmp(cmd,"REDO\n") == ZERO)
+    if (strcmp(cmd,"REDO\n") == ZERO ||
+    strcmp(cmd,"REDO") == ZERO)
         return ELEVEN;
 }
 
@@ -93,7 +94,7 @@ void PushQ(TCoada *Q, TCmd x) {
     aux->info->cod = x->cod;
     aux->info->param = x->param;
     aux->urm = NULL;
-    if ((*Q)->sf != NULL)
+    if ((*Q)->inc != NULL)
         (*Q)->sf->urm = aux;
     else
         (*Q)->inc = aux;
@@ -115,7 +116,7 @@ TCmd Read(FILE *input) {
     if (!cmd) return ZERO;
     TCmd CMD = (TCmd) malloc(sizeof(TCmd));
     fgets(cmd, MAX, input);
-    CMD->param = NULL;
+    CMD->param = '\0';
     CMD->cod = Code(cmd, &CMD->param);
     return CMD;
 }
@@ -126,7 +127,7 @@ void Execute(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo,
         PushQ(Q,cmd);
     switch(cmd->cod) {
         case ZERO: {
-            //EXECUTE(B,Q,Undo,cmd,output);
+            EXECUTE(B,Q,Undo,output);
             break;
         }
         case EIGHT: {
@@ -199,9 +200,9 @@ void PushS(TStiva *S, TListaB x) {
     (*S)->vf = aux;
 }
 
-void EXECUTE(TBanda *B, TCoada *Q, TStiva *Undo, TCmd cmd, FILE *output) {
-    char param = cmd->param[ZERO];
-    switch (cmd->cod) {
+void EXECUTE(TBanda *B, TCoada *Q, TStiva *Undo, FILE *output) {
+    char param = (*Q)->inc->info->param;
+    switch ((*Q)->inc->info->cod) {
         case ONE: {
             MOVE_LEFT(B, Undo);
             break;
@@ -245,7 +246,7 @@ void MOVE_RIGHT(TBanda *B, TStiva *Undo) {
     TListaB aux = NULL;
     if((*B)->deget->urm == NULL) {
         aux = PushB('#');
-        if (!aux) return;
+        if (!aux) printf("pf\n"); //return;
         aux->urm = NULL;
         aux->pre = (*B)->deget;
         (*B)->deget->urm = aux;
@@ -273,7 +274,7 @@ void MOVE_RIGHT_CHAR (TBanda *B, char param) {
     int verif = ZERO;
     if((*B)->deget->info == param)
         return;
-    for(p = (*B)->deget; p != (*B)->santinela; p = p->urm)
+    for(p = (*B)->deget; p != NULL; p = p->urm)
         if(p->info == param) {
             (*B)->deget = p;
             verif = ONE;
@@ -321,7 +322,7 @@ void SHOW_CURRENT(TBanda *B, FILE *output) {
 void SHOW(TBanda *B, FILE *output) {
     TListaB p = NULL;
     for (p = (*B)->santinela->urm; p != NULL; p = p->urm)
-        if (p->info == (*B)->deget->info)
+        if (p == (*B)->deget)
             fprintf(output, "|%c|", p->info);
         else
             fprintf(output, "%c",p->info);
@@ -350,8 +351,12 @@ void AfisareQ(TCoada *Q) {
         printf("Coada vida\n");
         return;
     }
-    printf("Elementele cozii: ");
+    printf("Elementele cozii:\n");
     for(p = (*Q)->inc; p != NULL; p = p->urm)
-        printf("cod: %d param: %s\n",p->info->cod, p->info->param);
+        printf("cod: %d param: %c\n",p->info->cod, p->info->param);
     printf("\n");
+}
+
+void Free(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
+    DistrQ(Q);
 }

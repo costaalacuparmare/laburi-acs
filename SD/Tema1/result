@@ -8,5 +8,22 @@ Run clang-tidy
 13 warnings generated.
 27 warnings generated.
 40 warnings generated.
+45 warnings generated.
+/home/turner/Desktop/UPB/SD/Tema1/cmake-build-debug/CMakeFiles/3.24.2/CompilerIdC/CMakeCCompilerId.c:430:13: error: variable 'info_compiler' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables,-warnings-as-errors]
+char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";
+            ^
+/home/turner/Desktop/UPB/SD/Tema1/cmake-build-debug/CMakeFiles/3.24.2/CompilerIdC/CMakeCCompilerId.c:768:13: error: variable 'info_platform' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables,-warnings-as-errors]
+char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";
+            ^
+/home/turner/Desktop/UPB/SD/Tema1/cmake-build-debug/CMakeFiles/3.24.2/CompilerIdC/CMakeCCompilerId.c:769:13: error: variable 'info_arch' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables,-warnings-as-errors]
+char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";
+            ^
+/home/turner/Desktop/UPB/SD/Tema1/cmake-build-debug/CMakeFiles/3.24.2/CompilerIdC/CMakeCCompilerId.c:790:13: error: variable 'info_language_standard_default' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables,-warnings-as-errors]
+const char* info_language_standard_default =
+            ^
+/home/turner/Desktop/UPB/SD/Tema1/cmake-build-debug/CMakeFiles/3.24.2/CompilerIdC/CMakeCCompilerId.c:793:13: error: variable 'info_language_extensions_default' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables,-warnings-as-errors]
+const char* info_language_extensions_default = "INFO" ":" "extensions_default["
+            ^
 Suppressed 40 warnings (39 in non-user code, 1 with check filters).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+5 warnings treated as errors
