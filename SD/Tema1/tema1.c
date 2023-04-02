@@ -2,12 +2,9 @@
 
 #include "tema1.h"
 
-void Init(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
-    *B = InitB();
-    *Q = InitQ();
-    *Undo = InitS();
-    *Redo = InitS();
-}
+/* functii auxiliare */
+
+/* banda */
 
 TBanda InitB() {
 
@@ -28,62 +25,35 @@ TBanda InitB() {
     return aux;
 }
 
+TListaB PushB(char x) {
+    TListaB aux = (TListaB) malloc(sizeof(TCelulaB));
+    if (!aux) return NULL;
+    aux->info = x;
+    aux->pre = aux->urm = NULL;
+    return aux;
+}
+
+void FreeB (TBanda *B) {
+    TListaB p = NULL;
+    TListaB aux = NULL;
+    p = (*B)->santinela;
+    while(p)
+    {
+        aux = p;
+        p = p->urm;
+        free(aux);
+    }
+    free(*B);
+    *B = NULL;
+}
+
+/* coada */
+
 TCoada InitQ () {
     TCoada Q = (TCoada) malloc(sizeof(TCoada));
     if (!Q) return NULL;
     Q->inc = Q->sf = NULL;
     return Q;
-}
-
-TStiva InitS() {
-    TStiva s = (TStiva) malloc(sizeof(TStiva));
-    if (!s) return NULL;
-    s->vf = NULL;
-    return s;
-}
-
-int Code(char *cmd, char *param) {
-    if (strcmp(cmd,"EXECUTE\n") == ZERO ||
-    strcmp(cmd,"EXECUTE") == ZERO)
-        return ZERO;
-    if (strcmp(cmd,"MOVE_LEFT\n") == ZERO ||
-    strcmp(cmd,"MOVE_LEFT") == ZERO)
-        return ONE;
-    if (strcmp(cmd,"MOVE_RIGHT\n") == ZERO ||
-    strcmp(cmd,"MOVE_RIGHT") == ZERO)
-        return TWO;
-    if (cmd[TEN] == 'C' || cmd[ELEVEN] == 'C') {
-        *param = cmd[strlen(cmd) - TWO];
-        if(cmd[FIVE] == 'L') {
-
-            return THREE;
-        }
-        else
-            return FOUR;
-    }
-    if (cmd[ZERO] == 'W') {
-        *param = cmd[strlen(cmd) - TWO];
-        return FIVE;
-    }
-    if (cmd[ZERO] == 'I') {
-        *param = cmd[strlen(cmd) - TWO];
-        if (cmd[SEVEN] == 'L') {
-            return SIX;
-        } else
-            return SEVEN;
-    }
-    if (strcmp(cmd,"SHOW_CURRENT\n") == ZERO ||
-    strcmp(cmd,"SHOW_CURRENT") == ZERO)
-        return EIGHT;
-    if (strcmp(cmd,"SHOW\n") == ZERO ||
-    strcmp(cmd,"SHOW") == ZERO)
-        return NINE;
-    if (strcmp(cmd,"UNDO\n") == ZERO ||
-    strcmp(cmd,"UNDO") == ZERO)
-        return TEN;
-    if (strcmp(cmd,"REDO\n") == ZERO ||
-    strcmp(cmd,"REDO") == ZERO)
-        return ELEVEN;
 }
 
 void PushQ(TCoada *Q, TCmd x) {
@@ -111,71 +81,28 @@ void PopQ(TCoada *Q)
     free(aux);
 }
 
-TCmd Read(FILE *input) {
-    char *cmd = (char *) malloc(MAX * sizeof(char));
-    if (!cmd) return ZERO;
-    TCmd CMD = (TCmd) malloc(sizeof(TCmd));
-    fgets(cmd, MAX, input);
-    CMD->param = '\0';
-    CMD->cod = Code(cmd, &CMD->param);
-    return CMD;
-}
-
-void Execute(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo,
-             TCmd cmd, FILE *output) {
-    if (cmd->cod >= ONE && cmd->cod <= SEVEN)
-        PushQ(Q,cmd);
-    switch(cmd->cod) {
-        case ZERO: {
-            EXECUTE(B,Q,Undo,output);
-            break;
-        }
-        case EIGHT: {
-            SHOW_CURRENT(B,output);
-            break;
-        }
-        case NINE: {
-            SHOW(B,output);
-            break;
-        }
-        case TEN: {
-            UNDO(B,Undo,Redo);
-            break;
-        }
-        case ELEVEN: {
-            REDO(B,Undo,Redo);
-            break;
-        }
+void FreeQ(TCoada *Q)
+{
+    TListaC p = NULL;
+    TListaC aux = NULL;
+    p = (*Q)->inc;
+    while(p)
+    {
+        aux = p;
+        p = p->urm;
+        free(aux);
     }
+    free(*Q);
+    *Q = NULL;
 }
 
-void Run(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
-    FILE *input = fopen("tema1.in", "rt");
-    FILE *output = fopen("tema1.out", "w+");
-    int cmd_nr = ZERO;
-    fscanf(input, "%d", &cmd_nr);
-    TCmd cmd = (TCmd) malloc(sizeof(TCmd));
-    Read(input);
-    int i = ZERO;
-    for (; i < cmd_nr; i++) {
-        cmd = Read(input);
-        Execute(B, Q, Undo, Redo, cmd, output);
-    }
-    fclose(input);
-    fclose(output);
-}
+/* stiva */
 
-
-// FUNCTIILE PENTRU BANDA
-
-/* Aloca un element de tip TCelulaB si returneaza pointerul aferent */
-
-TListaB PushB(char x) {
-    TListaB aux = (TListaB) malloc(sizeof(TCelulaB));
-    if (!aux) return NULL;
-    aux->info = x;
-    aux->pre = aux->urm = NULL;
-    return aux;
+TStiva InitS() {
+    TStiva s = (TStiva) malloc(sizeof(TStiva));
+    if (!s) return NULL;
+    s->vf = NULL;
+    return s;
 }
 
 void PopS(TStiva *S)
@@ -199,6 +126,27 @@ void PushS(TStiva *S, TListaB x) {
         aux->urm = NULL;
     (*S)->vf = aux;
 }
+
+void FreeS(TStiva *S) {
+    TListaS p = NULL;
+    TListaS aux = NULL;
+    p = (*S)->vf;
+    while (p) {
+        aux = p;
+        p = p->urm;
+        free(aux);
+    }
+    free(*S);
+    *S = NULL;
+}
+void Init(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
+    *B = InitB();
+    *Q = InitQ();
+    *Undo = InitS();
+    *Redo = InitS();
+}
+
+/* functiile comenzi */
 
 void EXECUTE(TBanda *B, TCoada *Q, TStiva *Undo, FILE *output) {
     char param = (*Q)->inc->info->param;
@@ -284,6 +232,7 @@ void MOVE_RIGHT_CHAR (TBanda *B, char param) {
         TListaB aux = PushB('#');
         if (!aux) return;
         aux->urm = NULL;
+        for(;(*B)->deget->urm != NULL; (*B)->deget =(*B)->deget->urm);
         aux->pre = (*B)->deget;
         (*B)->deget->urm = aux;
         (*B)->deget = (*B)->deget->urm;
@@ -344,26 +293,119 @@ void UNDO(TBanda *B, TStiva *Undo, TStiva *Redo) {
 }
 
 void REDO(TBanda *B, TStiva *Undo, TStiva *Redo) {
-    //PushS(Undo,(*Redo)->vf->info);
+    if (!(*Redo)->vf->info->urm)
+        PushS(Undo,(*Redo)->vf->info->pre);
+    else
+        PushS(Undo,(*Redo)->vf->info->urm);
     (*B)->deget = (*Redo)->vf->info;
     PopS(Redo);
 }
 
-void DistrQ(TCoada *Q)
-{
-    TListaC p = NULL;
-    TListaC aux = NULL;
-    p = (*Q)->inc;
-    while(p)
-    {
-        aux = p;
-        p = p->urm;
-        free(aux);
+/* functii de implementare */
+
+int Code(char *cmd, char *param) {
+    if (strcmp(cmd,"EXECUTE\n") == ZERO ||
+        strcmp(cmd,"EXECUTE") == ZERO)
+        return ZERO;
+    if (strcmp(cmd,"MOVE_LEFT\n") == ZERO ||
+        strcmp(cmd,"MOVE_LEFT") == ZERO)
+        return ONE;
+    if (strcmp(cmd,"MOVE_RIGHT\n") == ZERO ||
+        strcmp(cmd,"MOVE_RIGHT") == ZERO)
+        return TWO;
+    if (cmd[TEN] == 'C' || cmd[ELEVEN] == 'C') {
+        *param = cmd[strlen(cmd) - TWO];
+        if(cmd[FIVE] == 'L') {
+
+            return THREE;
+        }
+        else
+            return FOUR;
     }
-    free(*Q);
-    *Q = NULL;
+    if (cmd[ZERO] == 'W') {
+        *param = cmd[strlen(cmd) - TWO];
+        return FIVE;
+    }
+    if (cmd[ZERO] == 'I') {
+        *param = cmd[strlen(cmd) - TWO];
+        if (cmd[SEVEN] == 'L') {
+            return SIX;
+        } else
+            return SEVEN;
+    }
+    if (strcmp(cmd,"SHOW_CURRENT\n") == ZERO ||
+        strcmp(cmd,"SHOW_CURRENT") == ZERO)
+        return EIGHT;
+    if (strcmp(cmd,"SHOW\n") == ZERO ||
+        strcmp(cmd,"SHOW") == ZERO)
+        return NINE;
+    if (strcmp(cmd,"UNDO\n") == ZERO ||
+        strcmp(cmd,"UNDO") == ZERO)
+        return TEN;
+    if (strcmp(cmd,"REDO\n") == ZERO ||
+        strcmp(cmd,"REDO") == ZERO)
+        return ELEVEN;
+}
+
+TCmd Read(FILE *input) {
+    char *cmd = (char *) malloc(MAX * sizeof(char));
+    if (!cmd) return ZERO;
+    TCmd CMD = (TCmd) malloc(sizeof(TCmd));
+    fgets(cmd, MAX, input);
+    CMD->param = '\0';
+    CMD->cod = Code(cmd, &CMD->param);
+    free(cmd);
+    return CMD;
+}
+
+void Execute(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo,
+             TCmd cmd, FILE *output) {
+    if (cmd->cod >= ONE && cmd->cod <= SEVEN)
+        PushQ(Q,cmd);
+    switch(cmd->cod) {
+        case ZERO: {
+            EXECUTE(B,Q,Undo,output);
+            break;
+        }
+        case EIGHT: {
+            SHOW_CURRENT(B,output);
+            break;
+        }
+        case NINE: {
+            SHOW(B,output);
+            break;
+        }
+        case TEN: {
+            UNDO(B,Undo,Redo);
+            break;
+        }
+        case ELEVEN: {
+            REDO(B,Undo,Redo);
+            break;
+        }
+    }
+}
+
+void Run(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
+    FILE *input = fopen("tema1.in", "rt");
+    FILE *output = fopen("tema1.out", "w+");
+    int cmd_nr = ZERO;
+    fscanf(input, "%d", &cmd_nr);
+    TCmd cmd = (TCmd) malloc(sizeof(TCmd));
+    Read(input);
+    int i = ZERO;
+    for (; i < cmd_nr; i++) {
+        cmd = Read(input);
+        Execute(B, Q, Undo, Redo, cmd, output);
+    }
+    fclose(input);
+    fclose(output);
+    free(cmd);
 }
 
 void Free(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
-    DistrQ(Q);
+    FreeB(B);
+    FreeQ(Q);
+    FreeS(Undo);
+    FreeS(Redo);
 }

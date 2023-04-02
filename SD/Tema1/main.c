@@ -11,6 +11,6 @@ int main()
 
     Init(&B,&Q,&Undo,&Redo);
     Run(&B,&Q,&Undo,&Redo);
-    Free(&B,&Q,&Undo,&Redo);
+    //Free(&B,&Q,&Undo,&Redo);
     return 0;
 }

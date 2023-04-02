@@ -6,6 +6,9 @@
 #include <string.h>
 #include <stdlib.h>
 
+/* macro-uri pentru codificarea
+ * comenziilor */
+
 #define MAX 20
 #define ZERO 0
 #define ONE 1
@@ -33,20 +36,11 @@
  * REDO / 11
 */
 
-/* FUNCTIILE PENTRU COMENZI */
+/* declarearea structuriilor folosite */
 
-typedef struct command {
-    int cod;
-    char param;
-} *TCmd;
 
-int Code(char *cmd, char *param);
-
-/* FUNCTIILE PENTRU BANDA */
-
-/* definirea benzii ca o lista dublu
- inlantuita cu santinela si un deget */
-
+/* banda ce contine deget si santinela de
+ * tipul lista dubla inlantuita */
 typedef struct celulaB {
     char info;
     struct celulaB *pre, *urm;
@@ -57,8 +51,7 @@ typedef struct banda {
     TListaB deget;
 } *TBanda;
 
-
-//STIVA
+/*structurile pentru stivele UNDO/ REDO */
 
 typedef struct celulaS {
     TListaB info;
@@ -69,14 +62,15 @@ typedef struct stiva {
     TListaS vf;
 } *TStiva;
 
-TStiva InitS();
-void PushS(TStiva *S, TListaB x);
-void PopS(TStiva *S);
+/* structura pentru comenzi */
 
-/* functiile folosite pentru crearea benzii */
+typedef struct command {
+    int cod;
+    char param;
+} *TCmd;
 
-TListaB PushB(char x);
-TBanda InitB();
+/*structurile pentru coada de
+ * comenzi UPDATE */
 
 typedef struct celulaC {
     TCmd info;
@@ -84,31 +78,70 @@ typedef struct celulaC {
 } TCelulaC, *TListaC;
 
 typedef struct coada {
-    TListaC inc, sf;       /* adresa primei si ultimei celule */
+    TListaC inc, sf;
 } *TCoada;
 
-void EXECUTE(TBanda *B, TCoada *Q, TStiva *Undo, FILE *output);
-void MOVE_LEFT(TBanda *B, TStiva *Undo);
-void MOVE_RIGHT(TBanda *B, TStiva *Undo);
-void MOVE_LEFT_CHAR(TBanda *B, char param, FILE *output);
-void MOVE_RIGHT_CHAR(TBanda *B, char param);
-void WRITE(TBanda *B, char param);
-void INSERT_LEFT(TBanda *B, char param, FILE *output);
-void INSERT_RIGHT(TBanda *B, char param);
-void SHOW_CURRENT(TBanda *B, FILE *output);
-void SHOW(TBanda *B, FILE *output);
-void UNDO(TBanda *B, TStiva *Undo, TStiva *Redo);
-void REDO(TBanda *B, TStiva *Undo, TStiva *Redo);
+/* functiile auxiliare pentru structuri */
 
-//FUNCTIILE PENTRU COADA
+/*functii pentru coada */
 
 TCoada InitQ ();
 
 void PopQ(TCoada *c);
-void PushQ(TCoada *c, TCmd x);
-void DistrQ(TCoada *c);
 
-//Functii
+void PushQ(TCoada *c, TCmd x);
+
+void FreeQ(TCoada *c);
+
+/* functii pentru stiva */
+
+TStiva InitS();
+
+void PushS(TStiva *S, TListaB x);
+
+void PopS(TStiva *S);
+
+void FreeS(TStiva *S);
+
+/* functii pentru banda */
+
+TListaB PushB(char x);
+
+TBanda InitB();
+
+void FreeB(TBanda *B);
+
+/* functii pentru comenzi */
+
+int Code(char *cmd, char *param);
+
+/* functiile comenzi */
+
+void EXECUTE(TBanda *B, TCoada *Q, TStiva *Undo, FILE *output);
+
+void MOVE_LEFT(TBanda *B, TStiva *Undo);
+
+void MOVE_RIGHT(TBanda *B, TStiva *Undo);
+
+void MOVE_LEFT_CHAR(TBanda *B, char param, FILE *output);
+
+void MOVE_RIGHT_CHAR(TBanda *B, char param);
+
+void WRITE(TBanda *B, char param);
+
+void INSERT_LEFT(TBanda *B, char param, FILE *output);
+
+void INSERT_RIGHT(TBanda *B, char param);
+
+void SHOW_CURRENT(TBanda *B, FILE *output);
+
+void SHOW(TBanda *B, FILE *output);
+
+void UNDO(TBanda *B, TStiva *Undo, TStiva *Redo);
+
+void REDO(TBanda *B, TStiva *Undo, TStiva *Redo);
+
+/* functii de implementare */
 
 void Init(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo);
 

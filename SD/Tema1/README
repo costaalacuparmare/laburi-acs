@@ -9,5 +9,18 @@ tema1.h: - macro-uri pentru fiecare cod al comenzilor,
 	 de date aferente, precum si comenzile cerute si comenzi
 	 auxiliare
 
-main.c: - contine declararea si initializarea tuturor tipurilor
-	 de date necesare
+main.c: - declararea tuturor structurilor de date
+	- Init (initializare structuri de date)
+	- Run (Rularea programului)
+	- Free (eliberarea din memorie a structurilor de date)
+	
+tema1.c -declararea functiilor:
+	- functii auxiliare: operarea bandei: InitB, PushB, FreeB
+			            operarea cozii: InitC, PushC, PopC
+                        operararea stivei: InitS, PushS, PopS, FreeS
+    - Code: codificarea comenzilor in valori intregi folosind detectarea anumitor caractere din stringul comenzilor si compararea prin functia "strcmp". Parametrii functiilor de prelucrare cu parametru sunt modificati secundar de functie
+    - Read: citire de la fisier a comenzii si codificarea ei
+    - Execute: un switch case pentru executarea comenzilor, daca exista comenzi de tip UPDATE, le adauga in coada
+    -Run: citeste nr de comenzi din fisier, codifica pe fiecare si ruleaza pentru fiecare comanda codificata functia de executare (Execute)
+    -Free: elibereaza structurile de date declarate in main.c
+    - functiile comenzi: functiile cerute de cerinta
