@@ -13,8 +13,8 @@ int main()
     if(!IntrQ(c, x))
       break;
   }
-    AfisareQ(Qpar(c));
-  //AfisareQ(c);
+  //AfisareQ(Qpar(c));
+  AfisareQ(c);
 
   DistrQ(&c);
 }

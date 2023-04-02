@@ -24,7 +24,7 @@ typedef struct command {
     char *param;
 } *TCmd;
 
-int Codificare(char *cmd, char **param);
+int Code(char *cmd, char **param);
 
 /* FUNCTIILE PENTRU BANDA */
 
@@ -42,53 +42,59 @@ typedef struct banda {
 } *TBanda;
 
 
+//STIVA
+
+typedef struct celulaS {
+    TlistaB info;
+    struct celulaS* urm;
+} TCelulaS, *TListaS;
+
+typedef struct stiva {
+    TListaS vf;
+} *TStiva;
+
+TStiva InitS();
+
 /* functiile folosite pentru crearea benzii */
 
-TBanda AlocCelulaB(char x);
+TListaB AddCellB(char x);
 TBanda InitB();
 
-void MOVE_LEFT(TBanda *deget);
-void MOVE_RIGHT(TBanda *deget);
+void MOVE_LEFT(TBanda *B, TStiva *Undo);
+void MOVE_RIGHT(TBanda *B, TStiva *Undo);
 void MOVE_LEFT_CHAR(TBanda *deget, char x);
 void MOVE_RIGHT_CHAR(TBanda *deget, char x);
 void WRITE (TBanda *B, char x);
 void INSERT_LEFT(TBanda *deget, char c);
-void SHOW_CURRENT(TBanda *deget);
+void SHOW_CURRENT(TBanda *B, FILE *output);
 
 //FUNCTIILE PENTRU COADA
 
-#define _COADA_DINAMICA_
-
-typedef struct celula {
+typedef struct celulaC {
     TCmd info;
-    struct celula* urm;
-} TCelula, *TLista;
+    struct celulaC* urm;
+} TCelulaC, *TListaC;
 
 typedef struct coada {
-    TLista inc, sf;       /* adresa primei si ultimei celule */
+    TListaC inc, sf;       /* adresa primei si ultimei celule */
 } *TCoada;
 
 TCoada InitQ ();
 
-int ExtrQ(TCoada*c, int *x);
-int IntrQ(TCoada *c, TCmd x);
-void DistrQ(TCoada **c);
-
+void PopQ(TCoada *c);
+void PushQ(TCoada *c, TCmd x);
+void DistrQ(TCoada *c);
 void AfisareQ(TCoada *c);
-
-//STIVA
-
-typedef struct stiva {
-    TLista vf;
-} *TStiva;
-
-TStiva InitS();
 
 //Functii
 
 void Init(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo);
 
+TCmd Read(FILE *input);
+
+void Execute(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo,
+             TCmd cmd, FILE *output);
+
 void Run(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo);
 
-void Read(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo);
 
