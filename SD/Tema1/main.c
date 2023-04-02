@@ -4,10 +4,10 @@
 
 int main()
 {
-    TBanda B;
-    TCoada Q;
-    TStiva Undo;
-    TStiva Redo;
+    TBanda B = NULL;
+    TCoada Q  = NULL;
+    TStiva Undo  = NULL;
+    TStiva Redo  = NULL;
 
     Init(&B,&Q,&Undo,&Redo);
     Run(&B,&Q,&Undo,&Redo);

@@ -13,17 +13,12 @@ TBanda InitB() {
 
     /* creem banda returnand santinela si
     inseram primul element # catre care va pointa degetul*/
-    TBanda aux;
-    aux = (TBanda) malloc(sizeof(TBanda));
-    if (!aux)
-        return NULL;
+    TBanda aux = (TBanda) malloc(sizeof(TBanda));
+    if (!aux) return NULL;
     aux->santinela = (TListaB) malloc(sizeof(TCelulaB));
-    if (!aux->santinela)
-        return NULL;
+    if (!aux->santinela) return NULL;
     TListaB aux2= (TListaB) malloc(sizeof(TCelulaB));
-    if (!aux2)
-        return NULL;
-
+    if (!aux2) return NULL;
     aux->santinela->pre = NULL;
     aux->santinela->urm = aux2;
     aux2->info = '#';
@@ -34,16 +29,14 @@ TBanda InitB() {
 }
 
 TCoada InitQ () {
-    TCoada Q;
-    Q = (TCoada) malloc(sizeof(TCoada));
+    TCoada Q = (TCoada) malloc(sizeof(TCoada));
     if (!Q) return NULL;
     Q->inc = Q->sf = NULL;
     return Q;
 }
 
 TStiva InitS() {
-    TStiva s;
-    s = (TStiva) malloc(sizeof(TStiva));
+    TStiva s = (TStiva) malloc(sizeof(TStiva));
     if (!s) return NULL;
     s->vf = NULL;
     return s;
@@ -53,48 +46,47 @@ int Code(char *cmd, char **param) {
 
     char *p = (char *) malloc (MAX);
     strcpy(p,cmd);
-    if (strcmp(cmd,"EXECUTE\n") == 0)
-        return 0;
-    if (strcmp(cmd,"MOVE_LEFT\n") == 0)
-        return 1;
-    if (strcmp(cmd,"MOVE_RIGHT\n") == 0)
-        return 2;
-    if (cmd[11] == 'C' || cmd[10] == 'C') {
+    if (strcmp(cmd,"EXECUTE\n") == ZERO)
+        return ZERO;
+    if (strcmp(cmd,"MOVE_LEFT\n") == ZERO)
+        return ONE;
+    if (strcmp(cmd,"MOVE_RIGHT\n") == ZERO)
+        return TWO;
+    if (cmd[TEN] == 'C' || cmd[ELEVEN] == 'C') {
         *param = strtok(p," ");
         *param = strtok(NULL,"\n");
-        if(cmd[5] == 'L') {
+        if(cmd[FIVE] == 'L') {
 
-            return 3;
+            return THREE;
         }
         else
-            return 4;
+            return FOUR;
     }
-    if (cmd[0] == 'I') {
-        *param = strtok(p, " ");
-        *param = strtok(NULL, "\n");
-        if (cmd[7] == 'L') {
-            return 5;
-        } else
-            return 6;
-    }
-    if (cmd[0] == 'W') { // de rez cu strchr
+    if (cmd[ZERO] == 'W') { // de rez cu strchr
         *param = strtok(p," ");
         *param = strtok(NULL,"\n");
-        return 7;
+        return FIVE;
     }
-    if (strcmp(cmd,"SHOW_CURRENT\n") == 0)
-        return 8;
-    if (strcmp(cmd,"SHOW\n") == 0)
-        return 9;
-    if (strcmp(cmd,"UNDO\n") == 0)
-        return 10;
-    if (strcmp(cmd,"REDO\n") == 0)
-        return 11;
+    if (cmd[ZERO] == 'I') {
+        *param = strtok(p, " ");
+        *param = strtok(NULL, "\n");
+        if (cmd[SEVEN] == 'L') {
+            return SIX;
+        } else
+            return SEVEN;
+    }
+    if (strcmp(cmd,"SHOW_CURRENT\n") == ZERO)
+        return EIGHT;
+    if (strcmp(cmd,"SHOW\n") == ZERO)
+        return NINE;
+    if (strcmp(cmd,"UNDO\n") == ZERO)
+        return TEN;
+    if (strcmp(cmd,"REDO\n") == ZERO)
+        return ELEVEN;
 }
 
 void PushQ(TCoada *Q, TCmd x) {
-    TListaC aux;
-    aux = (TListaC) malloc(sizeof(TCelulaC));
+    TListaC aux = (TListaC) malloc(sizeof(TCelulaC));
     if (!aux) return;
     aux->info = (TCmd) malloc(sizeof(TCmd));
     if (!aux->info) return;
@@ -110,7 +102,7 @@ void PushQ(TCoada *Q, TCmd x) {
 
 void PopQ(TCoada *Q)
 {
-    TListaC aux;
+    TListaC aux = NULL;
     if((*Q)->inc == NULL)
         return;
     aux = (*Q)->inc;
@@ -120,7 +112,7 @@ void PopQ(TCoada *Q)
 
 TCmd Read(FILE *input) {
     char *cmd = (char *) malloc(MAX * sizeof(char));
-    if (!cmd) return 0;
+    if (!cmd) return ZERO;
     TCmd CMD = (TCmd) malloc(sizeof(TCmd));
     fgets(cmd, MAX, input);
     CMD->param = NULL;
@@ -130,18 +122,41 @@ TCmd Read(FILE *input) {
 
 void Execute(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo,
              TCmd cmd, FILE *output) {
-    if (cmd->cod >)
+    if (cmd->cod >= ONE && cmd->cod <= SEVEN)
+        PushQ(Q,cmd);
+    switch(cmd->cod) {
+        case ZERO: {
+            //EXECUTE(B,Q,Undo,cmd,output);
+            break;
+        }
+        case EIGHT: {
+            SHOW_CURRENT(B,output);
+            break;
+        }
+        case NINE: {
+            SHOW(B,output);
+            break;
+        }
+        case TEN: {
+            //UNDO(B,Undo,Redo);
+            break;
+        }
+        case ELEVEN: {
+            //REDO(B,Undo,Redo);
+            break;
+        }
+    }
 }
 
 void Run(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
     FILE *input = fopen("tema1.in", "rt");
     FILE *output = fopen("tema1.out", "w+");
-    int cmd_nr = 0;
+    int cmd_nr = ZERO;
     fscanf(input, "%d", &cmd_nr);
-    int i;
     TCmd cmd = (TCmd) malloc(sizeof(TCmd));
     Read(input);
-    for (i = 0; i < cmd_nr; i++) {
+    int i = ZERO;
+    for (; i < cmd_nr; i++) {
         cmd = Read(input);
         Execute(B, Q, Undo, Redo, cmd, output);
     }
@@ -154,28 +169,82 @@ void Run(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
 
 /* Aloca un element de tip TCelulaB si returneaza pointerul aferent */
 
-TListaB AddCellB(char x) {
+TListaB PushB(char x) {
     TListaB aux = (TListaB) malloc(sizeof(TCelulaB));
-    if (!aux) {
-        return NULL;
-    }
-    aux->pre = x;
+    if (!aux) return NULL;
+    aux->info = x;
     aux->pre = aux->urm = NULL;
     return aux;
 }
 
+void PopS(TStiva *S)
+{
+    TListaS aux = NULL;
+    if((*S)->vf == NULL) return;
+    aux = (*S)->vf;
+    (*S)->vf = (*S)->vf->urm;
+    free(aux);
+}
+
+void PushS(TStiva *S, TListaB x) {
+    TListaS aux = (TListaS) malloc(sizeof(TCelulaS));
+    if (!aux) return;
+    aux->info = (TListaB) malloc(sizeof(TCelulaS));
+    if (!aux->info) return;
+    aux->info = x;
+    if ((*S)->vf != NULL)
+        aux->urm = (*S)->vf;
+    else
+        aux->urm = NULL;
+    (*S)->vf = aux;
+}
+
+void EXECUTE(TBanda *B, TCoada *Q, TStiva *Undo, TCmd cmd, FILE *output) {
+    char param = cmd->param[ZERO];
+    switch (cmd->cod) {
+        case ONE: {
+            MOVE_LEFT(B, Undo);
+            break;
+        }
+        case TWO: {
+            MOVE_RIGHT(B, Undo);
+            break;
+        }
+        case THREE: {
+            MOVE_LEFT_CHAR(B, param, output);
+            break;
+        }
+        case FOUR: {
+            MOVE_RIGHT_CHAR(B, param);
+            break;
+        }
+        case FIVE: {
+            WRITE(B, param);
+            break;
+        }
+        case SIX: {
+            INSERT_LEFT(B, param, output);
+            break;
+        }
+        case SEVEN: {
+            INSERT_RIGHT(B, param);
+            break;
+        }
+    }
+    PopQ(Q);
+}
 
 void MOVE_LEFT(TBanda *B, TStiva *Undo) {
-    if ((*B)->deget->pre->pre == NULL)
-        return;
-    AddCellS()
+    PushS(Undo, (*B)->deget);
+    if ((*B)->deget->pre->pre == NULL) return;
     (*B)->deget = (*B)->deget->pre;
 }
 
 void MOVE_RIGHT(TBanda *B, TStiva *Undo) {
-    TListaB aux;
+    PushS(Undo, (*B)->deget);
+    TListaB aux = NULL;
     if((*B)->deget->urm == NULL) {
-        aux = AddCellB('#');
+        aux = PushB('#');
         if (!aux) return;
         aux->urm = NULL;
         aux->pre = (*B)->deget;
@@ -184,60 +253,85 @@ void MOVE_RIGHT(TBanda *B, TStiva *Undo) {
     (*B)->deget = (*B)->deget->urm;
 }
 
-void MOVE_RIGHT_CHAR (TBanda *deget, char x) {
-    TBanda p, aux;
+void MOVE_LEFT_CHAR (TBanda *B, char param, FILE *output) {
+    TListaB p = NULL;
     int verif = 0;
-    for(p = (*deget); p != NULL; p = p->pre)
-        if(p->info == x) {
-            (*deget) = p;
-            verif = 1;
-            break;
-        }
-    if(!verif) {
-        aux = AlocCelulaB('#');
-        if (!aux) return;
-        aux->urm = NULL;
-        aux->pre = (*deget);
-        (*deget)->urm = aux;
-        (*deget) = (*deget)->urm;
-    }
-}
-
-void MOVE_LEFT_CHAR (TBanda *deget, char c) {
-    TBanda p;
-    int verif = 0;
-    for(p = (*deget); p != NULL; p = p->urm)
-        if(p->info == c) {
-            (*deget) = p;
+    if ((*B)->deget->info == param)
+        return;
+    for(p = (*B)->deget; p != (*B)->santinela; p = p->pre)
+        if(p->info == param) {
+            (*B)->deget = p;
             verif = 1;
             break;
         }
     if(!verif)
-        printf("ERROR\n");
+        fprintf(output, "ERROR\n");
+}
+
+void MOVE_RIGHT_CHAR (TBanda *B, char param) {
+    TListaB p = NULL;
+    int verif = ZERO;
+    if((*B)->deget->info == param)
+        return;
+    for(p = (*B)->deget; p != (*B)->santinela; p = p->urm)
+        if(p->info == param) {
+            (*B)->deget = p;
+            verif = ONE;
+            break;
+        }
+    if(!verif) {
+        TListaB aux = PushB('#');
+        if (!aux) return;
+        aux->urm = NULL;
+        aux->pre = (*B)->deget;
+        (*B)->deget->urm = aux;
+        (*B)->deget = (*B)->deget->urm;
+    }
 }
 
 void WRITE (TBanda *B, char param) {
     (*B)->deget->info = param;
 }
 
-void INSERT_LEFT(TBanda *deget, char c) {
-    if((*deget)->pre->pre == NULL)
-        printf("ERROR\n");
-    TBanda aux = AlocCelulaB(c);
-    aux->urm = (*deget);
-    aux->pre = (*deget)->pre;
-    (*deget)->pre->urm = aux;
-    (*deget)->pre = aux;
-
+void INSERT_LEFT(TBanda *B, char param, FILE *output) {
+    if((*B)->deget->pre->pre == NULL) {
+        fprintf(output, "ERROR\n");
+        return;
+    }
+    TListaB aux = PushB(param);
+    if(!aux) return;
+    aux->urm = (*B)->deget;
+    aux->pre = (*B)->deget->pre;
+    (*B)->deget->pre->urm = aux;
+    (*B)->deget->pre = aux;
+    (*B)->deget = aux;
 }
 
-void SHOW_CURRENT (TBanda *B, FILE *output) {
+void INSERT_RIGHT(TBanda *B, char param) {
+    TListaB aux = PushB(param);
+    (*B)->deget->urm = aux;
+    aux->pre = (*B)->deget;
+    (*B)->deget = aux;
+}
+
+void SHOW_CURRENT(TBanda *B, FILE *output) {
     fprintf(output,"%c\n",(*B)->deget->info);
+}
+
+void SHOW(TBanda *B, FILE *output) {
+    TListaB p = NULL;
+    for (p = (*B)->santinela->urm; p != NULL; p = p->urm)
+        if (p->info == (*B)->deget->info)
+            fprintf(output, "|%c|", p->info);
+        else
+            fprintf(output, "%c",p->info);
+    fprintf(output, "\n");
 }
 
 void DistrQ(TCoada *Q)
 {
-    TListaC p, aux;
+    TListaC p = NULL;
+    TListaC aux = NULL;
     p = (*Q)->inc;
     while(p)
     {
@@ -250,7 +344,7 @@ void DistrQ(TCoada *Q)
 }
 
 void AfisareQ(TCoada *Q) {
-    TListaC p;
+    TListaC p = NULL;
     if((*Q)->inc == NULL)
     {
         printf("Coada vida\n");

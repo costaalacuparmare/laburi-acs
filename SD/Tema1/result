@@ -1,0 +1,12 @@
+
+Run cpplint
+
+./checker_vadim.sh: line 19: cpplint: command not found
+
+Run clang-tidy
+
+13 warnings generated.
+27 warnings generated.
+40 warnings generated.
+Suppressed 40 warnings (39 in non-user code, 1 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
