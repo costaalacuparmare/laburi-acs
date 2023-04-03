@@ -1,5 +1,5 @@
 build:
-	gcc -o tema1 main.c tema1.c
+	gcc -g -o tema1 main.c tema1.c
 run:
 	./tema1
 clean:

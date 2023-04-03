@@ -10,10 +10,20 @@ TBanda InitB() {
 
     /* creem banda returnand santinela si
     inseram primul element # catre care va pointa degetul*/
+
     TBanda aux = (TBanda) malloc(sizeof(TBanda));
     if (!aux) return NULL;
     aux->santinela = (TListaB) malloc(sizeof(TCelulaB));
-    if (!aux->santinela) return NULL;
+    if (!aux->santinela) {
+        free(aux);
+        return NULL;
+    }
+    aux->deget = (TListaB) malloc(sizeof(TCelulaB));
+    if (!aux->deget) {
+        free(aux->santinela);
+        free(aux);
+        return NULL;
+    }
     TListaB aux2= (TListaB) malloc(sizeof(TCelulaB));
     if (!aux2) return NULL;
     aux->santinela->pre = NULL;
