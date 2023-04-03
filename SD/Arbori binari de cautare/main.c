@@ -13,7 +13,7 @@ int main() {
 
     /* Ex1 Lab5 */
     int x = 16;
-//    printf("Numarul de numere: %d\n",Numara(arbore,x));
+    // printf("Numarul de numere: %d\n",Numara(arbore,x));
     /* Ex2 Lab5 */
     printf("%d\n",Verif(arbore,x));
     DistrugeArb(&arbore);
