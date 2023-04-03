@@ -66,6 +66,28 @@ void RSD(TArb a) {
 	printf(")");
 }
 
+void DRS(TArb a) {
+    if (!a) {
+        printf("-");
+        return;
+    }
+
+    if (!a->st && !a->dr) {          /* conditie frunza */
+        printf(" %d ", a->info);
+        return;
+    }
+
+    DRS(a->dr);                      /* apelare recursiva */
+    printf(",");
+
+
+    printf(" %d ", a->info);
+    printf("(");
+
+    DRS(a->st);                      /* apelare recursiva */
+    printf(")");
+}
+
 /* Dezalocare memorie arbore */
 void DistrugeArb(TArb* adrArbore) {
     if (!(*adrArbore)) {
@@ -133,4 +155,61 @@ void AfiArb(TArb r)
 		}
 	}
 	printf ("\n");
+}
+
+/* Ex1 Lab 5 afiseaza info mai mici decat x, nr de valori prin drs */
+
+void DRS_Num(TArb a, int x, int *nr) {
+    if (!a)
+        return;
+
+    DRS_Num(a->dr,x,nr);
+
+        if (a->info < x) {
+            printf("%d ", a->info);
+            (*nr)++;
+        }
+
+    DRS_Num(a->st,x,nr);
+}
+
+int Numara(TArb r, int x) {
+    int nr = 0;
+    if(!r) return 0;
+    printf("Elemente mai mari decat %d: ", x);
+    DRS_Num(r,x,&nr);
+    printf("\n");
+    return nr;
+}
+
+/* Ex1 Lab 5 afiseaza nivelul daca info mai mici decat x sunt pe acelasi sau -1 */
+
+int NrNiv (TArb r) {
+    int ns = 0, nd = 0;
+    if (!r) return 0;
+    ns = NrNiv(r->st);
+    nd = NrNiv(r->dr);
+    return 1 + (ns >= nd ? ns : nd);
+}
+
+int Check_Niv (TArb r, int x, int nivCrt, int niv) {
+    if(!r) return 0;
+    if (nivCrt == niv)
+        if (r->info < x)
+            return 1;
+        else
+            return 0;
+    return Check_Niv(r->st,x,nivCrt+1,niv) && Check_Niv(r->dr,x,nivCrt+1,niv);
+}
+
+int Verif(TArb r, int x) {
+    int niv = NrNiv(r);
+    int i = 0;
+    for(; i < niv; i++) {
+        int Check = Check_Niv(r,x,0,i);
+        if (Check == 1)
+            return 1;
+    }
+    return -1;
+
 }

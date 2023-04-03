@@ -1,7 +1,7 @@
 #include "arbBC.h"
 
 int main() {
-    int v[] = {15, 3, 31, 14, 7, 28, 16};
+    int v[] = {5, 3, 9, 1, 6, 7, 2};
     int nrNoduri = sizeof(v)/sizeof(v[0]);
     TArb arbore = NULL;
     
@@ -10,9 +10,12 @@ int main() {
     }
 
     AfiArb(arbore);
-    RSD(arbore);
-    printf("\n");
 
+    /* Ex1 Lab5 */
+    int x = 16;
+//    printf("Numarul de numere: %d\n",Numara(arbore,x));
+    /* Ex2 Lab5 */
+    printf("%d\n",Verif(arbore,x));
     DistrugeArb(&arbore);
     return 0;
 }

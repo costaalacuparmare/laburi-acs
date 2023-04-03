@@ -11,16 +11,10 @@ TBanda InitB() {
     /* creem banda returnand santinela si
     inseram primul element # catre care va pointa degetul*/
 
-    TBanda aux = (TBanda) malloc(sizeof(TBanda));
+    TBanda aux = (TBanda) malloc(sizeof(struct banda));
     if (!aux) return NULL;
     aux->santinela = (TListaB) malloc(sizeof(TCelulaB));
     if (!aux->santinela) {
-        free(aux);
-        return NULL;
-    }
-    aux->deget = (TListaB) malloc(sizeof(TCelulaB));
-    if (!aux->deget) {
-        free(aux->santinela);
         free(aux);
         return NULL;
     }
@@ -60,7 +54,7 @@ void FreeB (TBanda *B) {
 /* coada */
 
 TCoada InitQ () {
-    TCoada Q = (TCoada) malloc(sizeof(TCoada));
+    TCoada Q = (TCoada) malloc(sizeof(struct coada));
     if (!Q) return NULL;
     Q->inc = Q->sf = NULL;
     return Q;
@@ -88,6 +82,7 @@ void PopQ(TCoada *Q)
         return;
     aux = (*Q)->inc;
     (*Q)->inc = (*Q)->inc->urm;
+    free(aux->info);
     free(aux);
 }
 
@@ -100,6 +95,7 @@ void FreeQ(TCoada *Q)
     {
         aux = p;
         p = p->urm;
+        free(aux->info);
         free(aux);
     }
     free(*Q);
@@ -109,7 +105,7 @@ void FreeQ(TCoada *Q)
 /* stiva */
 
 TStiva InitS() {
-    TStiva s = (TStiva) malloc(sizeof(TStiva));
+    TStiva s = (TStiva) malloc(sizeof(struct stiva));
     if (!s) return NULL;
     s->vf = NULL;
     return s;
@@ -148,12 +144,6 @@ void FreeS(TStiva *S) {
     }
     free(*S);
     *S = NULL;
-}
-void Init(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
-    *B = InitB();
-    *Q = InitQ();
-    *Undo = InitS();
-    *Redo = InitS();
 }
 
 /* functiile comenzi */
@@ -313,6 +303,13 @@ void REDO(TBanda *B, TStiva *Undo, TStiva *Redo) {
 
 /* functii de implementare */
 
+void Init(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
+    *B = InitB();
+    *Q = InitQ();
+    *Undo = InitS();
+    *Redo = InitS();
+}
+
 int Code(char *cmd, char *param) {
     if (strcmp(cmd,"EXECUTE\n") == ZERO ||
         strcmp(cmd,"EXECUTE") == ZERO)
@@ -323,15 +320,16 @@ int Code(char *cmd, char *param) {
     if (strcmp(cmd,"MOVE_RIGHT\n") == ZERO ||
         strcmp(cmd,"MOVE_RIGHT") == ZERO)
         return TWO;
-    if (cmd[TEN] == 'C' || cmd[ELEVEN] == 'C') {
-        *param = cmd[strlen(cmd) - TWO];
-        if(cmd[FIVE] == 'L') {
+    if(TEN <= strlen(cmd))
+        if (*(cmd + TEN) == 'C' || *(cmd + ELEVEN) == 'C') {
+            *param = cmd[strlen(cmd) - TWO];
+            if(cmd[FIVE] == 'L') {
 
-            return THREE;
+                return THREE;
+            }
+            else
+                return FOUR;
         }
-        else
-            return FOUR;
-    }
     if (cmd[ZERO] == 'W') {
         *param = cmd[strlen(cmd) - TWO];
         return FIVE;
@@ -358,13 +356,12 @@ int Code(char *cmd, char *param) {
 }
 
 TCmd Read(FILE *input) {
-    char *cmd = (char *) malloc(MAX * sizeof(char));
+    char cmd[MAX];
     if (!cmd) return ZERO;
     TCmd CMD = (TCmd) malloc(sizeof(TCmd));
     fgets(cmd, MAX, input);
     CMD->param = '\0';
     CMD->cod = Code(cmd, &CMD->param);
-    free(cmd);
     return CMD;
 }
 
@@ -401,7 +398,7 @@ void Run(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
     FILE *output = fopen("tema1.out", "w+");
     int cmd_nr = ZERO;
     fscanf(input, "%d", &cmd_nr);
-    TCmd cmd = (TCmd) malloc(sizeof(TCmd));
+    TCmd cmd = NULL;// = (TCmd) malloc(sizeof(struct command));
     Read(input);
     int i = ZERO;
     for (; i < cmd_nr; i++) {
@@ -410,7 +407,6 @@ void Run(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
     }
     fclose(input);
     fclose(output);
-    free(cmd);
 }
 
 void Free(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
