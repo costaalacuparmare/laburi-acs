@@ -123,8 +123,6 @@ void PopS(TStiva *S)
 void PushS(TStiva *S, TListaB x) {
     TListaS aux = (TListaS) malloc(sizeof(TCelulaS));
     if (!aux) return;
-    aux->info = (TListaB) malloc(sizeof(TCelulaS));
-    if (!aux->info) return;
     aux->info = x;
     if ((*S)->vf != NULL)
         aux->urm = (*S)->vf;
@@ -358,7 +356,7 @@ int Code(char *cmd, char *param) {
 TCmd Read(FILE *input) {
     char cmd[MAX];
     if (!cmd) return ZERO;
-    TCmd CMD = (TCmd) malloc(sizeof(TCmd));
+    TCmd CMD = (TCmd) malloc(sizeof(struct command));
     fgets(cmd, MAX, input);
     CMD->param = '\0';
     CMD->cod = Code(cmd, &CMD->param);
@@ -391,6 +389,7 @@ void Execute(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo,
             break;
         }
     }
+    free(cmd);
 }
 
 void Run(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
@@ -399,7 +398,8 @@ void Run(TBanda *B, TCoada *Q, TStiva *Undo, TStiva *Redo) {
     int cmd_nr = ZERO;
     fscanf(input, "%d", &cmd_nr);
     TCmd cmd = NULL;// = (TCmd) malloc(sizeof(struct command));
-    Read(input);
+    char s[MAX];
+    fgets(s, MAX, input);
     int i = ZERO;
     for (; i < cmd_nr; i++) {
         cmd = Read(input);
