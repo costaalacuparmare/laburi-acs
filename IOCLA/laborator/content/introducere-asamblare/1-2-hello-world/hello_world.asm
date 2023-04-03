@@ -2,6 +2,7 @@
 
 section .data
     myString: db "Hello, World!", 0
+    myString2: db "Goodbye, World!", 0
 
 section .text
     global main
@@ -9,15 +10,18 @@ section .text
 
 main:
     mov ecx, 6                      ; N = valoarea registrului ecx
-    mov eax, 1
+    mov eax, 2
     mov ebx, 1
     cmp eax, ebx
-    je print                        ; TODO1: eax > ebx?
+    jns print
     ret
 
 print:
     PRINTF32 `%s\n\x0`, myString
-                                    ; TODO2.2: afisati "Hello, World!" de N ori
-                                    ; TODO2.1: afisati "Goodbye, World!"
+    sub ecx, 1
+    cmp ecx, 0
+    jnz print
+    PRINTF32 `%s\n\x0`, myString2
+    ret
 
     ret
