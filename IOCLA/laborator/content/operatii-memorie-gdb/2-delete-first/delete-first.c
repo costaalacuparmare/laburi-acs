@@ -5,17 +5,14 @@
 char* delete_first(char *s, char *pattern) {
     int len_pattern = strlen(pattern);
     char *p = strstr(s, pattern);
-    if (!p) return s;
-    char *q = p + len_pattern;
-    while (*q != '\0') {
-        *p = *q;
-        p++;
-        q++;
-    }
+    if (!p) return strdup(s);
+    int lenbef = p - s;
+    char *q = (char *) malloc (strlen(s) + 1 - len_pattern);
+    if (!q) return strdup(s);
+    strncpy(q,s,lenbef);
+    strcpy(q + lenbef, p + len_pattern);
 
-    *p = '\0';
-
-    return s;
+    return q;
 }
 
 int main(void)

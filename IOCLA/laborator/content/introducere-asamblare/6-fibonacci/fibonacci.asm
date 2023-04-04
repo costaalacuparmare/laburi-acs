@@ -5,8 +5,20 @@ section .text
     extern printf
 
 main:
-    mov eax, 7       ; vrem sa aflam al N-lea numar; N = 7
+    mov ecx, 3       ; vrem sa aflam al N-lea numar; N = 7
+    mov eax, 1
+    mov ebx, 1
+    sub ecx, 1
+fibonacci:
+    sub ecx, 1
+    test ecx, ecx
+    je print
 
-    ; TODO: calculati al N-lea numar fibonacci (f(0) = 0, f(1) = 1)
+    add eax, ebx
+    xchg eax, ebx
+    jmp fibonacci
 
+print:
+    PRINTF32 `%d\n\x0`, ebx
+    xor eax, eax
     ret
