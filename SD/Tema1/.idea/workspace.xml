@@ -20,7 +20,28 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46a78210-40e1-4426-8604-efba152de2e0" name="Changes" comment="" />
+    <list default="true" id="46a78210-40e1-4426-8604-efba152de2e0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/4-sets/sets" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/4-sets/sets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/4-sets/sets.asm" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/4-sets/sets.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/4-sets/sets.o" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/4-sets/sets.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/5-min/min.asm" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/5-min/min.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/6-fibonacci/fibonacci.asm" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/6-fibonacci/fibonacci.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/iterate" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/iterate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/iterate.o" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/iterate.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/delete-first" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/delete-first" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/delete-first.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/delete-first.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/delete-first.o" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/delete-first.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/3-pixels/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/3-pixels/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/3-pixels/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/3-pixels/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/3-pixels/pixels.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/3-pixels/pixels.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/4-find-max/find-max.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/4-find-max/find-max.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,7 +71,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/home/vconstantinescu/Desktop/UPB/SD/Arbori binari de cautare&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/home/vconstantinescu/Desktop/UPB/SD/Tema1&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -81,6 +102,10 @@
       <workItem from="1680464710932" duration="9582000" />
       <workItem from="1680512722437" duration="8732000" />
       <workItem from="1680554882803" duration="1795000" />
+      <workItem from="1680557496516" duration="119000" />
+      <workItem from="1680593493718" duration="82000" />
+      <workItem from="1680594541998" duration="1127000" />
+      <workItem from="1680596185013" duration="207000" />
     </task>
     <servers />
   </component>
