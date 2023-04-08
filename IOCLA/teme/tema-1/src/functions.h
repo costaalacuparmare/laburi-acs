@@ -5,3 +5,4 @@
 FILE *InitF(char const *argv[]);
 sensor *InitS(int nr_sensors);
 void Read(sensor *sensors,  int nr_sensors, FILE *input);
+void Free(int nr_sensors, sensor *sensors);
