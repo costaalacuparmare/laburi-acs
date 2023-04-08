@@ -16,7 +16,9 @@ functions.o: functions.c
 	$(CC) $(CFLAGS) -c $^
 
 run: build
-	./main
+	./main sensors_print_easy_1.dat
 
 clean:
 	rm -f *.o main
+valgrind:
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./main

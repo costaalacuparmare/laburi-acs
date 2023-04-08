@@ -28,6 +28,4 @@ typedef struct __attribute__((__packed__)) {
 	int performace_score;
 } tire_sensor;
 
-void INIT();
-
-#endif // _STRUCTS_H_
+#endif //_STRUCTS_H_
