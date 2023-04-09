@@ -16,11 +16,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/functions.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operations.o" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +66,8 @@
       <workItem from="1680776384982" duration="7710000" />
       <workItem from="1680881219321" duration="3206000" />
       <workItem from="1680946977574" duration="6006000" />
-      <workItem from="1680963540275" duration="3744000" />
+      <workItem from="1680963540275" duration="5673000" />
+      <workItem from="1681048751993" duration="4189000" />
     </task>
     <servers />
   </component>
