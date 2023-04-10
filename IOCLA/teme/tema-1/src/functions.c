@@ -92,10 +92,12 @@ char *Read_CMD(int *i) {
 void Run_CMD(sensor *sensors, int nr_sensors, char *cmd, int i) {
     if (i > nr_sensors || i < 0) {
         printf("Index not in range!\n");
+        free(cmd);
         return;
     }
     if(!strcmp(cmd,"print"))
         print(sensors, i);
+    free(cmd);
 }
 
 void Free(sensor *sensors, int nr_sensors, char *cmd) {

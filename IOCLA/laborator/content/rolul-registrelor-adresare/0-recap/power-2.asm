@@ -9,8 +9,14 @@ main:
 
     mov eax, 211    ; to be broken down into powers of 2
     mov ebx, 1      ; stores the current power
+    cmp eax, ebx
+    jl print
 
-    ; TODO - print the powers of 2 that generate number stored in EAX
+print:
+    PRINTF32 `%u\n\x0`, ebx
+    shl ebx, 1
+    cmp eax, ebx
+    jge print
 
     leave
     ret
