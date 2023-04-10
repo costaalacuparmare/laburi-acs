@@ -18,6 +18,7 @@ FILE *InitF(char const *argv[]);
 sensor *InitS(int nr_sensors);
 void delete(sensor *sensors,int i, int *nr_sensors);
 void print(sensor *sensors, int i);
+void analyze(sensor *sensors, int i);
 void clear(sensor *s, int *nr_sensors);
 int cmp(const void *a, const void *b);
 void Read(sensor *sensors, int nr_sensors, FILE *input);
