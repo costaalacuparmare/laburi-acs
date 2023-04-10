@@ -16,7 +16,7 @@ functions.o: functions.c
 	$(CC) $(CFLAGS) -c $^
 
 run: build
-	./main ../checker/input/sensors_print_easy_2.dat
+	./main ../checker/input/sensors_clear_easy_1.dat
 
 clean:
 	rm -f *.o main

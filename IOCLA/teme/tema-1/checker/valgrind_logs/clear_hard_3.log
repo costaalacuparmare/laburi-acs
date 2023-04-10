@@ -1,0 +1,35 @@
+==24715== Memcheck, a memory error detector
+==24715== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==24715== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==24715== Command: ./../src/main input/sensors_clear_hard_3.dat
+==24715== Parent PID: 24714
+==24715== 
+==24715== 
+==24715== HEAP SUMMARY:
+==24715==     in use at exit: 2,388 bytes in 154 blocks
+==24715==   total heap usage: 2,558 allocs, 2,404 frees, 90,112 bytes allocated
+==24715== 
+==24715== 656 bytes in 41 blocks are definitely lost in loss record 1 of 3
+==24715==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==24715==    by 0x10A2B0: Read (functions.c:116)
+==24715==    by 0x109381: main (main.c:9)
+==24715== 
+==24715== 720 bytes in 36 blocks are definitely lost in loss record 2 of 3
+==24715==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==24715==    by 0x10A21F: Read (functions.c:108)
+==24715==    by 0x109381: main (main.c:9)
+==24715== 
+==24715== 1,012 bytes in 77 blocks are definitely lost in loss record 3 of 3
+==24715==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==24715==    by 0x10A384: Read (functions.c:124)
+==24715==    by 0x109381: main (main.c:9)
+==24715== 
+==24715== LEAK SUMMARY:
+==24715==    definitely lost: 2,388 bytes in 154 blocks
+==24715==    indirectly lost: 0 bytes in 0 blocks
+==24715==      possibly lost: 0 bytes in 0 blocks
+==24715==    still reachable: 0 bytes in 0 blocks
+==24715==         suppressed: 0 bytes in 0 blocks
+==24715== 
+==24715== For lists of detected and suppressed errors, rerun with: -s
+==24715== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)

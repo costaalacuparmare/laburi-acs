@@ -10,7 +10,7 @@ int main(int argc, char const *argv[])
     int i = 0;
     char *cmd = Read_CMD(&i);
     while (strcmp(cmd,"exit\n")) {
-        Run_CMD(sensors,nr_sensors, cmd, i);
+        Run_CMD(sensors,&nr_sensors, cmd, i);
         cmd = Read_CMD(&i);
     }
     Free(sensors, nr_sensors, cmd);

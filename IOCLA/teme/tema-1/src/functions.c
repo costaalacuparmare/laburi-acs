@@ -1,8 +1,9 @@
-// THIS ARE THE FUNCTIONS FOR THE TASKS
+/* These are the functions we use for solving the homework */
 #include "functions.h"
 
 FILE *InitF(char const *argv[]) {
-    FILE *input = fopen(/*argv[1]*/"sensors_print_easy_1.dat", "rb");
+    FILE *input = fopen(argv[1], "rb");
+    //FILE *input = fopen("../checker/input/sensors_clear_easy_1.dat", "rb");
     if (!input) {
         printf("Unable to read file\n");
         return NULL;
@@ -19,14 +20,19 @@ sensor *InitS(int nr_sensors) {
     return sensors;
 }
 
-
+void delete(sensor *sensors, int i, int *nr_sensors) {
+    for (; i < (*nr_sensors)-1; i++)
+        sensors[i] = sensors[i+1];
+    (*nr_sensors)--;
+}
 
 void print(sensor *sensors, int i) {
     if (sensors[i].sensor_type) {
         printf("Power Management Unit\n");
         printf("Voltage: %.2f\n", ((power_management_unit *) sensors[i].sensor_data)->voltage);
         printf("Current: %.2f\n", ((power_management_unit *) sensors[i].sensor_data)->current);
-        printf("Power Consumption: %.2f\n", ((power_management_unit *) sensors[i].sensor_data)->power_consumption);printf("Energy Regen: %d%%\n", ((power_management_unit *) sensors[i].sensor_data)->energy_regen);
+        printf("Power Consumption: %.2f\n", ((power_management_unit *) sensors[i].sensor_data)->power_consumption);
+        printf("Energy Regen: %d%%\n", ((power_management_unit *) sensors[i].sensor_data)->energy_regen);
         printf("Energy Storage: %d%%\n", ((power_management_unit *) sensors[i].sensor_data)->energy_storage);
     }
     else {
@@ -41,7 +47,50 @@ void print(sensor *sensors, int i) {
     }
 }
 
+void clear(sensor *sensors, int *nr_sensors) {
+    int i = 0;
+    for (; i < (*nr_sensors); i++)
+        if (sensors[i].sensor_type) {
+            power_management_unit *pmu = (power_management_unit *) sensors[i].sensor_data;
+            if (!pmu) {
+                printf("Error at malloc pmu, sensor %d\n", i);
+                return;
+            }
+            if (pmu->voltage < MIN_V || pmu->voltage > MAX_V) {
+                delete(sensors, i, nr_sensors);
+            }
+            if (pmu->current < MIN_A || pmu->current > MAX_A) {
+                delete(sensors, i, nr_sensors);
+            }
+            if (pmu->power_consumption < 0 || pmu->power_consumption > MAX_KW) {
+                delete(sensors, i, nr_sensors);
+            }
+            if (pmu->energy_storage < 0 || pmu->energy_storage > MAX_PERCENTAGE) {
+                delete(sensors, i, nr_sensors);
+            }
+            if (pmu->energy_regen < 0 || pmu->energy_regen > MAX_PERCENTAGE) {
+                delete(sensors, i, nr_sensors);
+            }
+        }
+        else {
+            tire_sensor *tire = (tire_sensor *) sensors[i].sensor_data;
+            if (tire->pressure < MIN_PSI || tire->pressure > MAX_PSI) {
+                delete(sensors, i, nr_sensors);
+            }
+            if (tire->temperature < 0 || tire->temperature > MAX_CELSIUS) {
+                delete(sensors, i, nr_sensors);
+            }
+            if (tire->wear_level < 0 || tire->wear_level > MAX_PERCENTAGE) {
+                delete(sensors, i, nr_sensors);
+            }
+        }
+}
 
+int cmp(const void *a, const void *b) {
+    sensor *ax = (sensor *) a;
+    sensor *bx = (sensor *) b;
+    return (bx->sensor_type - ax->sensor_type);
+}
 
 void Read(sensor *sensors, int nr_sensors, FILE *input) {
     int i = 0;
@@ -50,7 +99,7 @@ void Read(sensor *sensors, int nr_sensors, FILE *input) {
         if (sensors[i].sensor_type) {
             sensors[i].sensor_data = malloc(sizeof(power_management_unit));
             if (!sensors[i].sensor_data) {
-                printf("Error at malloc sensor_data, element %d\n", i);
+                printf("Error at malloc sensor_data, sensor %d\n", i);
                 return;
             }
             fread(sensors[i].sensor_data, sizeof(power_management_unit), 1, input);
@@ -58,7 +107,7 @@ void Read(sensor *sensors, int nr_sensors, FILE *input) {
         else {
             sensors[i].sensor_data = malloc(sizeof(tire_sensor));
             if (!sensors[i].sensor_data) {
-                printf("Error at malloc sensor_data, element %d\n", i);
+                printf("Error at malloc sensor_data, sensor %d\n", i);
                 return;
             }
             fread(sensors[i].sensor_data, sizeof(tire_sensor), 1, input);
@@ -70,9 +119,10 @@ void Read(sensor *sensors, int nr_sensors, FILE *input) {
             return;
         }
         int j = 0;
-        for(; j < sensors[i].nr_operations; j++)
+        for (; j < sensors[i].nr_operations; j++)
             fread(&sensors[i].operations_idxs[j], sizeof(sensors[i].operations_idxs[j]), 1, input);
     }
+    qsort(sensors, nr_sensors, sizeof(sensor), cmp);
     fclose(input);
 }
 
@@ -83,20 +133,27 @@ char *Read_CMD(int *i) {
         return NULL;
     }
     fgets(cmd, MAX, stdin);
-    if (strcmp(cmd, "exit\n"))
-        *i = atoi(strchr(cmd,' '));
-    cmd = strtok(cmd," ");
+    if (strcmp(cmd, "exit\n") || strcmp(cmd, "clear\n")) {
+        if ('0' <= cmd[strlen(cmd) - 2] && cmd[strlen(cmd) - 2] <= '9')
+            (*i) = atoi(strchr(cmd, ' '));
+        else
+            (*i) = -1;
+    }
+    cmd = strtok(cmd, " ");
     return cmd;
 }
 
-void Run_CMD(sensor *sensors, int nr_sensors, char *cmd, int i) {
-    if (i > nr_sensors || i < 0) {
-        printf("Index not in range!\n");
-        free(cmd);
-        return;
-    }
+void Run_CMD(sensor *sensors, int *nr_sensors, char *cmd, int i) {
+    if (i > (*nr_sensors) || i < 0)
+        if(strcmp(cmd,"clear\n")) {
+            printf("Index not in range!\n");
+            free(cmd);
+            return;
+        }
     if(!strcmp(cmd,"print"))
         print(sensors, i);
+    if(!strcmp(cmd,"clear\n"))
+        clear(sensors, nr_sensors);
     free(cmd);
 }
 
