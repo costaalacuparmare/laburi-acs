@@ -16,8 +16,7 @@ functions.o: functions.c
 	$(CC) $(CFLAGS) -c $^
 
 run: build
-	./main ../checker/input/sensors_clear_easy_1.dat
-
+	./main
 clean:
 	rm -f *.o main
 valgrind:
