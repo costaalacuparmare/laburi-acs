@@ -16,12 +16,13 @@
 
 FILE *InitF(char const *argv[]);
 sensor *InitS(int nr_sensors);
-void delete(sensor *sensors,int i, int *nr_sensors);
+int condition(sensor *sensors, int i);
 void print(sensor *sensors, int i);
-void analyze(sensor *sensors, int i);
+void analyse(sensor *sensors, int i);
 void clear(sensor *s, int *nr_sensors);
 int cmp(const void *a, const void *b);
 void Read(sensor *sensors, int nr_sensors, FILE *input);
 char *Read_CMD(int *i);
 void Run_CMD(sensor *sensors, int *nr_sensors, char *cmd, int i);
 void Free(sensor *sensors, int nr_sensors, char *cmd);
+void get_operations(void **operations);

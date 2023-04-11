@@ -1,81 +1,15 @@
-==22264== Memcheck, a memory error detector
-==22264== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==22264== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==22264== Command: ./../src/main input/sensors_analyse_2.dat
-==22264== Parent PID: 22263
-==22264== 
-==22264== 
-==22264== Process terminating with default action of signal 2 (SIGINT)
-==22264==    at 0x4977A35: write (write.c:26)
-==22264==    by 0x48EDF6C: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
-==22264==    by 0x48EFA60: new_do_write (fileops.c:448)
-==22264==    by 0x48EFA60: _IO_new_do_write (fileops.c:425)
-==22264==    by 0x48EFA60: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
-==22264==    by 0x48EE754: _IO_new_file_xsputn (fileops.c:1243)
-==22264==    by 0x48EE754: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
-==22264==    by 0x48E3F9B: puts (ioputs.c:40)
-==22264==    by 0x109DD4: print (functions.c:39)
-==22264==    by 0x10A601: Run_CMD (functions.c:162)
-==22264==    by 0x1093B0: main (main.c:13)
-==22264== 
-==22264== HEAP SUMMARY:
-==22264==     in use at exit: 38,772 bytes in 964 blocks
-==22264==   total heap usage: 42,026 allocs, 41,062 frees, 879,880 bytes allocated
-==22264== 
-==22264== 20 bytes in 1 blocks are still reachable in loss record 1 of 7
-==22264==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22264==    by 0x10A480: Read_CMD (functions.c:138)
-==22264==    by 0x1093BC: main (main.c:14)
-==22264== 
-==22264== 3,712 bytes in 232 blocks are still reachable in loss record 2 of 7
-==22264==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22264==    by 0x10A2AF: Read (functions.c:116)
-==22264==    by 0x109381: main (main.c:9)
-==22264== 
-==22264== 4,096 bytes in 1 blocks are still reachable in loss record 3 of 7
-==22264==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22264==    by 0x48E1C23: _IO_file_doallocate (filedoalloc.c:101)
-==22264==    by 0x48F0D5F: _IO_doallocbuf (genops.c:347)
-==22264==    by 0x48EFD5B: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:485)
-==22264==    by 0x48F0E15: _IO_default_uflow (genops.c:362)
-==22264==    by 0x48E349B: _IO_getline_info (iogetline.c:60)
-==22264==    by 0x48E248F: fgets (iofgets.c:53)
-==22264==    by 0x10A4BC: Read_CMD (functions.c:143)
-==22264==    by 0x109394: main (main.c:11)
-==22264== 
-==22264== 4,096 bytes in 1 blocks are still reachable in loss record 4 of 7
-==22264==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22264==    by 0x48E1C23: _IO_file_doallocate (filedoalloc.c:101)
-==22264==    by 0x48F0D5F: _IO_doallocbuf (genops.c:347)
-==22264==    by 0x48EFFDF: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
-==22264==    by 0x48EE754: _IO_new_file_xsputn (fileops.c:1243)
-==22264==    by 0x48EE754: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
-==22264==    by 0x48E3F9B: puts (ioputs.c:40)
-==22264==    by 0x109C9B: print (functions.c:31)
-==22264==    by 0x10A601: Run_CMD (functions.c:162)
-==22264==    by 0x1093B0: main (main.c:13)
-==22264== 
-==22264== 4,960 bytes in 248 blocks are still reachable in loss record 5 of 7
-==22264==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22264==    by 0x10A21E: Read (functions.c:108)
-==22264==    by 0x109381: main (main.c:9)
-==22264== 
-==22264== 6,528 bytes in 480 blocks are still reachable in loss record 6 of 7
-==22264==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22264==    by 0x10A383: Read (functions.c:124)
-==22264==    by 0x109381: main (main.c:9)
-==22264== 
-==22264== 15,360 bytes in 1 blocks are still reachable in loss record 7 of 7
-==22264==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22264==    by 0x109BB2: InitS (functions.c:15)
-==22264==    by 0x109368: main (main.c:8)
-==22264== 
-==22264== LEAK SUMMARY:
-==22264==    definitely lost: 0 bytes in 0 blocks
-==22264==    indirectly lost: 0 bytes in 0 blocks
-==22264==      possibly lost: 0 bytes in 0 blocks
-==22264==    still reachable: 38,772 bytes in 964 blocks
-==22264==         suppressed: 0 bytes in 0 blocks
-==22264== 
-==22264== For lists of detected and suppressed errors, rerun with: -s
-==22264== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==12868== Memcheck, a memory error detector
+==12868== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==12868== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==12868== Command: ./../src/main input/sensors_analyse_2.dat
+==12868== Parent PID: 12867
+==12868== 
+==12868== 
+==12868== HEAP SUMMARY:
+==12868==     in use at exit: 0 bytes in 0 blocks
+==12868==   total heap usage: 48,487 allocs, 48,487 frees, 1,009,100 bytes allocated
+==12868== 
+==12868== All heap blocks were freed -- no leaks are possible
+==12868== 
+==12868== For lists of detected and suppressed errors, rerun with: -s
+==12868== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

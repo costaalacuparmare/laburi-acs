@@ -1,25 +1,15 @@
-==30716== Memcheck, a memory error detector
-==30716== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==30716== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==30716== Command: ./../src/main input/sensors_clear_easy_5.dat
-==30716== Parent PID: 30715
-==30716== 
-==30716== 
-==30716== HEAP SUMMARY:
-==30716==     in use at exit: 1,044 bytes in 70 blocks
-==30716==   total heap usage: 1,784 allocs, 1,714 frees, 983,904 bytes allocated
-==30716== 
-==30716== 1,044 bytes in 70 blocks are definitely lost in loss record 1 of 1
-==30716==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==30716==    by 0x10A41E: Read (functions.c:136)
-==30716==    by 0x109381: main (main.c:9)
-==30716== 
-==30716== LEAK SUMMARY:
-==30716==    definitely lost: 1,044 bytes in 70 blocks
-==30716==    indirectly lost: 0 bytes in 0 blocks
-==30716==      possibly lost: 0 bytes in 0 blocks
-==30716==    still reachable: 0 bytes in 0 blocks
-==30716==         suppressed: 0 bytes in 0 blocks
-==30716== 
-==30716== For lists of detected and suppressed errors, rerun with: -s
-==30716== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==12854== Memcheck, a memory error detector
+==12854== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==12854== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==12854== Command: ./../src/main input/sensors_clear_easy_5.dat
+==12854== Parent PID: 12853
+==12854== 
+==12854== 
+==12854== HEAP SUMMARY:
+==12854==     in use at exit: 0 bytes in 0 blocks
+==12854==   total heap usage: 1,715 allocs, 1,715 frees, 72,032 bytes allocated
+==12854== 
+==12854== All heap blocks were freed -- no leaks are possible
+==12854== 
+==12854== For lists of detected and suppressed errors, rerun with: -s
+==12854== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
