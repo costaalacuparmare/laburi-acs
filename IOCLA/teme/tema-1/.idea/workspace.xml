@@ -13,17 +13,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e158237-d614-445e-b434-b3a169093ad4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/src/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/structs.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/structs.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../SD/Arbori binari de cautare/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SD/Arbori binari de cautare/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../SD/Arbori binari/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SD/Arbori binari/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../SD/Arbori binari/functiiArb.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SD/Arbori binari/functiiArb.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../SD/Arbori binari/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SD/Arbori binari/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../SD/Arbori binari/tarb.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SD/Arbori binari/tarb.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/functions.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operations.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/result" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tema1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tema1.in" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tema1.out" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +76,7 @@
       <workItem from="1681134009698" duration="11671000" />
       <workItem from="1681240057278" duration="7748000" />
       <workItem from="1681307829132" duration="4000" />
-      <workItem from="1681395818549" duration="1496000" />
+      <workItem from="1681395818549" duration="2058000" />
     </task>
     <servers />
   </component>

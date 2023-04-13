@@ -1,8 +1,0 @@
-
-Run cpplint
-
-./checker_vadim.sh: line 19: cpplint: command not found
-
-Run clang-tidy
-
-./checker_vadim.sh: line 28: clang-tidy: command not found
