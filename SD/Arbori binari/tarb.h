@@ -5,7 +5,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
-
+#define MIN(a,b) ((a < b) ? a : b)
 #ifndef ARBORE_BINAR
 #define ARBORE_BINAR
 
@@ -28,6 +28,9 @@ void AfiArb(TArb r); /*- afiseaza arborele r -*/
 int Numara (TArb r);
 void Parcurgere (TArb r, int * nr_info);
 int Verifica (TArb r);
+int Check_Fr (TArb r, int niv);
+int nr_procent(TArb r, int n)
+float procent(TArb r, int niv);
 #endif
 
 #ifndef _random_

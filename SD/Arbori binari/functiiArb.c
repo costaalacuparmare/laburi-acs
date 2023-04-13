@@ -170,3 +170,38 @@ int Verifica (TArb r) {
     return 0;
 }
 
+//Ex2 Lab 6 - niv minim cu o frunza
+
+int Check_Fr (TArb r, int niv) {
+    if (r->st == NULL && r->dr == NULL)
+        return niv;
+    if (r->st == NULL)
+        return Check_Fr(r->dr,niv+1);
+
+    if (r->dr == NULL)
+        return Check_Fr(r->st, niv+1);
+    return MIN(Check_Fr(r->st, niv+1),Check_Fr(r->dr, niv+1));
+}
+
+//Ex3 Lab 6 - procent de numere deasupra unui niv care sunt pare
+
+int Check_Niv (TArb r, int x, int nivCrt, int niv) {
+    if(!r) return 0;
+    if (nivCrt == niv)
+        if (r->info < x)
+            return 1;
+        else
+            return 0;
+    return Check_Niv(r->st,x,nivCrt+1,niv) && Check_Niv(r->dr,x,nivCrt+1,niv);
+}
+
+int nr_procent(TArb r, int niv, int nivCrt) {
+    if (!r) return 0;
+    if (nivCrt < niv)
+        return 1 + procent(r->st,niv,nivCrt+1) + procent(r->dr,niv,nivCrt+1);
+    return 0;
+}
+
+float procent(TArb r, int n) {
+
+}

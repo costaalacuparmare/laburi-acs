@@ -11,13 +11,15 @@ int main ()
 
 	AfiArb (arb);
 	printf ("noduri: %i\n", NrNoduri(arb));
-    printf("Numar de noduri pt ex 1 %d\n", Numara(arb));
+    printf("Numar de noduri pt lab 4 ex 1 %d\n", Numara(arb));
     Parcurgere(arb,&nr_info);
-    printf("Numar de noduri pt ex 2 %d\n", nr_info);
+    printf("Numar de noduri pt lab 4 ex 2 %d\n", nr_info);
+    printf("lab 4 ex3: ");
     if (Verifica(arb))
         printf("Toate au\n");
     else
         printf("N-au\n");
+    printf("Niv cel mai mic cu frunza: %d\n",Check_Fr(arb,0));
 	/*-- se completeaza cu apelurile functiilor implementate --*/
 
 	DistrArb (&arb);
