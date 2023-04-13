@@ -4,7 +4,7 @@ CFLAGS = -Wall -g
 build: main
 
 main: main.o operations.o functions.o
-	$(CC) -o main $^ 
+	$(CC) -o main $^
 
 main.o: main.c
 	$(CC) $(CFLAGS) -c $^

@@ -1,7 +1,6 @@
 #include "functions.h"
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
     FILE *input = InitF(argv);
 
     int nr_sensors = 0;
@@ -14,8 +13,8 @@ int main(int argc, char const *argv[])
      * and runs them as long as they're not exit */
     int i = 0;
     char *cmd = Read_CMD(&i);
-    while (strcmp(cmd,"exit\n")) {
-        Run_CMD(sensors,&nr_sensors, cmd, i);
+    while (strcmp(cmd, "exit\n")) {
+        Run_CMD(sensors, &nr_sensors, cmd, i);
         cmd = Read_CMD(&i);
     }
 

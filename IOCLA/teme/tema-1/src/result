@@ -1,0 +1,272 @@
+
+Run cpplint
+
+./operations.c:2:  Found C system header after other header. Should be: operations.h, c system, c++ system, other.  [build/include_order] [4]
+./operations.c:7:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./operations.c:8:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:9:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:10:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:11:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:12:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:13:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:14:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:15:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:16:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:17:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:21:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./operations.c:22:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:23:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:24:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:25:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:26:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:27:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:31:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./operations.c:32:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:33:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:34:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:35:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:36:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:37:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:38:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:39:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:40:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:41:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:45:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./operations.c:46:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:47:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:49:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:50:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:51:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:52:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:53:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:54:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:55:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:56:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:57:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:58:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:60:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:61:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:62:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:63:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:64:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:65:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:66:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:67:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:68:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:69:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:71:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:72:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:73:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:74:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:75:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:76:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:77:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:78:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:79:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:80:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:82:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:83:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:84:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:85:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:86:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:87:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:89:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:90:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:94:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./operations.c:95:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:96:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:98:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:102:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./operations.c:103:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:105:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:106:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:108:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:109:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:110:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:112:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:116:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./operations.c:117:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:118:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:120:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:124:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./operations.c:125:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:126:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:128:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:129:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:130:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:131:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:133:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:134:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:135:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:136:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:138:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:139:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:140:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:141:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:142:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:144:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:145:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:146:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:147:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:149:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:150:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:151:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:152:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:154:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:155:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:157:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:161:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./operations.c:162:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:163:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:164:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:165:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:166:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:167:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:168:  Tab found; better to use spaces  [whitespace/tab] [1]
+./operations.c:169:  Tab found; better to use spaces  [whitespace/tab] [1]
+Done processing ./functions.c
+Done processing ./functions.h
+Done processing ./main.c
+Done processing ./operations.c
+Done processing ./structs.h
+Total errors found: 123
+
+Run clang-tidy
+
+12 warnings generated.
+24 warnings generated.
+36 warnings generated.
+86 warnings generated.
+86 warnings generated.
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:9:21: error: 21 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (t->pressure >= 21 && t->pressure <= 26) {
+                           ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:9:42: error: 26 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (t->pressure >= 21 && t->pressure <= 26) {
+                                                ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:11:27: error: 26 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->pressure > 26 && t->pressure <= 28) {
+                                 ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:11:48: error: 28 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->pressure > 26 && t->pressure <= 28) {
+                                                      ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:13:28: error: 19 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->pressure >= 19 && t->pressure < 21) {
+                                  ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:13:48: error: 21 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->pressure >= 19 && t->pressure < 21) {
+                                                      ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:23:47: error: 120 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (t->temperature >= 0 && t->temperature <= 120) {
+                                                     ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:33:45: error: 20 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (t->wear_level >= 0 && t->wear_level <= 20) {
+                                                   ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:35:30: error: 20 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->wear_level >= 20 && t->wear_level <= 40) {
+                                    ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:35:53: error: 40 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->wear_level >= 20 && t->wear_level <= 40) {
+                                                           ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:37:30: error: 40 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->wear_level >= 40 && t->wear_level <= 60) {
+                                    ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:37:53: error: 60 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->wear_level >= 40 && t->wear_level <= 60) {
+                                                           ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:50:21: error: 21 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (t->pressure >= 21 && t->pressure <= 26) {
+                           ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:50:42: error: 26 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (t->pressure >= 21 && t->pressure <= 26) {
+                                                ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:52:28: error: 19 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->pressure >= 19 && t->pressure < 21) {
+                                  ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:52:48: error: 21 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->pressure >= 19 && t->pressure < 21) {
+                                                      ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:54:27: error: 26 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->pressure > 26 && t->pressure <= 28) {
+                                 ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:54:48: error: 28 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->pressure > 26 && t->pressure <= 28) {
+                                                      ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:61:24: error: 80 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (t->temperature >= 80 && t->temperature <= 100) {
+                              ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:61:48: error: 100 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (t->temperature >= 80 && t->temperature <= 100) {
+                                                      ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:63:31: error: 100 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->temperature >= 100 && t->temperature < 120) {
+                                     ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:63:55: error: 120 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->temperature >= 100 && t->temperature < 120) {
+                                                             ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:65:30: error: 60 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->temperature > 60 && t->temperature <= 80) {
+                                    ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:65:54: error: 80 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->temperature > 60 && t->temperature <= 80) {
+                                                            ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:72:44: error: 20 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (t->wear_level >= 0 && t->wear_level < 20) {
+                                                  ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:74:30: error: 20 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->wear_level >= 20 && t->wear_level < 40) {
+                                    ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:74:52: error: 40 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->wear_level >= 20 && t->wear_level < 40) {
+                                                          ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:76:29: error: 40 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->wear_level > 40 && t->wear_level < 60) {
+                                   ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:76:51: error: 60 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        } else if (t->wear_level > 40 && t->wear_level < 60) {
+                                                         ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:83:14: error: 10 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (score > 10) {
+                    ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:84:11: error: 10 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+                score = 10;
+                        ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:109:28: error: 100 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (pmu->energy_storage > 100)
+                                  ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:110:25: error: 100 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+                pmu->energy_storage = 100;
+                                      ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:128:21: error: 10 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (pmu->voltage < 10 || pmu->voltage > 20) {
+                           ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:128:42: error: 20 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (pmu->voltage < 10 || pmu->voltage > 20) {
+                                                ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:133:22: error: 100 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (pmu->current < -100 || pmu->current > 100) {
+                            ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:133:44: error: 100 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (pmu->current < -100 || pmu->current > 100) {
+                                                  ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:138:61: error: 1000 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (pmu->power_consumption < 0 || pmu->power_consumption > 1000) {
+                                                                   ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:144:51: error: 100 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (pmu->energy_regen < 0 || pmu->energy_regen > 100) {
+                                                         ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:149:55: error: 100 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        if (pmu->energy_storage < 0 || pmu->energy_storage > 100) {
+                                                             ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:167:13: error: 5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        operations[5] = pmu_regenerate_energy;
+                   ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:168:13: error: 6 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        operations[6] = pmu_get_energy_usage;
+                   ^
+/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1/src/operations.c:169:13: error: 7 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,-warnings-as-errors]
+        operations[7] = pmu_is_battery_healthy;
+                   ^
+Suppressed 43 warnings (43 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+43 warnings treated as errors

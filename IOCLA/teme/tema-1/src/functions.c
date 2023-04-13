@@ -32,7 +32,7 @@ sensor *InitS(int nr_sensors) {
 int cmp(const void *a, const void *b) {
     sensor *ax = (sensor *) a;
     sensor *bx = (sensor *) b;
-    return (bx->sensor_type - ax->sensor_type);
+    return ((int)(bx->sensor_type - ax->sensor_type));
 }
 
 /* Auxiliary function that checks the
@@ -80,8 +80,7 @@ void print(sensor *sensors, int i) {
         printf("Power Consumption: %.2f\n", ((power_management_unit *) sensors[i].sensor_data)->power_consumption);
         printf("Energy Regen: %d%%\n", ((power_management_unit *) sensors[i].sensor_data)->energy_regen);
         printf("Energy Storage: %d%%\n", ((power_management_unit *) sensors[i].sensor_data)->energy_storage);
-    }
-    else {
+    } else {
         printf("Tire Sensor\n");
         printf("Pressure: %.2f\n", ((tire_sensor *) sensors[i].sensor_data)->pressure);
         printf("Temperature: %.2f\n", ((tire_sensor *) sensors[i].sensor_data)->temperature);
@@ -112,8 +111,8 @@ void analyse(sensor *sensors, int i) {
  * after the sensor that is faulty */
 void clear(sensor *sensors, int *nr_sensors) {
     int i = 0;
-    while( i < (*nr_sensors))
-        if (condition(sensors,i)) {
+    while (i < (*nr_sensors))
+        if (condition(sensors, i)) {
             if (sensors[i].sensor_data != NULL)
                 free(sensors[i].sensor_data);
             if (sensors[i].operations_idxs != NULL)
@@ -121,9 +120,9 @@ void clear(sensor *sensors, int *nr_sensors) {
             for (int j = i; j < (*nr_sensors)-1; j++)
                 sensors[j] = sensors[j+1];
             (*nr_sensors)--;
-        }
-        else
+        } else {
             i++;
+        }
 }
 
 /* Implementation functions */
@@ -140,8 +139,7 @@ void Read(sensor *sensors, int nr_sensors, FILE *input) {
                 return;
             }
             fread(sensors[i].sensor_data, sizeof(power_management_unit), 1, input);
-        }
-        else {
+        } else {
             sensors[i].sensor_data = malloc(sizeof(tire_sensor));
             if (!sensors[i].sensor_data) {
                 printf("Error at malloc sensor_data, sensor %d\n", i);
@@ -161,7 +159,7 @@ void Read(sensor *sensors, int nr_sensors, FILE *input) {
 
     /*sorts the sensors based on their priority
      * using the cmp auxiliary function */
-    qsort(sensors,nr_sensors,sizeof(sensor), cmp);
+    qsort(sensors, nr_sensors, sizeof(sensor), cmp);
     fclose(input);
 }
 
@@ -193,17 +191,18 @@ char *Read_CMD(int *i) {
 /* Verifies that indexes are available for the sensor array
  * and runs the command desired */
 void Run_CMD(sensor *sensors, int *nr_sensors, char *cmd, int i) {
-    if (i > (*nr_sensors) || i < 0)
-        if(strcmp(cmd,"clear\n")) {
+    if (i > (*nr_sensors) || i < 0) {
+        if (strcmp(cmd, "clear\n")) {
             printf("Index not in range!\n");
             free(cmd);
             return;
         }
-    if(!strcmp(cmd,"print"))
+    }
+    if (!strcmp(cmd, "print"))
         print(sensors, i);
-    if(!strcmp(cmd,"analyze"))
+    if (!strcmp(cmd, "analyze"))
         analyse(sensors, i);
-    if(!strcmp(cmd,"clear\n"))
+    if (!strcmp(cmd, "clear\n"))
         clear(sensors, nr_sensors);
     free(cmd);
 }
