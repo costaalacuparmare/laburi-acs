@@ -13,14 +13,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e158237-d614-445e-b434-b3a169093ad4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/functions.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operations.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/result" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tema1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tema1.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tema1.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/cs/checkpatch.pl" beforeDir="false" afterPath="$PROJECT_DIR$/checker/cs/checkpatch.pl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/analyse_1.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/analyse_1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/analyse_2.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/analyse_2.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/analyse_3.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/analyse_3.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/analyse_4.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/analyse_4.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/analyse_5.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/analyse_5.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/clear_easy_1.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/clear_easy_1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/clear_easy_2.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/clear_easy_2.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/clear_easy_3.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/clear_easy_3.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/clear_easy_4.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/clear_easy_4.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/clear_easy_5.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/clear_easy_5.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/clear_hard_1.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/clear_hard_1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/clear_hard_2.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/clear_hard_2.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/clear_hard_3.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/clear_hard_3.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/clear_hard_4.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/clear_hard_4.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/clear_hard_5.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/clear_hard_5.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/print_easy_1.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/print_easy_1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/print_easy_2.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/print_easy_2.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/print_easy_3.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/print_easy_3.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/print_easy_4.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/print_easy_4.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/print_easy_5.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/print_easy_5.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/print_hard_1.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/print_hard_1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/print_hard_2.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/print_hard_2.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/print_hard_3.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/print_hard_3.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/print_hard_4.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/print_hard_4.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/valgrind_logs/print_hard_5.log" beforeDir="false" afterPath="$PROJECT_DIR$/checker/valgrind_logs/print_hard_5.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ferrari sensors.zip" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ferrari sensors.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/functions.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,23 +64,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/home/vconstantinescu/Desktop/UPB/IOCLA/teme/tema-1&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -76,7 +99,9 @@
       <workItem from="1681134009698" duration="11671000" />
       <workItem from="1681240057278" duration="7748000" />
       <workItem from="1681307829132" duration="4000" />
-      <workItem from="1681395818549" duration="2058000" />
+      <workItem from="1681395818549" duration="2364000" />
+      <workItem from="1681398619436" duration="4488000" />
+      <workItem from="1681455630869" duration="9333000" />
     </task>
     <servers />
   </component>

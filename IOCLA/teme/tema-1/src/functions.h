@@ -32,7 +32,7 @@ void get_operations(void **operations);
 /* Commands functions */
 void print(sensor *sensors, int i);
 void analyse(sensor *sensors, int i);
-void clear(sensor *s, int *nr_sensors);
+void clear(sensor *sensors, int *nr_sensors);
 
 /* Implementation functions */
 void Read(sensor *sensors, int nr_sensors, FILE *input);
