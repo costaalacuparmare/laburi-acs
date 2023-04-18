@@ -1,2 +1,2 @@
-PROGNAME := sum-array
+PROGNAME := sum-array-square
 include ../../utils/Makefile.generic

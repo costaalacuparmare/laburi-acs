@@ -29,7 +29,7 @@ int Numara (TArb r);
 void Parcurgere (TArb r, int * nr_info);
 int Verifica (TArb r);
 int Check_Fr (TArb r, int niv);
-int nr_procent(TArb r, int n)
+int nr_procent(TArb r, int niv, int nivCrt, int *val);
 float procent(TArb r, int niv);
 #endif
 

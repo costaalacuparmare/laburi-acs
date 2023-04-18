@@ -21,7 +21,7 @@ int main ()
         printf("N-au\n");
     printf("Niv cel mai mic cu frunza: %d\n",Check_Fr(arb,0));
 	/*-- se completeaza cu apelurile functiilor implementate --*/
-
+	printf("Procent de noduri pare in nivelele pana in %d: %.2f%%\n", 3, procent(arb,3));
 	DistrArb (&arb);
 	return 0;
 }

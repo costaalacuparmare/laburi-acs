@@ -14,27 +14,39 @@ main:
     push ebp
     mov ebp, esp
 
-    mov ecx, ARRAY_SIZE     ; Use ecx as loop counter.
-    xor eax, eax            ; Use eax to store the sum.
-    xor edx, edx            ; Store current value in dl; zero entire edx.
+    mov ecx, ARRAY_SIZE
+    xor eax, eax
+    xor edx, edx
 
 add_byte_array_element:
     mov dl, byte [byte_array + ecx - 1]
     add eax, edx
-    loop add_byte_array_element ; Decrement ecx, if not zero, add another element.
+    loop add_byte_array_element
 
     PRINTF32 `Array sum is %u\n\x0`, eax
+
+    mov ecx, ARRAY_SIZE
+    xor eax, eax
+    xor edx, edx
 
 add_word_array_element:
-    mov dx, word [word_array + ecx - 1]
-    add ax, dx
-    loop add_word_array_element ; Decrement ecx, if not zero, add another element.
+    mov dx, word [word_array + 2 * ecx - 2]
+    add eax, edx
+    loop add_word_array_element
 
     PRINTF32 `Array sum is %u\n\x0`, eax
 
+    mov ecx, ARRAY_SIZE
+    xor eax, eax
+    xor edx, edx
 
 
-    ; TODO: Compute sum for elements in word_array and dword_array.
+add_dword_array_element:
+    mov edx, dword [dword_array + 4 * ecx - 4]
+    add eax, edx
+    loop add_dword_array_element
+
+    PRINTF32 `Array sum is %u\n\x0`, eax
 
     leave
     ret

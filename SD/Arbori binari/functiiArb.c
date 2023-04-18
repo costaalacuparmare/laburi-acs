@@ -185,23 +185,20 @@ int Check_Fr (TArb r, int niv) {
 
 //Ex3 Lab 6 - procent de numere deasupra unui niv care sunt pare
 
-int Check_Niv (TArb r, int x, int nivCrt, int niv) {
-    if(!r) return 0;
-    if (nivCrt == niv)
-        if (r->info < x)
-            return 1;
-        else
-            return 0;
-    return Check_Niv(r->st,x,nivCrt+1,niv) && Check_Niv(r->dr,x,nivCrt+1,niv);
-}
-
-int nr_procent(TArb r, int niv, int nivCrt) {
+int nr_procent(TArb r, int niv, int nivCrt, int *val) {
     if (!r) return 0;
-    if (nivCrt < niv)
-        return 1 + procent(r->st,niv,nivCrt+1) + procent(r->dr,niv,nivCrt+1);
-    return 0;
+    if (nivCrt < niv) {
+		if (r->info % 2 == 0)
+			(*val)++;
+		return 1 + nr_procent(r->st, niv, nivCrt + 1, val) + nr_procent(r->dr, niv, nivCrt + 1, val);
+	}
+		return 0;
 }
 
 float procent(TArb r, int n) {
-
+	int val = 0;
+	int nr = nr_procent(r,n,0,&val);
+	if (nr == 0)
+		return 0;
+	return ((float) val/nr) * 100;
 }
