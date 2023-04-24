@@ -30,6 +30,20 @@ main:
     ; print all three values (int_x, char_y, string_s) from simple_obj
     ; Hint: use "lea reg, [base + offset]" to save the result of
     ; "base + offset" into register "reg"
+get_int:
+	xor eax, eax
+	mov eax, dword [sample_obj + int_x]
+    PRINTF32 `%d\n\x0`, eax
+
+get_char:
+    xor ebx, ebx
+    mov bl, byte [sample_obj + char_y]
+    PRINTF32 `%c\n\x0`, ebx
+
+get_string:
+	xor edx, edx
+	lea edx, [sample_obj + string_s]
+	PRINTF32 `%s\n\x0`, edx
 
     ; TODO
     ; write the equivalent of "simple_obj->int_x = new_int"

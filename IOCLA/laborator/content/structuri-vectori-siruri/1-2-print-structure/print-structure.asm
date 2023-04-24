@@ -38,10 +38,16 @@ main:
     push ebp
     mov ebp, esp
 
+	mov word [sample_student + birth_year], 1993
+	mov byte [sample_student + age], 22
+
+    lea eax, [sample_student + group + 2]
+    mov byte [eax], '3'
     ; TODO: Update name, surname, birth_year, gender and age such that:
     ; birth_year is 1993
     ; age is 22
     ; group is '323CA'
+
 
     lea ebx, [string_name]
     push ebx
