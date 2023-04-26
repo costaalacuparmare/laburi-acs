@@ -202,3 +202,24 @@ float procent(TArb r, int n) {
 		return 0;
 	return ((float) val/nr) * 100;
 }
+
+int NivSum(TArb r, int niv, int nivCrt) {
+	if (!r) return 0;
+	if (niv > NrNiv(r))
+		return 0;
+	if (nivCrt == niv)
+		return r->info;
+	else
+		return NivSum(r->st, niv, nivCrt+1) + NivSum(r->dr, niv, nivCrt+1);
+}
+
+int NivSumMax (TArb r, int *sum) {
+	if (!r) return 0;
+	int niv = 0;
+	for ( int i = 0; i < NrNiv(r); i++)
+		if ( sum < NivSum(r,i,0)) {
+			sum = NivSum(r, i, 0);
+			niv = i;
+		}
+	return niv;
+}

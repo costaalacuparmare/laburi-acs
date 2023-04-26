@@ -31,6 +31,9 @@ int Verifica (TArb r);
 int Check_Fr (TArb r, int niv);
 int nr_procent(TArb r, int niv, int nivCrt, int *val);
 float procent(TArb r, int niv);
+
+int NivSum(TArb r, int niv, int nivCrt)
+int NivSumMax (TArb r, int *sum)
 #endif
 
 #ifndef _random_
