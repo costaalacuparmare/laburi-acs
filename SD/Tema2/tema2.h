@@ -2,6 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 
+typedef struct argument {
+	char const *option;
+	unsigned int factor;
+	FILE *input;
+	FILE *output;
+} TCellArg, *TArg;
+
 typedef struct pixel {
 	unsigned int R;
 	unsigned int G;
@@ -19,3 +26,6 @@ typedef struct quad {
 void Init();
 void Run();
 void Free();
+
+TArg InitArg(char const *argv[]);
+void FreeArg(TArg *arg);

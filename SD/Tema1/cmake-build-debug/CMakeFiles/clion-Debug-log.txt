@@ -1,0 +1,1 @@
+CMakeLists.txt not found in \\wsl$\Ubuntu\home\vconstantinescu\Desktop\UPB\SD\Tema1 Select CMakeLists.txt

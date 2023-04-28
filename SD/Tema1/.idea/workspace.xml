@@ -10,9 +10,7 @@
     <option name="reloaded" value="true" />
   </component>
   <component name="CMakeRunConfigurationManager">
-    <generated>
-      <config projectName="Tema1" targetName="Tema1" />
-    </generated>
+    <generated />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -20,28 +18,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46a78210-40e1-4426-8604-efba152de2e0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/4-sets/sets" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/4-sets/sets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/4-sets/sets.asm" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/4-sets/sets.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/4-sets/sets.o" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/4-sets/sets.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/5-min/min.asm" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/5-min/min.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/6-fibonacci/fibonacci.asm" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/introducere-asamblare/6-fibonacci/fibonacci.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/iterate" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/iterate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/iterate.o" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/1-iterate/iterate.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/delete-first" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/delete-first" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/delete-first.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/delete-first.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/delete-first.o" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/2-delete-first/delete-first.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/3-pixels/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/3-pixels/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/3-pixels/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/3-pixels/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/3-pixels/pixels.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/3-pixels/pixels.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/4-find-max/find-max.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../IOCLA/laborator/content/operatii-memorie-gdb/4-find-max/find-max.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-    </list>
+    <list default="true" id="46a78210-40e1-4426-8604-efba152de2e0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,7 +58,7 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration name="Tema1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Tema1" TARGET_NAME="Tema1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Tema1" RUN_TARGET_NAME="Tema1">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -106,6 +83,8 @@
       <workItem from="1680593493718" duration="82000" />
       <workItem from="1680594541998" duration="1127000" />
       <workItem from="1680596185013" duration="207000" />
+      <workItem from="1682677269585" duration="82000" />
+      <workItem from="1682689999600" duration="3533000" />
     </task>
     <servers />
   </component>
