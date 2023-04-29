@@ -7,16 +7,14 @@ int main(int argc, char const *argv[]) {
 
 	unsigned int size = 0;
 	TPixel **grid = readPPM(grid, &size, input);
-	if (!grid) {
-		printf("Error at reading .ppm\n");
-		return 0;
-	}
 
-	TQuad QTree = InitQT();
-		//	Init(&QTree);
-//	Run(&QTree);
-//	Free(&QTree);
+	int factor = atoi(argv[2]);
+	TQuad qtree = buildQT(grid, size, 0, 0, factor);
+	task1(qtree, output, size);
+	FreeGrid(grid,size);
+	FreeQT(&qtree);
 	fclose(input);
 	fclose(output);
+
 	return 0;
 }
