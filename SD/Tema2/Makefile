@@ -1,10 +1,10 @@
 build:
-		touch tema2.in
-		gcc -g -o tema2 main.c functions.c task1.c task2.c task3.c
+		touch quadtree.ppm
+		gcc -g -o quadtree main.c functions.c task1.c task2.c task3.c
 run:
-		./tema2
+		./quadtree -c1 2 tests/input/test0.ppm quadtree.out
 clean:
-		rm tema2
-		rm *.out *.in
+		rm quadtree
+		rm *.out quadtree.ppm
 valgrind:
-		valgrind --leak-check=yes --track-origins=yes ./tema2
+		valgrind --leak-check=yes --leak-check=full --show-leak-kinds=all --track-origins=yes ./quadtree
