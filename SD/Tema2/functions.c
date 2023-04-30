@@ -1,6 +1,6 @@
 #include "quadtree.h"
 
-FILE *openIn(char const *argv[]) {
+/*FILE *openIn(char const *argv[]) {
 	FILE *input = NULL;
 	if (!strstr(argv[1], "-d")) {
 		input = fopen(argv[3], "r");
@@ -20,23 +20,31 @@ FILE *openIn(char const *argv[]) {
 
 FILE *openOut(char const *argv[]) {
 	FILE *output = NULL;
-	if (!strstr(argv[1], "-d")) {
+	if (strstr(argv[1], "-c1")) {
 		output = fopen(argv[4], "w+");
 		if (!output) {
 			printf("Error at output open\n");
 			return NULL;
 		}
 	} else {
-		output = fopen(argv[3], "w+");
-		if (!output) {
-			printf("Error at output open\n");
-			return NULL;
+		if (strstr(argv[1], "-c2")) {
+			output = fopen(argv[4], "wb+");
+			if (!output) {
+				printf("Error at output open\n");
+				return NULL;
+			}
+		} else {
+			output = fopen(argv[3], "w+");
+			if (!output) {
+				printf("Error at output open\n");
+				return NULL;
+			}
 		}
 	}
 	return output;
-}
+}*/
 
-/*FILE *openIn(char const *argv[]) {
+FILE *openIn(char const *argv[]) {
 	FILE *input = NULL;
 	if (!strstr("-c1", "-d")) {
 		input = fopen("tests/input/test0.ppm", "r");
@@ -56,21 +64,29 @@ FILE *openOut(char const *argv[]) {
 
 FILE *openOut(char const *argv[]) {
 	FILE *output = NULL;
-	if (!strstr("-c1", "-d")) {
+	if (strstr("-c2", "-c1")) {
 		output = fopen("quadtree.out", "w+");
 		if (!output) {
 			printf("Error at output open\n");
 			return NULL;
 		}
 	} else {
-		output = fopen("quadtree.out", "w+");
-		if (!output) {
-			printf("Error at output open\n");
-			return NULL;
+		if (strstr("-c2", "-c2")) {
+			output = fopen("quadtree.out", "wb+");
+			if (!output) {
+				printf("Error at output open\n");
+				return NULL;
+			}
+		} else {
+			output = fopen("guadtree.out", "w+");
+			if (!output) {
+				printf("Error at output open\n");
+				return NULL;
+			}
 		}
 	}
 	return output;
-}*/
+}
 
 TPixel **readPPM(TPixel **grid, unsigned int *size, FILE* input) {
 	char *dump_char = (char *) malloc(4 * sizeof(char));
@@ -182,6 +198,21 @@ void FreeQT(TQuad *qtree) {
 	if (!(*qtree)) return;
 	freeQT((*qtree));
 	(*qtree) = NULL;
+}
+
+void Free(TQuad *qtree, FILE *input, FILE *output) {
+	FreeQT(qtree);
+	fclose(input);
+	fclose(output);
+}
+
+void getTask(char const *argv[], TQuad qtree, FILE *output, unsigned int size) {
+	if (strstr(argv[1], "-c1"))
+		task1(qtree, output, size);
+	if (strstr(argv[1], "-c2"))
+		task2(qtree, output, size);
+	if(strstr(argv[1], "-d"))
+		task3(qtree, output, size);
 }
 
 void Parcurgere (TQuad r, FILE *output) {

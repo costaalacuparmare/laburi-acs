@@ -4,17 +4,22 @@ int main(int argc, char const *argv[]) {
 
 	FILE *input = openIn(argv);
 	FILE *output = openOut(argv);
-
 	unsigned int size = 0;
-	TPixel **grid = readPPM(grid, &size, input);
+	TQuad qtree = NULL;
 
-	int factor = atoi(argv[2]);
-	TQuad qtree = buildQT(grid, size, 0, 0, factor);
-	task1(qtree, output, size);
-	FreeGrid(grid,size);
-	FreeQT(&qtree);
-	fclose(input);
-	fclose(output);
+	if(!strstr(argv[1], "-d")) {
+		TPixel **grid = readPPM(grid, &size, input);
+		int factor = 0;//atoi(argv[2]);
+		qtree = buildQT(grid, size, 0, 0, factor);
+		FreeGrid(grid, size);
+	} else {
+		fread(&size, sizeof(unsigned int), 1, input);
+		qtree = getQT(input);
+	}
+
+	getTask(argv, qtree, output, size);
+
+	Free(&qtree, input, output);
 
 	return 0;
 }
