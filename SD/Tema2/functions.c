@@ -1,6 +1,6 @@
 #include "quadtree.h"
 
-/*FILE *openIn(char const *argv[]) {
+FILE *openIn(char const *argv[]) {
 	FILE *input = NULL;
 	if (!strstr(argv[1], "-d")) {
 		input = fopen(argv[3], "r");
@@ -34,7 +34,7 @@ FILE *openOut(char const *argv[]) {
 				return NULL;
 			}
 		} else {
-			output = fopen(argv[3], "w+");
+			output = fopen(argv[3], "wb+");
 			if (!output) {
 				printf("Error at output open\n");
 				return NULL;
@@ -42,18 +42,18 @@ FILE *openOut(char const *argv[]) {
 		}
 	}
 	return output;
-}*/
+}
 
-FILE *openIn(char const *argv[]) {
+/*FILE *openIn(char const *argv[]) {
 	FILE *input = NULL;
-	if (!strstr("-c1", "-d")) {
+	if (!strstr("-d", "-d")) {
 		input = fopen("tests/input/test0.ppm", "r");
 		if (!input) {
 			printf("Error at input open\n");
 			return NULL;
 		}
 	} else {
-		input = fopen("tests/input/test0.ppm", "r");
+		input = fopen("tests/input/test0_c2.out", "r");
 		if (!input) {
 			printf("Error at input open\n");
 			return NULL;
@@ -64,21 +64,21 @@ FILE *openIn(char const *argv[]) {
 
 FILE *openOut(char const *argv[]) {
 	FILE *output = NULL;
-	if (strstr("-c2", "-c1")) {
+	if (strstr("-d", "-c1")) {
 		output = fopen("quadtree.out", "w+");
 		if (!output) {
 			printf("Error at output open\n");
 			return NULL;
 		}
 	} else {
-		if (strstr("-c2", "-c2")) {
+		if (strstr("-d", "-c2")) {
 			output = fopen("quadtree.out", "wb+");
 			if (!output) {
 				printf("Error at output open\n");
 				return NULL;
 			}
 		} else {
-			output = fopen("guadtree.out", "w+");
+			output = fopen("quadtree.out", "w+");
 			if (!output) {
 				printf("Error at output open\n");
 				return NULL;
@@ -86,7 +86,7 @@ FILE *openOut(char const *argv[]) {
 		}
 	}
 	return output;
-}
+}*/
 
 TPixel **readPPM(TPixel **grid, unsigned int *size, FILE* input) {
 	char *dump_char = (char *) malloc(4 * sizeof(char));

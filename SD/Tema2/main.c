@@ -9,7 +9,7 @@ int main(int argc, char const *argv[]) {
 
 	if(!strstr(argv[1], "-d")) {
 		TPixel **grid = readPPM(grid, &size, input);
-		int factor = 0;//atoi(argv[2]);
+		int factor = atoi(argv[2]);
 		qtree = buildQT(grid, size, 0, 0, factor);
 		FreeGrid(grid, size);
 	} else {

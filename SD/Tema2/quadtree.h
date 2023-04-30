@@ -41,5 +41,5 @@ void getTask(char const *argv[], TQuad qtree, FILE *output, unsigned int size);
 TQuad getQT(FILE *input);
 void task1(TQuad qtree, FILE *output, unsigned int size);
 void task2(TQuad qtree, FILE *output, unsigned int size);
-void task3(TQuad qtree, FILE *output, unsigned int size)
+void task3(TQuad qtree, FILE *output, unsigned int size);
 void FreeGrid(TPixel **grid, unsigned int size);
