@@ -31,7 +31,7 @@ typedef struct queue {
 FILE *openIn(char const *argv[]);
 FILE *openOut(char const *argv[]);
 TPixel **readPPM(TPixel **grid, unsigned int *size, FILE* input);
-TPixel **InitGrid(unsigned int *size);
+TPixel **InitGrid(unsigned int size);
 TQuad buildQT (TPixel **grid, unsigned int size, int x, int y, int factor);
 TPixel getAverage(TPixel **grid, int x, int y, unsigned int size);
 long int getMean(TPixel **grid, TPixel avg, int x, int y, unsigned int size);

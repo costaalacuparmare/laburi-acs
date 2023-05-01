@@ -101,7 +101,7 @@ TPixel **readPPM(TPixel **grid, unsigned int *size, FILE* input) {
 	fscanf(input, "%d", &dump_int);
 	fread(dump_char, sizeof(char), 1, input);
 	free(dump_char);
-	grid = InitGrid(size);
+	grid = InitGrid((*size));
 	for (int i = 0; i < (*size); i++)
 		for (int j = 0; j < (*size); j++) {
 			fread(&grid[i][j].R, sizeof(char), 1, input);
@@ -111,14 +111,14 @@ TPixel **readPPM(TPixel **grid, unsigned int *size, FILE* input) {
 	return grid;
 }
 
-TPixel **InitGrid(unsigned int *size) {
-	TPixel **grid = (TPixel **) malloc((*size) * sizeof(TPixel *));
+TPixel **InitGrid(unsigned int size) {
+	TPixel **grid = (TPixel **) malloc(size * sizeof(TPixel *));
 	if (!grid) {
 		printf("Error at malloc of grid\n");
 		return NULL;
 	}
-	for (int i = 0; i < (*size); i++)  {
-		grid[i] = (TPixel *) malloc((*size) * sizeof(TPixel));
+	for (int i = 0; i < size; i++)  {
+		grid[i] = (TPixel *) malloc(size * sizeof(TPixel));
 		if (!grid[i]) {
 			printf("Error at malloc of grid[%d]\n", i);
 			return NULL;
