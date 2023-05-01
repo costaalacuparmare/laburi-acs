@@ -1,9 +1,9 @@
 #include "quadtree.h"
 
-TQuad getQT(FILE *input) {
+TQuad readQT(FILE *input) {
 	TQuad qtree = (TQuad) calloc(1, sizeof(TCellQuad));
 	if (!qtree) {
-		printf ("Error at qtree calloc\n");
+		printf("Error at qtree malloc\n");
 		return NULL;
 	}
 	fread(&qtree->type, sizeof(char), 1, input);
@@ -11,12 +11,32 @@ TQuad getQT(FILE *input) {
 		fread(&qtree->info.R, sizeof(char), 1, input);
 		fread(&qtree->info.G, sizeof(char), 1, input);
 		fread(&qtree->info.B, sizeof(char), 1, input);
-	} else {
-		qtree->topL = getQT(input);
-		qtree->topR = getQT(input);
-		qtree->botR = getQT(input);
-		qtree->botL = getQT(input);
 	}
+	return qtree;
+}
+
+void getQTfromQ(TQueue *Q, FILE *input) {
+	while ((*Q)->front) {
+		if (!(*Q)->front->info->type) {
+			(*Q)->front->info->topL = readQT(input);
+			PushQ(Q, (*Q)->front->info->topL);
+			(*Q)->front->info->topR = readQT(input);
+			PushQ(Q, (*Q)->front->info->topR);
+			(*Q)->front->info->botR = readQT(input);
+			PushQ(Q, (*Q)->front->info->botR);
+			(*Q)->front->info->botL = readQT(input);
+			PushQ(Q, (*Q)->front->info->botL);
+		}
+		PopQ(Q);
+	}
+}
+
+TQuad getQT(FILE* input) {
+	TQueue Q = InitQ();
+	TQuad qtree = readQT(input);
+	PushQ(&Q, qtree);
+	getQTfromQ(&Q, input);
+	FreeQ(&Q);
 	return qtree;
 }
 
@@ -54,4 +74,5 @@ void task3(TQuad qtree, FILE *output, unsigned int size) {
 	TPixel **grid = InitGrid(size);
 	getGrid(grid, qtree, 0 , 0, size);
 	writePPM(grid, size, output);
+	FreeGrid(grid, size);
 }

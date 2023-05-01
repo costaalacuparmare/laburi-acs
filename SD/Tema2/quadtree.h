@@ -38,8 +38,13 @@ long int getMean(TPixel **grid, TPixel avg, int x, int y, unsigned int size);
 void Parcurgere (TQuad r, FILE *output);
 void Free(TQuad *qtree, FILE *input, FILE *output);
 void getTask(char const *argv[], TQuad qtree, FILE *output, unsigned int size);
-TQuad getQT(FILE *input);
+TQuad getQT(FILE * input);
 void task1(TQuad qtree, FILE *output, unsigned int size);
 void task2(TQuad qtree, FILE *output, unsigned int size);
 void task3(TQuad qtree, FILE *output, unsigned int size);
 void FreeGrid(TPixel **grid, unsigned int size);
+
+TQueue InitQ();
+void PushQ(TQueue *Q, TQuad x);
+void PopQ(TQueue *Q);
+void FreeQ(TQueue *Q);
