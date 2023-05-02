@@ -1,6 +1,11 @@
+/* CONSTANTINESCU Vlad 314CB */
 #include "quadtree.h"
 
-int nrLvs(TQuad qtree) {
+/* counts the number of levels from the
+ * compression tree using the MAX macro
+ * and a recursive function */
+int nrLvs(TQuad qtree)
+{
 	if (!qtree)
 		return 0;
 	int nr_tL = nrLvs(qtree->topL);
@@ -12,7 +17,10 @@ int nrLvs(TQuad qtree) {
 	return 1 + MAX(nr_t ,nr_b);
 }
 
-void nrLeafs (TQuad qtree, int *nr_lfs) {
+/* counts the number of leafs in the compressiom
+ * tree and memorizes it in nr_lfs, received as argument */
+void nrLeafs (TQuad qtree, int *nr_lfs)
+{
 	if (!qtree)
 		return;
 	if (qtree->type)
@@ -23,7 +31,13 @@ void nrLeafs (TQuad qtree, int *nr_lfs) {
 	nrLeafs(qtree->botR, nr_lfs);
 }
 
-int highLeaf (TQuad qtree, int lvl) {
+/* find the least compressed leaf from the
+ * compression tree, meaning the highest leaf
+ * from the tree and returns the level where it is
+ * by comparing the leafs' levels, using the MIN macro,
+ * returning the smallest one */
+int highLeaf (TQuad qtree, int lvl)
+{
 	if (!qtree)
 		return 0;
 	if (qtree->type) {
@@ -38,11 +52,22 @@ int highLeaf (TQuad qtree, int lvl) {
 	return MIN(min_t, min_b);
 }
 
-void stats(TQuad qtree, FILE *output, unsigned int size) {
+/* Statistics/ Task1 = determines the levels in the quad tree, the number
+ * of leafs and the size of the least compressed leaf */
+void stats(TQuad qtree, FILE *output, unsigned int size)
+{
+	/* number of levels in the compressed tree */
 	fprintf(output, "%d\n", nrLvs(qtree));
+
+	/* number of leafs in the compressed tree */
 	int nr_lfs = 0;
 	nrLeafs(qtree,&nr_lfs);
 	fprintf(output, "%d\n", nr_lfs);
+
+	/* in order to determine the size of the leaf,
+	 * the original size of the image is divided by 2
+	 * for every level until the leaf's level in the
+	 * compressed tree */
 	int lvl = highLeaf(qtree, 0);
 	int div = 1;
 	for (int i = 0; i < lvl; i++)

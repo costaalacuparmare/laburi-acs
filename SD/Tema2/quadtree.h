@@ -1,3 +1,4 @@
+/* CONSTANTINESCU Vlad 314CB */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -21,13 +22,13 @@ typedef struct pixel {
 
 /* grid functions */
 
-/* initializes the grid array to size * size */
+/* initializes the grid / pixel array to size * size */
 TPixel **InitGrid(unsigned int size);
 
-/* reads the size and grid from the ppm input file */
+/* reads the size and grid/ pixel array from the ppm input file */
 TPixel **readPPM(TPixel **grid, unsigned int *size, FILE* input);
 
-/* frees the memory allocated for the grid array */
+/* frees the memory allocated for the grid/ pixel array */
 void FreeGrid(TPixel **grid, unsigned int size);
 
 /* quad tree */
@@ -91,7 +92,7 @@ FILE *openOut(char const *argv[]);
 /* script options functions */
 
 /* Statistics/ Task1 = determines the levels in the quad tree, the number
- * of leafs and the least compressed leaf */
+ * of leafs and the size of the least compressed leaf */
 void stats(TQuad qtree, FILE *output, unsigned int size);
 
 /* Compression/ Task2 = writes in a binary output file the size of the image,

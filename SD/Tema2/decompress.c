@@ -1,6 +1,10 @@
+/* CONSTANTINESCU Vlad 314CB */
 #include "quadtree.h"
 
-TQuad readQT(FILE *input) {
+/* reads the type of nodes from the BFS compression
+ * 0 = not leaf, 1 = leaf => reads the RGB values */
+TQuad readQT(FILE *input)
+{
 	TQuad qtree = (TQuad) calloc(1, sizeof(TCellQuad));
 	if (!qtree) {
 		printf("Error at qtree malloc\n");
@@ -15,7 +19,11 @@ TQuad readQT(FILE *input) {
 	return qtree;
 }
 
-void getQTfromQ(TQueue *Q, FILE *input) {
+/* completes the previous function. if node is not a leaf,
+ * add the children to the queue, therefore connecting them
+ * to their parent */
+void getQTfromQ(TQueue *Q, FILE *input)
+{
 	while ((*Q)->front) {
 		if (!(*Q)->front->info->type) {
 			(*Q)->front->info->topL = readQT(input);
@@ -31,7 +39,10 @@ void getQTfromQ(TQueue *Q, FILE *input) {
 	}
 }
 
-TQuad getQT(FILE* input) {
+/* Reads the compressed BFS of a tree using an auxiliary
+ * queue and the previous functions */
+TQuad getQT(FILE* input)
+{
 	TQueue Q = InitQ();
 	TQuad qtree = readQT(input);
 	PushQ(&Q, qtree);
@@ -40,7 +51,9 @@ TQuad getQT(FILE* input) {
 	return qtree;
 }
 
-void getGrid(TPixel **grid, TQuad qtree, int x, int y, unsigned int size) {
+/* creates the image using an array of pixels and the quad tree */
+void getGrid(TPixel **grid, TQuad qtree, int x, int y, unsigned int size)
+{
 	if(!qtree) return;
 	if (qtree->type) {
 		for (int i = x; i < x + size; i++)
@@ -57,7 +70,9 @@ void getGrid(TPixel **grid, TQuad qtree, int x, int y, unsigned int size) {
 	getGrid(grid, qtree->botL, x + size / 2, y, size / 2);
 }
 
-void writePPM(TPixel **grid, unsigned int size, FILE *output) {
+/* writes the array of pixels into the .ppm file in binary*/
+void writePPM(TPixel **grid, unsigned int size, FILE *output)
+{
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++) {
 				fwrite(&grid[i][j].R, sizeof(char), 1, output);
@@ -67,10 +82,15 @@ void writePPM(TPixel **grid, unsigned int size, FILE *output) {
 		return;
 }
 
-void decompress(TQuad qtree, FILE *output, unsigned int size) {
+/* prints the header from the .ppm file as well as the image */
+void decompress(TQuad qtree, FILE *output, unsigned int size)
+{
+	/* prints the header */
 	fprintf(output, "P6\n");
 	fprintf(output, "%d %d\n", size, size);
 	fprintf(output, "255\n");
+
+	/* prints the image */
 	TPixel **grid = InitGrid(size);
 	getGrid(grid, qtree, 0 , 0, size);
 	writePPM(grid, size, output);

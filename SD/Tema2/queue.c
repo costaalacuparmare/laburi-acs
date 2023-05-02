@@ -1,9 +1,11 @@
+/* CONSTANTINESCU Vlad 314CB */
 #include "quadtree.h"
 
 /* queue functions */
 
 /* initializes the queue */
-TQueue InitQ() {
+TQueue InitQ()
+{
 	TQueue Q = (TQueue) malloc(sizeof(struct queue));
 	if (!Q) return NULL;
 	Q->front = Q->rear = NULL;
@@ -11,7 +13,8 @@ TQueue InitQ() {
 }
 
 /* adds a command to the queue */
-void PushQ(TQueue *Q, TQuad x) {
+void PushQ(TQueue *Q, TQuad x)
+{
 	TListQ aux = (TListQ) malloc(sizeof(TCellQ));
 	if (!aux) return;
 	aux->info = x;
@@ -24,7 +27,8 @@ void PushQ(TQueue *Q, TQuad x) {
 }
 
 /* removes a command from the queue */
-void PopQ(TQueue *Q) {
+void PopQ(TQueue *Q)
+{
 	TListQ aux = NULL;
 	if ((*Q)->front == NULL)
 		return;
@@ -34,7 +38,8 @@ void PopQ(TQueue *Q) {
 }
 
 /* frees the heap memory space used for the queue */
-void FreeQ(TQueue *Q) {
+void FreeQ(TQueue *Q)
+{
 	TListQ p = NULL;
 	TListQ aux = NULL;
 	p = (*Q)->front;

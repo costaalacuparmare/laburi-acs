@@ -1,6 +1,9 @@
+/* CONSTANTINESCU Vlad 314CB */
 #include "quadtree.h"
 
-TPixel **InitGrid(unsigned int size) {
+/* initializes the grid / pixel array to size * size */
+TPixel **InitGrid(unsigned int size)
+{
 	TPixel **grid = (TPixel **) malloc(size * sizeof(TPixel *));
 	if (!grid) {
 		printf("Error at malloc of grid\n");
@@ -16,9 +19,13 @@ TPixel **InitGrid(unsigned int size) {
 	return grid;
 }
 
-TPixel **readPPM(TPixel **grid, unsigned int *size, FILE* input) {
+/* reads the size and grid from the ppm input file */
+TPixel **readPPM(TPixel **grid, unsigned int *size, FILE* input)
+{
+	/* uses dump_char to read the characters
+	 * between the values from the header */
 	char *dump_char = (char *) malloc(4 * sizeof(char));
-	unsigned int dump_int = 0;
+	unsigned int max_pixel_value = 0;
 	if (!dump_char) {
 		printf("Error at malloc of dump\n");
 		return NULL;
@@ -26,7 +33,7 @@ TPixel **readPPM(TPixel **grid, unsigned int *size, FILE* input) {
 	fread(dump_char, sizeof(char), 3, input);
 	fscanf(input, "%d", size);
 	fscanf(input, "%d", size);
-	fscanf(input, "%d", &dump_int);
+	fscanf(input, "%d", &max_pixel_value);
 	fread(dump_char, sizeof(char), 1, input);
 	free(dump_char);
 	grid = InitGrid((*size));
@@ -39,7 +46,9 @@ TPixel **readPPM(TPixel **grid, unsigned int *size, FILE* input) {
 	return grid;
 }
 
-void FreeGrid(TPixel **grid, unsigned int size) {
+/* frees the memory allocated for the grid/ pixel array */
+void FreeGrid(TPixel **grid, unsigned int size)
+{
 	for (int i = 0; i < size; i++)
 		free(grid[i]);
 	free(grid);
