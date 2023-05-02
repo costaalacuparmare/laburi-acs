@@ -67,7 +67,7 @@ void writePPM(TPixel **grid, unsigned int size, FILE *output) {
 		return;
 }
 
-void task3(TQuad qtree, FILE *output, unsigned int size) {
+void decompress(TQuad qtree, FILE *output, unsigned int size) {
 	fprintf(output, "P6\n");
 	fprintf(output, "%d %d\n", size, size);
 	fprintf(output, "255\n");

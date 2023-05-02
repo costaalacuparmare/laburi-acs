@@ -38,7 +38,7 @@ int highLeaf (TQuad qtree, int lvl) {
 	return MIN(min_t, min_b);
 }
 
-void task1(TQuad qtree, FILE *output, unsigned int size) {
+void stats(TQuad qtree, FILE *output, unsigned int size) {
 	fprintf(output, "%d\n", nrLvs(qtree));
 	int nr_lfs = 0;
 	nrLeafs(qtree,&nr_lfs);
