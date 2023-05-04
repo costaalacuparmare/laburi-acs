@@ -11,7 +11,7 @@ for p = 1 : n
     endfor
     L(i,p) = A(i,p) - s;
   endfor
-  
+
   for j = p+1 : n
     s = 0;
     for k = 1 : p-1
