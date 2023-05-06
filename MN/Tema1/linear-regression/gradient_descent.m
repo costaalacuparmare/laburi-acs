@@ -9,4 +9,5 @@ function [Theta] = gradient_descent(FeatureMatrix, Y, n, m, alpha, iter)
   % Theta -> the vector of weights
 
   % TODO: gradient_descent implementation
+
 endfunction

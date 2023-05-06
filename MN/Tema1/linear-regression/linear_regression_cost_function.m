@@ -6,4 +6,16 @@ function [Error] = linear_regression_cost_function(Theta, Y, FeatureMatrix)
   % Error -> the error of the regularized cost function
 
   % TODO: linear_regression_cost_function implementation
+  [m n] = size(FeatureMatrix);
+  h = zeros(m, 1);
+  for i = 1:m
+    for j = 1:n
+      h(i, 1) += Theta(j + 1, 1) * FeatureMatrix(i, j);
+    endfor
+  endfor
+  sum = 0;
+  for i = 1:m
+    sum += (h(i, 1) - Y(i, 1)) * (h(i,1) - Y(i, 1));
+  endfor
+  Error = sum / (2 * m);
 endfunction
