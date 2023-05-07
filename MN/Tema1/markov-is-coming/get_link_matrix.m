@@ -4,7 +4,7 @@ function [Link] = get_link_matrix (Labyrinth)
   % Link -> the link matrix associated to the given labyrinth
 
   % TODO: get_link_matrix implementation
-    Link = get_adjacency_matrix(Labyrinth);
+  Link = get_adjacency_matrix(Labyrinth);
   [n m] = size(Link);
   for i = 1:n
     k = 0;

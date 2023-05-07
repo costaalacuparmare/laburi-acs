@@ -8,7 +8,7 @@ function [Error] = ridge_regression_cost_function(Theta, Y, FeatureMatrix, lambd
   % Error -> the error of the regularized cost function
 
   % TODO: ridge_regression_cost_function implementation
-    [m n] = size(FeatureMatrix);
+  [m n] = size(FeatureMatrix);
   h = zeros(m, 1);
   for i = 1:m
     for j = 1:n

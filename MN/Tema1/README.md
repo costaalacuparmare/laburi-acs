@@ -1,89 +1,100 @@
-# Numerical Methods - First Homework Checker
+# Numerical Methods - First Homework
 
-This repository contains the current Numerical Methods checker. The project is
-intended to be easily modifiable to any user's needs.
+### Constantinescu Vlad 314CB 
 
-Please refer to this README in order to fully understand how to use it.
+The archive contains the implementation of the three tasks required
 
-## License
+## Task 1 - Markov is coming
 
-This project was written by **Valentin-Ioan Vintilă** and it is provided under
-the MIT License. For more info about the author, check out his
-[personal website](https://v-vintila.com/).
+- `parse_labyrinth` The function reads the labyrinth matrix using to loops and after
+each read line makes sure to read separately the newline character
 
-In order to legally use the checker, don't forget to include a copy of the
-license that comes with.
 
-## Usage
+- `get_adjacency_matrix` The function decodes the given matrix that represents
+where the walls are found in the labyrinth by checking bit by bit each wall. To get the elements
+int the adjacency matrix, it uses general formulas for the rows and columns.
 
-In order to run the checker, all you have to do is run `./checker.py` from your
-favorite bash terminal. If you only want to run a specific task, you can do so
-by calling `./checker.py X`, where `X` is the task's number (for example,
-`./checker.py 2` will only run the checker for the second task).
 
-## Internal settings
+- `get_link_matrix` The function counts how many places in the labyrinth can move
+from one to another and calculates the links by dividing the 1s in the matrix by
+the number of connections
 
-The checker is written entirely in Python 3 and it was tailor-made to be easily
-customizable. Most settings can be changed in a separate JSON file. However,
-a few are left out in the `checker.py` file:
 
-- `CHECKER_FOLDER` - This is a constant that tells the checker where are its
-  *insides*. All the content required by the checker shall be provided in this
-  folder. By default, this value is set to `checker`.
-- `JSON_CONFIG_PATH` - This is the path to the JSON file that contains most
-  settings. By default, this value is set to `{CHECKER_FOLDER}/config.json`.
-- `DEFAULT_TEST_TIMEOUT` - This constant represents the number of seconds that
-  each test should be run for. By default, this value is set to `2`.
+- `get_Jacobi_parameters` The function returns the G matrix and the c vector used for the
+Jacobi method. The c vector is composed of all the probabilities from the link matrix contained
+in the last two columns and rows, which are related to the WIN/LOSE cases. The G matrix is filled
+by the rest of the link matrix, using loop functions, disregarding the last two rows and columns
 
-## JSON File
 
-The bread and butter of the checker is the JSON file (see `JSON_CONFIG_PATH`).
-This file will contain the structure of the provided tests.
+- `perform_iterative` The function solves the system using the Jacobi method, which is implemented
+as long as the error is bigger than the tolerance and the maximum number of steps has not been achieved
 
-The config should contain a list of test groups (called `test-groups`) - these
-were designed in order to store the tests for different tasks.
 
-Each test group should have a name (`name`), a folder name that will contain
-ref files and more (`folder`), a required file that is provided by the students
-(`expected-file`) and a list of individual tests (`tests`).
+- `heuristic_greedy` The function, using the heuristic algorithm given, determines the quickest path
+in the labyrinth to get out
 
-Each test has a name (`name`) - **please use the convention bellow** -, a
-maximum score (`test-score`) and a test type (`test-type`). The last parameter
-can be:
 
-- `"exact"` - This means that the values are probed exactly as they are. This is
-  a great way to test integers, for example.
-- `"approx"` - This means that the values can be similar, but they don't have to
-  be the same. For this mode, **please provide the** `max-error` **field**!
+- `decode_path` The function return the pairs of rows and columns that compose the quickest path, making
+sure to not take into account the WIN state
 
-Tests should be named using the following convention: the first test should be
-called `test-01`, the second test should be `test-02` and so on. The example
-provided with this repository **breaks** this convention for convenience.
+  
+## Task 2 - Linear Regression
 
-## File structure
+- `parse_data_set_file` The function reads the matrix that must be transformed, as well
+  as a vector with the actual values that must be reached by the regression, using a similar
+  style of reading as the previous task, with two loops, but the matrix is initialized with the
+  *cell* function, in order to keep the strings intact
 
-Each test group is expected to have a folder with the following path:
-`{CHECKER_FOLDER}/folder`, where the value for `folder` is provided in the JSON
-file.
 
-Each test inside a test group is expected to have its own folder in:
-`{CHECKER_FOLDER}/test-group-folder/test-folder`. The value for `test-folder` is
-set by the test's name provided in the JSON file.
+- `prepare_for_regression` The function takes the values from the initial matrix and uses
+  the *switch* function to populate the feature matrix with 0s and 1s respecting the indications
+  given. It uses 2 loops and before reading every line from the initial matrix, a counter is
+  initialized with 0 that verifies how many elements are already loaded in the feature matrix
+  inside the switch so that, if none of the cells are string, the feature matrix can be loaded
+  with 0s using the function *str2num*, jumping over already filled areas memorised by the furnish_check
+  variable
 
-Each test should contain at least the following two files:
 
-- `run_test.m` - This file should be runnable (meaning it should contain a valid
-  Octave function called `run_test()`). The file is expected to create an output
-  file called `out` inside the same folder.
-- `ref` - This file shouldn't change. This file will be compared to the `out`
-  file generated using the `run_test()` function.
+- `linear_regression_cost_function` The function calculates the cost using the specified formula,
+  implemented with the help of loops to calculate sums in order to simplify the code
 
-As an example, please refer to the files provided in this repository.
 
-## Output
 
-The checker will create various forms of output to aid the students solve any
-issues encountered throughout. The console will tell the user the score for each
-test individually, alongside an error if it shall be necessary.
+- `parse_csv_file` The function uses the *textscan* function in order to get the cells from the csv file.
+  Using the function's parameters, it skips the header and gets the format of the cells on each line. The
+  first column is then attributed to the vector of the actual values and the auxiliary in which the data is
+  read is transformed intro a matrix, using the *cell2mat* function. The initial matrix is then populated by the
 
-Error messages in case of TLE / WA are provided as well.
+
+- `gradient_descent` The function calculates the Theta vector using the formulas given, adding at the end
+  a line in the vector at the beginning, representing the first Theta, Theta0, which is 0
+
+
+- `normal_equation` The function uses the conjugated gradient algorithm to calculate the normal equation.
+  The function's implementation required that the parameters of the function to be transformed in the data
+  for the algorithm, thus having to verify if the data for the algorithm respect the conditions of the
+  theoretical algorithm
+
+
+- `lasso_regression_cost_function` The function is almost identical to the end to the *linear_regression_cost_function*
+because of the formulas' similarity. At the end the 1st norm of the Theta vector, multiplied by lambda is added
+to the error and the sum is divided by m, instead of 2 * m
+
+
+- `ridge_regression_cost_function` The function is almost identical to the end to the *linear_regression_cost_function* 
+because of the formulas' similarity. At the end the sum of the squared elements of the Theta vector, calculated with
+the *sumsq* function, multiplied by lambda is added to the error.
+
+
+## Task 3 - MNis 101
+
+- `load_dataset` The function uses the *load* function to read the .mat file
+
+
+- `split_dataset` The function gets a random index vector id_rand using the *randperm* function and splits the X matrix
+and the y vector
+
+
+- `initialize_weights` The function calculates the epsilon based on the L_prev and L_next values and the formula
+given. Afterwards, the matrix is calculated by making a random matrix of L_next rows and L_prev + 1 lines and
+multiplying it by 2 and epsilon and subtracting  an epsilon to get the random values in the -epsilon, epsilon range
