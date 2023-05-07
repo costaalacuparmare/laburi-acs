@@ -10,6 +10,7 @@ function [Error] = linear_regression_cost_function(Theta, Y, FeatureMatrix)
   h = zeros(m, 1);
   for i = 1:m
     for j = 1:n
+      % getting Theta from j + 1 to ignore Theta0
       h(i, 1) += Theta(j + 1, 1) * FeatureMatrix(i, j);
     endfor
   endfor

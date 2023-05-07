@@ -6,7 +6,7 @@ function [FeatureMatrix] = prepare_for_regression(InitialMatrix)
   % TODO: prepare_for_regression implementation
   [m n] = size(InitialMatrix);
   for i = 1:m
-    furnish_check = 0 % counts if two elements are allocated
+    furnish_check = 0; % counts if two elements are allocated
     for j = 1:n
         switch InitialMatrix{i, j}
           case "yes"
