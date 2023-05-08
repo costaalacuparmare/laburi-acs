@@ -1,0 +1,7 @@
+filtru trece-jos
+Vin 1 0 AC 1V PWL(0,0 0.2ms,0V 0.2001ms,1V 1ms,1V)
+R1 2 0 10
+C1 1 2 15uF
+.AC DEC 100 1Hz 100kHz
+.probe
+.end
