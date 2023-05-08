@@ -29,7 +29,7 @@ by the rest of the link matrix, using loop functions, disregarding the last two 
 - `perform_iterative` The function solves the system using the Jacobi method, which is implemented
 as long as the error is bigger than the tolerance and the maximum number of steps has not been achieved
 
-
+ 
 - `heuristic_greedy` The function, using the heuristic algorithm given, determines the quickest path
 in the labyrinth to get out
 
@@ -37,10 +37,10 @@ in the labyrinth to get out
 - `decode_path` The function return the pairs of rows and columns that compose the quickest path, making
 sure to not take into account the WIN state
 
-  
+
 ## Task 2 - Linear Regression
 
-- `parse_data_set_file` The function reads the matrix that must be transformed, as well
+  - `parse_data_set_file` The function reads the matrix that must be transformed, as well
   as a vector with the actual values that must be reached by the regression, using a similar
   style of reading as the previous task, with two loops, but the matrix is initialized with the
   *cell* function, in order to keep the strings intact

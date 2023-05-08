@@ -1,0 +1,13 @@
+* C:\Users\Vlad\Desktop\Poli\ELTH\cc1.cir
+V1 2 0 90
+V2 0 6 20
+V3 4 5 20
+I1 3 1 5
+R1 1 6 20
+R2 3 2 5
+R3 1 4 10
+R4 3 5 2
+R5 5 0 5
+.dc V1 90 90 1
+.print dc I(R1) I(R2) I(R3) I(R4) I(R5) V(I1)
+.end

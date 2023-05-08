@@ -1,0 +1,13 @@
+* C:\Users\Vlad\Desktop\Poli\ELTH\Lab2\Ex2\ex2.cir
+R1 3 4 1
+R2 5 0 5
+R4 2 1 4
+R5 1 3 30
+V1 3 5 115
+V2 1 0 30
+I1 4 2 10
+R3 2 0 10
+.dc v1 115 115 1
+.print dc I(R1) I(R2) I(R3) I(R4) I(R5) V(I1)
+.end
+

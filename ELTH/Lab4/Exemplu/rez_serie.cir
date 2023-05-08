@@ -1,0 +1,8 @@
+Rez serie
+Vin 1 0 AC 1
+R 1 2 100
+L 2 3 25.33m
+C 3 0 1u
+.AC LIN 1000 100Hz 10kHz
+.PROBE
+.END

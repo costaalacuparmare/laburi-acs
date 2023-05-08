@@ -1,0 +1,9 @@
+* C:\Users\Vlad\Desktop\Poli\ELTH\circuitT.cir
+VPOLARIZARE 1 0 12
+R1 1 2 10
+R2 2 0 10
+R3 2 3 5
+R4 1 3 5
+*
+.OP
+.END
