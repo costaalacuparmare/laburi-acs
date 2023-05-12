@@ -1,5 +1,5 @@
 checker: bonus.o checker.o
-	gcc -m32 -g $^ -o $@
+	gcc -m32 -no-pie -g $^ -o $@
 
 bonus.o: bonus.asm
 	nasm -f elf $^ -o $@

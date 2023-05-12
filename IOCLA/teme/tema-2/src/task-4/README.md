@@ -8,9 +8,9 @@ Dandu-se pozitie unei dame pe suprafata de joc, dorim sa calculam noi pozitii pe
 
 Argumentele primite sunt:
 
-`x - coloana pe care se afla piesa a carei pozitii vrem sa o calculam`
+`x - linia pe care se afla piesa a carei pozitii vrem sa o calculam`
 
-`y - linia pe care se afla piesa a carei pozitii vrem sa o calculam`
+`y - coloana pe care se afla piesa a carei pozitii vrem sa o calculam`
 
 `table - tabla de joc unde se vor pune pozitiile pe care poate ajunge piesa de joc`
 

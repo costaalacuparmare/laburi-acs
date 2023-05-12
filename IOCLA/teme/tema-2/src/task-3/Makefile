@@ -14,7 +14,7 @@ check_enigma.o: check_enigma.c
 	gcc -c -g -m32 $^ -o $@
 
 checker: check_enigma.o  enigma.o
-	gcc -m32 -g $^ -o $@
+	gcc -m32 -no-pie -g $^ -o $@
 	rm *.o
 
 clean:
