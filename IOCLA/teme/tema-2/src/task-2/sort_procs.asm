@@ -1,8 +1,8 @@
 %include "../include/io.mac"
 
 struc proc
-    .pid: resw 1
-    .prio: resb 1
+	.pid: resw 1
+	.prio: resb 1
     .time: resw 1
 endstruc
 
@@ -21,62 +21,66 @@ sort_procs:
     ;; Your code starts here
 
     ;; ebx is first loop index, frees eax to use for mul
-    sub eax, 1
+    dec eax
     mov ebx, eax
 
 first_loop:
     ;; ecx is second loop index
     mov ecx, ebx
-    sub ecx, 1
+	dec ecx
 
     ;; calculates the offset for the element in the first loop
+    ;; and stores it in the 'edi' register
+    mov edi, edx
+    mov eax, proc_size
+    ;; multiplies eax with the index to determine the offset
+    mul ebx
+    mov edx, edi
+    mov edi, eax
+
+second_loop:
+    ;; calculates the offset for the element in the second loop
     ;; and stores it in the 'esi' register
     mov esi, edx
     mov eax, proc_size
-    mul ebx
+    ;; multiplies eax with the index to determine the offset
+    mul ecx
     mov edx, esi
     mov esi, eax
 
-second_loop:
-      ; edi = Used to calculate the offset for the element in the second loop
+    ;; compares the two elements
+    xor eax, eax
+    mov al, byte [edx + edi + proc.prio]
+    cmp al, byte [edx + esi + proc.prio]
+    jg no_swap
+    jl swap_procs
+    mov ax, word [edx + edi + proc.time]
+    cmp ax, word [edx + esi + proc.time]
+    jg no_swap
+    jl swap_procs
+    mov ax, word [edx + edi + proc.pid]
+    cmp ax, word [edx + esi + proc.pid]
+    jge no_swap
 
-      mov edi, edx
-      mov eax, proc_size
-      mul ecx
-      mov edx, edi
-      mov edi, eax
+swap_procs:
+	;; uses xchg to interchange the two elements
+    mov al, byte [edx + edi + proc.prio]
+    xchg al, byte [edx + esi + proc.prio]
+    mov byte [edx + edi + proc.prio], al
 
-      xor eax, eax
-      mov al, byte [edx + esi + proc.prio]
-      cmp al, byte [edx + edi + proc.prio]
-      jg skip_swap
-      jl swap
-      mov ax, word [edx + esi + proc.time]
-      cmp ax, word [edx + edi + proc.time]
-      jg skip_swap
-      jl swap
-      mov ax, word [edx + esi + proc.pid]
-      cmp ax, word [edx + edi + proc.pid]
-      jge skip_swap
-swap:
-      mov al, byte [edx + esi + proc.prio]
-      xchg al, byte [edx + edi + proc.prio]
-      mov [edx + esi + proc.prio], al
+    mov ax, word [edx + edi + proc.pid]
+    xchg ax, word [edx + esi + proc.pid]
+    mov word [edx + edi + proc.pid], ax
 
-      mov ax, word [edx + esi + proc.pid]
-      xchg ax, word [edx + edi + proc.pid]
-      mov [edx + esi + proc.pid], ax
-
-      mov ax, word [edx + esi + proc.time]
-      xchg ax, word [edx + edi + proc.time]
-      mov [edx + esi + proc.time], ax
-skip_swap:
-      sub ecx, 1
-      jns second_loop
-    sub ebx, 1
+    mov ax, word [edx + edi + proc.time]
+    xchg ax, word [edx + esi + proc.time]
+    mov word [edx + edi + proc.time], ax
+no_swap:
+	dec ecx
+	cmp ecx, -1
+	jnz second_loop
+	dec ebx
     jnz first_loop
-
-
 
     ;; Your code ends here
     

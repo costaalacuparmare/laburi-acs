@@ -79,3 +79,17 @@ void DistrugeLG(TLG* aL, void (*stergeElem)(void *)) {
         free(aux);
     }
 }
+
+/* Verifica numerele pare */
+
+int nr_pare (TLG L, TFCond VerifPar) {
+	int k = 0;
+	while (L) {
+		if (VerifPar(L->info))
+			k++;
+		L = L->urm;
+	}
+	return k;
+}
+
+/*
