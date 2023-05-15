@@ -24,38 +24,50 @@
 
 function new_X = task3 (photo, pcs)
   [m, n] = size (photo);
-  
+
   % initializare matrice finala.
   new_X = zeros (m, n);
-  
+
   % TODO: cast photo la double.
-  
+  photo = double(photo);
+
   % TODO: calculeaza media fiecarui rand al matricii.
-  
+  mean_row = mean(photo, 2);
+
   % TODO: normalizeaza matricea initiala scazand din ea media fiecarui rand.
-  
+  normalized_photo = photo - mean_row;
+
   % TODO: calculeaza matricea de covarianta.
-  
+  covariance_matrix = normalized_photo * normalized_photo' / (n - 1);
+
   % TODO: calculeaza vectorii si valorile proprii ale matricei de covarianta.
   % HINT: functia eig
-  
+  [eigenvectors, eigenvalues] = eig(covariance_matrix);
+
   % TODO: ordoneaza descrescator valorile proprii si creaza o matrice V
   % formata din vectorii proprii asezati pe coloane, astfel incat prima coloana
   % sa fie vectorul propriu corespunzator celei mai mari valori proprii si
   % asa mai departe.
-  
+  [eigenvalues, sorted_indices] = sort(eigenvalues, 'descend');
+  sorted_eigenvectors = eigenvectors(:, sorted_indices);
+
   % TODO: pastreaza doar primele pcs coloane
   % OBS: primele coloane din V reprezinta componentele principale si
   % pastrandu-le doar pe cele mai importante obtinem astfel o compresie buna
   % a datelor. Cu cat crestem numarul de componente principale claritatea
   % imaginii creste, dar de la un numar incolo diferenta nu poate fi sesizata
   % de ochiul uman asa ca pot fi eliminate.
-  
+  principal_components = sorted_eigenvectors(:, 1:pcs);
+
   % TODO: creaza matricea Y schimband baza matricii initiale.
-  
+  Y = principal_components' * normalized_photo;
+
   % TODO: calculeaza matricea new_X care este o aproximatie a matricii initiale
-  
+  reconstructed_photo = principal_components * Y;
+
   % TODO: aduna media randurilor scazuta anterior.
+  new_X = reconstructed_photo + mean_row;
 
   % TODO: transforma matricea in uint8 pentru a fi o imagine valida.
+  new_X = uint8(new_X);
 endfunction
