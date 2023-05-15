@@ -19,22 +19,24 @@ sort_procs:
     ;; DO NOT MODIFY
 
     ;; Your code starts here
+
+    ;; ebx is first loop index, frees eax to use for mul
     sub eax, 1
-    ; ebx = First loop index
     mov ebx, eax
-    ; eax = Used for multiplication
+
 first_loop:
-    ; ecx = Second loop index
+    ;; ecx is second loop index
     mov ecx, ebx
     sub ecx, 1
 
-    ; esi = Used to calculate the offset for the element in the first loop
-
+    ;; calculates the offset for the element in the first loop
+    ;; and stores it in the 'esi' register
     mov esi, edx
     mov eax, proc_size
     mul ebx
     mov edx, esi
     mov esi, eax
+
 second_loop:
       ; edi = Used to calculate the offset for the element in the second loop
 
