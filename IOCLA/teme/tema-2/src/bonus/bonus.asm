@@ -54,6 +54,7 @@ get_column:
 
 	;; checks the limits of the table
 check_limits_left_up:
+	;; used the stack to store the y value
 	pop ebx
 	cmp eax, 7
 	je check_limits_left_down

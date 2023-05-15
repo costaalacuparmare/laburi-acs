@@ -3,6 +3,10 @@
     ;;
     ;;   TODO: Declare 'avg' struct to match its C counterpart
     ;;
+struc avg
+    .quo: resw 1
+    .remain: resw 1
+endstruc
 
 struc proc
     .pid: resw 1
@@ -42,6 +46,43 @@ clean_results:
    
     ;; Your code starts here
 
+    ; Use esi as a pointer to the first element of the result array
+    mov esi, eax
+
+    ; Use edi as counter
+    mov edi, ebx
+    sub edi, 1
+    xor ebx, ebx
+
+
+compute_time:
+    mov eax, proc_size
+    mul edi
+    mov edx, eax
+
+    xor eax, eax
+    mov al, byte [ecx + edx + proc.prio]
+    sub al, 1
+    mov bx, word [ecx + edx + proc.time]
+    add dword [prio_result + 4 * eax], 1
+    add dword [time_result + 4 * eax], ebx
+    sub edi, 1
+    jns compute_time
+    mov edi, 4
+finish:
+    xor edx, edx
+    mov eax, [time_result + 4 * edi]
+    mov ebx, [prio_result + 4 * edi]
+    cmp ebx, 0
+    jz push_results
+    mov edx, eax
+    shr edx, 16
+    div ebx
+push_results:
+    mov word [esi + edi*avg_size + avg.quo], ax
+    mov word [esi + edi*avg_size + avg.remain], dx
+    sub edi, 1
+    jns finish
 
 
     ;; Your code ends here
