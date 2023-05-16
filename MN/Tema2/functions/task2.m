@@ -29,18 +29,27 @@ function new_X = task2 (photo, pcs)
   new_X = zeros(m, n);
 
   % TODO: cast photo la double.
+  photo = double(photo);
 
   % TODO: normalizeaza matricea initiala scazand din ea media fiecarui rand.
+  mean_row = mean(photo')';
+  photo = photo - mean_row;
 
   % TODO: construieste matricea Z.
+  Z = photo' / sqrt(n - 1);
 
   % TODO: calculeaza matricile U, S si V din SVD aplicat matricii Z
+  [U, S, V] = svd(Z);
 
   % TODO: construieste matricea W din primele pcs coloane ale lui V
+  W = V(:, 1:pcs);
 
-  % TODO: cacluleaza matricea Y
+  % TODO: caclleaza matricea Y
+  Y = W' * photo;
 
   % TODO: aproximeaza matricea initiala
+  new_X = W * Y + mean_row;
 
   % TODO: transforma matricea in uint8 pentru a fi o imagine valida.
-endfunction
+  new_X = uint8(new_X);
+ endfunction
