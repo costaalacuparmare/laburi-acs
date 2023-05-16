@@ -18,14 +18,14 @@ bonus:
 
 	;; testing, I have discovered the correlation
 	;; between the rows and the addresses where they are found
-    ; 7 = ecx + 3 => offset = eax - 4
-    ; 6 = ecx + 2 => offset = eax - 4
-    ; 5 = ecx + 1 => offset = eax - 4
-    ; 4 = ecx => offset = 0
-    ; 3 = ecx + 7 => offset = eax + 4
-    ; 2 = ecx + 6 => offset = eax + 4
-	; 1 = ecx + 5 => offset = eax + 4
-	; 0 = ecx + 4 => offset = eax + 4
+    ;; 7 = ecx + 3 => offset = eax - 4
+    ;; 6 = ecx + 2 => offset = eax - 4
+    ;; 5 = ecx + 1 => offset = eax - 4
+    ;; 4 = ecx => offset = 0
+    ;; 3 = ecx + 7 => offset = eax + 4
+    ;; 2 = ecx + 6 => offset = eax + 4
+	;; 1 = ecx + 5 => offset = eax + 4
+	;; 0 = ecx + 4 => offset = eax + 4
 
 	;; compares for each position possible if the
 	;; original position is at the limits of the

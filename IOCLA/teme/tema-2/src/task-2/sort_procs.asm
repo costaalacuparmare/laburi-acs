@@ -49,6 +49,8 @@ second_loop:
     mov esi, eax
 
     ;; compares the two elements
+    ;; if they are not in the right order
+    ;; swaps, otherwise just decrements indexes
     xor eax, eax
     mov al, byte [edx + edi + proc.prio]
     cmp al, byte [edx + esi + proc.prio]
@@ -76,6 +78,7 @@ swap_procs:
     xchg ax, word [edx + esi + proc.time]
     mov word [edx + edi + proc.time], ax
 no_swap:
+	;; decrements indexes and resets the loops
 	dec ecx
 	cmp ecx, -1
 	jnz second_loop

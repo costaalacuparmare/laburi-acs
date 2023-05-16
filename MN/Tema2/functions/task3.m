@@ -42,7 +42,7 @@ function new_X = task3 (photo, pcs)
 
   % TODO: calculeaza vectorii si valorile proprii ale matricei de covarianta.
   % HINT: functia eig
-  [V, S] = eig(Z);
+  [V, S] = eig(Z, 'vector');
 
   % TODO: ordoneaza descrescator valorile proprii si creaza o matrice V
   % formata din vectorii proprii asezati pe coloane, astfel incat prima coloana

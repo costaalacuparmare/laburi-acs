@@ -25,62 +25,7 @@ rotate_x_positions:
     ;; DO NOT MODIFY
     ;; TODO: Implement rotate_x_positions
     ;; FREESTYLE STARTS HERE
-;; Calculate the effective number of shifts based on the forward direction
-    ;; and the rotor number
-    mov esi, ebx
-    mul esi
-    mov ecx, eax
 
-    ;; Get the address of the rotor configuration row
-    lea edx, [ecx + ecx * 4]
-    lea edx, [edx * 2 + config]
-
-    ;; Perform the rotation
-    mov edi, esi
-    neg edi
-    and edi, LETTERS_COUNT
-    jz skip_rotation
-
-    ;; Rotate to the left (forward = 0)
-    cmp edx, 0
-    je rotate_left
-
-    ;; Rotate to the right (forward = 1)
-    rotate_right:
-        mov al, byte [edx]
-        mov ah, al
-        rol al, cl
-        mov byte [edx], al
-        inc edx
-        loop rotate_right_loop
-        jmp end_rotation
-
-    rotate_left:
-        mov al, byte [edx]
-        mov ah, al
-        ror al, cl
-        mov byte [edx], al
-        inc edx
-        loop rotate_left_loop
-        jmp end_rotation
-
-    rotate_right_loop:
-        mov al, byte [edx]
-        mov ah, al
-        ror al, cl
-        mov byte [edx], al
-        inc edx
-
-    rotate_left_loop:
-        mov al, byte [edx]
-        mov ah, al
-        rol al, cl
-        mov byte [edx], al
-        inc edx
-        loop rotate_left_loop
-
-    end_rotation:
-    skip_rotation:
     ;; FREESTYLE ENDS HERE
     ;; DO NOT MODIFY
     popa
