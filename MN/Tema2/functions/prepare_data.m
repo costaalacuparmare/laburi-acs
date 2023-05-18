@@ -33,14 +33,14 @@ function [train_mat, train_val] = prepare_data (name, no_train_images)
 
   % TODO: incarca datele din tabelul primit ca argument.
   % HINT: functia load
-  load(name);
+  d = load(name);
 
   % TODO: salveaza in matricea train_mat primele no_train_images linii din
   % tabelul de imagini de antrenament.
-  train_mat = trainX(1:no_train_images, :);
+  train_mat = d.trainX(1:no_train_images, :);
 
   % TODO: salveaza in vectorul train_val primele no_train_images valori ale
   % vectorului de etichete.
-  train_val = trainY(1:no_train_images);
+  train_val = d.trainY(1:no_train_images);
 
 endfunction
