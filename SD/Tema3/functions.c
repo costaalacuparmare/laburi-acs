@@ -23,12 +23,12 @@ FILE *openOut()
 
 TGraph InitG(int nr_vertices)
 {
-	TGraph graph = (TGraph) malloc(sizeof(TGraph));
+	TGraph graph = (TGraph) malloc(sizeof(struct graph));
 	if (!graph) {
 		printf("Error at graph malloc\n");
 		return NULL;
 	}
-	graph->list_array = (TEdge *) calloc((nr_vertices + 1), sizeof(TEdge));
+	graph->list_array = (TEdge *) calloc((nr_vertices + 1), sizeof(struct cellE));
 	if(!graph->list_array){
 		printf("Error at list_array calloc\n");
 		free(graph);

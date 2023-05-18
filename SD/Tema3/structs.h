@@ -1,9 +1,9 @@
 /* CONSTANTINESCU Vlad - 314CB */
 
 typedef struct cellE {
-	int dest;
+	char *dest;
 	int cost;
-	struct cellE* next;
+	struct cellE *next;
 } TCellE, *TEdge;
 
 typedef struct graph {

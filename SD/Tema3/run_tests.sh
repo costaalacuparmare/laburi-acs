@@ -59,7 +59,7 @@ do
 		result1=$(awk "BEGIN {print $result1+1.5; exit}")
 	else
 		echo "-1.5.0: Cerința 1 a) Test $idx .............................................. FAIL"
-        print $EXIT_CODE
+        printf $EXIT_CODE
 	fi
 
 	diff <(tail -n +1 $fileOut) <(tail -n +1 $fileRef) -w > /dev/null
@@ -76,7 +76,7 @@ do
 		result1=$(awk "BEGIN {print $result1+2.5; exit}")
 	else
 		echo "-2.5.0: Cerința 1 b) Test $idx .............................................. FAIL"
-        print $EXIT_CODE
+        printf $EXIT_CODE
 	fi
 done
 
@@ -108,7 +108,7 @@ do
 		result2=$(awk "BEGIN {print $result2+4; exit}")
 	else
 		echo "-4.0: Cerința 2 Test $idx ................................................. FAIL"
-		print $EXIT_CODE
+		printf $EXIT_CODE
 	fi
 done
 
