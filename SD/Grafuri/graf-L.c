@@ -54,7 +54,7 @@ TGL* CitGraf()
     aux = (TCelArc*)calloc(sizeof(TCelArc),1);
     if (!aux) {
       DistrG(&g); return NULL;
-    }                     
+    }
     aux->urm = *p; *p = aux;
     aux->d = d; aux->c = x;
   }

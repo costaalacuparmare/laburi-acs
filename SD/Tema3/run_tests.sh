@@ -59,7 +59,6 @@ do
 		result1=$(awk "BEGIN {print $result1+1.5; exit}")
 	else
 		echo "-1.5.0: Cerința 1 a) Test $idx .............................................. FAIL"
-        printf $EXIT_CODE
 	fi
 
 	diff <(tail -n +1 $fileOut) <(tail -n +1 $fileRef) -w > /dev/null
@@ -76,7 +75,6 @@ do
 		result1=$(awk "BEGIN {print $result1+2.5; exit}")
 	else
 		echo "-2.5.0: Cerința 1 b) Test $idx .............................................. FAIL"
-        printf $EXIT_CODE
 	fi
 done
 
@@ -108,7 +106,6 @@ do
 		result2=$(awk "BEGIN {print $result2+4; exit}")
 	else
 		echo "-4.0: Cerința 2 Test $idx ................................................. FAIL"
-		printf $EXIT_CODE
 	fi
 done
 
@@ -124,7 +121,7 @@ do
 	cp "$fileIn" "tema3.in"
 	$VALGRIND ./tema3 1 > /dev/null 2>&1
 	if [[ ! -z $(cat rezultat_valgrind.txt) ]]; then
-		echo "-0.0: VALGRIND Cerinta 1 Test $i ....................................... FAIL"
+		echo "-0.0: VALGRIND Cerinta 1 Test $i .......................................... FAIL"
 		no_of_valgrind=$(awk "BEGIN {print "0"; exit}")
 	else
 		printf "+0.0: VALGRIND Cerinta 1 Test $i ......................................... PASS\n"

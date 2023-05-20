@@ -5,8 +5,19 @@ int main(int argc, char const *argv[])
 {
 	FILE *input = openIn();
 	FILE *output = openOut();
-	TGraph graph = getGraph(input);
-	printf("%d\n", graph->nr_vertices);
+	TVertices *vertices_array = NULL;
+	TGraph graph = getGraph(input, &vertices_array);
+	int k = 0;
+	for (int i = 0 ; i < graph->nr_vertices; i++) {
+		TEdge temp = graph->list_array[i];
+		while (temp) {
+			printf("%d %d %d\n", i, temp->dest, temp->cost);
+			k++;
+			temp = temp->next;
+		}
+	}
+	printf("%d\n", k);
+	FreeV(vertices_array, graph->nr_vertices);
 	FreeG(&graph);
 	fclose(input);
 	fclose(output);
