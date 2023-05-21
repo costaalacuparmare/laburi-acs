@@ -61,7 +61,3 @@ void Heapify(THeap *h, int c_id) {
 		}
 	}
 }
-
-//Lab 7 ex 1 -
-
-//Lab 7 ex 2 -

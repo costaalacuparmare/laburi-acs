@@ -38,7 +38,7 @@ TVertices *InitV(int nr_vertices)
 			return NULL;
 		}
 		vertices_array[i]->vertices_code = i;
-		vertices_array[i]->vertices_char = (char *) calloc(MAX_CHAR, sizeof(char));
+		vertices_array[i]->vertices_char = (char *) calloc(CHAR_MAX, sizeof(char));
 		if (!vertices_array[i]->vertices_char) {
 			printf("Error at vertices_char calloc nr %d\n", i);
 			for (int j = 0; j < i; j++) {
@@ -59,7 +59,7 @@ TGraph InitG(int nr_vertices)
 		printf("Error at graph malloc\n");
 		return NULL;
 	}
-	graph->list_array = (TEdge *) calloc((nr_vertices + 1), sizeof(TCellE));
+	graph->list_array = (TEdge *) calloc(nr_vertices, sizeof(TCellE));
 	if(!graph->list_array){
 		printf("Error at list_array calloc\n");
 		free(graph);
@@ -140,12 +140,12 @@ TGraph getGraph(FILE *input, TVertices **vertices_array)
 	fscanf(input, "%d", &nr_edges_given);
 	TGraph graph = InitG(nr_vertices);
 	(*vertices_array) = InitV(nr_vertices);
-	char *temp_char1 = (char *) malloc(MAX_CHAR * sizeof(char));
+	char *temp_char1 = (char *) malloc(CHAR_MAX * sizeof(char));
 	if (!temp_char1) {
 		printf("error at temp_char1 malloc\n");
 		return NULL;
 	}
-	char *temp_char2 = (char *) malloc(MAX_CHAR * sizeof(char));
+	char *temp_char2 = (char *) malloc(CHAR_MAX * sizeof(char));
 	if (!temp_char2) {
 		printf("error at temp_char2 malloc\n");
 		return NULL;
@@ -156,19 +156,7 @@ TGraph getGraph(FILE *input, TVertices **vertices_array)
 		int code = getVerticesCode(temp_char1, (*vertices_array), nr_vertices);
 		getEdge(temp_char1, temp_char2, temp_cost, (*vertices_array), &graph);
 	}
-	//double_edges(&graph);
 	free(temp_char1);
 	free(temp_char2);
 	return graph;
 }
-
-//void double_edges(TGraph *graph)
-//{
-//	for (int i = 0; i < (*graph)->nr_vertices; i++)
-//		TEdge temp = graph->list_array[i];
-//		if (l)
-//		printf("%d %d %d\n", i, temp->dest, temp->cost);
-//		k++;
-//		temp = temp->next;
-//	}
-//}

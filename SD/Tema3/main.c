@@ -7,7 +7,18 @@ int main(int argc, char const *argv[])
 	FILE *output = openOut();
 	TVertices *vertices_array = NULL;
 	TGraph graph = getGraph(input, &vertices_array);
-	int k = 0;
+	//int task = atoi(argv[1]);
+	switch (1) {
+		case 1: {
+			task1(&graph, output);
+			break;
+		}
+		case 2: {
+			task2();
+			break;
+		}
+	}
+	/*int k = 0;
 	for (int i = 0 ; i < graph->nr_vertices; i++) {
 		TEdge temp = graph->list_array[i];
 		while (temp) {
@@ -16,7 +27,7 @@ int main(int argc, char const *argv[])
 			temp = temp->next;
 		}
 	}
-	printf("%d\n", k);
+	printf("%d\n", k);*/
 	FreeV(vertices_array, graph->nr_vertices);
 	FreeG(&graph);
 	fclose(input);

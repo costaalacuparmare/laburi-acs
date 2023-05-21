@@ -1,7 +1,7 @@
 build:
-		gcc -g -std=c99 -o tema3 main.c functions.c
+		gcc -g -std=c99 -o tema3 main.c functions.c task1.c
 run:
-		./tema3
+		./tema3 1
 clean:
 		rm tema3
 		rm *.out

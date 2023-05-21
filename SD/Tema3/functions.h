@@ -3,8 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
-#define MAX_CHAR 256
+#include <limits.h>
 
 FILE *openIn();
 FILE *openOut();
@@ -16,3 +15,7 @@ void getEdge(char *temp_char1, char *temp_char2, int temp_cost, TVertices *verti
 void FreeG(TGraph* graph);
 TGraph getGraph(FILE *input, TVertices **vertices_array);
 void addEdge(int temp_dest, int temp_cost, int code, TGraph *graph);
+
+void task1(TGraph *graph, FILE *output);
+
+void task2();
