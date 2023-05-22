@@ -140,7 +140,9 @@ int cmp(const void *a, const void *b)
  *    pentru componenta conexa actuala. daca nu, ne intoarcem la pasul 2.
  */
 
-int *lazy_prim(graf_lista_adiacenta *graf, unsigned int nr_conexe, unsigned int *masca, unsigned int *componente_conexe)
+// visited = masca
+
+int *lazy_prim(TGraph *graph, int nr_zones, int *visited, unsigned int *componente_conexe)
 {
 	lista_prim lista = NULL;
 	int *vizitati = NULL;
