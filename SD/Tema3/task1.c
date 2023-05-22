@@ -27,11 +27,12 @@ void DFS(TGraph graph, int code, int *visited, int zone)
 	}
 }
 
-int getZones(TGraph graph, int *visited)
+int getZones(TGraph graph, int *visited, int *start_zones)
 {
 	int nr_zones = 0;
 	for (int i = 0; i < graph->nr_vertices; i++) {
 		if (!visited[i]) {
+			start_zones[nr_zones] = i;
 			nr_zones++;
 			DFS(graph, i, visited, nr_zones);
 		}
@@ -95,9 +96,8 @@ TEdge PopFirstEdge(TListPrim *list_prim)
 	TListPrim first_cell = (*list_prim);
 	if (!first_cell)
 		return NULL;
-	TEdge edge = NULL;
-	edge = first_cell->edge;
-	(*list_prim) = (*list_prim)->urm;
+	TEdge edge = first_cell->edge;
+	(*list_prim) = (*list_prim)->next;
 	free(first_cell);
 	return edge;
 }
@@ -107,103 +107,66 @@ int cmp(const void *a, const void *b)
 	return (*(int *)a) - (*(int *)b);
 }
 
-/*
- * algoritm_prim:
- *         graf      - graful pe care aplicam algoritmul lui prim
- *         nr_conexe - numarul de elemente conexe din graf
- *         masca     - vector ce contine pentru fiecare nod indexul componentei
- *                     conexe din care face parte
- *         componente_conexe - vector ce contine pentru fiecare componenta
- *                             conexa primul nod din aceasta
- * Returneaza:
- *         sume      - vectorul sortat ce contine suma costurilor drumurilor
- *                     pentru fiecare componenta conexa in parte
- *         NULL      - nu s-a reusit alocarea
- * Variabile:
- *         lista     - lista de prioritati pentru muchii
- *         vizitati  - vector ce tine cont de ce noduri au fost vizitate
- *         sume      - vectorul sortat ce contine suma costurilor drumurilor
- *                     pentru fiecare componenta conexa in parte
- *         min       - valoarea cu care se va gasi muchia cu cel mai mic cost
- *         start     - nodul de la care se porneste
- *         i         - iterator clasic
- *         p         - variabila auxiliar cu care se parcurge lista muchiilor
- * 1. start devine nod din fiecare componenta conexa.
- * 2. vizitati[start] devine 1
- * 3. adaugam in lista de muchii toate muchiile ce pornesc de la start si
- *    nu au ca destinatie un nod deja vizitat
- * 4. alegem din lista de muchii cea mai buna muchie
- * 5. start devine nodul catre care se duce aceasta muchie
- * 6. eliminam din lista de muchii toate muchiile ce duc la start
- * 7. adaugam in componenta conexa corespunzatoare acelui nod costul muchiei
- * 8. daca muchia extrasa este catre un nod deja vizitat, implicit am terminat
- *    pentru componenta conexa actuala. daca nu, ne intoarcem la pasul 2.
- */
-
-// visited = masca
-
-int *lazy_prim(TGraph *graph, int nr_zones, int *visited, unsigned int *componente_conexe)
+int *lazy_prim(TGraph graph, int nr_zones, int *zone_vertices, unsigned int *start_zones)
 {
-	lista_prim lista = NULL;
-	int *vizitati = NULL;
-	unsigned int *sume = NULL;
-	int min = INT_MAX;
-	unsigned int start = 0;
-	unsigned int i = 0;
-	lista_adiacenta p = NULL;
-/******************************************************************************
- *                              STOP INITIALIZARI                             *
- * ***************************************************************************/
-	vizitati = calloc(graf->nr_noduri, sizeof(int));
-	if (!vizitati)
-		return NULL;
-	sume = calloc(nr_conexe, sizeof(int));
-	if (!sume) {
-		free(vizitati);
+	int *visited = (int *) calloc(graph->nr_vertices, sizeof(int));
+	if (!visited) {
+		printf("Error at visited calloc\n");
 		return NULL;
 	}
-	for (; i < nr_conexe; i++) {
-		start = componente_conexe[i];                           //  1.
-		do {                                                    //
-			vizitati[start] = 1;                                //  2.
-			p = graf->lista_arce[start];                        //  3.
-			while (p) {                                         //  3.
-				if (vizitati[p->destinatie] == 0)               //  3.
-					lista_prim_adauga(&lista, p);               //  3.
-				p = p->urm;                                     //  3.
-			}                                                   //  3.
-			p = lista_extrage_min(&lista);                      //  4.
-			if (!p)                                             //
-				break;                                          //
-			start = p->destinatie;                              //  5.
-			lista_purifica(&lista, start);                      //  6.
-			sume[masca[start] - 1] += p->cost;                  //  7.
-			if (vizitati[start] == 1)                           //  8.
-				p = NULL;                                       //  8.
-		} while (lista || p);                                   //  8.
+	int *min_cost = calloc(nr_zones, sizeof(int));
+	if (!min_cost) {
+		printf("Error at min_cost calloc\n");
+		free(visited);
+		return NULL;
 	}
-	free(vizitati);
-	qsort(sume, nr_conexe, sizeof(int), fcomp);
-	return sume;
+	int start = 0;
+	TEdge p = NULL;
+	TListPrim list_prim = NULL;
+	for (int i = 0; i < nr_zones; i++) {
+		start = start_zones[i];
+		do {
+			p = graph->list_array[start];
+			visited[start] = 1;
+			while (p) {
+				if (visited[p->dest] == 0)
+					PushListPrim(&list_prim, p);
+				p = p->next;
+			}
+			p = PopFirstEdge(&list_prim);
+			if (!p)
+				break;
+			start = p->dest;
+			PopListPrim(&list_prim, start);
+			min_cost[zone_vertices[start] - 1] += p->cost;
+			if (visited[start] == 1)
+				p = NULL;
+		} while (list_prim || p);
+	}
+	free(visited);
+	qsort(min_cost, nr_zones, sizeof(int), cmp);
+	return min_cost;
 }
 
 void task1(TGraph *graph, FILE *output)
 {
 	double_edges(graph);
-	int *visited = (int *) calloc((*graph)->nr_vertices, sizeof(int));
-	if (!visited) {
-		printf("Error at visited calloc\n");
+	int *zone_vertices = (int *) calloc((*graph)->nr_vertices, sizeof(int));
+	if (!zone_vertices) {
+		printf("Error at zone_vertices calloc\n");
 		return;
 	}
-	int nr_zones = getZones((*graph), visited);
-	for (int i = 0; i < (*graph)->nr_vertices; i++)
-		printf("%d ", visited[i]);
-	printf("\n");
+	int *start_zones = (int *) calloc((*graph)->nr_vertices, sizeof(int));
+	if (!start_zones) {
+		printf("Error at start_zones calloc\n");
+		return;
+	}
+	int nr_zones = getZones((*graph), zone_vertices, start_zones);
+	int *min_cost = lazy_prim((*graph), nr_zones, zone_vertices, start_zones);
 	fprintf(output, "%d\n", nr_zones);
-	free(visited);
-}
-
-void task2()
-{
-	printf("2\n");
+	for (int i = 0; i < nr_zones; i++)
+		fprintf(output, "%d\n", min_cost[i]);
+	free(zone_vertices);
+	free(start_zones);
+	free(min_cost);
 }

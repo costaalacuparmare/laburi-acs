@@ -7,14 +7,15 @@ int main(int argc, char const *argv[])
 	FILE *output = openOut();
 	TVertices *vertices_array = NULL;
 	TGraph graph = getGraph(input, &vertices_array);
-	//int task = atoi(argv[1]);
-	switch (1) {
+	int task = atoi(argv[1]);
+	switch (task) {
 		case 1: {
 			task1(&graph, output);
 			break;
 		}
 		case 2: {
-			task2();
+			int treasure_weight = getVerticesDepth(input, vertices_array, graph->nr_vertices);
+			task2(&graph, vertices_array, treasure_weight, output);
 			break;
 		}
 	}

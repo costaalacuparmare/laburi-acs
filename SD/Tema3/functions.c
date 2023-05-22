@@ -37,12 +37,12 @@ TVertices *InitV(int nr_vertices)
 			free(vertices_array);
 			return NULL;
 		}
-		vertices_array[i]->vertices_code = i;
-		vertices_array[i]->vertices_char = (char *) calloc(CHAR_MAX, sizeof(char));
-		if (!vertices_array[i]->vertices_char) {
-			printf("Error at vertices_char calloc nr %d\n", i);
+		vertices_array[i]->code = i;
+		vertices_array[i]->name = (char *) calloc(CHAR_MAX, sizeof(char));
+		if (!vertices_array[i]->name) {
+			printf("Error at name calloc nr %d\n", i);
 			for (int j = 0; j < i; j++) {
-				free(vertices_array[j]->vertices_char);
+				free(vertices_array[j]->name);
 				free(vertices_array[j]);
 			}
 			free(vertices_array);
@@ -88,12 +88,12 @@ void FreeG(TGraph* graph)
 int getVerticesCode(char *temp_char, TVertices *vertices_array, int nr_vertices)
 {
 	for (int i = 0; i < nr_vertices; i++) {
-		if (strlen(vertices_array[i]->vertices_char) == 0) {
-			strcpy(vertices_array[i]->vertices_char, temp_char);
-			return vertices_array[i]->vertices_code;
+		if (strlen(vertices_array[i]->name) == 0) {
+			strcpy(vertices_array[i]->name, temp_char);
+			return vertices_array[i]->code;
 		} else {
-			if (strcmp(vertices_array[i]->vertices_char, temp_char) == 0)
-				return vertices_array[i]->vertices_code;
+			if (strcmp(vertices_array[i]->name, temp_char) == 0)
+				return vertices_array[i]->code;
 		}
 	}
 }
@@ -101,7 +101,7 @@ int getVerticesCode(char *temp_char, TVertices *vertices_array, int nr_vertices)
 void FreeV(TVertices *vertices_array, int nr_vertices)
 {
 	for (int i = 0; i < nr_vertices; i++) {
-		free(vertices_array[i]->vertices_char);
+		free(vertices_array[i]->name);
 		free(vertices_array[i]);
 	}
 	free(vertices_array);
