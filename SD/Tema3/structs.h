@@ -5,6 +5,11 @@ typedef struct cellV {
 	int vertices_code;
 } TCellV, *TVertices;
 
+typedef struct cellPrim {
+	TEdge edge;
+	struct cellPrim *next;
+} TCellPrim, *TListPrim;
+
 typedef struct cellE {
 	int dest;
 	int cost;
