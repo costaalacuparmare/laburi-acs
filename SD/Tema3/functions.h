@@ -23,3 +23,5 @@ void getEdge(char *temp_char1, char *temp_char2, int temp_cost, TVertices *verti
 void task1(TGraph *graph, FILE *output);
 
 void task2(TGraph *graph, TVertices *vertices_array, int treasure_weight, FILE *output);
+
+int *get_size_array(int nr_elements);

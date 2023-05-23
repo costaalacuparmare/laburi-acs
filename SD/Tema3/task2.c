@@ -19,76 +19,111 @@ int getVerticesDepth(FILE *input, TVertices *vertices_array, int nr_vertices)
 	return treasure_weight;
 }
 
-#define INFINITE 9999
-#define MAX_VERTICES 100
+int dijkstra(TGraph graph, int start, int end, int *path, int *distance, TVertices *vertices_array)
+{
+	int *visited = get_size_array(graph->nr_vertices);
+	int *previous = get_size_array(graph->nr_vertices);
+	float *score = (float *) get_size_array(graph->nr_vertices);
 
-void Dijkstra(TGraph G, int startVertex, int endVertex, TVertices *vertices_array, FILE *output) {
-	int distance[MAX_VERTICES];
-	int visited[MAX_VERTICES];
-	int previous[MAX_VERTICES];
-	int path[MAX_VERTICES];
-	int pathLength = 0;
-	int i, minDist, nextVertex;
-
-	for (i = 0; i < G->nr_vertices; i++) {
-		distance[i] = INFINITE;
+	for (int i = 0; i < graph->nr_vertices; i++) {
+		distance[i] = INT_MAX;
+		score[i] = INT_MAX;
 		visited[i] = 0;
 		previous[i] = -1;
 	}
 
-	distance[startVertex] = 0;
+	distance[start] = 0;
+	score[start] = 0;
+	int max_iter = graph->nr_vertices;
+	int iter = 0;
+	int next = 0;
+	float edge_score = 0;
+	float min_score = INT_MAX;
 
-	while (!visited[endVertex]) {
-		minDist = INFINITE;
-
-		for (i = 0; i < G->nr_vertices; i++) {
-			if (!visited[i] && distance[i] < minDist) {
-				minDist = distance[i];
-				nextVertex = i;
+	while (!visited[end] && iter < max_iter) {
+		min_score = INT_MAX;
+		for (int i = 0; i < graph->nr_vertices; i++) {
+			if (!visited[i] && score[i] < min_score) {
+				min_score = score[i];
+				next = i;
 			}
 		}
-
-		visited[nextVertex] = 1;
-
-		TEdge edge = G->list_array[nextVertex];
+		visited[next] = 1;
+		TEdge edge = graph->list_array[next];
 		while (edge != NULL) {
-			int neighbor = edge->dest;
-			int cost = edge->cost;
-
-			if (!visited[neighbor] && distance[nextVertex] + cost < distance[neighbor]) {
-				distance[neighbor] = distance[nextVertex] + cost;
-				previous[neighbor] = nextVertex;
+			edge_score = (float) edge->cost / vertices_array[edge->dest]->depth;
+			if (!visited[edge->dest] && score[next] + edge_score < score[edge->dest]) {
+				score[edge->dest] = score[next] + edge_score;
+				distance[edge->dest] = distance[next] + edge->cost;
+				previous[edge->dest] = next;
 			}
-
 			edge = edge->next;
 		}
+		iter++;
+	}
+	if (distance[end] == INT_MAX) {
+		free(visited);
+		free(previous);
+		free(score);
+		return -1;
 	}
 
-	int currentVertex = endVertex;
-	while (currentVertex != startVertex) {
-		path[pathLength] = currentVertex;
-		pathLength++;
-		currentVertex = previous[currentVertex];
+	int path_length = 0;
+	int current = end;
+	while (current != start) {
+		path[path_length++] = current;
+		current = previous[current];
 	}
-	path[pathLength] = startVertex;
-	pathLength++;
+	path[path_length++] = start;
 
-	for (i = pathLength - 1; i >= 0; i--) {
-		fprintf(output, "%s ", vertices_array[path[i]]->name);
-	}
-	fprintf(output, "\n");
-	fprintf(output, "%d\n", distance[endVertex]);
+	free(visited);
+	free(previous);
+	free(score);
+
+	return path_length;
 }
-
 
 void task2(TGraph *graph, TVertices *vertices_array, int treasure_weight, FILE *output)
 {
-	printf("%d\n", treasure_weight);
-	int startVertex = 0;
-	int endVertex = 0;
+	int start = 0;
+	int end = 0;
 	for (int i = 0; i < (*graph)->nr_vertices; i++)
 		if (strstr("Corabie\n", vertices_array[i]->name))
-			endVertex = vertices_array[i]->code;
+			end = vertices_array[i]->code;
 
-	Dijkstra((*graph), startVertex, endVertex, vertices_array, output);
+	int *distance = get_size_array((*graph)->nr_vertices);
+	int *path = get_size_array((*graph)->nr_vertices);
+
+	int path_length = dijkstra((*graph), end, start, path, distance, vertices_array);
+	if (path_length == -1) {
+		fprintf(output, "Echipajul nu poate ajunge la insula\n");
+		free(distance);
+		free(path);
+		return;
+	}
+	for (int i = 0 ; i < (*graph)->nr_vertices; i++) {
+		distance[i] = 0;
+		path[i] = 0;
+	}
+	path_length = dijkstra((*graph), start, end, path, distance, vertices_array);
+	if (path_length == -1) {
+		fprintf(output, "Echipajul nu poate transporta comoara inapoi la corabie\n");
+		free(distance);
+		free(path);
+		return;
+	}
+
+	int minDepth = INT_MAX;
+	for (int i = path_length - 1; i >= 0; i--) {
+		fprintf(output, "%s ", vertices_array[path[i]]->name);
+	}
+	for (int i = path_length -2; i > 0; i--)
+		if (vertices_array[path[i]]->depth < minDepth)
+			minDepth = vertices_array[path[i]]->depth;
+	fprintf(output, "\n");
+	fprintf(output, "%d\n", distance[end]);
+	fprintf(output, "%d\n", minDepth);
+	fprintf(output, "%d\n", treasure_weight / minDepth);
+	free(distance);
+	free(path);
 }

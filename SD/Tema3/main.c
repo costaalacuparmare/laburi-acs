@@ -19,16 +19,7 @@ int main(int argc, char const *argv[])
 			break;
 		}
 	}
-	/*int k = 0;
-	for (int i = 0 ; i < graph->nr_vertices; i++) {
-		TEdge temp = graph->list_array[i];
-		while (temp) {
-			printf("%d %d %d\n", i, temp->dest, temp->cost);
-			k++;
-			temp = temp->next;
-		}
-	}
-	printf("%d\n", k);*/
+
 	FreeV(vertices_array, graph->nr_vertices);
 	FreeG(&graph);
 	fclose(input);

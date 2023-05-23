@@ -109,17 +109,8 @@ int cmp(const void *a, const void *b)
 
 int *lazy_prim(TGraph graph, int nr_zones, int *zone_vertices, unsigned int *start_zones)
 {
-	int *visited = (int *) calloc(graph->nr_vertices, sizeof(int));
-	if (!visited) {
-		printf("Error at visited calloc\n");
-		return NULL;
-	}
-	int *min_cost = calloc(nr_zones, sizeof(int));
-	if (!min_cost) {
-		printf("Error at min_cost calloc\n");
-		free(visited);
-		return NULL;
-	}
+	int *visited = get_size_array(graph->nr_vertices);
+	int *min_cost = get_size_array(nr_zones);
 	int start = 0;
 	TEdge p = NULL;
 	TListPrim list_prim = NULL;
@@ -151,16 +142,8 @@ int *lazy_prim(TGraph graph, int nr_zones, int *zone_vertices, unsigned int *sta
 void task1(TGraph *graph, FILE *output)
 {
 	double_edges(graph);
-	int *zone_vertices = (int *) calloc((*graph)->nr_vertices, sizeof(int));
-	if (!zone_vertices) {
-		printf("Error at zone_vertices calloc\n");
-		return;
-	}
-	int *start_zones = (int *) calloc((*graph)->nr_vertices, sizeof(int));
-	if (!start_zones) {
-		printf("Error at start_zones calloc\n");
-		return;
-	}
+	int *zone_vertices = get_size_array((*graph)->nr_vertices);
+	int *start_zones = get_size_array((*graph)->nr_vertices);
 	int nr_zones = getZones((*graph), zone_vertices, start_zones);
 	int *min_cost = lazy_prim((*graph), nr_zones, zone_vertices, start_zones);
 	fprintf(output, "%d\n", nr_zones);

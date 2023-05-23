@@ -4,21 +4,31 @@
 
 The archive contains the implementation of the two tasks required 
 
-Punctaj local: 75/100 iupi
+Punctaj local: 120/100 iupi
 
 ## Implementation
      
     I read the input using the two I/O functions and did blabla with the graph
 
-#### I/O functions
+#### Auxiliary functions
 
 - `openIn` bla bla bla pt input
 
 
 - `openOut` bla bla bla pt output
 
+
+- `get_size_array`
+
 #### Vertices functions
+
 - `InitV`
+
+
+- `getVerticesCode`
+
+
+- `FreeV`
 
 ## Task 1
 
@@ -52,4 +62,12 @@ Punctaj local: 75/100 iupi
 
 ## Task 2
 
-haha
+	blah
+	
+- `getVerticesDepth`
+
+
+- `dijkstra`
+
+
+- `task2`
