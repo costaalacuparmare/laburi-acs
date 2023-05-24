@@ -1,4 +1,5 @@
 /* CONSTANTINESCU Vlad - 314CB */
+
 #include "functions.h"
 
 void double_edges(TGraph *graph)

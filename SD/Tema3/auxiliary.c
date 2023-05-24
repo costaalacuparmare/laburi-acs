@@ -1,6 +1,8 @@
 /* CONSTANTINESCU Vlad - 314CB */
+
 #include "functions.h"
 
+/* opens the input file and checks if it was opened correctly */
 FILE *openIn()
 {
 	FILE *input = fopen("tema3.in", "r");
@@ -11,6 +13,7 @@ FILE *openIn()
 	return input;
 }
 
+/* opens the input file and checks if it was opened correctly */
 FILE *openOut()
 {
 	FILE *output = fopen("tema3.out", "w+");
@@ -21,6 +24,8 @@ FILE *openOut()
 	return output;
 }
 
+/* allocates memory with calloc using the given dimension and
+ * verifies correct allocation */
 int *get_size_array(int nr_elements)
 {
 	int *array = (int *) calloc(nr_elements, sizeof(int));

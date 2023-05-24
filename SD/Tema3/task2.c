@@ -1,7 +1,8 @@
 /* CONSTANTINESCU Vlad 314CB */
+
 #include "functions.h"
 
-int getVerticesDepth(FILE *input, TVertices *vertices_array, int nr_vertices)
+int addVerticesDepth(FILE *input, TVertices *vertices_array, int nr_vertices)
 {
 	char *temp_char = (char *) malloc(CHAR_MAX * sizeof(char));
 	if (!temp_char) {
@@ -90,6 +91,9 @@ void task2(TGraph *graph, TVertices *vertices_array, int treasure_weight, FILE *
 	for (int i = 0; i < (*graph)->nr_vertices; i++)
 		if (strstr("Corabie\n", vertices_array[i]->name))
 			end = vertices_array[i]->code;
+	for (int i = 0; i < (*graph)->nr_vertices; i++)
+		if (strstr("Insula\n", vertices_array[i]->name))
+			start = vertices_array[i]->code;
 
 	int *distance = get_size_array((*graph)->nr_vertices);
 	int *path = get_size_array((*graph)->nr_vertices);

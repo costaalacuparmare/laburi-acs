@@ -1,4 +1,5 @@
 /* CONSTANTINESCU Vlad - 314CB */
+
 #include "functions.h"
 
 TVertices *InitV(int nr_vertices)

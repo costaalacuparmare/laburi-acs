@@ -1,4 +1,5 @@
 /* CONSTANTINESCU Vlad - 314CB */
+
 #include "functions.h"
 
 void addEdge(int temp_dest, int temp_cost, int code, TGraph *graph)
