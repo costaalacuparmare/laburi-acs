@@ -28,9 +28,9 @@ Local score: 120/100
   and add an edge in the graph, memorising the vertices using a separate structure
   that identifies the codification with the vertex's name
 
-- For the second task, using a vertices array with contains elements of the vertices
-  structure type, created a function that reads from the input file the depth
-  for each vertex 
+- For the second task, using a vertices array with contains elements of the 
+  vertices structure type, created a function that reads from the input file
+  the depth for each vertex 
 
 - Created a function the allocates memory with calloc using the given dimension
 ```
@@ -53,17 +53,12 @@ verifies correct allocation
 - `getVerticesCode` return the codification of the vertex and adds the vertex
 in the vertices array if it wasn't already added
 
-
-- `addVerticesDepth` return the codification of the vertex and adds the vertex
-in the vertices array if it wasn't already added
-
-
 - `FreeV` frees the heap memory allocated for the vertices array
 
 #### Edge functions 
 
-- `addEdge` adds the edge in the list of the vertex from where it is originated, sorting 
-upwards based on the codification of the vertices
+- `addEdge` adds the edge in the list of the vertex from where it is originated, 
+sorting upwards based on the codification of the vertices
 
 
 - `getEdge` uses vertices function to determine the codification of the
@@ -84,39 +79,53 @@ with the edges and the cost using edge functions
 
 ## Task 1
 ```
-I wanted to make this awsome so this is me trying
+For the first task, after the implementation steps of the algorithm, the code
+doubles the number of edges, uses DFS to determine how many connected components
+are in the given graph and using the safe DFS algorithm to determine the first
+vertex of each zone, so that, using the lazy prim algorithm, it can determine
+the minimal cost for the renovated roads in each zone. The lazy prim algorithm
+also required the implementation of a priority queue, represented by a simple
+chained list
 ```
-- `double_edges` bla bla bla
+- `double_edges` doubles the number of edges for the undirected graph
 
 
-- `DFS` bla bla bla
+- `DFS` DFS algorithm used to determine the number of connected components
+and the beginning of each connected zone
 
 
-- `getZones`
+- `getZones` determines the number of connected zones using DFS and
+gets the first vertex of each zone
 
 
-- `PushListPrim`
+- `PushListPrim` adds an edge to the priority queue, sorting the elements
+by the cost
 
 
-- `PopListPrim` 
+- `PopListPrim` removes from the priority queue all the edges that point
+to a given destination
 
 
-- `PopFirstEdge`
+- `PopFirstEdge` extracts the edge with the highest priority. Because the list
+is sorted, the edge will always be the first one
 
 
-- `cmp`
+- `cmp` comparison function used for qsort
 
 
-- `lazy_prim`
+- `lazy_prim` 
 
 
-- `task1`
+- `task1` implements the following steps: doubles the edges, calculates the 
+number of connected zones, the minimal cost for each and prints them
+in the output file
 
 ## Task 2
 ```
-blah
+For the second task
 ```
-- `getVerticesDepth`
+- `getVerticesDepth` return the codification of the vertex and adds the vertex
+  in the vertices array if it wasn't already added
 
 
 - `dijkstra`

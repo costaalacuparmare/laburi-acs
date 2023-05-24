@@ -2,6 +2,8 @@
 
 #include "functions.h"
 
+/* return the codification of the vertex and adds the vertex
+ * in the vertices array if it wasn't already added */
 int addVerticesDepth(FILE *input, TVertices *vertices_array, int nr_vertices)
 {
 	char *temp_char = (char *) malloc(CHAR_MAX * sizeof(char));

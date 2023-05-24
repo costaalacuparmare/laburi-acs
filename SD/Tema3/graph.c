@@ -2,6 +2,8 @@
 
 #include "functions.h"
 
+/* adds the edge in the list of the vertex from where it is originated, sorting
+ * upwards based on the codification of the vertices */
 void addEdge(int temp_dest, int temp_cost, int code, TGraph *graph)
 {
 	TEdge *edge_temp = (*graph)->list_array + code;
@@ -19,6 +21,9 @@ void addEdge(int temp_dest, int temp_cost, int code, TGraph *graph)
 	aux->cost = temp_cost;
 }
 
+/* uses vertices function to determine the codification of the
+ * current vertex and the destination of the edge
+ * and then uses the function above to add the edge */
 void getEdge(char *temp_char1, char *temp_char2, int temp_cost, TVertices *vertices_array, TGraph *graph)
 {
 	int code = getVerticesCode(temp_char1, vertices_array, (*graph)->nr_vertices);
@@ -26,6 +31,7 @@ void getEdge(char *temp_char1, char *temp_char2, int temp_cost, TVertices *verti
 	addEdge(temp_dest, temp_cost, code, graph);
 }
 
+/* initialises the graph variable and the edge lists */
 TGraph InitG(int nr_vertices)
 {
 	TGraph graph = (TGraph) malloc(sizeof(TCellG));
@@ -43,6 +49,8 @@ TGraph InitG(int nr_vertices)
 	return graph;
 }
 
+/* return the codification of the vertex and adds the vertex
+ * in the vertices array if it wasn't already added */
 TGraph getGraph(FILE *input, TVertices **vertices_array)
 {
 	int nr_vertices = 0;
@@ -72,6 +80,7 @@ TGraph getGraph(FILE *input, TVertices **vertices_array)
 	return graph;
 }
 
+/* frees the heap memory allocated for the graph */
 void FreeG(TGraph* graph)
 {
 	TEdge p, aux;

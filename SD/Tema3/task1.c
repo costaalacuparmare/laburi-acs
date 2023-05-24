@@ -2,6 +2,7 @@
 
 #include "functions.h"
 
+/* doubles the number of edges for the undirected graph */
 void double_edges(TGraph *graph)
 {
 	for (int i = 0; i < (*graph)->nr_vertices; i++) {
@@ -10,6 +11,7 @@ void double_edges(TGraph *graph)
 			TEdge edge_temp2 = (*graph)->list_array[edge_temp1->dest];
 			while (edge_temp2 && edge_temp2->dest != i)
 				edge_temp2 = edge_temp2->next;
+			/* if the edge already exists, it skips it */
 			if (!edge_temp2)
 				addEdge(i, edge_temp1->cost, edge_temp1->dest, graph);
 			edge_temp1 = edge_temp1->next;
@@ -17,6 +19,8 @@ void double_edges(TGraph *graph)
 	}
 }
 
+/* DFS algorithm used to determine the number of connected components
+ * and the beginning of each connected zone */
 void DFS(TGraph graph, int code, int *visited, int zone)
 {
 	visited[code] = zone;
@@ -28,6 +32,8 @@ void DFS(TGraph graph, int code, int *visited, int zone)
 	}
 }
 
+/* determines the number of connected zones using DFS and
+ * gets the first vertex of each zone */
 int getZones(TGraph graph, int *visited, int *start_zones)
 {
 	int nr_zones = 0;
@@ -41,6 +47,8 @@ int getZones(TGraph graph, int *visited, int *start_zones)
 	return nr_zones;
 }
 
+/* adds an edge to the priority queue, sorting the elements
+ * by the cost */
 void PushListPrim(TListPrim *list_prim, TEdge edge)
 {
 	TListPrim aux = calloc(1, sizeof(TCellPrim));
@@ -69,6 +77,8 @@ void PushListPrim(TListPrim *list_prim, TEdge edge)
 	return;
 }
 
+/* removes from the priority queue all the edges that point
+ * to a given destination */
 void PopListPrim(TListPrim *list_prim, int dest)
 {
 	TListPrim p = NULL, prev = NULL, aux = NULL;
@@ -92,6 +102,8 @@ void PopListPrim(TListPrim *list_prim, int dest)
 	}
 }
 
+/* extracts the edge with the highest priority. Because the list is sorted,
+ * the edge will always be the first one */
 TEdge PopFirstEdge(TListPrim *list_prim)
 {
 	TListPrim first_cell = (*list_prim);
@@ -103,10 +115,12 @@ TEdge PopFirstEdge(TListPrim *list_prim)
 	return edge;
 }
 
+/* comparison function used for qsort */
 int cmp(const void *a, const void *b)
 {
 	return (*(int *)a) - (*(int *)b);
 }
+
 
 int *lazy_prim(TGraph graph, int nr_zones, int *zone_vertices, unsigned int *start_zones)
 {
@@ -140,16 +154,29 @@ int *lazy_prim(TGraph graph, int nr_zones, int *zone_vertices, unsigned int *sta
 	return min_cost;
 }
 
+/* implements the following steps: doubles the edges, calculates the number of
+ * connected zones, the minimal cost for each and prints them in the output
+ * file */
 void task1(TGraph *graph, FILE *output)
 {
+	/* double the edges for the undirected graph */
 	double_edges(graph);
+
 	int *zone_vertices = get_size_array((*graph)->nr_vertices);
 	int *start_zones = get_size_array((*graph)->nr_vertices);
+
+	/* calculates the number of connected zones */
 	int nr_zones = getZones((*graph), zone_vertices, start_zones);
+
+	/* determines the minimal cost of each connected zone */
 	int *min_cost = lazy_prim((*graph), nr_zones, zone_vertices, start_zones);
+
+	/* prints in the output file */
 	fprintf(output, "%d\n", nr_zones);
 	for (int i = 0; i < nr_zones; i++)
 		fprintf(output, "%d\n", min_cost[i]);
+
+	/* frees memory */
 	free(zone_vertices);
 	free(start_zones);
 	free(min_cost);
