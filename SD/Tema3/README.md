@@ -113,7 +113,14 @@ is sorted, the edge will always be the first one
 - `cmp` comparison function used for qsort
 
 
-- `lazy_prim` 
+- `lazy_prim` implementation of lazy prim algorithm:
+start marks the beginning of each connected zone, and visited marks the
+visitation of each vertex; adds in the priority queue all the edges from
+start which have as destination an unvisited vertex; chooses the highest
+priority edge and start becomes the edge's destination; removes from priority
+queue all the edges which have as destination start; adds the edge's cost,
+if the edge points to an already visited vertex it returns the array of costs
+otherwise it repeats the algorithm.
 
 
 - `task1` implements the following steps: doubles the edges, calculates the 
@@ -122,13 +129,27 @@ in the output file
 
 ## Task 2
 ```
-For the second task
+For the second task, the vertices array receive the depth from the input file
+and also the treasure weight. The code uses the dijkstra algorithm to calculate
+the shortest path from the island to the ship, prints the path, the overall
+cost of the path, the maximum depth of the ship and the trips needed to carry
+the whole treasure to the ship as well as determines if the path exists
 ```
 - `getVerticesDepth` return the codification of the vertex and adds the vertex
   in the vertices array if it wasn't already added
 
 
-- `dijkstra`
+- `dijkstra` implementation of the dijkstra algorithm using the score given:
+visited is used to check the visitation of vertices; previous memorises the
+vertex before the current one in order to return to it; score array contains
+the added up score until the index vertex; verifies the minimal score to update
+it each iteration, if the score of the next edge is and the previous scores
+are below the added up score in the destination, it replaces it; if no path was
+found, returns -1 and frees heap allocated memory; calculates the length of the
+path and returns it
 
 
-- `task2`
+- `task2` uses the dijkstra algorithm to calculate the shortest path from the 
+island to the ship, prints the path, the overall cost of the path, the maximum
+depth of the ship and the trips needed to carry the whole treasure to the ship
+as well as determines if the path exists

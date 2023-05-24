@@ -59,8 +59,13 @@ void FreeG(TGraph* graph);
 
 /* Implementation functions */
 
-
+/* implements the following steps: doubles the edges, calculates the
+ * number of connected zones, the minimal cost for each and prints them
+ * in the output file */
 void task1(TGraph *graph, FILE *output);
 
-
+/* uses the dijkstra algorithm to calculate the shortest path from the
+ * island to the ship, prints the path, the overall cost of the path, the maximum
+ * depth of the ship and the trips needed to carry the whole treasure to the ship
+ * as well as determines if the path exists */
 void task2(TGraph *graph, TVertices *vertices_array, int treasure_weight, FILE *output);

@@ -121,12 +121,18 @@ int cmp(const void *a, const void *b)
 	return (*(int *)a) - (*(int *)b);
 }
 
-
+/* implementation of lazy prim algorithm */
 int *lazy_prim(TGraph graph, int nr_zones, int *zone_vertices, unsigned int *start_zones)
 {
+	/* used to memorise the visited vertices */
 	int *visited = get_size_array(graph->nr_vertices);
+
+	/* array of minimal cost for each connected zone */
 	int *min_cost = get_size_array(nr_zones);
+
+	/* start marks the beginning of each connected zone */
 	int start = 0;
+
 	TEdge p = NULL;
 	TListPrim list_prim = NULL;
 	for (int i = 0; i < nr_zones; i++) {
@@ -134,23 +140,39 @@ int *lazy_prim(TGraph graph, int nr_zones, int *zone_vertices, unsigned int *sta
 		do {
 			p = graph->list_array[start];
 			visited[start] = 1;
+
 			while (p) {
 				if (visited[p->dest] == 0)
 					PushListPrim(&list_prim, p);
 				p = p->next;
 			}
+
+			/* chooses the highest priority edge */
 			p = PopFirstEdge(&list_prim);
 			if (!p)
 				break;
+
+			/* start becomes p's destination */
 			start = p->dest;
+
+			/* removes from priority queue all the edges which have
+			 * as destination start */
 			PopListPrim(&list_prim, start);
+
+			/* adds the edge's cost */
 			min_cost[zone_vertices[start] - 1] += p->cost;
 			if (visited[start] == 1)
 				p = NULL;
+			/* if the edge points to an already visited vertex it returns
+			 * the array of costs otherwise it repeats the algorithm */
 		} while (list_prim || p);
 	}
+
 	free(visited);
+
+	/* sort the minimal costs for each zone */
 	qsort(min_cost, nr_zones, sizeof(int), cmp);
+
 	return min_cost;
 }
 
