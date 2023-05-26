@@ -1,13 +1,11 @@
-FROM alpine:edge
+FROM node:15.11.0-stretch
 
-RUN apk add --update py3-pip
+COPY package.json ./
 
-COPY requirements.txt /usr/src/app/
-RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+RUN npm install
 
-COPY app.py /usr/src/app/
-COPY templates/index.html /usr/src/app/templates/
+COPY server.js /usr/src/app/
 
-EXPOSE 5000
+EXPOSE 8080
 
-CMD ["python3", "/usr/src/app/app.py"]
+CMD ["node", "/usr/src/app/server.js"]
