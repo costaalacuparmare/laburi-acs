@@ -59,6 +59,50 @@ TLG CitireLG(int *dimLista) {
     return L;
 }
 
+TLG CitireLG2(int *dimLista) {
+	TLG L = NULL, aux, ultim = NULL;
+	TCarte x, *elem;
+	x.titlu = malloc(20 * sizeof(char));
+	x.autor = malloc(20 * sizeof(char));
+	int k = 0;
+	*dimLista = 0;
+	printf("Introduceti elemente de adaugat in lista:\n");
+	while (k != 4) {
+		scanf("%s", x.titlu);
+		scanf("%s", x.autor);
+		scanf("%d", &x.an_aparitie);
+		elem = malloc(sizeof(TCarte));
+		*elem = x;
+		aux = AlocCelulaG(elem);
+		if (!aux) {
+			return L;
+		}
+		if (L == NULL) {
+			L = aux;
+		} else {
+			/*TLG prev = NULL;
+			int k1 = 1;
+			while (k1) {
+				TCarte* p = (TCarte*) ultim->info;
+				if (x.an_aparitie > p->an_aparitie) {
+					prev = ultim;
+					ultim = ultim->urm;
+				}
+				else
+					k1 = 0;
+			}
+			aux->urm = prev->urm;
+			prev->urm = aux;*/
+			ultim->urm = aux;
+		}
+		ultim = aux;
+		(*dimLista)++;
+		k++;
+	}
+
+	return L;
+}
+
 /* Afisare continut lista, primim un pointer la o functie de printare */
 void AfisareLG(TLG L, void (*afisareElem)(void *)) {
     printf("Lista: [");
@@ -91,5 +135,3 @@ int nr_pare (TLG L, TFCond VerifPar) {
 	}
 	return k;
 }
-
-/*

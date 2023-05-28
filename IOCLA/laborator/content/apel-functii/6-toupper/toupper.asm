@@ -13,9 +13,21 @@ toupper:
     mov ebp, esp
 
     ; TODO
+   mov eax, dword [ebp+8]
 
+check_one_byte:
+    mov bl, byte [eax]
+    test bl, bl
+    je out
+    sub bl, 0x20
+    mov byte [eax], bl
+    inc eax
+    jmp check_one_byte
+
+out:
     leave
     ret
+
 
 main:
     push ebp

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct celGenerica {
     void *info;
@@ -15,10 +16,13 @@ int nr_pare (TLG L, TFCond VerifPar);
 typedef struct carti {
 	char *autor;
 	char *titlu;
-	x
-};
+	int an_aparitie;
+} TCarte;
+TLG CitireLG2(int *dimLista);
+
 typedef int (*TFComp) (void *elem1, void *elem2);
 void ElimPer (void *elem, TFComp Comp);
+
 
 TLG AlocCelulaG(void *elem);
 int InserareLG(TLG* aL, void *elem);
