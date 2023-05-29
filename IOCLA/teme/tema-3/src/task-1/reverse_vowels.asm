@@ -1,6 +1,5 @@
 section .data
 	; declare global vars here
-	vowels db "AEIOUaeiou", 0
 section .text
 	global reverse_vowels
 
@@ -9,72 +8,90 @@ section .text
 ;	in ordine inversa. Consoanele raman nemodificate.
 ;	Modificare se va face in-place
 reverse_vowels:
-     push ebp
-     mov ebp, esp
-     push edi
-     push esi
 
-     mov edi, dword [ebp + 8]   ; edi points to the input string
+	; modifies stack pointer and pops the string
+	add esp, 4
+	pop eax ; string
+	sub esp, 8
 
-     xor ecx, ecx              ; ecx will store the length of the string
-     mov esi, edi              ; esi will be used for string traversal
-     mov al, byte [esi]        ; load the first character
+	; saves the string pointer in ecx for the second loop
+	push eax
+	pop ecx
 
-     ; calculate the length of the string
-     find_string_length:
-         cmp al, 0
-         je end_find_string_length
-         inc ecx
-         inc esi
-         mov al, byte [esi]
-         jmp find_string_length
-     end_find_string_length:
+	; saves in the stack the vowels found in the string
+push_loop:
+	; uses dx to save the first to chars from the string
+	; dl contains the first char and verifies that it isn't
+	; the null terminator
+	push word [eax]
+	pop dx
+	cmp dl, 0
+	je pop_setup
 
-     dec esi                   ; esi points to the last character of the string
-     mov edx, ecx              ; edx will be used for vowel reversal loop
+push_check:
+	; check if the current character is a vowel by comparing it with the vowels
+	cmp dl, "a"
+	je push_vowel
+	cmp dl, "e"
+	je push_vowel
+	cmp dl, "i"
+	je push_vowel
+	cmp dl, "o"
+	je push_vowel
+	cmp dl, "u"
+	je push_vowel
+	; moves eax to point to the second char in the string
+	inc eax
+	jmp push_loop
 
-     ; reverse the vowels
-     reverse_loop:
-         mov al, byte [edi]     ; load the current character
-         cmp al, 0
-         je end_reverse_loop
+push_vowel:
+	; resets the second char, in dh, to push only the vowel found
+	xor dh, dh
+	push dx
+	; moves eax to point to the second char in the string
+	inc eax
+	jmp push_loop
 
-         ; check if the character is a vowel
-         movzx eax, al
-         cmp al, 'A'
-         jl not_a_vowel
-         cmp al, 'Z'
-         jle is_a_vowel
-         cmp al, 'a'
-         jl not_a_vowel
-         cmp al, 'z'
-         jg not_a_vowel
+	; uses the ecx register to reset eax
+pop_setup:
+	push ecx
+	pop eax
 
-     is_a_vowel:
-         ; check if the current character is a vowel by comparing it with the vowels string
-         mov esi, vowels
-         movzx edi, al
+pop_loop:
+	; verifies that the string did not reach the null terminator
+	; same as the first loop
+	push word [eax]
+	pop dx
+	cmp dl, 0
+	je reverse_end
 
-     check_vowel:
-         lodsb                 ; load the next vowel from the vowels string
-         cmp al, 0
-         je not_a_vowel
-         cmp al, dil
-         je reverse_vowel
-         jmp check_vowel
+pop_check:
+	; check if the current character is a vowel by comparing it with the vowels
+	cmp dl, "a"
+	je reverse
+	cmp dl, "e"
+	je reverse
+	cmp dl, "i"
+	je reverse
+	cmp dl, "o"
+	je reverse
+	cmp dl, "u"
+	je reverse
+	inc eax
+	jmp pop_loop
 
-     reverse_vowel:
-         xchg al, byte [esi-1]  ; swap the current vowel with the last vowel found
-         dec esi
-         dec edx
+reverse:
+	; pops the memories vowels and reverses the current one with the one popped
+	; using ecx and edx registers to save in cx the reversed vowels and the
+	; next char, replacing the current ones from eax
+	xor dl, dl
+	pop cx
+	add cx, dx
+	push cx
+	pop word [eax]
+	inc eax
+	jmp pop_loop
 
-     not_a_vowel:
-         inc edi               ; move to the next character
-         jmp reverse_loop
+reverse_end:
 
-     end_reverse_loop:
-     pop esi
-     pop edi
-     mov esp, ebp
-     pop ebp
-     ret
+	ret
