@@ -1,5 +1,3 @@
-%include "../printf32.asm"
-
 section .data
 	back db "..", 0
 	curr db ".", 0
@@ -9,7 +7,6 @@ section .data
 section .text
 	global pwd
 	extern strcmp
-	extern printf
 	extern strcat
 	extern strlen
 ;;	void pwd(char **directories, int n, char *output)
@@ -123,14 +120,15 @@ no_prev_directory:
     jmp add_directory
 
 prep_strcat:
+	; save the number of operation for freeing the stack later
 	mov esi, ebx
+
 strcat_loop:
-	; exit if all directories were added
-	cmp ebx, 0
-	je prep_reverse
+	; get the directories in reverse order
+	dec ebx
+	mov edx, [esp + ebx * 4]
 
 	; strcat modifies edx
-	pop edx
 	push edx
 
 	; add '/' in output
@@ -140,50 +138,39 @@ strcat_loop:
    	add esp, 8
 
 	pop edx
+
 	; add directory in output
     push edx
     push edi
     call strcat
     add esp, 8
 
-    dec ebx
+	; exit if all directories were added
+    cmp ebx, 0
+    je prep_free_stack
+
     jmp strcat_loop
 
-prep_reverse:
-	; add last '/' in output
+prep_free_stack:
+	; add '/' in output
     push slash
     push edi
     call strcat
     add esp, 8
 
-	; stores the number of directories from output in ebx
+	; reset counter of directories to free stack
 	mov ebx, esi
-    xor esi, esi
-    inc ebx
 
-    PRINTF32 `%s\n\x0`, edi
-    ; Reverse the string
-    mov esi, edi
+free_stack:
+	; verifies if all directories from the stack were popped
+	cmp ebx, 0
+	je end_pwd
 
-    ; get length
-    push edi
-    call strlen
-    add esp, 4
-    mov ecx, eax
-	dec ecx
-    add edi, ecx
+	pop edx
+	xor edx, edx
 
-    PRINTF32 `%s\n\x0`, edi
-    shr ebx, 1
-
-reverse_loop:
-	mov dl, byte [edi]
-	mov dh, byte [esi]
-	mov byte [edi], dh
-	mov byte [esi], dl
-	dec edi
-	inc esi
-	loop reverse_loop
+	dec ebx
+	jmp free_stack
 
 end_pwd:
 	popa
