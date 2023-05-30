@@ -33,15 +33,15 @@ avx_loop:
 	;  we store only the lower part of the multiplication
 	vpmulld	ymm2, ymm0, ymm1
 	
-	;; compute B .* C; store the result in ymm5
+	; compute B .* C; store the result in ymm5
 	vmovdqu	ymm3, [rdx + 4 * rax]
 	vmovdqu	ymm4, [rcx + 4 * rax]
 	vpmulld	ymm5, ymm3, ymm4
 
-	;; add the partial results in ymm2
+	; add the partial results in ymm2
 	vpaddd	ymm2, ymm2, ymm5
 
-	;; store the result in D
+	; store the result in D
 	vmovdqu	[r9 + 4 * rax], ymm2
 
 	add	rax, 8

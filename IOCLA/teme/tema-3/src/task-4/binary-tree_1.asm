@@ -26,6 +26,65 @@ section .text
 
 inorder_parc:
     enter 0, 0
-    
+    pusha
+
+    ; get function parameters
+    mov esi, [ebp + 8]   ; node
+    mov edi, [ebp + 12]  ; array
+
+    ; traverse the binary search tree in inorder
+    push esi
+    push edi
+    call inorder_recursion
+	add esp, 8
+
+    popa
+    leave
+    ret
+
+inorder_recursion:
+    push ebp
+    mov ebp, esp
+
+	; pushes esi because the function modifies it
+	push esi
+
+	mov edi, [ebp + 8] ; array
+	mov esi, [ebp + 12] ; node
+
+    ; check if the node is NULL
+    cmp esi, 0
+    je end_inorder_recursion
+
+    ; traverse the left subtree
+
+    ; load the left child pointer
+    mov eax, [esi + 4]
+    push eax ; node
+    push edi ; array
+    call inorder_recursion
+    add esp, 8
+
+    ; process the current node
+    ; load the value of the current node
+    mov eax, [esi]
+    mov ebx, dword [array_idx_1]
+    ; store the value in the array at the specified index
+    mov [edi + ebx * 4], eax
+    inc dword [array_idx_1]
+
+    ; traverse the right subtree
+    ; load the right child pointer
+    mov eax, [esi + 8]
+    push eax
+    push edi
+    call inorder_recursion
+    add esp, 8
+
+end_inorder_recursion:
+
+	; resets esi
+    pop esi
+
     leave
     ret
