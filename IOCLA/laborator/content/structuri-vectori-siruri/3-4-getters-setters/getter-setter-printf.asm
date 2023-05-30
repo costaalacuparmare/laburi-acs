@@ -43,7 +43,7 @@ get_char:
 get_string:
 	xor edx, edx
 	lea edx, [sample_obj + string_s]
-	PRINTF32 `%s\n\x0`, edx
+
 
     ; TODO
     ; write the equivalent of "simple_obj->int_x = new_int"
