@@ -1,0 +1,167 @@
++++++++++cd ~/ - goes home
+cd / - goes to rootL
+mkdir - makes directory
+rm -removes a file
+rmdir - removes empty dir
+rm -r (reccursive removal - sterge tot dintr-un fisier)
+echo $ verifica daca exista valori in varaiboila de dupa dolar
+* - muta tot ce se afla in fisier
+-ln makes links
+touch - makes file
+file - sees type of the file
+su - supperior user
+pstree - tree of processes
+top - shows proc.
+sleep - stopps proc. for determined period of time
+bg - runs a proc in the bg
+fg - moves a running bg proc in fg
+'command' & - goes directly to bg
+Ctrl + Z - moves from fg in bg
+-ls > fis1.txt - afiseaza in fisierul fis1.txt
+0 -stdin
+1 -stdout
+2 -stder
+=> ls / /root &> fis1.txt (ignora eroare de la /root si o adauga in fis1)
+ls >fis1 - overwrite
+"<" - furnizeaza date
+ex: ./ex1 < in.txt > out.txt
+">>" scrie in continuare in fisier
+tar -cvf = creeaza arhiva
+[sudo] find /etc -name "*.txt" - afis toate fisierele cu partic resp
+sudo apt -get install
+Ctrl+K : cut
+ctrl+Y: paste
+Ctrl+D: exit
+Ctrl+A: moves to front
+ps -e - toate procesele
+ps - e -o afisaj specific
+echo $$ -pid shell current
+nautilus . ( opens current directory ex: ~ opens in home) / xdg-open
+drepturi: r= read w= write x= execute (se adauga cu chmod +<type>)
+NAT = network adapt transformation
+ip link show: see links ( afisaz > STATE DOWN/UP lo (lootback) -> localhost -> 127.0.0.1)
+ip adress show / ip a s/ ip a - ipul stationului
+nc opens local connections
+netstat -tulpn - vedem ce servicii ruleaza
+scp - trimite pachete ( scp student@ipadress:~/fis1 / scp ./fis2 student@ipadress:~)
+ssh -Keygen - ne genereaza cheie ( cd ~/.ssh | ls | id_rsa ( cheie priv) id_rsa.pub ( cheie de dat) | ssh-copy-id student@ipadress)
+ip a + orice din man 
+
+- GLOBBING -
+* - orice
+? - un char
+[] - range / interval
+{} - lista ( cuprind extensiile fisierelor dupa . / interval de numere)
+ex: cp [a-zA-z][a-z][a-z]-DCIM10{0..99}[0-9]*.{jpeg,png}
+afisare eroare: echo $?
+ex: ls fis &> /dev/null && echo "exista" || touch fis1 -> verific daca exista fisierul unul si afiseaza atat continut cat si erori in "gaura neagra" si daca nu exista creeaza fisierul
+afisari din fisier:
+cat/etc/passwd | head -n 10 ( primele 10 linii)
+cat/etc/passwd | head -n +10 ( afis de la linia 10 incolo)
+cat/etc/passwd | tail -n +10 (afis de la linia 10 de la coada incolo)
+alias = creeaza comenzi (ex alias ll = 'ls -alF') - aliasurile se baga in ~/.bashrc pentru a fi permanente tre source ~/.bashrc pt actualizare, altfel e numai in terminalul deschis)
+in manual /extensie cauta comanda in man + n da scroll in jos shift+n scroll in sus 
+? in man cauta de jos in sus, inverseasa n si shift+n
+G te duce in jos
+g te duce in sus
+ls -l | awk '{print $1}' - afiseaza doar prima coloana din ls -l
+find -> gaseste fisiere
+ex: !! find / -type f -name "*.c" -exec ls-l{} \; !!
+less -> afis rapid a unui fisier ( ca o pagina de man, nu ca un cat)
+ps --sort = -%mem | head -n 11 | tail -n 10
+vimtutor !!!!!!!
+!! - ruleaza cmd ant
+ps -e --sort=%mem | less vizualizare rezutat comanda ps in sesiune interactiva less
+
+LAB 7 SHELL SCRIPTING
+regex - filtre pt selectari (ex grep)
+^ - inceput de linie
+$ sf linie
+.* - orice oricat
+* - expr ant ori de cate ori
++ - expr ant ori de cate ori cel putin o data
+[] - range
+[^] - anything but range
+? - expr anterioara o data sau niciodata
+-E in regex ( arg- posibilitati infinite) - pt grep
+ex: cat fis | grep -E ^[A-Z].*[0-9]$
+cut/awk
+cut - selecteaza coloane cand avem un delimitator clar
+ex: cat /etc/passwd | cut -d ':' -f 1,3,5
+awk - select coloane cand avem delimitator neclar
+ex: free | awk '{printf $1}' $NF - end of file??
+
+Shell scripting:
+ex1.sh
+SHEEBANG: #!/bin/bash - # pt comm -> cand rulezi ex1, foloseste /bin/bash
+ex:
+#!/bin/bash
+for i in {1..10}
+do
+echo $i - $ - expandare, daca folos " " nu expandeaza tot ce e dupa el interpreteaza ca variabila 
+done
+
+$: chmox +x ex1.sh ( sau chmod 777 ofera toate permisiunile)
+
+alt ex:
+SAU //cur_dir = $pwd
+for f in ./* (cur_dir) (relativ unde esti tu pt claritate folos cale absoluta)
+do
+	ls -l $f
+done
+
+xdg-open - deschide fisiere
+nr cuv in cautare fisiere - sudo grep -r -w cale -e 'Cuvant' | wc(word count)
+-y - parametru inlaturare request de yes/no la apt install
+netstat -at - toate porturile TCP
+
+---- GIT ----
+
+git add * - adaugi tot
+git commit -m (mesaj) "Add button X" - impacheteaza fisierele
+git checkout -b(creeaza) b1
+git push - pune fisierele
+ani-cli ( comanda orices anime)
+git remote add - contezeaza un fisier local cu unul remote
+extensia .md = markdown
+|| - a doua comanda se executa daca prima esueaza
+&& a doua se executa doar daca prima se executa cu succes
+pwgen - genereaza parole
+
+sudo rmmod uas
+sudo rmmod usb_storage ( modific montare stick usb)
+
+sudo modprobe usb_storage
+sudo modprobe uas ( readaugare montare stick usb)
+
+---------Lab 9 - users-------------
+useradd - neinteract
+adduser - interact ( ia date si iti faca ssh)
+ls -l: 
+owner group others
+drwx - rwx - rwx
+chmod - schimba modul
+chown new_name file - schimba ownerul
+chgrp new_name file - schimba grupul
+
+redirectare cu permisiuni:
+sudo nano /etc/zealot.txt si scriem ce vrem
+sudo echo "All for the empire" > /etc/zealot.txt nu functioneaza ( > nu primeste permisiuni sudo)
+tee - scriere si redirecteaza ( accepta sudo)
+fcrackzip - used for brute force or dictionary attacks
+base64 - cripting
+hashing - md5sum
+
+#!/bin/bash
+
+# extragem itemii cu câmpul de durabilitate din fișierul JSON și îi sortăm descrescător după durabilitate
+items=$(jq -r '.players[] | .items[] | select(has("durability")) | "Durabilitate: " + (.durability | tostring) + "\n"' inventory.json | sort -nr)
+
+# scriem itemii sortați în fișierul best_items.txt
+echo -e "$items" > outputs/best_items.txt
+
+select(has("durability")) | "Durabilitate: " + (.durability | tostring) + "\n"
+
+Lab 11
+tunele ssh - ssh -N
+tmux : pt deconectare Ctrl+v (Ctrl+b pe maj sistemelor) d
