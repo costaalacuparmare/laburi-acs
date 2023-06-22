@@ -1,0 +1,29 @@
+Rezultatele voastre ar trebui sa arate ca cele de mai jos.
+
+Here comes a)
+
+Absinth
+Beer
+Rum
+Whiskey
+Cider
+
+Here comes b)
+
+Absinth Deadly
+Beer Apetisers
+Rum Spirits
+Whiskey Spirits
+Cider Apetisers
+
+Here comes c)
+
+Deadly
+Spirits
+Apetisers
+
+Here comes d)
+
+Deadly 1400
+Spirits 2425
+Apetisers 665

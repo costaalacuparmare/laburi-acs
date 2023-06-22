@@ -1,0 +1,21 @@
+Aveți mai jos mai multe exemple de rulare cu date diferite de input:
+Programul vostru **NU** trebuie să printeze ce este între paranteze,
+sunt doar clarificări.
+
+(Input) 5 -6
+(Input printed)
+5
+6
+(Result of "get_sum(5)") 15
+(Result of "get_sum(-6)") 0
+(Result of "get_fib(5)") 5
+(Result of "get_fib(-6)") 0
+
+(Input) 1 2
+(Input printed)
+1
+2
+(Result of "get_sum(1)") 1
+(Result of "get_sum(2)") 3
+(Result of "get_fib(1)") 1
+(Result of "get_fib(2)") 1

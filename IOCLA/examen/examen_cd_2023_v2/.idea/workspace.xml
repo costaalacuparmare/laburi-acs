@@ -3,16 +3,19 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="CMakePresetLoader"><![CDATA[{
-  "useNewFormat": true
-}]]></component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3358ac0d-f6f8-404e-b276-3de24557ce0d" name="Changes" comment="" />
+    <list default="true" id="3358ac0d-f6f8-404e-b276-3de24557ce0d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1/file.asm" beforeDir="false" afterPath="$PROJECT_DIR$/1/file.asm" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,7 +43,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/vconstantinescu/Desktop/UPB/IOCLA/examen/examen_cd_2023_v1",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/vconstantinescu/Desktop/UPB/IOCLA/examen/examen_cb_2023_v2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -57,7 +60,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1687340925434</updated>
-      <workItem from="1687340926699" duration="3989000" />
+      <workItem from="1687340926699" duration="7847000" />
+      <workItem from="1687419268436" duration="1058000" />
     </task>
     <servers />
   </component>
