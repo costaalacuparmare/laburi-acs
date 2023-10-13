@@ -12,7 +12,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="01482fe4-20bb-478f-a83a-a0fd1ca90bf7" name="Changes" comment="" />
+    <list default="true" id="01482fe4-20bb-478f-a83a-a0fd1ca90bf7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../interactiune-c-assembly/1-2-max-c-calls/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../interactiune-c-assembly/1-2-max-c-calls/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../interactiune-c-assembly/1-2-max-c-calls/max.asm" beforeDir="false" afterPath="$PROJECT_DIR$/../interactiune-c-assembly/1-2-max-c-calls/max.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../interactiune-c-assembly/3-stack-frame/print-hello.asm" beforeDir="false" afterPath="$PROJECT_DIR$/../interactiune-c-assembly/3-stack-frame/print-hello.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../interactiune-c-assembly/4-5-max-assembly-calls/main.asm" beforeDir="false" afterPath="$PROJECT_DIR$/../interactiune-c-assembly/4-5-max-assembly-calls/main.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../interactiune-c-assembly/4-5-max-assembly-calls/max.c" beforeDir="false" afterPath="$PROJECT_DIR$/../interactiune-c-assembly/4-5-max-assembly-calls/max.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../interactiune-c-assembly/6-7-regs-preserve/main.asm" beforeDir="false" afterPath="$PROJECT_DIR$/../interactiune-c-assembly/6-7-regs-preserve/main.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../POO/lab1/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../POO/lab1/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../POO/lab1/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../POO/lab1/Ex2.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,6 +36,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
   <component name="ProjectId" id="2QStQF90m7S3o7K0b5jWaXlpZ9Z" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -40,7 +52,8 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/vconstantinescu/Desktop/UPB/IOCLA/examen/examen_cd_2023_v1",
+    "git-widget-placeholder": "linux",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/costa/Desktop/Poli/IOCLA/laborator/content/ctf",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -59,7 +72,11 @@
       <updated>1685358791495</updated>
       <workItem from="1685358792808" duration="1975000" />
       <workItem from="1687274364966" duration="611000" />
+      <workItem from="1697191906095" duration="109000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
