@@ -14,7 +14,7 @@ public class Ex2 {
         System.out.println(hello.isEmpty() && yes);
         System.out.println(grade <= 100 && !false);
         System.out.println(!yes || no);
-        System.out.println(grade > 75 > amount);
+        System.out.println(grade > 75 + amount);
         System.out.println(no && !no || yes && !yes);
     }
 }
