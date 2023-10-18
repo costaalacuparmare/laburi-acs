@@ -1,0 +1,12 @@
+name: Binary delete tape and leave 1
+init: start
+accept: Y, H
+
+start,0
+start,_,>
+
+start,1
+start,_,>
+
+start,_
+stop,1,-

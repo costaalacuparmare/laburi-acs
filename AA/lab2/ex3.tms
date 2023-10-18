@@ -1,0 +1,21 @@
+name: Binary complement
+init: start
+accept: Y, H
+
+start,0
+change,1,>
+
+start,1
+change,0,>
+
+change,1
+change,0,>
+
+change,0
+change,1,>
+
+change,_
+H,_,-
+
+start,_
+stop,_,<

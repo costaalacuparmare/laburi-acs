@@ -1,0 +1,44 @@
+name: Binary check first/last symbols
+init: start
+accept: Y, H
+
+start,0
+check_0,0,>
+
+check_0,0
+check_0,0,>
+
+check_0,1
+check_0,1,>
+
+check_0,_
+left_0,_,<
+
+left_0,0
+Y,1,_
+
+
+left_0,1
+stop,1,_
+
+start,1
+check_1,1,>
+
+check_1,0
+check_1,0,>
+
+check_1,1
+check_1,1,>
+
+check_1,_
+left_1,_,<
+
+left_1,0
+stop,1,_
+
+
+left_1,1
+Y,1,_
+
+start,_
+stop,_,<
