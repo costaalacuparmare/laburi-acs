@@ -1,40 +1,39 @@
+# Date de exemplu (înlocuiți cu datele reale)
+x_data = np.array([0.5, 1, 1.5, 2, 2.5])
+A_data = np.array([13938, 8848, 5494, 3455, 2170])
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
-def exponential_cubic_regression(x, a, b, c, d):
-    return a * np.exp(b * x) + c * x**3 + d * x**2
+# Definirea funcției pentru regresia liniară
+def linear_regression(x, a, b):
+    return a * x + b
 
-# Example data (replace with your actual data)
-x_data = np.array([0.5, 1, 1.5, 2, 2.5])
-y_data = np.array([13938, 8848, 5494, 3455, 2170])
+# Logaritmizare: A = A0 * exp(-miu * x) => ln(A) = ln(A0) - miu * x
+ln_A_data = np.log(A_data)
 
-# Perform the regression
-params, covariance = curve_fit(exponential_cubic_regression, x_data, y_data)
+# Regresie liniară
+params, covariance = curve_fit(linear_regression, x_data, ln_A_data)
 
-# Parameters: a, b, c, d
-a, b, c, d = params
+# Parametrii: a și b (pentru ecuația y = ax + b)
+a, b = params
 
-# Calculate the slope at x=2
-x_value = 2
-slope = (a * b * np.exp(b * x_value)) + (3 * c * x_value**2) + (2 * d * x_value)
-print("Panta pentru plumb:", slope)
+# Calcularea pantei
+miu = -a
 
-# Generate points for the regression curve
+# Generare puncte pentru linia de regresie
 x_fit = np.linspace(min(x_data), max(x_data), 100)
-y_fit = exponential_cubic_regression(x_fit, a, b, c, d)
+ln_A_fit = linear_regression(x_fit, a, b)
 
-# Plot original data and regression curve
-plt.scatter(x_data, y_data, label='Impulsuri')
-plt.plot(x_fit, y_fit, color='red', label='Functia de regresie')
-plt.xlabel('X')
-plt.ylabel('Y')
+# Plotare datele originale și linia de regresie
+plt.scatter(x_data, ln_A_data, label='Date Logaritmice')
+plt.plot(x_fit, ln_A_fit, color='red', label='Linie de Regresie')
+plt.xlabel('x cm')
+plt.ylabel('ln(A) impulsuri')
 plt.legend()
-plt.title('Plumb, Panta pentru Plumb: -3256.6391003127974')
+plt.title('Plumb, miu: 0.9320304997018676 cm^(-1)')
 plt.show()
 
-# Print the parameters
-print("a =", a)
-print("b =", b)
-print("c =", c)
-print("d =", d)
+# Afișare panta (miu)
+print("Panta (miu):", miu)
