@@ -15,7 +15,6 @@ void os_free(void *ptr)
 
 void *os_calloc(size_t nmemb, size_t size)
 {
-	int ret = 0;
 	/* TODO: Implement os_calloc */
 	return NULL;
 }
