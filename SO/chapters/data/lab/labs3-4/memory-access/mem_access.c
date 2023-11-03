@@ -5,7 +5,7 @@
 int main(void )
 {
 	int a;
-	const int ca = 2;
+	const int ca = 4;
 
 	char *p = "LeString";
 	char *const cp = "ConstLeString";

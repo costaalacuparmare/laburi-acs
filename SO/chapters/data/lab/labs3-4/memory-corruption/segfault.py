@@ -12,7 +12,7 @@ SIZE_INT = 32
 def print_bit_array(bits):
     """Print array of bits."""
     i = SIZE_INT - 1
-    while i >= 0:
+    while i:
         print(bits[i])
         i = i - 1
 

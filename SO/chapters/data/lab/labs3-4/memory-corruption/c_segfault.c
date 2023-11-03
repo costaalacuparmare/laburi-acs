@@ -7,7 +7,7 @@
 static void printBitArray(unsigned int theBits[SIZE_INT])
 {
 	unsigned int i = SIZE_INT-1;
-	while (i >= 0) {
+	while (i) {
 		printf("%u\n", theBits[i]);
 		i--;
 	}

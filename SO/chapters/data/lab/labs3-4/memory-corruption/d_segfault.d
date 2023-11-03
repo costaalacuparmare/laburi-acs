@@ -7,7 +7,7 @@ enum SIZE_INT = 32;
 void printBitArray(uint[SIZE_INT] theBits)
 {
     uint i = SIZE_INT-1;
-    while (i >= 0)
+    while (i)
     {
         printf("%u\n", theBits[i]);
         i--;

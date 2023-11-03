@@ -34,8 +34,8 @@ static void alloc_stack(size_t order)
 int main(void)
 {
 	puts("Hello, world!");
-	alloc_heap();
-	alloc_stack(5);
+	//alloc_heap();
+	//alloc_stack(5);
 	sleep(10000);
 
 	return 0;

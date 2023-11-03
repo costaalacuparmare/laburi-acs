@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 static int data[] = {10, 20, 30, 40};	/* stored in .data section (rw-) */
-
+const ro = 77;				/* stored in .rodata section (r--) */
 static void exec_do_nothing(void)	/* stored in .text section (r-x) */
 {
 }
@@ -40,9 +40,9 @@ int main(void)
 	do_exec("executing .text section", exec_do_nothing);
 
 	/* These won't work due to permission issues. */
-	//do_exec("executing .data section", &data[0]);
-	//do_write("writing to .text section", exec_do_nothing, 77);
-	//do_read("reading from NULL", NULL);
-
+	do_exec("executing .data section", &data[0]);
+	do_write("writing to .text section", exec_do_nothing, 77);
+	do_read("reading from NULL", NULL);
+    printf("ro = %d\n", ro);
 	return 0;
 }

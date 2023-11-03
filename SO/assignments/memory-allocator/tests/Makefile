@@ -27,17 +27,17 @@ clean_src:
 
 check:
 	$(MAKE) clean_src clean_snippets src snippets
-	python run_tests.py
+	python3 run_tests.py
 
 check-fast:
 	$(MAKE) clean_src clean_snippets src snippets
-	python run-tests.py -d
+	python3 run_tests.py -d
 
 lint:
-	-cd .. && checkpatch.pl -f src/*.c tests/src/*.c
-	-cd .. && checkpatch.pl -f checker/*.sh
-	-cd .. && cpplint --recursive src/ tests/ checker/
-	-cd .. && shellcheck checker/*.sh
+	-cd .. && checkpatch.pl -f src/*.c tests/snippets/*.c
+	-cd .. && checkpatch.pl -f checker/*.sh tests/*.sh
+	-cd .. && cpplint --recursive src/ tests/
+	-cd .. && shellcheck checker/*.sh tests/*.sh
 #	-cd .. && pylint tests/*.py
 
 snippets/%: snippets/%.c
