@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ae6bfabf-3899-43c6-b3fa-ebd303181c0b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/checker.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_10" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_11" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_12" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_13" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_14" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_15" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_16" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_17" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_18" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_19" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_20" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/logs/dbglog_9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/morse.tms" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/parse_tms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/parse_xlsx.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/statement.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/tm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/write_tms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AA/Tema 1/write_xlsx.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SO/assignments/memory-allocator" beforeDir="false" afterPath="$PROJECT_DIR$/../SO/assignments/memory-allocator" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SO/chapters/data/lab/labs3-4/alloc-size/alloc_size" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SO/chapters/data/lab/labs3-4/alloc-size/alloc_size.c" beforeDir="false" afterPath="$PROJECT_DIR$/../SO/chapters/data/lab/labs3-4/alloc-size/alloc_size.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SO/chapters/data/lab/labs3-4/alloc-size/alloc_size.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SO/chapters/data/lab/labs3-4/copy/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SO/common/utils/log/log.o" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2YAifCCEcWcDSLypiK23En87LGg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "linux",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/costa/Desktop/Poli/Fizica/lab6",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ae6bfabf-3899-43c6-b3fa-ebd303181c0b" name="Changes" comment="" />
+      <created>1699974885790</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699974885790</updated>
+      <workItem from="1699974886789" duration="8000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

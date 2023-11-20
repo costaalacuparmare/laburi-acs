@@ -28,11 +28,10 @@ int main(void)
 		p = malloc(ALLOC_SIZE);
 		DIE(p == NULL, "malloc");
 		printf("New allocation at %p\n", p);
+        free(p);
 	}
 
 	wait_for_input("Press key to deallocate");
-
-	free(p);
 
 	wait_for_input("Press key to close the program");
 
