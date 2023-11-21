@@ -1,0 +1,86 @@
+Constantinescu Vlad - 324CB
+Algorithm Analysis - First Homework (Morse Translator/ Filter)
+
+This project is an implementation of a Turing machine, a fundamental concept
+in the theory of computation, used in this case to translate morse code
+searching after decodification for key words "SOS" and "HELP".
+
+This implementation provides a table-based representation of said Turing machine.
+
+States Description:
+
+start: the beginning of the machine state;
+
+parse: starts the search for letters and "/" in the input, aswell as, after
+printing the letters, goes back to the remaining input, adding to that
+the state also verifies the end of the input;
+
+state_A - state_Z: for each letter parses the input determing the letter;
+
+prints_char - when encountering "/", prints it and for each letter
+or symbol printed, adds the "$" symbol which signals where the next
+decoded letter should sit;
+
+search - when reaching the end of the input and decodes all the letters
+starts the search for keywords "SOS" and "HELP";
+
+check_SO - if search finds an "S", verifies if the next letter is "O"
+if not, returns to search;
+
+check_SOS - if check_SO finds an "OS", verifies if the next letter is "S"
+and stop the machine with Y output; if not, returns to search;
+
+check_PL - if search finds an "P", verifies the if the next letter is "L"
+if not, returns to search;
+
+check_PLE - if check_PLE finds an "L", verifies the if the next letter is "E"
+if not, returns to search;
+
+check_PLEH - if check_PLE finds an "L", verifies the if the next letter is "E"
+and stop the machine with Y output; if not, returns to search;
+
+Implementation:
+
+To explain the implementation, the best way is to present an example:
+
+For the input "....*.*.-..*.--.*/*--*." 
+
+the start states places a $ to remember where to start printing letters;
+parses and find letters, while parsing prints ">" in order to identify
+the direction it reads for when it come back"
+This implementation was made because leaving blanks made an infinte loop
+when it reached the end of the input;
+
+After reading the first letter the tape looks like this:
+"$>>><.*.-..*.--.*/*--*."
+
+When finding "*", the current letter state moves back, reversing the 
+"<" symbol and print the letter, parse printing a new "$" to remember
+where to print the next letter;
+
+After printing the first letter the tape looks like this:
+""H$<<<.*.-..*.--.*/*--*."
+
+The rest of the letters are the same until it find a "/", when it moves
+to print_char to print the "/", also replacing the "*" after the dash;
+
+After finding and printing the dash the tape looks like this:
+ "HELP/$<<<<<<<<<<<<<<--*."
+
+When printing the last letter, it finds blank at the end, ending the translator
+step by going back to the end of the printed letters and deleting all
+unnecesary symbols and filtering to search for "SOS" and "HELP".
+since the cursor is at the end of the tape, it searches for the in the
+reverse order of the letters;
+
+After printing all the letters and going back, the tape looks like this:
+"HELP/ME$"
+
+The search state from the filter task also deletes the "$" and everytime
+it finds an "S" or a "P" it begin to check the next letter for "SOS" or
+"PLEH";
+
+If one of them is found, the cursor stops and show the "Accepted" state;
+
+If none of them are found the the tape is at the beginning, the state
+is "Rejected";
