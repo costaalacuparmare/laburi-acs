@@ -34,6 +34,8 @@ int main(void)
 	init_student(s, "Andrei Popescu", 22, "Linux");
 	print_student(s);
 
+	free(s);
+
 	s = malloc(sizeof(*s));
         init_student(s, "Ioana David", 23, "macOS");
 	print_student(s);

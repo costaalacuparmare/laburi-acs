@@ -44,7 +44,7 @@ int main(void)
 	DIE(src_p == MAP_FAILED, "mmap");
 	dst_p = mmap(NULL, statbuf.st_size, PROT_READ | PROT_WRITE, MAP_SHARED, dst_fd, 0);
 	DIE(dst_p == MAP_FAILED, "mmap");
-
+	sleep(100);
 	/* Do the copying. */
 	clock_gettime(CLOCK_REALTIME, &time_before);
 	memcpy(dst_p, src_p, statbuf.st_size);

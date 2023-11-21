@@ -31,6 +31,8 @@ int main(void)
 	s = new Student("Andrei Popescu", 22, "Linux");
 	s->Print();
 
+	delete s;
+
 	s = new Student("Ioana David", 23, "macOS");
 	s->Print();
 
