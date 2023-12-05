@@ -5,35 +5,65 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6420d275-6968-4009-b36c-fd550ceb868b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/checker.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_10" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_11" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_12" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_13" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_14" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_15" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_16" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_17" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_18" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_19" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_20" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_8" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/logs/dbglog_9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/morse.tms" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/parse_tms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/parse_xlsx.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/statement.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/tm.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/write_tms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AA/Tema 1/write_xlsx.py" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../AA/lab6/Partitioning/Partitioning.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../AA/tema1/checker/.idea/tema 1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Physics/proiect4/.idea/lab3.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Physics/proiect7/.idea/lab6.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Physics/proiect8/.idea/proiect8.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../AA/lab2/ex1.tms" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../AA/lab2/ex2.tms" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../AA/lab2/ex3.tms" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../AA/lab2/ex4.tms" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DEEA/lab3/ea_lab_3.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab2/Spectrioscopia radiatiilor beta.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab2/Spectroscopia_radiatiilor_BETA.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab2/Spectroscopia_radiatiilor_BETA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab2/get_f.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab2/max_val.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/lab3.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/Aluminiu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/Cupru.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/DETERMINAREA COEFICIENTULUI DE ATENUARE MASICA PENTRU RADIATIA GAMMA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/Fizica4.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/Plumb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/Variatia_coeficientului_de_atenuare_pt_radiatia_gamma_cu_energia.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/Variatia_coeficientului_de_atenuare_pt_radiatia_gamma_cu_energia.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/lab3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/Determinarea_constantei_lui_PLANCK_din_studiul_Efectul_Fotoelectric_(2016).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/Determinarea_constantei_lui_PLANCK_din_studiul_Efectul_Fotoelectric_(2016).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/Masuratori.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/lab4.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/Determinarea_ACTIVITATII_ABSOLUTE_a_unei_surse_prin_metoda_unghiului_solid.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/Determinarea_ACTIVITATII_ABSOLUTE_a_unei_surse_prin_metoda_unghiului_solid.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/Masuratori_lab5.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/lab5.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/.idea/lab6.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/Masuratori.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/Studiul_dispersiei_luminii.SPECTROSCOPUL_cu_prisma.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/Studiul_dispersiei_luminii.SPECTROSCOPUL_cu_prisma.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/script.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SO/chapters/data/lab/labs3-4/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../SO/chapters/data/lab/labs3-4/.idea/vcs.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +87,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "linux",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/costa/Desktop/Poli/POO/lab6",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/costa/Desktop/Poli/POO/lab5",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -89,6 +119,7 @@
       <workItem from="1699284241680" duration="19000" />
       <workItem from="1699284320216" duration="1923000" />
       <workItem from="1699292116719" duration="41000" />
+      <workItem from="1701775135547" duration="1405000" />
     </task>
     <servers />
   </component>

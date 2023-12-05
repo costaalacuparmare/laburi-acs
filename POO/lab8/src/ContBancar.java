@@ -27,7 +27,7 @@ public class ContBancar {
         ContBancar cont = new ContBancar(123, 1000);
         cont.depune(1000);
         try {
-            cont.retrage(500);
+            cont.retrage(1000);
         } catch (ExceptieFonduriInsuficiente e) {
             System.out.println(e.getMessage());
         }

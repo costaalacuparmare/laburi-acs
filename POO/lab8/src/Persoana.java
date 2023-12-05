@@ -40,8 +40,8 @@ public class Persoana {
             try {
                 System.out.println("nume: ");
                 String nume = s.nextLine();
-                System.out.println("cnp: ");
-                String cnp = s.nextLine();
+               String cnp = Long.toString(r.nextLong(5000000000000L - 1000000000000L + 1) + 1000000000000L);
+                System.out.println("cnp: " + cnp);
                 System.out.println("nr cont: ");
                 int nrCont = s.nextInt();
                 System.out.println("depozit: ");
