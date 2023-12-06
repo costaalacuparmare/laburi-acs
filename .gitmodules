@@ -4,3 +4,6 @@
 [submodule "SO/assignments/memory-allocator"]
 	path = SO/assignments/memory-allocator
 	url = https://gitlab.cs.pub.ro/vconstantinescu2109/memory-allocator
+[submodule "SO/assignments/parallel-graph"]
+	path = SO/assignments/parallel-graph
+	url = https://gitlab.cs.pub.ro/vconstantinescu2109/parallel-graph/
