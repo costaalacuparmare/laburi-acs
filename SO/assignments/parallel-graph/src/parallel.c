@@ -17,7 +17,7 @@ static int sum;
 static os_graph_t *graph;
 static os_threadpool_t *tp;
 /* TODO: Define graph synchronization mechanisms. */
-
+printf("Hello\n");
 /* TODO: Define graph task argument. */
 
 static void process_node(unsigned int idx)
