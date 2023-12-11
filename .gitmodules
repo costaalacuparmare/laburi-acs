@@ -7,6 +7,6 @@
 [submodule "SO/assignments/parallel-graph"]
 	path = SO/assignments/parallel-graph
 	url = https://gitlab.cs.pub.ro/vconstantinescu2109/parallel-graph
-[submodule "POO1/tema1"]
-	path = POO1/tema1
+[submodule "POO/tema1"]
+	path = POO/tema1
 	url = https://github.com/ACS-POO-2CB/tema-1-costaalacuparmare
