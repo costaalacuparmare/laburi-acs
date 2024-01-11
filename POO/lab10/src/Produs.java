@@ -1,12 +1,10 @@
 import java.util.ArrayList;
 
-public abstract class Produs implements Comparable{
+public abstract class Produs implements Comparable<Produs>{
   abstract double pretRaft();
   abstract void afiseaza();
-
   @Override
-  public int compareTo(Object o) {
-    Produs p = (Produs) o;
+  public int compareTo(Produs p) {
     if (this.pretRaft() < p.pretRaft()) {
       return -1;
     } else if (this.pretRaft() > p.pretRaft()) {

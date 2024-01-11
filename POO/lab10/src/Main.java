@@ -3,7 +3,9 @@ import java.util.ArrayList;
 class Main {
 
   public static void main(String[] args) {
-    Lista<Integer> listaInt = new Lista<>(3);
+    // Lista<Integer> listaInt2 = new Lista<>(0);
+
+    Lista<Integer> listaInt = new Lista<>(1);
     listaInt.adauga(1);
     listaInt.adauga(2);
     listaInt.adauga(3);
