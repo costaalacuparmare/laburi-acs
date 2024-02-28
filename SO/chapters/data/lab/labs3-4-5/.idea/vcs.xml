@@ -5,6 +5,7 @@
     <mapping directory="$PROJECT_DIR$/../../../../../POO/lab11/lab11-costaalacuparmare" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../../../../POO/tema1" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../../../../POO/tema2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../../assignments/async-web-server" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../../../assignments/memory-allocator" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../../../assignments/mini-libc" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../../../assignments/mini-shell" vcs="Git" />
