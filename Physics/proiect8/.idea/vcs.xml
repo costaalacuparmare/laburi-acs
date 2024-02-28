@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="VcsDirectoryMappings">
-    <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../SO/assignments/memory-allocator" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../SO/assignments/mini-libc" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../SO/assignments/parallel-graph" vcs="Git" />
-  </component>
-</project>
