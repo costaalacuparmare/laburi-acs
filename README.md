@@ -11,7 +11,7 @@
 
 ## Year 1 - Semester 2
 
-`SDA` Data Structure and Algorithms, learning about Stack, Queue, Trees, Graphs and Hash Tables
+`SDA` Data Structures and Algorithms, learning about Stack, Queue, Trees, Graphs and Hash Tables
 
 `IOCLA` Computer Management & Assembly Language, learning about labels, analyzing executables, assembly-c interaction, stack functions
 
@@ -23,5 +23,28 @@
 
 ## Year 2 - Semester 1
 
-`POO` Object Oriented Programming, learning 
+`AA` Algorithm Analysis, Turing machines (Computing), complexity & asymptotic analysis, amortized analysis, Algebraic Data Types, structural induction
+
+`DEEA` Electronic Devices and Analogue Electronics, diodes, tranzistors, operational amplifier, inversors, active filters (HPF & LPF), adders, comparators
+
+`PCLP4` VHDL Programming, tbc
+
+`Physics` Applied Physics (lab part), optics, electromagnetism, atomic physics, molecular physics, nuclear physics 
+
+`POO` Object Oriented Programming, Java comprehensive course (Basics, Classes, Collections, Interfaces, Exceptions, etc.)
+
+`SO` Operating Systems (mainly Linux), syscalls, pages, sockets, file descriptors, multithreading, etc.
+
+## Year 2 - Semester 2
+
+`ED` Digital Electronics, ?
+
+`PA` Projection Algorithms, C++
+
+`PCom` Communication Protocols, C/C++
+
+`PP` Programming Paradigms, racket, huskl, prolog
+
+`SOC` Structure and Operation of Computers, verilog
+
 
