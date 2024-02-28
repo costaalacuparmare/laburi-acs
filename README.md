@@ -23,19 +23,19 @@
 
 ## Year 2 - Semester 1
 
-`AA` Algorithm Analysis, Turing machines (Computing), complexity & asymptotic analysis, amortized analysis, Algebraic Data Types, structural induction
+`AA` Algorithm Analysis, learning about Turing machines (Computing), complexity & asymptotic analysis, amortized analysis, Algebraic Data Types, structural induction
 
-`DEEA` Electronic Devices and Analogue Electronics, diodes, tranzistors, operational amplifier, inversors, active filters (HPF & LPF), adders, comparators
+`DEEA` Electronic Devices and Analogue Electronics, learning about diodes, tranzistors, operational amplifier, inversors, active filters (HPF & LPF), adders, comparators
 
 `PCLP4` VHDL Programming, tbc
 
-`Physics` Applied Physics (lab part), optics, electromagnetism, atomic physics, molecular physics, nuclear physics 
+`Physics` Applied Physics (lab part), learning about optics, electromagnetism, atomic physics, molecular physics, nuclear physics 
 
-`POO` Object Oriented Programming, Java comprehensive course (Basics, Classes, Collections, Interfaces, Exceptions, etc.)
+`POO` Object Oriented Programming, learning in Java w/ comprehensive course (Basics, Classes, Collections, Interfaces, Exceptions, etc.)
 
-`SO` Operating Systems (mainly Linux), syscalls, pages, sockets, file descriptors, multithreading, etc.
+`SO` Operating Systems (mainly Linux), learning about syscalls, pages, sockets, file descriptors, multithreading, etc.
 
-## Year 2 - Semester 2
+## Year 2 - Semester 2 (ongoing)
 
 `ED` Digital Electronics, ?
 
