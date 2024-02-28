@@ -1,6 +1,6 @@
-# This is official (unofficial) UPB Repository of Vlad Constantinescu
+# This is the official (unofficial) UPB Repository of Vlad Constantinescu
     
-    List of descriptions of the courses and when were they taken
+>List of descriptions of the courses and when were they taken
 
 
 ## Year 1 - Semester 1
