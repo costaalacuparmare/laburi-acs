@@ -27,7 +27,7 @@
 
 `DEEA` Electronic Devices and Analogue Electronics, learning about diodes, tranzistors, operational amplifier, inversors, active filters (HPF & LPF), adders, comparators
 
-`PCLP4` VHDL Programming, tbc
+`PCLP4` VHDL Programming, using logical ports and clocks to create machines with Mealy logic
 
 `Physics` Applied Physics (lab part), learning about optics, electromagnetism, atomic physics, molecular physics, nuclear physics 
 
