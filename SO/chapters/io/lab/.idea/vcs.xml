@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/../../../.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../../POO/lab11/lab11-costaalacuparmare" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../../POO/tema1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../../POO/tema2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../assignments/memory-allocator" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../assignments/mini-libc" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../assignments/mini-shell" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../assignments/parallel-graph" vcs="Git" />
+  </component>
+</project>
