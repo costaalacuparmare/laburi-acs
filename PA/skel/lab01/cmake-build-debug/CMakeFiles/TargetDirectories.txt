@@ -1,0 +1,3 @@
+/home/costa/Desktop/Poli/PA/skel/lab01/cmake-build-debug/CMakeFiles/lab01.dir
+/home/costa/Desktop/Poli/PA/skel/lab01/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/costa/Desktop/Poli/PA/skel/lab01/cmake-build-debug/CMakeFiles/rebuild_cache.dir
