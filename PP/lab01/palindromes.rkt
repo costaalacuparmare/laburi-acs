@@ -174,13 +174,11 @@
 
 (define (palindromes-to-n n Bases)
   (cond
-    ((< 0 n) '())
+    ((< n 0) (list 0))
     ((all-palindromes? n Bases) (append (palindromes-to-n (- n 1) Bases) (list n)))
     (else (palindromes-to-n (- n 1) Bases))    
   )
 )
-
-(palindromes-to-n 100 '(2 10))
 
 (check-exp (palindromes-to-n 100 '(2 10)) '(0 1 3 5 7 9 33 99))
 
@@ -194,9 +192,20 @@
 ;; - puteți folosi tehnica "wishful thinking"
 ;;   - scrieți funcția finală apelând oricâte funcții ajutătoare încă inexistente
 ;;   - apoi implementați toate funcțiile de care ați descoperit că aveți nevoie
+(define (verify-bases n Bases)
+  (cond
+    ((null? Bases) 0)
+    ((palindrome? (num->base n (car Bases))) (+ (verify-bases n (cdr Bases)) 1))
+    (else (verify-bases n (cdr Bases)))
+  )
+)
 
 (define (first-b-pal start b)
-  'your-code-here)
+  (if (>= (verify-bases start '(2 3 4 5 6 7 8 9 10)) b)
+      start
+      (first-b-pal (+ start 1) b)
+  )
+)
 
 (check-exp-part 'a .5 (first-b-pal 10 4) 121)
 (check-exp-part 'b .5 (first-b-pal 150 4) 373)
@@ -215,7 +224,24 @@
 ;; - folosiți take - (take L n) întoarce prefixul de lungime n al listei L
 
 (define (longest-palindrome n)
-   'your-code-here)
+   (define L (num->base n 10))
+   (define len (length L))
+   (define (iter L len crtlen)
+      (and (<= len crtlen)
+           (if (palindrome? (take L len))
+               (list->num (take L len))
+               (iter (cdr L) len (- crtlen 1))
+           )
+      )
+  )
+  (define (iter2 leng)
+    (if (= leng 1)
+        (car L)
+        (or (iter L leng len) (iter2 (- leng 1)))
+    )
+  )
+  (iter2 len)
+)
 
 (check-exp-part 'a 1/6 (longest-palindrome 121) 121)
 (check-in-part  'b 1/6 (longest-palindrome 51) '(1 5))
