@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6420d275-6968-4009-b36c-fd550ceb868b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../AA/lab6/Partitioning/Partitioning.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../AA/tema1/checker/.idea/tema 1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Physics/proiect4/.idea/lab3.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Physics/proiect7/.idea/lab6.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Physics/proiect8/.idea/proiect8.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../AA/lab2/ex1.tms" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../AA/lab2/ex2.tms" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../AA/lab2/ex3.tms" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../AA/lab2/ex4.tms" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DEEA/lab3/ea_lab_3.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab2/Spectrioscopia radiatiilor beta.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab2/Spectroscopia_radiatiilor_BETA.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab2/Spectroscopia_radiatiilor_BETA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab2/get_f.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab2/max_val.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/lab3.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/Aluminiu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/Cupru.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/DETERMINAREA COEFICIENTULUI DE ATENUARE MASICA PENTRU RADIATIA GAMMA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/Fizica4.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/Plumb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/Variatia_coeficientului_de_atenuare_pt_radiatia_gamma_cu_energia.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/Variatia_coeficientului_de_atenuare_pt_radiatia_gamma_cu_energia.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab3/lab3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/Determinarea_constantei_lui_PLANCK_din_studiul_Efectul_Fotoelectric_(2016).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/Determinarea_constantei_lui_PLANCK_din_studiul_Efectul_Fotoelectric_(2016).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/Masuratori.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab4/lab4.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/Determinarea_ACTIVITATII_ABSOLUTE_a_unei_surse_prin_metoda_unghiului_solid.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/Determinarea_ACTIVITATII_ABSOLUTE_a_unei_surse_prin_metoda_unghiului_solid.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/Masuratori_lab5.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab5/lab5.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/.idea/lab6.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/Masuratori.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/Studiul_dispersiei_luminii.SPECTROSCOPUL_cu_prisma.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/Studiul_dispersiei_luminii.SPECTROSCOPUL_cu_prisma.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Physics/lab6/script.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SO/chapters/data/lab/labs3-4/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../SO/chapters/data/lab/labs3-4/.idea/vcs.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2XnL0Q5XrxpmbpJG0g3Vngbm3zY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "linux",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/costa/Desktop/Poli/POO/lab5",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.sourceCode",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\costa\Desktop\Poli\POO\lab5" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6420d275-6968-4009-b36c-fd550ceb868b" name="Changes" comment="" />
+      <created>1699259673253</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699259673253</updated>
+      <workItem from="1699259674255" duration="3836000" />
+      <workItem from="1699283500941" duration="158000" />
+      <workItem from="1699283834040" duration="48000" />
+      <workItem from="1699284241680" duration="19000" />
+      <workItem from="1699284320216" duration="1923000" />
+      <workItem from="1699292116719" duration="41000" />
+      <workItem from="1701775135547" duration="1405000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
