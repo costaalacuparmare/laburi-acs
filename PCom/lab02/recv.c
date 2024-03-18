@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include "link_emulator/lib.h"
 #include "include/utils.h"
+#include <time.h>
 
 /**
  * You can change these to communicate with another colleague.
@@ -50,6 +51,13 @@ int recv_frame(char *buf, int size)
 	return nr_bytes;
 }
 
+/* Function to get the time difference */
+int get_time_difference(char *payload)
+{
+    time_t t = time(NULL);
+    return t - atoi(payload);
+}
+
 int main(int argc,char** argv){
 	/* Don't modify this */
 	init(HOST,PORT);
@@ -68,17 +76,21 @@ int main(int argc,char** argv){
 
 	/* TODO 3: Measure latency in a while loop for any frame that contains
 	 * a timestamp we receive, print frame_size and latency */
-    char buffer2[100];
-    int size2 = recv_frame(buffer2, 32);
-    if (size2 == -1)
-        printf("Message not sent to me\n");
-    else
-        printf("Received: %d\n", size2);
-    struct Frame *frame2 = (struct Frame *)buffer2;
-    printf("Source: %d\n", frame2->source);
-    printf("Dest: %d\n", frame2->dest);
-    printf("Payload: %s\n", frame2->payload);
+    while (1) {
+        char buffer[100];
+        int size = recv_frame(buffer, 32);
+        if (size == -1) {
+            printf("Message not sent to me\n");
+            break;
+        } else
+            printf("Received: %d\n", size);
 
+        struct Frame *frame = (struct Frame *)buffer;
+        printf("Source: %d\n", frame->source);
+        printf("Dest: %d\n", frame->dest);
+        printf("Payload: %s\n", frame->payload);
+        printf("Latency: %d\n", get_time_difference(frame->payload));
+    }
 	printf("[RECEIVER] Finished transmission\n");
 	return 0;
 }

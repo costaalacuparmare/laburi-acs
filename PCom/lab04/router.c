@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "lib.h"
 #include "protocols.h"
+#include <string.h>
 
 /* Routing table */
 struct route_table_entry *rtable;
@@ -18,18 +19,20 @@ int mac_table_len;
  is no matching route.
 */
 struct route_table_entry *get_best_route(uint32_t ip_dest) {
-	/* TODO 2.2: Implement the LPM algorithm */
-	/* We can iterate through rtable for (int i = 0; i < rtable_len; i++). Entries in
-	 * the rtable are in network order already */
-	return NULL;
+    for (int i = 0; i < rtable_len; i++) {
+        if ((rtable[i].mask & ip_dest) == rtable[i].prefix) {
+            return &rtable[i];
+        }
+    }
+    return NULL;
 }
 
 struct mac_entry *get_mac_entry(uint32_t given_ip) {
-	/* TODO 2.4: Iterate through the MAC table and search for an entry
-	 * that matches given_ip. */
-
-	/* We can iterate thrpigh the mac_table for (int i = 0; i <
-	 * mac_table_len; i++) */
+    for (int i = 0; i < mac_table_len; i++) {
+        if (mac_table[i].ip == given_ip) {
+            return &mac_table[i];
+        }
+    }
 	return NULL;
 }
 
@@ -73,17 +76,33 @@ int main(int argc, char *argv[])
 			printf("Ignored non-IPv4 packet\n");
 			continue;
 		}
+        uint16_t old_check = ip_hdr->check;
+        ip_hdr->check = 0;
+        if (ntohs(old_check) != ip_checksum((uint16_t *)ip_hdr, sizeof(struct iphdr))) {
+            printf("Ignored packet with bad checksum\n");
+            continue;
+        }
+        struct route_table_entry *best_router = get_best_route(ip_hdr->daddr);
+        if (best_router == NULL) {
+            printf("Ignored packet with no route\n");
+            continue;
+        }
 
-		/* TODO 2.1: Check the ip_hdr integrity using ip_checksum((uint16_t *)ip_hdr, sizeof(struct iphdr)) */
+        if (ip_hdr->ttl < 1) {
+            printf("Ignored packet with TTL < 1\n");
+            continue;
+        }
+        ip_hdr->ttl--;
+        ip_hdr->check = ~(~old_check + ~((uint16_t)(ip_hdr->ttl + 1)) +
+                (uint16_t)ip_hdr->ttl) - 1;
 
-		/* TODO 2.2: Call get_best_route to find the most specific route, continue; (drop) if null */
-
-		/* TODO 2.3: Check TTL >= 1. Update TLL. Update checksum  */
-
-		/* TODO 2.4: Update the ethernet addresses. Use get_mac_entry to find the destination MAC
-		 * address. Use get_interface_mac(m.interface, uint8_t *mac) to
-		 * find the mac address of our interface. */
-		  
-		// Call send_to_link(best_router->interface, packet, packet_len);
+        struct mac_entry *best_mac = get_mac_entry(best_router->next_hop);
+        if (best_mac == NULL) {
+            printf("Ignored packet with no MAC entry\n");
+            continue;
+        }
+        memcpy(eth_hdr->ether_dhost, best_mac->mac, 6);
+        get_interface_mac(best_router->interface, eth_hdr->ether_shost);
+        send_to_link(best_router->interface, packet, packet_len);
 	}
 }

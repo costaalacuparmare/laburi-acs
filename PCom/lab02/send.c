@@ -55,9 +55,7 @@ int main(int argc,char** argv){
     strcpy(buffer, "Hello");
     send_frame(buffer, strlen(buffer));
 
-	/* TODO 3.1: Get a timestamp of the current time copy it in the the payload */
     time_t t = time(NULL);
-	/* TODO 3.0: Update the maximum size of the payload in Frame to 100 (in common.h), send the frame */
 struct Frame frame;
     frame.frame_delim_start[0] = DLE;
     frame.frame_delim_start[1] = STX;
@@ -73,7 +71,6 @@ struct Frame frame;
     for(int i = 0; i < sizeof(struct Frame); i++) {
         send_byte(((char *)&frame)[i]);
     }
-	/* TODO 3.0: Update the maximum size of the payload in Frame to 300, send the frame */
 
 	return 0;
 }
