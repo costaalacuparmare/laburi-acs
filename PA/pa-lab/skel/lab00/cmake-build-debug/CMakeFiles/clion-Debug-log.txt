@@ -1,1 +1,0 @@
-CMakeLists.txt not found in /home/costa/Desktop/Poli/PA/pa-lab/skel/lab00 Select CMakeLists.txt
