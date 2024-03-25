@@ -24,10 +24,17 @@ private:
     }
 
     int get_result() {
-        // TODO: Aflati numarul minim de monede ce poate fi folosit pentru a obtine
-        // suma S. Tipurile monedelor sunt stocate in vectorul v, de dimensiune n.
-
-        return 0;
+        vector<int> dp(S + 1, INT_MAX);
+        dp[0] = 0;
+        for (int i = 1; i <= S; i++)
+            for (int j = 1; j <= n; j++)
+                if (i >= v[j]) {
+                    if (dp[i - v[j]] + 1 < dp[i] && dp[i - v[j]] != INT_MAX)
+                        dp[i] = dp[i - v[j]] + 1;
+                }
+        if (dp[S] == INT_MAX)
+            return -1;
+        return dp[S];
     }
 
     void print_output(int result) {

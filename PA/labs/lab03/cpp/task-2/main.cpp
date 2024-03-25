@@ -40,15 +40,47 @@ private:
     Result get_result() {
         Result result;
         result.len = 0;
+        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+        vector<vector<int>> path(n + 1, vector<int>(m + 1, -1));
+        for (int i = 0; i <=n; i++) {
+            dp[i][0] = 0;
+        }
+        for (int i = 0; i <=m; i++) {
+            dp[0][i] = 0;
+        }
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (v[i] == w[j]) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                    path[i][j] = 0;
+                } else {
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+                    if (dp[i][j] == dp[i - 1][j]) {
+                        path[i][j] = 1;
+                    } else {
+                        path[i][j] = 2;
+                    }
+                }
+            }
+        }
 
-        // TODO: Aflati cel mai lung subsir comun intre v (de lungime n)
-        // si w (de lungime m).
-        // Se puncteaza separat urmatoarele 2 cerinte:
-        // 2.1. Lungimea CMLSC. Rezultatul pentru cerinta aceasta se va pune in
-        // ``result.len``.
-        // 2.2. Reconstructia CMLSC. Se puncteaza orice subsir comun maximal valid.
-        // Solutia pentru aceasta cerinta se va pune in ``result.subsequence``.
+        vector<int> subsequence;
+        int i = n, j = m;
+        while (i > 0 && j > 0) {
+            if (path[i][j] == 0) {
+                subsequence.push_back(v[i]);
+                i--;
+                j--;
+            } else if (path[i][j] == 1) {
+                i--;
+            } else {
+                j--;
+            }
+        }
 
+        reverse(subsequence.begin(), subsequence.end());
+        result.len = dp[n][m];
+        result.subsequence = subsequence;
         return result;
     }
 
