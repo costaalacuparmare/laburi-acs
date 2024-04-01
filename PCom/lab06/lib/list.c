@@ -59,3 +59,9 @@ void add_list_elem(list* list, void* info, int info_len, int seq) {
 
 	list->size++;
 }
+
+void free_entry(list_entry* e) {
+    if(e->info != NULL)
+        free(e->info);
+    free(e);
+}

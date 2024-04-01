@@ -18,7 +18,7 @@
 
 /* Max size of the datagrams that we will be sending */
 #define CHUNKSIZE MAX_SIZE;
-#define SENT_FILENAME "file.bin"
+#define SENT_FILENAME "client.c"
 #define SERVER_IP "172.16.0.100"
 
 #define TICK(X)                                                                \
@@ -51,15 +51,63 @@ void send_file_start_stop(int sockfd, struct sockaddr_in server_address,
     d.seq = seq;
     seq++;
 
-    /* TODO 1.2: Send the datagram. */
+    rc = sendto(sockfd, &d, sizeof(struct seq_udp), 0,
+            (struct sockaddr *)&server_address, sizeof(server_address));
+    DIE(rc < 0, "sendto");
 
-    /* TODO 1.3: Wait for ACK before moving to the next datagram to send. If timeout, resend the datagram. */
-    
+    while (1) {
+        int ack;
+        rc = recvfrom(sockfd, &ack, sizeof(ack), 0, NULL, NULL);
+        printf("ACK received\n" "ACK = %d\n", ack);
+        if (ack == d.seq)
+            break;
+        rc = sendto(sockfd, &d, sizeof(struct seq_udp), 0,
+                    (struct sockaddr *)&server_address, sizeof(server_address));
+        DIE(rc < 0, "sendto");
+    }
+
     if (n == 0) // end of file
       break;
 
   }
 }
+
+/* Scoate din lista segmentele care au fost primite */
+int update_left_window(list *window, int seq) {
+    list_entry* e = window->head;
+    list_entry *prev = NULL;
+    int count = 0;
+
+    while(e != NULL && e->seq <= seq) {
+        prev = e;
+        e = e->next;
+        free_entry(prev);
+        count++;
+    }
+
+    window->head = e;
+    return count;
+}
+
+int send_new_segments(list *window, int new_max_seq, int sockfd,
+                      struct sockaddr_in server_address) {
+    list_entry* e = window->head;
+    /* Sarim peste segmentele deja trimise */
+    while(e != NULL && e->seq <= window->max_seq)
+        e = e->next;
+
+    if (e != NULL) {
+        /* Trimitem urmatoarele segmente pana la new_max_seq */
+        while(e != NULL && e->seq <= new_max_seq) {
+            e = e->next;
+            sendto(sockfd, e->info, e->info_len, 0,
+                   (struct sockaddr *)&server_address, sizeof(server_address));
+        }
+    }
+    window->max_seq = new_max_seq;
+    return 1;
+}
+
 
 void send_file_go_back_n(int sockfd, struct sockaddr_in server_address,
                       char *filename) {
@@ -68,14 +116,11 @@ void send_file_go_back_n(int sockfd, struct sockaddr_in server_address,
   DIE(fd < 0, "open");
   int rc;
 
-  /* TODO 2.1: Increase window size to a value that optimally uses the link */
-  int window_size = 5;
-  window->max_seq = 5;
+  int window_size = 20;
+  window->max_seq = 20;
 
   int seq = 0;
   while (1) {
-    /* TODO: 1.1 Read all the data of the and add it as datagrams in
-     * datagram_queue */
     /* Reads the content of a file */
     struct seq_udp *d = malloc(sizeof(struct seq_udp));
     int n = read(fd, d->payload, sizeof(d->payload));
@@ -90,15 +135,25 @@ void send_file_go_back_n(int sockfd, struct sockaddr_in server_address,
       break;
   }
 
+  while (1) {
+    for (int i = 0; i < window_size; i++) {
+        list_entry* e = window->head;
+        while(e != NULL && e->seq < i)
+            e = e->next;
+        if (e != NULL) {
+            sendto(sockfd, e->info, e->info_len, 0,
+                   (struct sockaddr *)&server_address, sizeof(server_address));
+        }
+    }
 
-  /* TODO 2.2: Send window_size  packets to the server to saturate the link */
-
-  /* In a loop */
-
-    /* TODO 2.2: On ACK remove from the list all the segments that have been ACKed
-                and send the next new segments added to the window */
-
-    /* TODO 2.3: On timeout on recv resend all the segments from the window*/
+    int ack;
+    rc = recvfrom(sockfd, &ack, sizeof(ack), 0, NULL, NULL);
+    printf("ACK received\n" "ACK = %d\n", ack);
+    if (rc >= 0)
+        printf("removed segments: %d\n", update_left_window(window, ack));
+    if (ack == window->max_seq)
+        break;
+  }
 }
 
 void send_a_message(int sockfd, struct sockaddr_in server_address) {
@@ -154,12 +209,12 @@ int main(int argc, char *argv[]) {
   servaddr.sin_port = htons(PORT);
   inet_aton(SERVER_IP, &servaddr.sin_addr);
 
-  /* TODO: Read the demo function.
-  Implement and test (one at a time) each of the proposed versions for sending a
-  file. */
-  send_a_message(sockfd, servaddr);
+  /* Implement and test (one at a time) each of the proposed versions for sending a
+   * file.
+   */
+  // send_a_message(sockfd, servaddr);
   // send_file_start_stop(sockfd, servaddr, SENT_FILENAME);
-  // send_file_window(sockfd, servaddr, SENT_FILENAME);
+    send_file_go_back_n(sockfd, servaddr, SENT_FILENAME);
 
   close(sockfd);
 

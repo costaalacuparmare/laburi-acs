@@ -23,7 +23,7 @@ typedef struct {
 list* create_list();
 /* Adds a segment to the window */
 void add_list_elem(list* window, void* segment, int segment_size, int seq);
-
+void free_entry(list_entry* e);
 
 #endif /* _LIST_H_ */
 

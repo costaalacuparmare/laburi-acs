@@ -25,19 +25,21 @@ int recv_seq_udp(int sockfd, struct seq_udp *seq_packet, int expected_seq) {
   int rc = recvfrom(sockfd, seq_packet, sizeof(struct seq_udp), 0,
                     (struct sockaddr *)&client_addr, &clen);
 
-  /* TODO: Check if the sequence number is the expected one. if yes,
-     increase the expected sequence number after sending the ACK
-     return the number of bytes  read.
+  int ack, rc_ack;
 
-  /* TODO: If segment is not with the expected number, send ACK
-     with expected seqence number and return -1 */
+  if (seq_packet->seq == expected_seq) {
+    ack = expected_seq;
+    rc_ack = sendto(sockfd, &ack, sizeof(ack), 0, (struct sockaddr *)&client_addr,
+                clen);
+    DIE(rc_ack < 0, "send");
+    return rc;
+  }
 
-  int ack = 0;
-
-  // TODO: Sending ACK with expected sequence number */
-  rc = sendto(sockfd, &ack, sizeof(ack), 0, (struct sockaddr *)&client_addr,
-              clen);
-  DIE(rc < 0, "send");
+  ack = expected_seq - 1;
+  rc_ack = sendto(sockfd, &ack, sizeof(ack), 0, (struct sockaddr *)&client_addr,
+          clen);
+  DIE(rc_ack < 0, "send");
+  return -1;
 }
 
 void recv_a_file(int sockfd, char *filename) {
@@ -51,9 +53,10 @@ void recv_a_file(int sockfd, char *filename) {
     /* Receive a chunk */
     rc = recv_seq_udp(sockfd, &p, expected_seq);
 
-    /* TODO: If rc == -1 => we didn't receive the expected segment. We continue */
-
-    /* TODO: If rc >=0 => we receive the expected segment. We increase expected_seq */
+    if (rc == -1)
+        continue;
+    else
+        expected_seq++;
 
     /* An empty payload means the file ended.
     Break if file ended */
@@ -115,10 +118,8 @@ int main(int argc, char *argv[]) {
   int rc = bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr));
   DIE(rc < 0, "bind failed");
 
-  // TODO 1.0: Study the code. Uncoment this to receive a file chuck by chuck
-  // and save it locally
-  recv_a_message(sockfd);
-  // recv_a_file(sockfd, SAVED_FILENAME);
+  //recv_a_message(sockfd);
+  recv_a_file(sockfd, SAVED_FILENAME);
 
   return 0;
 }
