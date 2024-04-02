@@ -7,21 +7,12 @@
 [submodule "SO/assignments/parallel-graph"]
 	path = SO/assignments/parallel-graph
 	url = https://gitlab.cs.pub.ro/vconstantinescu2109/parallel-graph
-[submodule "POO/tema1"]
-	path = POO/tema1
-	url = https://github.com/ACS-POO-2CB/tema-1-costaalacuparmare
 [submodule "SO/assignments/mini-shell"]
 	path = SO/assignments/mini-shell
 	url = https://gitlab.cs.pub.ro/vconstantinescu2109/mini-shell
-[submodule "POO/tema2"]
-	path = POO/tema2
-	url = https://github.com/ACS-POO-2CB/tema-2-costaalacuparmare
 [submodule "SO/assignments/async-web-server"]
 	path = SO/assignments/async-web-server
 	url = https://gitlab.cs.pub.ro/vconstantinescu2109/async-web-server
-[submodule "POO/proiect"]
-	path = POO/proiect
-	url = https://github.com/ACS-POO-2CB/proiect-costaalacuparmare
 [submodule "PA/proiect"]
 	path = PA/proiect
 	url = https://github.com/acs-pa/proiect-pa-2024-f-a-c-fetitele-powershell
