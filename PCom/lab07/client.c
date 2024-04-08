@@ -27,29 +27,48 @@ void run_client(int sockfd) {
   struct chat_packet sent_packet;
   struct chat_packet recv_packet;
 
-  /* TODO 2.2: Multiplexeaza intre citirea de la tastatura si primirea unui
-     mesaj, ca sa nu mai fie impusa ordinea.
-  */
-  while (fgets(buf, sizeof(buf), stdin) && !isspace(buf[0])) {
-    sent_packet.len = strlen(buf) + 1;
-    strcpy(sent_packet.message, buf);
+  struct pollfd poll_fds[2];
+  int fd_count = 0;
 
-    // Use send_all function to send the pachet to the server.
-    send_all(sockfd, &sent_packet, sizeof(sent_packet));
+  poll_fds[fd_count].fd = STDIN_FILENO;
+  poll_fds[fd_count].events = POLLIN;
+  fd_count++;
 
-    // Receive a message and show it's content
-    int rc = recv_all(sockfd, &recv_packet, sizeof(recv_packet));
-    if (rc <= 0) {
-      break;
+  poll_fds[fd_count].fd = sockfd;
+  poll_fds[fd_count].events = POLLIN;
+  fd_count++;
+
+  while (1) {
+    int rc = poll(poll_fds, fd_count, -1);
+    DIE(rc < 0, "poll");
+
+    if (poll_fds[0].revents & POLLIN) {
+      // Am primit date de la tastatura.
+      memset(buf, 0, MSG_MAXSIZE + 1);
+      fgets(buf, sizeof(buf), stdin);
+      if (strncmp(buf, "exit", 4) == 0) {
+        break;
+      }
+
+      sent_packet.len = strlen(buf) + 1;
+      strcpy(sent_packet.message, buf);
+
+      send_all(sockfd, &sent_packet, sizeof(sent_packet));
     }
 
-    printf("%s\n", recv_packet.message);
+    if (poll_fds[1].revents & POLLIN) {
+      // Am primit date de la server.
+      memset(&recv_packet, 0, sizeof(recv_packet));
+      rc = recv_all(sockfd, &recv_packet, sizeof(recv_packet));
+      if (rc <= 0) {
+        break;
+      }
+      printf("%s\n", recv_packet.message);
+    }
   }
 }
 
 int main(int argc, char *argv[]) {
-  int sockfd = -1;
-
   if (argc != 3) {
     printf("\n Usage: %s <ip> <port>\n", argv[0]);
     return 1;
@@ -61,7 +80,7 @@ int main(int argc, char *argv[]) {
   DIE(rc != 1, "Given port is invalid");
 
   // Obtinem un socket TCP pentru conectarea la server
-  sockfd = socket(AF_INET, SOCK_STREAM, 0);
+  const int sockfd = socket(AF_INET, SOCK_STREAM, 0);
   DIE(sockfd < 0, "socket");
 
   // Completăm in serv_addr adresa serverului, familia de adrese si portul
@@ -78,6 +97,8 @@ int main(int argc, char *argv[]) {
   // Ne conectăm la server
   rc = connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
   DIE(rc < 0, "connect");
+
+
 
   run_client(sockfd);
 
