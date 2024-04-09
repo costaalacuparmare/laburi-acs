@@ -32,8 +32,13 @@ private:
     int get_result() {
         // Calculati numarul de subsiruri ale lui v cu suma numerelor para si
         // returnati restul impartirii numarului la 10^9 + 7 (vezi macro-ul MOD).
-
-        return 0;
+        vector<vector<int>> dp(n + 1, vector<int>(2, 0));
+        dp[0][0] = 1;
+        for (int i = 1; i <= n; i++) {
+            dp[i][0] = (dp[i - 1][0] + dp[i - 1][v[i] % 2]) % MOD;
+            dp[i][1] = (dp[i - 1][1] + dp[i - 1][(v[i] + 1) % 2]) % MOD;
+        }
+        return dp[n][0] - 1;
     }
 
     void print_output(int result) {

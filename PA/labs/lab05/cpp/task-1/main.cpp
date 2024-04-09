@@ -12,21 +12,28 @@ private:
     int n, k;
 
     void read_input() {
-        ifstream fin("in");
-        fin >> n >> k;
-        fin.close();
+        //ifstream fin("in");
+        cin >> n >> k;
+        //fin.close();
+    }
+
+    void backtrack(vector<vector<int>>& all, vector<int>& arrangement, int start) {
+        if (arrangement.size() == k) {
+            all.push_back(arrangement);
+            return;
+        }
+
+        for (int i = start; i <= n; ++i) {
+            arrangement.push_back(i);
+            backtrack(all, arrangement, i + 1);
+            arrangement.pop_back();
+        }
     }
 
     vector<vector<int>> get_result() {
         vector<vector<int>> all;
-
-        // TODO: Construiti toate aranjamentele de N luate cate K ale
-        // multimii {1, ..., N}.
-        //
-        // Pentru a adauga un nou aranjament:
-        //     vector<int> aranjament;
-        //     all.push_back(aranjament);
-
+        vector<int> arrangement;
+        backtrack(all, arrangement, 1);
         return all;
     }
 
