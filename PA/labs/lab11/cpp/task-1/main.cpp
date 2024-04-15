@@ -2,81 +2,21 @@
 using namespace std;
 
 // numarul maxim de noduri
-#define NMAX 200005
+#define NMAX 1005
 
-// Structura de date descrisa aici https://infoarena.ro/problema/disjoint.
-class DisjointSet {
-private:
-    // parent[node] = radacina arborelui din care face parte node.
-    // (adica identificatorul componentei conexe curente)
-    vector<int> parent;
+// valoare mai mare decat max_flow
+#define INF (1 << 30)
 
-    // size[node] = numarul de noduri din arborele in care se afla node acum.
-    vector<int> size;
+// structura folosita pentru a stoca daca exista drum de ameliorare
+// si care este acesta.
+struct AugmentedBFS {
+    bool has_path;
+    vector<pair<int, int>> path;
+    AugmentedBFS(bool has_path, const vector<pair<int, int>>& path)
+        : has_path(has_path)
+        , path(path) { }
 
-public:
-    // Se initializeaza n paduri.
-    DisjointSet(int nodes)
-        : parent(nodes + 1)
-        , size(nodes + 1) {
-        // Fiecare padure contine un nod initial.
-        for (int node = 1; node <= nodes; ++node) {
-            parent[node] = node;
-            size[node] = 1;
-        }
-    }
-
-    // Returneaza radacina arborelui din care face parte node.
-    int setOf(int node) {
-        // Daca node este radacina, atunci am gasit raspunsul.
-        if (node == parent[node]) {
-            return node;
-        }
-
-        // Altfel, urcam in sus din "radacina in radacina",
-        // actualizand pe parcurs radacinile pentru nodurile atinse.
-        parent[node] = setOf(parent[node]);
-        return parent[node];
-    }
-
-    // Reuneste arborii lui x si y intr-un singur arbore,
-    // folosind euristica de reuniune a drumurilor dupa rank.
-    void _union(int x, int y) {
-        // Obtinem radacinile celor 2 arbori
-        int rx = setOf(x), ry = setOf(y);
-
-        // Arborele mai mic este atasat la radacina arborelui mai mare.
-        if (size[rx] <= size[ry]) {
-            size[ry] += size[rx];
-            parent[rx] = ry;
-        } else {
-            size[rx] += size[ry];
-            parent[ry] = rx;
-        }
-    }
-};
-
-struct Edge {
-    int node;
-    int neigh;
-    int w;
-
-    Edge() { }
-    Edge(int node, int neigh, int w)
-        : node(node)
-        , neigh(neigh)
-        , w(w) { }
-};
-
-// structura folosita pentru a stoca MST
-struct MSTResult {
-    int cost; // costul MST-ului gasit
-
-    vector<pair<int, int>> edges; // muchiile din MST-ul gasit (ordinea nu conteaza)
-
-    MSTResult(int cost, const vector<pair<int, int>>& edges)
-        : cost(cost)
-        , edges(edges) { }
+    operator bool() const { return has_path; }
 };
 
 class Task {
@@ -90,43 +30,48 @@ private:
     // n = numar de noduri, m = numar de muchii
     int n, m;
 
-    // muchiile din graf: (node, neigh, w) - muchie de la node la neigh de cost w
-    vector<Edge> edges;
+    // adj[i] = lista de adiacenta a nodului i
+    vector<int> adj[NMAX];
+
+    // c[i][j] = capacitatea arcului i -> j
+    int c[NMAX][NMAX];
 
     void read_input() {
         ifstream fin("in");
         fin >> n >> m;
-        for (int i = 1, x, y, w; i <= m; i++) {
-            fin >> x >> y >> w;
-            edges.push_back(Edge{x, y, w});
+        memset(c, 0, sizeof(c));
+        for (int i = 1, u, v, capacity; i <= m; i++) {
+            // x -> y de capacitate cap
+            fin >> u >> v >> capacity;
+            adj[u].push_back(v);
+            adj[v].push_back(u); // stocam si arcul invers
+
+            // Presupunem existenta mai multor arce u -> v cu capacitati c1, c2, ...
+            // Comprimam intr-un singur arc x -> y cu capacitate
+            // c[x][y] = c1 + c2 + ...
+            c[u][v] += capacity;
         }
         fin.close();
     }
 
-    MSTResult get_result() {
+    int get_result() {
         //
-        // TODO: Calculati costul minim al unui MST folosind Kruskal.
+        // TODO: Calculati fluxul maxim pe graful orientat dat.
+        // Sursa este nodul 1.
+        // Destinatia este nodul n.
         //
+        // In adj este stocat graful neorientat obtinut dupa ce se elimina orientarea
+        // arcelor, iar in cap sunt stocate capacitatile arcelor.
+        // De exemplu, un arc (u, v) de capacitate cap va fi tinut astfel:
+        // c[u][v] = cap, adj[u] contine v, adj[v] contine u.
         //
-        // Vi se da implementarea DisjointSet. Exemple utilizare:
-        //      DisjointSet disjointset(n);
-        //      auto setX = disjointset.setOf(x);
-        //      ...
-        //      disjointset.union(x, y);
-        //
-
-        int cost = 0;
-        vector<pair<int, int>> mst;
-
-        return {cost, mst};
+        int total_flow = 0;
+        return total_flow;
     }
 
-    void print_output(const MSTResult& res) {
+    void print_output(int result) {
         ofstream fout("out");
-        fout << res.cost << "\n";
-        for (const auto& [x, y] : res.edges) {
-            fout << x << " " << y << "\n";
-        }
+        fout << result << '\n';
         fout.close();
     }
 };

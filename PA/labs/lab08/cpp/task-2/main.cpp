@@ -9,45 +9,56 @@ public:
     }
 
 private:
-    // numarul maxim de noduri
-    static constexpr int NMAX = (int)1e5 + 5; // 10^5 + 5 = 100.005
+    // n = numar de noduri
+    int n;
 
-    // n = numar de noduri, m = numar de muchii/arce
-    int n, m;
+    //
+    // parent[node] = parintele nodului node
+    // Cazuri particulare:
+    //      * parent[source] = -1
+    //      * parent[node] = -1, daca node nu este accesibil din nodul sursa.
+    //
+    vector<int> parent;
 
-    // adj[node] = lista de adiacenta a nodului node
-    // exemplu: daca adj[node] = {..., neigh, ...} => exista arcul (node, neigh)
-    vector<int> adj[NMAX];
+    // nodul sursa si nodul destinatie
+    // (captele drumului care trebuie reconstruit)
+    int source, destination;
 
     void read_input() {
         ifstream fin("in");
-        fin >> n >> m;
-        for (int i = 1, x, y; i <= m; i++) {
-            fin >> x >> y; // muchia (x, y)
-            adj[x].push_back(y);
-            adj[y].push_back(x);
+        fin >> n >> source >> destination;
+        parent.resize(n + 1);
+        for (int node = 1; node <= n; node++) {
+            fin >> parent[node];
         }
+
         fin.close();
     }
 
     vector<int> get_result() {
         //
-        // TODO: Gasiti toate nodurile critice ale grafului neorientat stocat cu liste de adiacenta in adj.
-        // Rezultatul se va returna sub forma unui vector cu toate punctele critice (ordinea nu conteaza).
+        // TODO: Reconstituiti drumul de cost minim de la nodul source la nodul destination
+        // folosind vectorul de parinti parent.
         //
-        // Indicație: Folosiți algoritmul lui Tarjan pentru CV.
+        // In cazul in care exista nu exista un drum de la sursa la destinatie, returnati
+        // un vector gol (a.k.a. return {};).
         //
-
-        vector<int> all_cvs;
-        return all_cvs;
+        vector<int> path;
+        return path;
     }
 
-    void print_output(const vector<int>& all_cvs) {
+    void print_output(const vector<int>& result) {
         ofstream fout("out");
-        for (auto cv : all_cvs) {
-            fout << cv << ' ';
+
+        if (result.empty()) {
+            fout << "Nu se poate ajunge\n";
+            return;
         }
-        fout << '\n';
+
+        for (auto &node : result) {
+            fout << node << " ";
+        }
+        fout << "\n";
         fout.close();
     }
 };

@@ -17,15 +17,22 @@ private:
         fin.close();
     }
 
+    // Construiti toate submultimile multimii {1, ..., N}.
+    // Pentru a adauga o noua submultime:
+    //     vector<int> submultime;
+    //     all.push_back(submultime);
     vector<vector<int>> get_result() {
         vector<vector<int>> all;
-
-        // TODO: Construiti toate submultimile multimii {1, ..., N}.
-        //
-        // Pentru a adauga o noua submultime:
-        //     vector<int> submultime;
-        //     all.push_back(submultime);
-
+        for (int i = 0; i < (1 << n); i++) {
+            vector<int> submultime;
+            for (int j = 0; j < n; j++) {
+                if (i & (1 << j)) {
+                    submultime.push_back(j + 1);
+                }
+            }
+            all.push_back(submultime);
+        }
+        sort(all.begin(), all.end());
         return all;
     }
 

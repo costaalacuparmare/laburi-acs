@@ -16,40 +16,42 @@ private:
     int n, m;
 
     // adj[node] = lista de adiacenta a nodului node
-    // exemplu: daca adj[node] = {..., neigh, ...} => exista muchia (node, neigh)
+    // exemplu: daca adj[node] = {..., neigh, ...} => exista arcul (node, neigh)
     vector<int> adj[NMAX];
-
-    // nodul sursa in parcurgerea BFS
-    int source;
 
     void read_input() {
         ifstream fin("in");
-        fin >> n >> m >> source;
+        fin >> n >> m;
         for (int i = 1, x, y; i <= m; i++) {
-            fin >> x >> y; // muchie (x, y)
-            adj[x].push_back(y);
-            adj[y].push_back(x);
+            fin >> x >> y;
+            adj[x].push_back(y); // arc (x, y)
         }
         fin.close();
     }
 
-    vector<int> get_result() {
-        // TODO: Faceti un BFS care sa construiasca in d valorile cerute:
-        // * d[node] = numarul minim de muchii de parcurs de la nodul `source` la nodul `node`
-        //      * d[source] = 0
-        //      * d[node]   = -1, daca nu exista drum de la source la node
-        // *******
-        // ATENTIE: nodurile sunt indexate de la 1 la n.
-        // *******
+    vector<vector<int>> get_result() {
+        //
+        // TODO: Găsiți componentele tare conexe  (CTC / SCC) ale grafului orientat cu n noduri, stocat în adj.
+        //
+        // Rezultatul se va returna sub forma unui vector, fiecare element fiind un SCC (adică tot un vector).
+        // * nodurile dintr-un SCC pot fi găsite în orice ordine
+        // * SCC-urile din graf pot fi găsite în orice ordine
+        //
+        // Indicație: Folosiți algoritmul lui Tarjan pentru SCC.
+        //
 
-        vector<int> d(n + 1);
-        return d;
+        vector<vector<int>> all_sccs;
+        return all_sccs;
     }
 
-    void print_output(const vector<int>& d) {
+    void print_output(const vector<vector<int>>& all_sccs) {
         ofstream fout("out");
-        for (int node = 1; node <= n; node++) {
-            fout << d[node] << (node == n ? '\n' : ' ');
+        fout << all_sccs.size() << '\n';
+        for (const auto& scc : all_sccs) {
+            for (auto node : scc) {
+                fout << node << ' ';
+            }
+            fout << '\n';
         }
         fout.close();
     }

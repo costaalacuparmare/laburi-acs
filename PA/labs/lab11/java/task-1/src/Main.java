@@ -1,12 +1,17 @@
 import java.io.BufferedReader;
-import java.io.File;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
+import java.lang.Math;
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
 
 public class Main {
     static class Task {
@@ -14,96 +19,41 @@ public class Main {
         public static final String OUTPUT_FILE = "out";
 
         // numarul maxim de noduri
-        public static final int NMAX = 200005;
+        public static final int NMAX = 1005;
+
+        // valoare mai mare decat maxFlow
+        public static final int INF = (int) 10e9;
 
         // n = numar de noduri, m = numar de muchii
         int n, m;
 
-        // adj[node] = lista de adiacenta a nodului node
-        // Edge e inseamna ca exista muchie de la e.node la e.neigh de cost e.w
-        ArrayList<Edge> edges = new ArrayList<>();
+        // adj[i] = lista de adiacenta a nodului i
+        @SuppressWarnings("unchecked")
+        ArrayList<Integer> adj[] = new ArrayList[NMAX];
 
-        public class Pair {
-            public int x;
-            public int y;
-
-            Pair(int _x, int _y) {
-                x = _x;
-                y = _y;
-            }
-        }
+        // cap[i][j] = capacitatea arcului i -> j
+        int c[][];
 
         public class Edge {
-            int node;
-            int neigh;
-            int w;
+            public int node;
+            public int neigh;
 
-            Edge(int _node, int _neigh, int _w) {
+            Edge(int _node, int _neigh) {
                 node = _node;
                 neigh = _neigh;
-                w = _w;
-            }
-        };
-
-        // structura folosita pentru a stoca MST
-        class MSTResult {
-            int cost; // costul MST-ului gasit
-
-            ArrayList<Pair> edges; // muchiile din MST-ul gasit (ordinea nu conteaza)
-
-            MSTResult(int _cost,  ArrayList<Pair> _edges) {
-                cost = _cost;
-                edges = _edges;
-            }
-        };
-
-        // Structura de date descrisa aici https://infoarena.ro/problema/disjoint.
-        public class DisjointSet {
-            // parent[node] = radacina arborelui din care face parte node.
-            // (adica identificatorul componentei conexe curente)
-            int [] parent;
-
-            // size[node] = numarul de noduri din arborele in care se afla node acum.
-            int [] size;
-
-            // Se initializeaza n paduri.
-            DisjointSet(int nodes) {
-                parent = new int[nodes + 1];
-                size   = new int[nodes + 1];
-                // Fiecare padure contine un nod initial.
-                for (int node = 1; node <= nodes; ++node) {
-                    parent[node] = node;
-                    size[node] = 1;
-                }
             }
 
-            // Returneaza radacina arborelui din care face parte node.
-            int setOf(int node) {
-                // Daca node este radacina, atunci am gasit raspunsul.
-                if (node == parent[node]) {
-                    return node;
-                }
+        }
 
-                // Altfel, urcam in sus din "radacina in radacina",
-                // actualizand pe parcurs radacinile pentru nodurile atinse.
-                parent[node] = setOf(parent[node]);
-                return parent[node];
-            }
+        // structura folosita pentru a stoca daca exista drum de ameliorare
+        // si care este acesta.
+        public class AugmentedPath {
+            boolean hasPath;
+            ArrayList<Edge> path;
 
-            // Reuneste arborii lui x si y intr-un singur arbore,
-            // folosind euristica de reuniune a drumurilor dupa rank.
-            void union(int x, int y) {
-                // Obtinem radacinile celor 2 arbori
-                int rx = setOf(x), ry = setOf(y);
-
-                // Arborele mai mic este atasat la radacina arborelui mai mare.
-                if (size[rx] <= size[ry]) {
-                    size[ry] += size[rx];
-                    parent[rx] = ry;
-                } else {
-                    size[rx] += size[ry];
-                    parent[ry] = rx;
-                }
+            AugmentedPath(boolean _hasPath, ArrayList<Edge> _path) {
+                hasPath = _hasPath;
+                path = _path;
             }
         }
 
@@ -115,16 +65,29 @@ public class Main {
         private void readInput() {
             try {
                 Scanner sc = new Scanner(new BufferedReader(new FileReader(
-                                INPUT_FILE)));
+                        INPUT_FILE)));
                 n = sc.nextInt();
                 m = sc.nextInt();
 
+                for (int i = 1; i <= n; i++) {
+                    adj[i] = new ArrayList<>();
+                }
+
+                c = new int[n + 1][n + 1];
+
                 for (int i = 1; i <= m; i++) {
-                    int x, y, w;
-                    x = sc.nextInt();
-                    y = sc.nextInt();
-                    w = sc.nextInt();
-                    edges.add(new Edge(x, y, w));
+                    // x -> y de capacitate c
+                    int u, v, capacity;
+                    u = sc.nextInt();
+                    v = sc.nextInt();
+                    capacity = sc.nextInt();
+                    adj[u].add(v);
+                    adj[v].add(u);
+
+                    // Presupunem existenta mai multor arce x -> y cu capacitati c1, c2, ...
+                    // Comprimam intr-un singur arc x -> y cu capacitate
+                    // cap[x][y] = c1 + c2 + ...
+                    c[u][v] += capacity;
                 }
                 sc.close();
             } catch (IOException e) {
@@ -132,38 +95,33 @@ public class Main {
             }
         }
 
-        private void writeOutput(MSTResult result) {
+        private void writeOutput(int result) {
             try {
-                PrintWriter pw = new PrintWriter(new File(OUTPUT_FILE));
-                pw.printf("%d\n", result.cost);
-                for (Pair e : result.edges) {
-                    pw.printf("%d %d\n", e.x, e.y);
-                }
+                PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(
+                        OUTPUT_FILE)));
+                pw.printf("%d\n", result);
                 pw.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        private MSTResult getResult() {
+        private int getResult() {
             //
-            // TODO: Calculati costul minim al unui MST folosind Kruskal.
+            // TODO: Calculati fluxul maxim pe graful orientat dat.
+            // Sursa este nodul 1.
+            // Destinatia este nodul n.
             //
+            // In adj este stocat graful neorientat obtinut dupa ce se elimina orientarea
+            // arcelor, iar in c sunt stocate capacitatile arcelor.
+            // De exemplu, un arc (x, y) de capacitate cap va fi tinut astfel:
+            // c[x][y] = cap, adj[x] contine y, adj[y] contine x.
             //
-            // Vi se da implementarea DisjointSet. Exemple utilizare:
-            //      DisjointSet disjointset = new DisjointSet(n);
-            //      int setX = disjointset.setOf(x);
-            //      ...
-            //      disjointset.union(x, y);
-            //
-            int cost = 0;
-            ArrayList<Pair> mst = new ArrayList<>();
-
-            return new MSTResult(cost, mst);
+            int totalFlow = 0;
+            return totalFlow;
         }
 
     }
-
     public static void main(String[] args) {
         new Task().solve();
     }

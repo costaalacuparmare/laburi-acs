@@ -1,12 +1,12 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Main {
     static class Task {
@@ -14,28 +14,98 @@ public class Main {
         public static final String OUTPUT_FILE = "out";
 
         // numarul maxim de noduri
-        public static final int NMAX = 105;
+        public static final int NMAX = 200005;
 
-        // n = numar de noduri
-        int n;
+        // n = numar de noduri, m = numar de muchii
+        int n, m;
 
-        // w[x]y] = constul muchiei de la x la y: (x, y, w[x][y])
-        // (w[x][y] = 0 - muchia lipseste)
-        //
-        // In aceasta problema, costurile sunt strict pozitive.
-        int w[][];
+        // adj[node] = lista de adiacenta a nodului node
+        // Edge e inseamna ca exista muchie de la e.node la e.neigh de cost e.w
+        ArrayList<Edge> edges = new ArrayList<>();
 
-        // structura folosita pentru a stoca matricea de distante, matricea
-        // de parinti folosind algoritmul RoyFloyd.
-        public class RoyFloydResult {
-            int d[][];
-            int p[][];
+        public class Pair {
+            public int x;
+            public int y;
 
-            RoyFloydResult(int _d[][], int _p[][]) {
-                d = _d;
-                p = _p;
+            Pair(int _x, int _y) {
+                x = _x;
+                y = _y;
+            }
+        }
+
+        public class Edge {
+            int node;
+            int neigh;
+            int w;
+
+            Edge(int _node, int _neigh, int _w) {
+                node = _node;
+                neigh = _neigh;
+                w = _w;
             }
         };
+
+        // structura folosita pentru a stoca MST
+        class MSTResult {
+            int cost; // costul MST-ului gasit
+
+            ArrayList<Pair> edges; // muchiile din MST-ul gasit (ordinea nu conteaza)
+
+            MSTResult(int _cost,  ArrayList<Pair> _edges) {
+                cost = _cost;
+                edges = _edges;
+            }
+        };
+
+        // Structura de date descrisa aici https://infoarena.ro/problema/disjoint.
+        public class DisjointSet {
+            // parent[node] = radacina arborelui din care face parte node.
+            // (adica identificatorul componentei conexe curente)
+            int [] parent;
+
+            // size[node] = numarul de noduri din arborele in care se afla node acum.
+            int [] size;
+
+            // Se initializeaza n paduri.
+            DisjointSet(int nodes) {
+                parent = new int[nodes + 1];
+                size   = new int[nodes + 1];
+                // Fiecare padure contine un nod initial.
+                for (int node = 1; node <= nodes; ++node) {
+                    parent[node] = node;
+                    size[node] = 1;
+                }
+            }
+
+            // Returneaza radacina arborelui din care face parte node.
+            int setOf(int node) {
+                // Daca node este radacina, atunci am gasit raspunsul.
+                if (node == parent[node]) {
+                    return node;
+                }
+
+                // Altfel, urcam in sus din "radacina in radacina",
+                // actualizand pe parcurs radacinile pentru nodurile atinse.
+                parent[node] = setOf(parent[node]);
+                return parent[node];
+            }
+
+            // Reuneste arborii lui x si y intr-un singur arbore,
+            // folosind euristica de reuniune a drumurilor dupa rank.
+            void union(int x, int y) {
+                // Obtinem radacinile celor 2 arbori
+                int rx = setOf(x), ry = setOf(y);
+
+                // Arborele mai mic este atasat la radacina arborelui mai mare.
+                if (size[rx] <= size[ry]) {
+                    size[ry] += size[rx];
+                    parent[rx] = ry;
+                } else {
+                    size[rx] += size[ry];
+                    parent[ry] = rx;
+                }
+            }
+        }
 
         public void solve() {
             readInput();
@@ -47,11 +117,14 @@ public class Main {
                 Scanner sc = new Scanner(new BufferedReader(new FileReader(
                                 INPUT_FILE)));
                 n = sc.nextInt();
-                w = new int[n + 1][n + 1];
-                for (int i = 1; i <= n; i++) {
-                    for (int j = 1; j <= n; j++) {
-                        w[i][j] = sc.nextInt();
-                    }
+                m = sc.nextInt();
+
+                for (int i = 1; i <= m; i++) {
+                    int x, y, w;
+                    x = sc.nextInt();
+                    y = sc.nextInt();
+                    w = sc.nextInt();
+                    edges.add(new Edge(x, y, w));
                 }
                 sc.close();
             } catch (IOException e) {
@@ -59,47 +132,36 @@ public class Main {
             }
         }
 
-        private void writeOutput(RoyFloydResult res) {
+        private void writeOutput(MSTResult result) {
             try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter(
-                                OUTPUT_FILE));
-                StringBuilder sb = new StringBuilder();
-                for (int x = 1; x <= n; x++) {
-                    for (int y = 1; y <= n; y++) {
-                        sb.append(res.d[x][y]).append(' ');
-                    }
-                    sb.append('\n');
+                PrintWriter pw = new PrintWriter(new File(OUTPUT_FILE));
+                pw.printf("%d\n", result.cost);
+                for (Pair e : result.edges) {
+                    pw.printf("%d %d\n", e.x, e.y);
                 }
-                bw.write(sb.toString());
-                bw.close();
+                pw.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        private RoyFloydResult getResult() {
+        private MSTResult getResult() {
             //
-            // TODO: Gasiti distantele minime intre oricare doua noduri, folosind
-            // Roy-Floyd pe graful orientat cu n noduri, m arce stocat in matricea
-            // ponderilor w (declarata mai sus).
+            // TODO: Calculati costul minim al unui MST folosind Kruskal.
             //
-            // Atentie:
-            // O muchie (x, y, w) este reprezentata astfel in matricea ponderilor:
-            //  w[x][y] = w;
-            // Daca nu exista o muchie intre doua noduri x si y, in matricea
-            // ponderilor se va afla valoarea 0:
-            //  w[x][y] = 0;
             //
-            // Trebuie sa populati matricea d[][] (declarata mai sus):
-            //  d[x][y] = distanta minima intre nodurile x si y, daca exista drum.
-            //  d[x][y] = 0 daca nu exista drum intre x si y.
-            //          * implicit: d[x][x] = 0 (distanta de la un nod la el insusi).
+            // Vi se da implementarea DisjointSet. Exemple utilizare:
+            //      DisjointSet disjointset = new DisjointSet(n);
+            //      int setX = disjointset.setOf(x);
+            //      ...
+            //      disjointset.union(x, y);
             //
-            int d[][] = new int[n + 1][n + 1];
-            int p[][] = new int[n + 1][n + 1];
+            int cost = 0;
+            ArrayList<Pair> mst = new ArrayList<>();
 
-            return new RoyFloydResult(d, p);
+            return new MSTResult(cost, mst);
         }
+
     }
 
     public static void main(String[] args) {

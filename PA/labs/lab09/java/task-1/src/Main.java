@@ -3,9 +3,10 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 public class Main {
     static class Task {
@@ -13,46 +14,28 @@ public class Main {
         public static final String OUTPUT_FILE = "out";
 
         // numarul maxim de noduri
-        public static final int NMAX = 50005;
+        public static final int NMAX = 105;
 
-        // valoare mai mare decat orice distanta din graf
-        public static final int INF = (int) 1e9;
+        // n = numar de noduri
+        int n;
 
-        // n = numar de noduri, m = numar de muchii
-        int n, m;
-        // nodul sursa
-        int source;
+        // w[x]y] = constul muchiei de la x la y: (x, y, w[x][y])
+        // (w[x][y] = 0 - muchia lipseste)
+        //
+        // In aceasta problema, costurile sunt strict pozitive.
+        int w[][];
 
-        // structura folosita pentru a stoca distanta, cat si vectorul de parinti
-        // folosind algoritmul Dijkstra
-        public class DijkstraResult {
-            List<Integer> d;
-            List<Integer> p;
+        // structura folosita pentru a stoca matricea de distante, matricea
+        // de parinti folosind algoritmul RoyFloyd.
+        public class RoyFloydResult {
+            int d[][];
+            int p[][];
 
-            DijkstraResult(List<Integer> _d, List<Integer> _p) {
+            RoyFloydResult(int _d[][], int _p[][]) {
                 d = _d;
                 p = _p;
             }
         };
-
-        public class Pair implements Comparable<Pair> {
-            public int destination;
-            public int cost;
-
-            Pair(int _destination, int _cost) {
-                destination = _destination;
-                cost = _cost;
-            }
-
-            public int compareTo(Pair rhs) {
-                return Integer.compare(cost, rhs.cost);
-            }
-        }
-
-        // adj[node] = lista de adiacenta a nodului node
-        // perechea (neigh, w) semnifica arc de la node la neigh de cost w
-        @SuppressWarnings("unchecked")
-        ArrayList<Pair> adj[] = new ArrayList[NMAX];
 
         public void solve() {
             readInput();
@@ -62,20 +45,13 @@ public class Main {
         private void readInput() {
             try {
                 Scanner sc = new Scanner(new BufferedReader(new FileReader(
-                        INPUT_FILE)));
+                                INPUT_FILE)));
                 n = sc.nextInt();
-                m = sc.nextInt();
-                source = sc.nextInt();
-
+                w = new int[n + 1][n + 1];
                 for (int i = 1; i <= n; i++) {
-                    adj[i] = new ArrayList<>();
-                }
-                for (int i = 1; i <= m; i++) {
-                    int x, y, w;
-                    x = sc.nextInt();
-                    y = sc.nextInt();
-                    w = sc.nextInt();
-                    adj[x].add(new Pair(y, w));
+                    for (int j = 1; j <= n; j++) {
+                        w[i][j] = sc.nextInt();
+                    }
                 }
                 sc.close();
             } catch (IOException e) {
@@ -83,15 +59,17 @@ public class Main {
             }
         }
 
-        private void writeOutput(DijkstraResult result) {
+        private void writeOutput(RoyFloydResult res) {
             try {
                 BufferedWriter bw = new BufferedWriter(new FileWriter(
-                        OUTPUT_FILE));
+                                OUTPUT_FILE));
                 StringBuilder sb = new StringBuilder();
-                for (int i = 1; i <= n; i++) {
-                    sb.append(result.d.get(i)).append(' ');
+                for (int x = 1; x <= n; x++) {
+                    for (int y = 1; y <= n; y++) {
+                        sb.append(res.d[x][y]).append(' ');
+                    }
+                    sb.append('\n');
                 }
-                sb.append('\n');
                 bw.write(sb.toString());
                 bw.close();
             } catch (IOException e) {
@@ -99,33 +77,29 @@ public class Main {
             }
         }
 
-        private DijkstraResult getResult() {
+        private RoyFloydResult getResult() {
             //
-            // TODO: Gasiti distantele minime de la nodul source la celelalte noduri
-            // folosind Dijkstra pe graful orientat cu n noduri, m arce stocat in adj.
-            //
-            // d[node] = costul minim / lungimea minima a unui drum de la source la nodul
-            // node
-            // * d[source] = 0;
-            // * d[node] = -1, daca nu se poate ajunge de la source la node.
+            // TODO: Gasiti distantele minime intre oricare doua noduri, folosind
+            // Roy-Floyd pe graful orientat cu n noduri, m arce stocat in matricea
+            // ponderilor w (declarata mai sus).
             //
             // Atentie:
-            // O muchie este tinuta ca o pereche (nod adiacent, cost muchie):
-            // adj[node][i] == (neigh, w) - unde neigh este al i-lea vecin al lui node, iar
-            // (node, neigh) are cost w.
+            // O muchie (x, y, w) este reprezentata astfel in matricea ponderilor:
+            //  w[x][y] = w;
+            // Daca nu exista o muchie intre doua noduri x si y, in matricea
+            // ponderilor se va afla valoarea 0:
+            //  w[x][y] = 0;
             //
-            List<Integer> d = new ArrayList<>();
-            List<Integer> p = new ArrayList<>();
+            // Trebuie sa populati matricea d[][] (declarata mai sus):
+            //  d[x][y] = distanta minima intre nodurile x si y, daca exista drum.
+            //  d[x][y] = 0 daca nu exista drum intre x si y.
+            //          * implicit: d[x][x] = 0 (distanta de la un nod la el insusi).
+            //
+            int d[][] = new int[n + 1][n + 1];
+            int p[][] = new int[n + 1][n + 1];
 
-            for (int i = 0; i <= n; i++) {
-                d.add(0);
-                p.add(0);
-            }
-
-            return new DijkstraResult(d, p);
-
+            return new RoyFloydResult(d, p);
         }
-
     }
 
     public static void main(String[] args) {

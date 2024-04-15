@@ -17,25 +17,48 @@ private:
         fin.close();
     }
 
+    bool is_valid(int row, int col, vector<int>& sol) {
+        for (int i = 1; i < row; i++) {
+            if (sol[i] == col || abs(i - row) == abs(sol[i] - col))
+                return false;
+        }
+        return true;
+    }
+
+    bool backtracking(int row, vector<int>& sol) {
+        if (row > n)
+            return true;
+        for (int col = 1; col <= n; col++) {
+            if (is_valid(row, col, sol)) {
+                sol[row] = col;
+                if (backtracking(row + 1, sol))
+                    return true;
+                sol[row] = 0;
+            }
+        }
+        return false;
+    }
+
+    // Gasiti o solutie pentru problema damelor pe o tabla de dimensiune
+    // n x n.
+    //
+    // Pentru a plasa o dama pe randul i, coloana j:
+    //     sol[i] = j.
+    // Randurile si coloanele se indexeaza de la 1 la n.
+    //
+    // De exemplu, configuratia (n = 5)
+    // X----
+    // --X--
+    // ----X
+    // -X---
+    // ---X-
+    // se va reprezenta prin sol[1..5] = {1, 3, 5, 2, 4}.
     vector<int> get_result() {
         vector<int> sol(n + 1, 0);
-
-        // TODO: Gasiti o solutie pentru problema damelor pe o tabla de dimensiune
-        // n x n.
-        //
-        // Pentru a plasa o dama pe randul i, coloana j:
-        //     sol[i] = j.
-        // Randurile si coloanele se indexeaza de la 1 la n.
-        //
-        // De exemplu, configuratia (n = 5)
-        // X----
-        // --X--
-        // ----X
-        // -X---
-        // ---X-
-        // se va reprezenta prin sol[1..5] = {1, 3, 5, 2, 4}.
-
-        return sol;
+        if (backtracking(1, sol)) {
+            return sol;
+        }
+        return vector<int>();
     }
 
     void print_output(const vector<int>& result) {

@@ -12,20 +12,23 @@ private:
     int n, k;
 
     void read_input() {
-        //ifstream fin("in");
-        cin >> n >> k;
-        //fin.close();
+        ifstream fin("in");
+        fin>> n >> k;
+        fin.close();
     }
 
-    void backtrack(vector<vector<int>>& all, vector<int>& arrangement, int start) {
+    void backtrack(vector<vector<int>>& all, vector<int>& arrangement) {
         if (arrangement.size() == k) {
             all.push_back(arrangement);
             return;
         }
 
-        for (int i = start; i <= n; ++i) {
+        for (int i = 1; i <= n; ++i) {
+            if (find(arrangement.begin(), arrangement.end(), i) != arrangement.end()) {
+                continue;
+            }
             arrangement.push_back(i);
-            backtrack(all, arrangement, i + 1);
+            backtrack(all, arrangement);
             arrangement.pop_back();
         }
     }
@@ -33,7 +36,7 @@ private:
     vector<vector<int>> get_result() {
         vector<vector<int>> all;
         vector<int> arrangement;
-        backtrack(all, arrangement, 1);
+        backtrack(all, arrangement);
         return all;
     }
 

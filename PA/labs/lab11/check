@@ -5,7 +5,7 @@ TASKS=(task-1)
 NUM_TESTS=(10)
 
 TIMEOUT_CPP=1
-TIMEOUT_JAVA=7
+TIMEOUT_JAVA=2
 
 DIRNAME=$(realpath $(dirname "${0}"))
 source "${DIRNAME}"/../../utils/base_check.sh

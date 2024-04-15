@@ -2,18 +2,15 @@
 using namespace std;
 
 // numarul maxim de noduri
-#define NMAX 50005
+#define NMAX 105
 
-// valoare mai mare decat orice distanta din graf
-#define INF (1 << 30)
+// structura folosita pentru a stoca matricea de distante, matricea
+// de parinti folosind algoritmul Roy-Floyd.
+struct RoyFloydResult {
+    vector<vector<int>> d;
+    vector<vector<int>> p;
 
-// structura folosita pentru a stoca distanta, cat si vectorul de parinti
-// folosind algoritmul Dijkstra
-struct DijkstraResult {
-    vector<int> d;
-    vector<int> p;
-
-    DijkstraResult(const vector<int>& d, const vector<int>& p)
+    RoyFloydResult(const vector<vector<int>>& d, const vector<vector<int>>& p)
         : d(d)
         , p(p) { }
 };
@@ -22,53 +19,62 @@ class Task {
 public:
     void solve() {
         read_input();
-        print_output(get_result());
+        print_output(compute());
     }
 
 private:
-    // n = numar de noduri, m = numar de muchii
-    int n, m;
-    // adj[node] = lista de adiacenta a nodului node
-    // perechea (neigh, w) semnifica arc de la node la neigh de cost w
-    vector<pair<int, int>> adj[NMAX];
-    // nodul sursa
-    int source;
+    // n = numar de noduri
+    int n;
+
+    // w[x]y] = costul muchiei de la x la y: (x, y, w[x][y])
+    // (w[x][y] = 0 - muchia lipseste)
+    //
+    // In aceasta problema, costurile sunt strict pozitive.
+    int w[NMAX][NMAX];
 
     void read_input() {
         ifstream fin("in");
-        fin >> n >> m >> source;
-        for (int i = 1, x, y, w; i <= m; i++) {
-            fin >> x >> y >> w;
-            adj[x].push_back({y, w});
+        fin >> n;
+        for (int x = 1; x <= n; x++) {
+            for (int y = 1; y <= n; y++) {
+                fin >> w[x][y];
+            }
         }
         fin.close();
     }
 
-    DijkstraResult get_result() {
+    RoyFloydResult compute() {
         //
-        // TODO: Gasiti distantele minime de la nodul source la celelalte noduri
-        // folosind Dijkstra pe graful orientat cu n noduri, m arce stocat in adj.
-        //
-        // d[node] = costul minim / lungimea minima a unui drum de la source la nodul node
-        //     * d[source] = 0;
-        //     * d[node] = -1, daca nu se poate ajunge de la source la node.
+        // TODO: Gasiti distantele minime intre oricare doua noduri, folosind Roy-Floyd
+        // pe graful orientat cu n noduri, m arce stocat in matricea ponderilor w
+        // (declarata mai sus).
         //
         // Atentie:
-        // O muchie este tinuta ca o pereche (nod adiacent, cost muchie):
-        //     adj[node][i] == (neigh, w) - unde neigh este al i-lea vecin al lui node, iar (node, neigh) are cost w.
+        // O muchie (x, y, w[x][y]) este reprezentata astfel in matricea ponderilor:
+        //     w[x][y] este costul muchiei de la x la y
+        // Daca nu exista o muchie intre doua noduri x si y, in matricea ponderilor:
+        //     w[x][y] = 0;
         //
-        vector<int> d(n + 1);
-        vector<int> p(n + 1);
+        // Trebuie sa populati matricea d[][] (declarata mai sus):
+        //     d[x][y] = distanta minima intre nodurile x si y, daca exista drum.
+        //     d[x][y] = 0 daca nu exista drum intre x si y.
+        //          * implicit: d[x][x] = 0 (distanta de la un nod la el insusi).
+        //
+
+        vector<vector<int>> d(n + 1, vector<int>(n + 1));
+        vector<vector<int>> p(n + 1, vector<int>(n + 1));
+
         return {d, p};
     }
 
-    void print_output(const DijkstraResult& result) {
+    void print_output(const RoyFloydResult& res) {
         ofstream fout("out");
-        const auto& [d, _] = result;
-        for (int node = 1; node <= n; node++) {
-            fout << d[node] << " ";
+        for (int x = 1; x <= n; x++) {
+            for (int y = 1; y <= n; y++) {
+                fout << res.d[x][y] << ' ';
+            }
+            fout << '\n';
         }
-        fout << "\n";
         fout.close();
     }
 };

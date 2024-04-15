@@ -2,78 +2,130 @@
 using namespace std;
 
 // numarul maxim de noduri
-#define NMAX 105
+#define NMAX 200005
 
-// structura folosita pentru a stoca matricea de distante, matricea
-// de parinti folosind algoritmul Roy-Floyd.
-struct RoyFloydResult {
-    vector<vector<int>> d;
-    vector<vector<int>> p;
+// Structura de date descrisa aici https://infoarena.ro/problema/disjoint.
+class DisjointSet {
+private:
+    // parent[node] = radacina arborelui din care face parte node.
+    // (adica identificatorul componentei conexe curente)
+    vector<int> parent;
 
-    RoyFloydResult(const vector<vector<int>>& d, const vector<vector<int>>& p)
-        : d(d)
-        , p(p) { }
+    // size[node] = numarul de noduri din arborele in care se afla node acum.
+    vector<int> size;
+
+public:
+    // Se initializeaza n paduri.
+    DisjointSet(int nodes)
+        : parent(nodes + 1)
+        , size(nodes + 1) {
+        // Fiecare padure contine un nod initial.
+        for (int node = 1; node <= nodes; ++node) {
+            parent[node] = node;
+            size[node] = 1;
+        }
+    }
+
+    // Returneaza radacina arborelui din care face parte node.
+    int setOf(int node) {
+        // Daca node este radacina, atunci am gasit raspunsul.
+        if (node == parent[node]) {
+            return node;
+        }
+
+        // Altfel, urcam in sus din "radacina in radacina",
+        // actualizand pe parcurs radacinile pentru nodurile atinse.
+        parent[node] = setOf(parent[node]);
+        return parent[node];
+    }
+
+    // Reuneste arborii lui x si y intr-un singur arbore,
+    // folosind euristica de reuniune a drumurilor dupa rank.
+    void _union(int x, int y) {
+        // Obtinem radacinile celor 2 arbori
+        int rx = setOf(x), ry = setOf(y);
+
+        // Arborele mai mic este atasat la radacina arborelui mai mare.
+        if (size[rx] <= size[ry]) {
+            size[ry] += size[rx];
+            parent[rx] = ry;
+        } else {
+            size[rx] += size[ry];
+            parent[ry] = rx;
+        }
+    }
+};
+
+struct Edge {
+    int node;
+    int neigh;
+    int w;
+
+    Edge() { }
+    Edge(int node, int neigh, int w)
+        : node(node)
+        , neigh(neigh)
+        , w(w) { }
+};
+
+// structura folosita pentru a stoca MST
+struct MSTResult {
+    int cost; // costul MST-ului gasit
+
+    vector<pair<int, int>> edges; // muchiile din MST-ul gasit (ordinea nu conteaza)
+
+    MSTResult(int cost, const vector<pair<int, int>>& edges)
+        : cost(cost)
+        , edges(edges) { }
 };
 
 class Task {
 public:
     void solve() {
         read_input();
-        print_output(compute());
+        print_output(get_result());
     }
 
 private:
-    // n = numar de noduri
-    int n;
+    // n = numar de noduri, m = numar de muchii
+    int n, m;
 
-    // w[x]y] = costul muchiei de la x la y: (x, y, w[x][y])
-    // (w[x][y] = 0 - muchia lipseste)
-    //
-    // In aceasta problema, costurile sunt strict pozitive.
-    int w[NMAX][NMAX];
+    // muchiile din graf: (node, neigh, w) - muchie de la node la neigh de cost w
+    vector<Edge> edges;
 
     void read_input() {
         ifstream fin("in");
-        fin >> n;
-        for (int x = 1; x <= n; x++) {
-            for (int y = 1; y <= n; y++) {
-                fin >> w[x][y];
-            }
+        fin >> n >> m;
+        for (int i = 1, x, y, w; i <= m; i++) {
+            fin >> x >> y >> w;
+            edges.push_back(Edge{x, y, w});
         }
         fin.close();
     }
 
-    RoyFloydResult compute() {
+    MSTResult get_result() {
         //
-        // TODO: Gasiti distantele minime intre oricare doua noduri, folosind Roy-Floyd
-        // pe graful orientat cu n noduri, m arce stocat in matricea ponderilor w
-        // (declarata mai sus).
+        // TODO: Calculati costul minim al unui MST folosind Kruskal.
         //
-        // Atentie:
-        // O muchie (x, y, w[x][y]) este reprezentata astfel in matricea ponderilor:
-        //     w[x][y] este costul muchiei de la x la y
-        // Daca nu exista o muchie intre doua noduri x si y, in matricea ponderilor:
-        //     w[x][y] = 0;
         //
-        // Trebuie sa populati matricea d[][] (declarata mai sus):
-        //     d[x][y] = distanta minima intre nodurile x si y, daca exista drum.
-        //     d[x][y] = 0 daca nu exista drum intre x si y.
-        //          * implicit: d[x][x] = 0 (distanta de la un nod la el insusi).
+        // Vi se da implementarea DisjointSet. Exemple utilizare:
+        //      DisjointSet disjointset(n);
+        //      auto setX = disjointset.setOf(x);
+        //      ...
+        //      disjointset.union(x, y);
         //
 
-        vector<vector<int>> d(n + 1, vector<int>(n + 1));
-        vector<vector<int>> p(n + 1, vector<int>(n + 1));
+        int cost = 0;
+        vector<pair<int, int>> mst;
 
-        return {d, p};
+        return {cost, mst};
     }
 
-    void print_output(const RoyFloydResult& res) {
+    void print_output(const MSTResult& res) {
         ofstream fout("out");
-        for (int x = 1; x <= n; x++) {
-            for (int y = 1; y <= n; y++) {
-                fout << res.d[x][y] << ' ';
-            }
-            fout << '\n';
+        fout << res.cost << "\n";
+        for (const auto& [x, y] : res.edges) {
+            fout << x << " " << y << "\n";
         }
         fout.close();
     }

@@ -3,9 +3,9 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     static class Task {
@@ -13,15 +13,46 @@ public class Main {
         public static final String OUTPUT_FILE = "out";
 
         // numarul maxim de noduri
-        public static final int NMAX = (int) 1e5 + 5; // 10^5 + 5 = 100.005
+        public static final int NMAX = 50005;
 
-        // n = numar de noduri, m = numar de muchii/arce
+        // valoare mai mare decat orice distanta din graf
+        public static final int INF = (int) 1e9;
+
+        // n = numar de noduri, m = numar de muchii
         int n, m;
+        // nodul sursa
+        int source;
+
+        // structura folosita pentru a stoca distanta, cat si vectorul de parinti
+        // folosind algoritmul Dijkstra
+        public class DijkstraResult {
+            List<Integer> d;
+            List<Integer> p;
+
+            DijkstraResult(List<Integer> _d, List<Integer> _p) {
+                d = _d;
+                p = _p;
+            }
+        };
+
+        public class Pair implements Comparable<Pair> {
+            public int destination;
+            public int cost;
+
+            Pair(int _destination, int _cost) {
+                destination = _destination;
+                cost = _cost;
+            }
+
+            public int compareTo(Pair rhs) {
+                return Integer.compare(cost, rhs.cost);
+            }
+        }
 
         // adj[node] = lista de adiacenta a nodului node
-        // exemplu: daca adj[node] = {..., neigh, ...} => exista arcul (node, neigh)
+        // perechea (neigh, w) semnifica arc de la node la neigh de cost w
         @SuppressWarnings("unchecked")
-        ArrayList<Integer> adj[] = new ArrayList[NMAX];
+        ArrayList<Pair> adj[] = new ArrayList[NMAX];
 
         public void solve() {
             readInput();
@@ -30,18 +61,21 @@ public class Main {
 
         private void readInput() {
             try {
-                Scanner sc = new Scanner(new BufferedReader(new FileReader(INPUT_FILE)));
+                Scanner sc = new Scanner(new BufferedReader(new FileReader(
+                        INPUT_FILE)));
                 n = sc.nextInt();
                 m = sc.nextInt();
+                source = sc.nextInt();
 
                 for (int i = 1; i <= n; i++) {
                     adj[i] = new ArrayList<>();
                 }
                 for (int i = 1; i <= m; i++) {
-                    int x, y;
+                    int x, y, w;
                     x = sc.nextInt();
                     y = sc.nextInt();
-                    adj[x].add(y); // arc (x, y)
+                    w = sc.nextInt();
+                    adj[x].add(new Pair(y, w));
                 }
                 sc.close();
             } catch (IOException e) {
@@ -49,38 +83,49 @@ public class Main {
             }
         }
 
-        private void writeOutput(ArrayList<ArrayList<Integer>> all_sccs) {
+        private void writeOutput(DijkstraResult result) {
             try {
-                PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT_FILE)));
-                pw.printf("%d\n", all_sccs.size());
-                for (ArrayList<Integer> scc : all_sccs) {
-                    for (Integer node : scc) {
-                        pw.printf("%d ", node);
-                    }
-                    pw.printf("\n");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(
+                        OUTPUT_FILE));
+                StringBuilder sb = new StringBuilder();
+                for (int i = 1; i <= n; i++) {
+                    sb.append(result.d.get(i)).append(' ');
                 }
-                pw.close();
+                sb.append('\n');
+                bw.write(sb.toString());
+                bw.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        private ArrayList<ArrayList<Integer>> getResult() {
+        private DijkstraResult getResult() {
             //
-            // TODO: Gasiti componentele tare conexe (CTC / SCC) ale grafului orientat cu n
-            // noduri, stocat in adj.
+            // TODO: Gasiti distantele minime de la nodul source la celelalte noduri
+            // folosind Dijkstra pe graful orientat cu n noduri, m arce stocat in adj.
             //
-            // Rezultatul se va returna sub forma unui vector, fiecare element fiind un SCC
-            // (adica tot un vector).
-            // * nodurile dintr-un SCC pot fi gasite in orice ordine
-            // * SCC-urile din graf pot fi gasite in orice ordine
+            // d[node] = costul minim / lungimea minima a unui drum de la source la nodul
+            // node
+            // * d[source] = 0;
+            // * d[node] = -1, daca nu se poate ajunge de la source la node.
             //
-            // Indicatie: Folositi algoritmul lui Tarjan pentru SCC.
+            // Atentie:
+            // O muchie este tinuta ca o pereche (nod adiacent, cost muchie):
+            // adj[node][i] == (neigh, w) - unde neigh este al i-lea vecin al lui node, iar
+            // (node, neigh) are cost w.
             //
+            List<Integer> d = new ArrayList<>();
+            List<Integer> p = new ArrayList<>();
 
-            ArrayList<ArrayList<Integer>> all_sccs = new ArrayList<>();
-            return all_sccs;
+            for (int i = 0; i <= n; i++) {
+                d.add(0);
+                p.add(0);
+            }
+
+            return new DijkstraResult(d, p);
+
         }
+
     }
 
     public static void main(String[] args) {

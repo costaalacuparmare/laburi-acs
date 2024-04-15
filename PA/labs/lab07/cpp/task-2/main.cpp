@@ -23,26 +23,29 @@ private:
         ifstream fin("in");
         fin >> n >> m;
         for (int i = 1, x, y; i <= m; i++) {
-            fin >> x >> y; // arc (x, y)
+            fin >> x >> y; // muchia (x, y)
             adj[x].push_back(y);
+            adj[y].push_back(x);
         }
         fin.close();
     }
 
     vector<int> get_result() {
-        // TODO: Faceti sortarea topologica a grafului stocat cu liste de adiacenta din adj.
-        // *******
-        // ATENTIE: nodurile sunt indexate de la 1 la n.
-        // *******
+        //
+        // TODO: Gasiti toate nodurile critice ale grafului neorientat stocat cu liste de adiacenta in adj.
+        // Rezultatul se va returna sub forma unui vector cu toate punctele critice (ordinea nu conteaza).
+        //
+        // Indicație: Folosiți algoritmul lui Tarjan pentru CV.
+        //
 
-        vector<int> topsort;
-        return topsort;
+        vector<int> all_cvs;
+        return all_cvs;
     }
 
-    void print_output(const vector<int>& topsort) {
+    void print_output(const vector<int>& all_cvs) {
         ofstream fout("out");
-        for (auto node : topsort) {
-            fout << node << ' ';
+        for (auto cv : all_cvs) {
+            fout << cv << ' ';
         }
         fout << '\n';
         fout.close();

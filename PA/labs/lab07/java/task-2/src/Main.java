@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Main {
     static class Task {
@@ -14,7 +13,7 @@ public class Main {
         public static final String OUTPUT_FILE = "out";
 
         // numarul maxim de noduri
-        public static final int NMAX = (int)1e5 + 5; // 10^5 + 5 = 100.005
+        public static final int NMAX = (int) 1e5 + 5; // 10^5 + 5 = 100.005
 
         // n = numar de noduri, m = numar de muchii/arce
         int n, m;
@@ -24,6 +23,20 @@ public class Main {
         @SuppressWarnings("unchecked")
         ArrayList<Integer> adj[] = new ArrayList[NMAX];
 
+        // parent[node] = parent of node in the DFS traversal
+        int[] parent;
+
+        // found[node] = the timestamp when node was found (when started to visit its subtree)
+        // Note: The global timestamp is incremented everytime a node is found.
+        int[] found;
+
+        // the minimum accessible timestamp that node can see/access
+        // low_link[node] = min { found[x] | x is node OR x in ancestors(node) OR x in descendants(node) };
+        int[] low_link;
+
+        // global timestamp
+        int timestamp;
+
         public void solve() {
             readInput();
             writeOutput(getResult());
@@ -31,36 +44,33 @@ public class Main {
 
         private void readInput() {
             try {
-                Scanner sc = new Scanner(new BufferedReader(new FileReader(
-                                INPUT_FILE)));
+                Scanner sc = new Scanner(new BufferedReader(new FileReader(INPUT_FILE)));
                 n = sc.nextInt();
                 m = sc.nextInt();
 
-                for (int node = 1; node <= n; node++) {
-                    adj[node] = new ArrayList<>();
+                for (int i = 1; i <= n; i++) {
+                    adj[i] = new ArrayList<>();
                 }
-
-                for (int i = 1, x, y; i <= m; i++) {
-                    // arc (x, y)
+                for (int i = 1; i <= m; i++) {
+                    int x, y;
                     x = sc.nextInt();
                     y = sc.nextInt();
+                    // muchie (x, y)
                     adj[x].add(y);
+                    adj[y].add(x);
                 }
-
                 sc.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        private void writeOutput(ArrayList<Integer> topsort) {
+        private void writeOutput(ArrayList<Integer>  all_cvs) {
             try {
-                PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(
-                                OUTPUT_FILE)));
-                for (Integer node : topsort) {
-                    pw.printf("%d ", node);
+                PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT_FILE)));
+                for (Integer cv : all_cvs) {
+                    pw.printf("%d ", cv);
                 }
-                pw.printf("\n");
                 pw.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -68,13 +78,15 @@ public class Main {
         }
 
         private ArrayList<Integer> getResult() {
-            // TODO: Faceti sortarea topologica a grafului stocat cu liste de adiacenta din adj.
-            // *******
-            // ATENTIE: nodurile sunt indexate de la 1 la n.
-            // *******
+            //
+            // TODO: Gasiti toate nodurile critice ale grafului neorientat stocat cu liste de adiacenta in adj.
+            // Rezultatul se va returna sub forma unui vector cu toate punctele critice (ordinea nu conteaza).
+            //
+            // Indicatie: Folositi algoritmul lui Tarjan pentru CV.
+            //
 
-            ArrayList<Integer> topsort = new ArrayList<>();
-            return topsort;
+            ArrayList<Integer> all_cvs = new ArrayList<>();
+            return all_cvs;
         }
     }
 
