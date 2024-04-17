@@ -23,16 +23,28 @@ private:
             return;
         }
 
-        for (int i = 1; i <= n; ++i) {
-            if (find(arrangement.begin(), arrangement.end(), i) != arrangement.end()) {
-                continue;
+        for (int i = 1; i <= n; i++) {
+            bool ok = true;
+            for (int j = 0; j < arrangement.size(); j++) {
+                if (arrangement[j] == i) {
+                    ok = false;
+                    break;
+                }
             }
-            arrangement.push_back(i);
-            backtrack(all, arrangement);
-            arrangement.pop_back();
+            if (ok) {
+                arrangement.push_back(i);
+                backtrack(all, arrangement);
+                arrangement.pop_back();
+            }
         }
     }
 
+    // Construiti toate aranjamentele de N luate cate K ale
+    // multimii {1, ..., N}.
+    //
+    // Pentru a adauga un nou aranjament:
+    //     vector<int> aranjament;
+    //     all.push_back(aranjament);
     vector<vector<int>> get_result() {
         vector<vector<int>> all;
         vector<int> arrangement;

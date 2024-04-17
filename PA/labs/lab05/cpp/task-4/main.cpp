@@ -15,17 +15,41 @@ private:
 
     void read_input() {
         ifstream fin("in");
-        cin >> n >> k;
-        cin >> caractere;
+        fin >> n >> k;
+        fin >> caractere;
         caractere = " " + caractere; // Adaugare element fictiv -
         // indexare de la 1.
         freq.push_back(-1); // Adaugare element fictiv - indexare de la 1.
         for (int i = 1, f; i <= n; i++) {
-            cin >> f;
+            fin >> f;
             freq.push_back(f);
         }
         fin.close();
     }
+
+
+    // n = number of characters
+    // k = maximum number of consecutive characters
+    // freq = frequency of each character
+    void backtrack(vector<vector<char>>& all, vector<char>& sir, int pos) {
+        if (pos >= k) {
+            all.push_back(sir);
+            return;
+        }
+
+        for (int i = 1; i <= n; i++) {
+            if (freq[i] > 0 && (pos <= k || sir[pos - k] != caractere[i])) {
+                sir[pos] = caractere[i];
+                freq[i]--;
+                backtrack(all, sir, pos + 1);
+                freq[i]++;
+            }
+        }
+    }
+
+
+
+
 
     // Construiti toate sirurile cu caracterele in stringul caractere
     // (indexat de la 1 la n), si frecventele in vectorul freq (indexat de la 1 la n),
@@ -37,50 +61,24 @@ private:
     //     all.push_back(sir);
     //
 
-    void backtrack(vector <vector<char>> &all, vector<char> &sir, int pos) {
-        if (pos > n) {
-            all.push_back(sir);
-            return;
-        }
-        for (char c: caractere) {
-            if (freq[pos] == 0) {
-                continue;
-            }
-            if (pos - k >= 0) {
-                int conscecutive = 0;
-                for (int i = pos - k + 1; i < pos; i++) {
-                    if (sir[i] == c) {
-                        conscecutive++;
-                        if (conscecutive == k) {
-                            return;
-                        }
-                    } else {
-                        conscecutive = 0;
-                    }
-                }
-            }
-            sir[pos] = c;
-            freq[pos]--;
-            backtrack(all, sir, pos + 1);
-            freq[pos]++;
-        }
-    }
-
     vector<vector<char>> get_result() {
         vector<vector<char>> all;
-        vector<char> sir(n + 1);
+        vector<char> sir(k, ' ');
         backtrack(all, sir, 1);
+        for (size_t i = 0; i < all.size(); i++) {
+            all[i].erase(all[i].begin());
+        }
         return all;
     }
 
     void print_output(const vector<vector<char>>& result) {
         ofstream fout("out");
-        cout << result.size() << '\n';
+        fout << result.size() << '\n';
         for (size_t i = 0; i < result.size(); i++) {
             for (size_t j = 0; j < result[i].size(); j++) {
-                cout << result[i][j];
+                fout << result[i][j];
             }
-            cout << '\n';
+            fout << '\n';
         }
         fout.close();
     }
