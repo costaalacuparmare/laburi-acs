@@ -39,7 +39,6 @@ private:
         //
         // Indicație: Folosiți algoritmul lui Tarjan pentru SCC.
         //
-
         vector<vector<int>> all_sccs;
         return all_sccs;
     }

@@ -25,9 +25,14 @@ char *compute_get_request(char *host, char *url, char *query_params,
     compute_message(message, line);
 
     // Step 2: add the host
+    sprintf(line, "Host: %s", host);
+
     // Step 3 (optional): add headers and/or cookies, according to the protocol format
     if (cookies != NULL) {
-       
+       for (int i = 0; i < cookies_count; i++) {
+           sprintf(line, "Cookie: %s", cookies[i]);
+           compute_message(message, line);
+       }
     }
     // Step 4: add final new line
     compute_message(message, "");
@@ -46,18 +51,39 @@ char *compute_post_request(char *host, char *url, char* content_type, char **bod
     compute_message(message, line);
     
     // Step 2: add the host
+    sprintf(line, "HOST: %s", host);
+    compute_message(message, line);
     /* Step 3: add necessary headers (Content-Type and Content-Length are mandatory)
             in order to write Content-Length you must first compute the message size
     */
+    sprintf(line, "Content-Type: %s", content_type);
+    compute_message(message, line);
+
+    int total_size = 0;
+    for (int i = 0; i < body_data_fields_count; i++) {
+        strcat(body_data_buffer, body_data[i]);
+        total_size += strlen(body_data[i]);
+    }
+
+    sprintf(line, "Content-Length: %d", total_size);
+    compute_message(message, line);
+
     // Step 4 (optional): add cookies
     if (cookies != NULL) {
-       
+        sprintf(line , "Cokkies: %s", cookies[0]);
+        for (int i = 1; i < cookies_count; i++) {
+            sprintf(line , "; %s", cookies[i]);
+            compute_message(message, line);
+        }
     }
     // Step 5: add new line at end of header
+    memset(line, 0, LINELEN);
+    compute_message(message, line);
 
     // Step 6: add the actual payload data
     memset(line, 0, LINELEN);
     strcat(message, body_data_buffer);
+
 
     free(line);
     return message;
