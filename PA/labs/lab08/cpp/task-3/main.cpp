@@ -59,25 +59,45 @@ private:
         fin.close();
     }
 
-    BellmanFordResult get_result() {
-        //
-        // TODO: Gasiti distantele minime de la nodul source la celelalte noduri
-        // folosind Bellman-Ford pe graful orientat cu n noduri, m arce stocat in adj.
-        //     d[node] = costul minim / lungimea minima a unui drum de la source la nodul
-        // node;
-        //     d[source] = 0;
-        //     d[node] = -1, daca nu se poate ajunge de la source la node.
-        //
-        // Atentie:
-        // O muchie este tinuta ca o pereche (nod adiacent, cost muchie):
-        //     adj[node][i] == (neigh, w) - unde neigh este al i-lea vecin al lui node, iar (node, neigh) are cost w.
-        //
-        // In cazul in care exista ciclu de cost negativ, returnati un obiect de tipul
-        //  BellmanFordResult cu campul has_cycle setat pe true si doi vectori fara elemente;
-        //
+    // Gasiti distantele minime de la nodul source la celelalte noduri
+    // folosind Bellman-Ford pe graful orientat cu n noduri, m arce stocat in adj.
+    //     d[node] = costul minim / lungimea minima a unui drum de la source la nodul
+    // node;
+    //     d[source] = 0;
+    //     d[node] = -1, daca nu se poate ajunge de la source la node.
+    //
+    // Atentie:
+    // O muchie este tinuta ca o pereche (nod adiacent, cost muchie):
+    //     adj[node][i] == (neigh, w) - unde neigh este al i-lea vecin al lui node, iar (node, neigh) are cost w.
+    //
+    // In cazul in care exista ciclu de cost negativ, returnati un obiect de tipul
+    //  BellmanFordResult cu campul has_cycle setat pe true si doi vectori fara elemente;
 
+    BellmanFordResult get_result() {
         vector<int> d(n + 1);
         vector<int> p(n + 1);
+        for (int i = 1; i <= n; i++) {
+            d[i] = INF;
+            p[i] = -1;
+        }
+        d[source] = 0;
+        for (int i = 1; i < n; i++) {
+            for (int node = 1; node <= n; node++) {
+                for (const auto& [neigh, w] : adj[node]) {
+                    if (d[node] + w < d[neigh]) {
+                        d[neigh] = d[node] + w;
+                        p[neigh] = node;
+                    }
+                }
+            }
+        }
+        for (int node = 1; node <= n; node++) {
+            for (const auto& [neigh, w] : adj[node]) {
+                if (d[node] + w < d[neigh]) {
+                    return {true, d, p};
+                }
+            }
+        }
         return {false, d, p};
     }
 

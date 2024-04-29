@@ -30,15 +30,52 @@ private:
         fin.close();
     }
 
-    vector<int> get_result() {
-        //
-        // TODO: Gasiti toate nodurile critice ale grafului neorientat stocat cu liste de adiacenta in adj.
-        // Rezultatul se va returna sub forma unui vector cu toate punctele critice (ordinea nu conteaza).
-        //
-        // Indicație: Folosiți algoritmul lui Tarjan pentru CV.
-        //
+    // Gasiti toate nodurile critice ale grafului neorientat stocat cu liste de adiacenta in adj.
+    // Rezultatul se va returna sub forma unui vector cu toate punctele critice (ordinea nu conteaza).
+    // Indicație: Folosiți algoritmul lui Tarjan pentru CV.
 
+    void tarjan(int node, vector<int>& all_cvs, vector<int>& idx,
+                vector<int>& low, vector<int>& parent, vector<bool>& visited,
+                int& time) {
+        idx[node] = low[node] = time++;
+        visited[node] = true;
+        int children = 0;
+        bool is_critical = false;
+        for (auto neigh : adj[node]) {
+            if (!visited[neigh]) {
+                children++;
+                parent[neigh] = node;
+                tarjan(neigh, all_cvs, idx, low, parent, visited, time);
+                low[node] = min(low[node], low[neigh]);
+                if (parent[node] == -1 && children > 1) {
+                    is_critical = true;
+                }
+                if (parent[node] != -1 && low[neigh] >= idx[node]) {
+                    is_critical = true;
+                }
+            } else if (neigh != parent[node]) {
+                low[node] = min(low[node], idx[neigh]);
+            }
+        }
+        if ((parent[node] == -1 && children > 1) || (parent[node] != -1 &&
+            is_critical)) {
+            all_cvs.push_back(node);
+        }
+    }
+
+
+    vector<int> get_result() {
         vector<int> all_cvs;
+        vector<int> idx(n + 1, -1);
+        vector<int> low(n + 1, -1);
+        vector<int> parent(n + 1, -1);
+        vector<bool> visited(n + 1, false);
+        int time = 0;
+        for (int i = 1; i <= n; i++) {
+            if (!visited[i]) {
+                tarjan(i, all_cvs, idx, low, parent, visited, time);
+            }
+        }
         return all_cvs;
     }
 

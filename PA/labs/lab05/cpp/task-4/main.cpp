@@ -12,6 +12,7 @@ private:
     int n, k;
     string caractere;
     vector<int> freq;
+    int max_apparitions = 0;
 
     void read_input() {
         ifstream fin("in");
@@ -22,6 +23,7 @@ private:
         freq.push_back(-1); // Adaugare element fictiv - indexare de la 1.
         for (int i = 1, f; i <= n; i++) {
             fin >> f;
+            max_apparitions += f;
             freq.push_back(f);
         }
         fin.close();
@@ -32,13 +34,24 @@ private:
     // k = maximum number of consecutive characters
     // freq = frequency of each character
     void backtrack(vector<vector<char>>& all, vector<char>& sir, int pos) {
-        if (pos >= k) {
+        int consecutive = 1;
+        for (int i = 1; i < pos; i++) {
+            if (sir[i] == sir[i - 1]) {
+                consecutive++;
+            } else {
+                consecutive = 1;
+            }
+        }
+        if (pos == max_apparitions) {
             all.push_back(sir);
             return;
         }
 
         for (int i = 1; i <= n; i++) {
-            if (freq[i] > 0 && (pos <= k || sir[pos - k] != caractere[i])) {
+            if (freq[i] > 0) {
+                if (consecutive >= k && sir[pos - 1] == caractere[i]) {
+                    continue;
+                }
                 sir[pos] = caractere[i];
                 freq[i]--;
                 backtrack(all, sir, pos + 1);
@@ -46,10 +59,6 @@ private:
             }
         }
     }
-
-
-
-
 
     // Construiti toate sirurile cu caracterele in stringul caractere
     // (indexat de la 1 la n), si frecventele in vectorul freq (indexat de la 1 la n),
@@ -63,11 +72,8 @@ private:
 
     vector<vector<char>> get_result() {
         vector<vector<char>> all;
-        vector<char> sir(k, ' ');
-        backtrack(all, sir, 1);
-        for (size_t i = 0; i < all.size(); i++) {
-            all[i].erase(all[i].begin());
-        }
+        vector<char> sir(max_apparitions + 1, ' ');
+        backtrack(all, sir, 0);
         return all;
     }
 

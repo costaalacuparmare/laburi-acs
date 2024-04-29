@@ -44,21 +44,50 @@ private:
         fin.close();
     }
 
+    // Gasiti distantele minime de la nodul source la celelalte noduri
+    // folosind Dijkstra pe graful orientat cu n noduri, m arce stocat in adj.
+    //
+    // d[node] = costul minim / lungimea minima a unui drum de la source la nodul node
+    //     * d[source] = 0;
+    //     * d[node] = -1, daca nu se poate ajunge de la source la node.
+    //
+    // Atentie:
+    // O muchie este tinuta ca o pereche (nod adiacent, cost muchie):
+    //     adj[node][i] == (neigh, w) - unde neigh este al i-lea vecin al lui node, iar (node, neigh) are cost w.
+
     DijkstraResult get_result() {
-        //
-        // TODO: Gasiti distantele minime de la nodul source la celelalte noduri
-        // folosind Dijkstra pe graful orientat cu n noduri, m arce stocat in adj.
-        //
-        // d[node] = costul minim / lungimea minima a unui drum de la source la nodul node
-        //     * d[source] = 0;
-        //     * d[node] = -1, daca nu se poate ajunge de la source la node.
-        //
-        // Atentie:
-        // O muchie este tinuta ca o pereche (nod adiacent, cost muchie):
-        //     adj[node][i] == (neigh, w) - unde neigh este al i-lea vecin al lui node, iar (node, neigh) are cost w.
-        //
-        vector<int> d(n + 1);
-        vector<int> p(n + 1);
+        vector<int> d(n + 1, INF);
+        vector<int> p(n + 1, -1);
+        vector<bool> visited(n + 1, false);
+
+        d[source] = 0;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq; // pereche (distanță, nod)
+        pq.push({0, source});
+
+        while (!pq.empty()) {
+            int node = pq.top().second;
+            pq.pop();
+
+            if (visited[node]) {
+                continue;
+            }
+            visited[node] = true;
+
+            for (const auto& [neigh, w] : adj[node]) {
+                if (d[neigh] > d[node] + w) {
+                    d[neigh] = d[node] + w;
+                    p[neigh] = node;
+                    pq.push({d[neigh], neigh});
+                }
+            }
+        }
+
+        for (int i = 1; i <= n; i++) {
+            if (d[i] == INF) {
+                d[i] = -1;
+            }
+        }
+
         return {d, p};
     }
 

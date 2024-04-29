@@ -40,16 +40,42 @@ private:
         fin.close();
     }
 
-    vector<Edge> get_result() {
-        //
-        // TODO: Gasiti toate muchiile critice ale grafului neorientat stocat cu liste de adiacenta in adj.
-        //
-        // Rezultatul se va returna sub forma unui vector cu toate muchille critice (ordinea lor nu conteaza).
-        //
-        // Indicație: Folosiți algoritmul lui Tarjan pentru CE.
-        //
+    // Gasiti toate muchiile critice ale grafului neorientat stocat cu liste de adiacenta in adj.
+    // Rezultatul se va returna sub forma unui vector cu toate muchille critice (ordinea lor nu conteaza).
+    // Indicație: Folosiți algoritmul lui Tarjan pentru CE.
 
+    void tarjan(int node, vector<int>& low, vector<int>& disc,
+                vector<int>& parent, vector<bool>& visited,
+                int& time, vector<Edge>& all_ces) {
+        visited[node] = true;
+        disc[node] = low[node] = ++time;
+        for (auto& neigh : adj[node]) {
+            if (!visited[neigh]) {
+                parent[neigh] = node;
+                tarjan(neigh, low, disc, parent, visited, time, all_ces);
+                low[node] = min(low[node], low[neigh]);
+                if (low[neigh] > disc[node]) {
+                    all_ces.push_back(Edge(node, neigh));
+                }
+            } else if (neigh != parent[node]) {
+                low[node] = min(low[node], disc[neigh]);
+            }
+        }
+    }
+
+    vector<Edge> get_result() {
         vector<Edge> all_ces;
+        vector<int> low(n + 1, 0);
+        vector<int> disc(n + 1, 0);
+        vector<int> parent(n + 1, -1);
+        vector<bool> visited(n + 1, false);
+        int time = 0;
+        // use tarjan
+        for (int i = 1; i <= n; i++) {
+            if (!visited[i]) {
+                tarjan(i, low, disc, parent, visited, time, all_ces);
+            }
+        }
         return all_ces;
     }
 

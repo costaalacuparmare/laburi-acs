@@ -29,17 +29,51 @@ private:
         fin.close();
     }
 
+    // Găsiți componentele tare conexe  (CTC / SCC) ale grafului orientat cu n noduri, stocat în adj.
+    // Rezultatul se va returna sub forma unui vector, fiecare element fiind un SCC (adică tot un vector).
+    // * nodurile dintr-un SCC pot fi găsite în orice ordine
+    // * SCC-urile din graf pot fi găsite în orice ordine
+    // Indicație: Folosiți algoritmul lui Tarjan pentru SCC.
+
+    void tarjan(int node, vector<int>& idx, vector<int>& low, int& idx_counter,
+                stack<int>& st, vector<bool>& on_stack,
+                vector<vector<int>>& all_sccs) {
+        idx[node] = low[node] = idx_counter++;
+        st.push(node);
+        on_stack[node] = true;
+        for (auto neigh : adj[node]) {
+            if (idx[neigh] == -1) {
+                tarjan(neigh, idx, low, idx_counter, st, on_stack, all_sccs);
+                low[node] = min(low[node], low[neigh]);
+            } else if (on_stack[neigh]) {
+                low[node] = min(low[node], idx[neigh]);
+            }
+        }
+        if (idx[node] == low[node]) {
+            vector<int> scc;
+            int top;
+            do {
+                top = st.top();
+                st.pop();
+                on_stack[top] = false;
+                scc.push_back(top);
+            } while (top != node);
+            all_sccs.push_back(scc);
+        }
+    }
+
     vector<vector<int>> get_result() {
-        //
-        // TODO: Găsiți componentele tare conexe  (CTC / SCC) ale grafului orientat cu n noduri, stocat în adj.
-        //
-        // Rezultatul se va returna sub forma unui vector, fiecare element fiind un SCC (adică tot un vector).
-        // * nodurile dintr-un SCC pot fi găsite în orice ordine
-        // * SCC-urile din graf pot fi găsite în orice ordine
-        //
-        // Indicație: Folosiți algoritmul lui Tarjan pentru SCC.
-        //
         vector<vector<int>> all_sccs;
+        stack<int> st;
+        vector<int> idx(n + 1, -1);
+        vector<int> low(n + 1, -1);
+        vector<bool> on_stack(n + 1, false);
+        int idx_counter = 0;
+        for (int i = 1; i <= n; i++) {
+            if (idx[i] == -1) {
+                tarjan(i, idx, low, idx_counter, st, on_stack, all_sccs);
+            }
+        }
         return all_sccs;
     }
 

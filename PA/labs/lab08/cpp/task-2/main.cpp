@@ -35,15 +35,22 @@ private:
         fin.close();
     }
 
+    // Reconstituiti drumul de cost minim de la nodul source la nodul destination
+    // folosind vectorul de parinti parent.
+    // In cazul in care exista nu exista un drum de la sursa la destinatie, returnati
+    // un vector gol (a.k.a. return {};).
+
     vector<int> get_result() {
-        //
-        // TODO: Reconstituiti drumul de cost minim de la nodul source la nodul destination
-        // folosind vectorul de parinti parent.
-        //
-        // In cazul in care exista nu exista un drum de la sursa la destinatie, returnati
-        // un vector gol (a.k.a. return {};).
-        //
         vector<int> path;
+        int node = destination;
+        while (node != -1) {
+            path.push_back(node);
+            node = parent[node];
+        }
+        if (path.back() != source) {
+            return {};
+        }
+        reverse(path.begin(), path.end());
         return path;
     }
 
