@@ -15,8 +15,8 @@ private:
 
         Edge() { }
         Edge(int x, int y)
-            : x(x)
-            , y(y) { }
+                : x(x)
+                , y(y) { }
 
         bool operator==(const Edge& other) { return x == other.x && y == other.y; }
         bool operator!=(const Edge& other) { return !(*this == other); }
@@ -32,9 +32,37 @@ private:
     // exemplu: daca adj[node] = {..., neigh, ...} => exista arcul (node, neigh)
     vector<int> adj[NMAX];
 
+
+    // vector pentru a memora timpul de descoperire a fiecarui nod
+    vector<int> disc;
+
+    // vector pentru a memora timpul de terminare a fiecarui nod
+    vector<int> finish;
+
+    // vector pentru a memora cel mai mic timp de descoperire al unui nod
+    // accesibil din subarborele unui nod
+    vector<int> low;
+
+    // vector pentru a memora daca un nod este sau nu punct de articulatie
+    vector<bool> is_articulation;
+
+    // vector pentru a memora muchiile critice (ponturi)
+    vector<Edge> bridges;
+
+    // stiva folosita pentru a retine nodurile dintr-un BCC
+    stack<Edge> edge_stack;
+
+    // vector pentru a memora toate BCC-urile
+    vector<vector<int>> all_bccs;
+
     void read_input() {
         ifstream fin("in");
         fin >> n >> m;
+        disc.resize(n + 1);
+        finish.resize(n + 1);
+        low.resize(n + 1);
+        is_articulation.resize(n + 1, false);
+
         for (int i = 1, x, y; i <= m; i++) {
             fin >> x >> y; // muchia (x, y)
             adj[x].push_back(y);
@@ -43,58 +71,79 @@ private:
         fin.close();
     }
 
-    void tarjan(int node, int parent, stack<Edge>& st, vector<int>& idx, vector<int>& low, vector<bool>& is_articulation, int& idx_counter, vector<vector<int>>& all_bccs) {
-        idx[node] = low[node] = ++idx_counter;
+
+    // Găsiți componentele biconexe (BCC) ale grafului neorientat cu n noduri, stocat în adj.
+    // Rezultatul se va returna sub forma unui vector, fiecare element fiind un BCC (adică tot un vector).
+    // * nodurile dintr-un BCC pot fi găsite în orice ordine
+    // * BCC-urile din graf pot fi găsite în orice ordine
+    // Indicație: Folosiți algoritmul lui Tarjan pentru BCC.
+
+    void tarjan(int u, int parent, int &time) {
+        disc[u] = low[u] = ++time;
         int children = 0;
-        for (auto neigh : adj[node]) {
-            if (neigh == parent) {
+
+        for (int v : adj[u]) {
+            if (v == parent)
                 continue;
-            }
-            if (idx[neigh] == -1) {
-                st.push(Edge(node, neigh));
+            if (!disc[v]) {
                 children++;
-                tarjan(neigh, node, st, idx, low, is_articulation, idx_counter, all_bccs);
-                low[node] = min(low[node], low[neigh]);
-                if ((parent == -1 && children > 1) || (parent != -1 && low[neigh] >= idx[node])) {
-                    is_articulation[node] = true;
-                    vector<int> bcc;
-                    while (st.top() != Edge(node, neigh)) {
-                        bcc.push_back(st.top().x);
-                        bcc.push_back(st.top().y);
-                        st.pop();
-                    }
-                    bcc.push_back(st.top().x);
-                    bcc.push_back(st.top().y);
-                    st.pop();
-                    all_bccs.push_back(bcc);
+                edge_stack.push(Edge(u, v));
+                tarjan(v, u, time);
+                low[u] = min(low[u], low[v]);
+
+                if (low[v] > disc[u])
+                    bridges.push_back(Edge(u, v));
+
+                if (parent != -1 && low[v] >= disc[u])
+                    is_articulation[u] = true;
+
+                if (low[v] >= disc[u]) {
+                    vector<int> bcc_nodes;
+                    Edge e;
+                    do {
+                        e = edge_stack.top();
+                        edge_stack.pop();
+                        if (find(bcc_nodes.begin(), bcc_nodes.end(), e.x) == bcc_nodes.end())
+                            bcc_nodes.push_back(e.x);
+                        if (find(bcc_nodes.begin(), bcc_nodes.end(), e.y) == bcc_nodes.end())
+                            bcc_nodes.push_back(e.y);
+                    } while (!(e.x == u && e.y == v) && !(e.x == v && e.y == u));
+                    if (find(bcc_nodes.begin(), bcc_nodes.end(), u) == bcc_nodes.end())
+                        bcc_nodes.push_back(u); // Adaugam nodul u in BCC
+                    sort(bcc_nodes.begin(), bcc_nodes.end());
+                    all_bccs.push_back(bcc_nodes);
                 }
-            } else {
-                low[node] = min(low[node], idx[neigh]);
-                if (idx[neigh] < idx[node]) {
-                    st.push(Edge(node, neigh));
-                }
+            } else if (disc[v] < disc[u]) {
+                low[u] = min(low[u], disc[v]);
+                edge_stack.push(Edge(u, v));
             }
         }
+
+        if (parent == -1 && children > 1)
+            is_articulation[u] = true;
     }
 
-    vector<vector<int>> get_result() {
-        // Găsiți componentele biconexe (BCC) ale grafului neorientat cu n noduri, stocat în adj.
-        // Rezultatul se va returna sub forma unui vector, fiecare element fiind un BCC (adică tot un vector).
-        // * nodurile dintr-un BCC pot fi găsite în orice ordine
-        // * BCC-urile din graf pot fi găsite în orice ordine
-        // Indicație: Folosiți algoritmul lui Tarjan pentru BCC.
 
-        vector<vector<int>> all_bccs;
-        stack<Edge> st;
-        vector<int> idx(n + 1, -1);
-        vector<int> low(n + 1, -1);
-        vector<bool> is_articulation(n + 1, false);
-        int idx_counter = 0;
-        for (int i = 1; i <= n; i++) {
-            if (idx[i] == -1) {
-                tarjan(i, -1, st, idx, low, is_articulation, idx_counter, all_bccs);
+    vector<vector<int>> get_result() {
+        int time = 0;
+        for (int i = 1; i <= n; ++i) {
+            if (!disc[i]) {
+                tarjan(i, -1, time);
             }
         }
+
+        vector<vector<int>> remaining_bccs;
+        while (!edge_stack.empty()) {
+            Edge e = edge_stack.top();
+            edge_stack.pop();
+            vector<int> bcc_nodes = {e.x, e.y};
+            remaining_bccs.push_back(bcc_nodes);
+        }
+        if (!remaining_bccs.empty()) {
+            all_bccs.push_back(remaining_bccs.back());
+            remaining_bccs.pop_back();
+        }
+
         return all_bccs;
     }
 
