@@ -112,7 +112,6 @@ void send_command(int sockfd, const char sendbuf[], char *expected)
 int main(int argc, char **argv) {
     int sockfd;
     int port = SMTP_PORT;
-    struct sockaddr_in servaddr;
     char server_ip[INET_ADDRSTRLEN];
     char sendbuf[MAXLEN]; 
     char recvbuf[MAXLEN];
@@ -124,7 +123,8 @@ int main(int argc, char **argv) {
 
     strncpy(server_ip, argv[1], INET_ADDRSTRLEN);
 
-    // TODO 1: Conecteaza-te la server
+    // Conecteaza-te la server
+    sockfd = open_connection(server_ip, port, AF_INET, SOCK_STREAM, 0);
 
     // se primeste mesajul de conectare de la server
     read_line(sockfd, recvbuf, MAXLEN -1);
@@ -134,17 +134,59 @@ int main(int argc, char **argv) {
     sprintf(sendbuf, "HELO localhost");
     send_command(sockfd, sendbuf, "250");
 
-    // TODO 2: trimiteti comanda de MAIL FROM
+    // trimiteti comanda de MAIL FROM
+    sprintf(sendbuf, "MAIL FROM: <");
+    strcat(sendbuf, "costa@ASUS-TUF-A15");
+    strcat(sendbuf, ">");
+    send_command(sockfd, sendbuf, "250");
 
-    // TODO 3: trimiteti comanda de RCPT TO
+    // trimiteti comanda de RCPT TO
+    sprintf(sendbuf, "RCPT TO: <");
+    strcat(sendbuf, "root@localhost");
+    strcat(sendbuf, ">");
+    send_command(sockfd, sendbuf, "250");
 
-    // TODO 4: trimiteti comanda de DATA
+    // trimiteti comanda de DATA
+    sprintf(sendbuf, "DATA");
+    send_command(sockfd, sendbuf, "354");
 
     // TODO 5: trimiteti e-mail-ul (antete + corp + atasament)
+    sprintf(sendbuf, "MIME-Version: 1.0\r\n");
+    strcat(sendbuf, "From: <costa@ASUS-TUF-A15>\r\n");
+    strcat(sendbuf, "To: <root@localhost>\r\n");
+    strcat(sendbuf, "Subject: Laborator\r\n");
+    strcat(sendbuf, "Content-Type: multipart/mixed; boundary=abc\r\n");
+    strcat(sendbuf, "\r\n--abc\r\n");
+    strcat(sendbuf, "Content-Type: text/plain\r\n");
+    strcat(sendbuf, "\r\n");
+    strcat(sendbuf, "Hello world! This is content\r\n Bye World\r\n");
+    strcat(sendbuf,"\r\n--abc\r\n.");
+    strcat(sendbuf, "Content-Type: text/plain\r\n");
+    strcat(sendbuf, "Content-Disposition: attachment; filename=\"/");
+    strcat(sendbuf, argv[2]);
+    strcat(sendbuf, "\"\r\n\r\n");
 
-    // TODO 6: trimiteti comanda de QUIT
+    int fd = open(argv[2], O_RDONLY);
+    if (fd < 0) {
+        exit(-1);
+    }
+    while (1) {
+        int bytes = read(fd, sendbuf, MAXLEN);
+        if (bytes <= 0) {
+            break;
+        }
+        write(sockfd, sendbuf, bytes);
+    }
+    close(fd);
 
-    // TODO 7: inchideti socket-ul TCP client
+    strcat(sendbuf, "\r\n--abc--\r\n");
+    send_command(sockfd, sendbuf, "250");
+
+    // trimiteti comanda de QUIT
+    sprintf(sendbuf, "QUIT");
+
+    // inchideti socket-ul TCP client
+    close(sockfd);
 
     return 0;
 }

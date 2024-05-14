@@ -23,13 +23,30 @@ void get_ip(char* name)
 	int ret;
 	struct addrinfo hints, *result, *p;
 
-	// TODO: set hints
+	// set hints
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_protocol = 0;
+    hints.ai_flags = AI_CANONNAME;
 
-	// TODO: get addresses
+	// get addresses
+    ret = getaddrinfo(name, NULL, &hints, &result);
+    if (ret != 0) {
+        return;
+    }
 
-	// TODO: iterate through addresses and print them
+	// iterate through addresses and print them
+    for (p = result; p != NULL; p = p->ai_next) {
+        struct sockaddr_in *addr = (struct sockaddr_in *)p->ai_addr;
+        printf("%s\n", inet_ntoa(addr->sin_addr));
+        /*
+         * FOR IPv6 printf("%s\n", inet_ntop(AF_INET, &addr->sin_addr,
+         * (char *)malloc(INET_ADDRSTRLEN), INET_ADDRSTRLEN));
+         */
+    }
 
-	// TODO: free allocated data
+	// free allocated data
+    freeaddrinfo(result);
 }
 
 // Receives an address and prints the associated name and service
@@ -40,11 +57,20 @@ void get_name(char* ip)
 	char host[1024];
 	char service[20];
 
-	// TODO: fill in address data
+	// fill in address data
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(80);
+    inet_aton(ip, &addr.sin_addr);
 
-	// TODO: get name and service
+	// get name and service
+    ret = getnameinfo((struct sockaddr *)&addr, sizeof(addr), host,
+            sizeof(host), service, sizeof(service), 0);
+    if (ret != 0) {
+       return;
+    }
 
-	// TODO: print name and service
+	// print name and service
+    printf("%s %s\n", host, service);
 }
 
 int main(int argc, char **argv)
