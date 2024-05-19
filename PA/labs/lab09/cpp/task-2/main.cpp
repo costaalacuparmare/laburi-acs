@@ -28,33 +28,93 @@ private:
         fin.close();
     }
 
-    JohnsonResult compute() {
-        //
-        // TODO: Gasiti distantele minime intre oricare doua noduri, folosind
-        // algoritmul lui Johnson pe graful orientat cu n noduri, m arce stocat in adk.
-        //
-        // Atentie:
-        // O muchie este tinuta ca o pereche (nod adiacent, cost muchie):
-        //     adj[node][i] == (neigh, w) - unde neigh este al i-lea vecin al lui node, iar (node, neigh) are cost w.
-        //
-        //
-        // Trebuie sa întoarceți o structură de tipul JohnsonResult, care contine membrii
-        //  * has_cycle = true, dacă a fost întâlnit un ciclu de cost negativ
-        //  * d = matricea de distante, unde se setează d[u][v] = 0, daca nu a fost gasit
-        // un drum de la u la v. d[u][u] = 0
-        //  * p = matricea de parinti, unde p[u][v] = parintele nodului v, pornind din nodul u.
-        // si p[u][v] = 0, daca v nu se poate atinge din nodul u
-        //
-        // Verificati "shortest_path.h":
-        // * Structuri ajutatoare: Edge, JohnsonResult.
-        // * Implementare data Dijkstra, BellmanFord.
-        //
+    // Gasiti distantele minime intre oricare doua noduri, folosind
+    // algoritmul lui Johnson pe graful orientat cu n noduri, m arce stocat in adk.
+    //
+    // Atentie:
+    // O muchie este tinuta ca o pereche (nod adiacent, cost muchie):
+    //     adj[node][i] == (neigh, w) - unde neigh este al i-lea vecin al lui node, iar (node, neigh) are cost w.
+    //
+    //
+    // Trebuie sa întoarceți o structură de tipul JohnsonResult, care contine membrii
+    //  * has_cycle = true, dacă a fost întâlnit un ciclu de cost negativ
+    //  * d = matricea de distante, unde se setează d[u][v] = 0, daca nu a fost gasit
+    // un drum de la u la v. d[u][u] = 0
+    //  * p = matricea de parinti, unde p[u][v] = parintele nodului v, pornind din nodul u.
+    // si p[u][v] = 0, daca v nu se poate atinge din nodul u
+    //
+    // Verificati "shortest_path.h":
+    // * Structuri ajutatoare: Edge, JohnsonResult.
+    // * Implementare data Dijkstra, BellmanFord.
+    pair<bool, vector<int>> bellman_help(int nodes, std::vector<std::pair<int, int>> adj[NMAX]) {
+        // Se adauga un nod suplimentar "fictiv"
+        int new_n = n + 1;
+        int source = n + 1;
 
+        // Se copiaza vectorul de liste de adiacente
+        auto new_adj = adj;
+
+        // Se leaga la toate celelalte noduri cu distanta "fictiva" 0
+        for (int node = 1; node <= n; node++) {
+            new_adj[source].push_back({node, 0});
+        }
+
+        // Construiesc un vector de muchii
+        vector<Edge> edges;
+        for (int node = 1; node <= new_n; ++node) {
+            for (const auto& [neigh, w] : new_adj[node]) {
+                edges.push_back(Edge(node, neigh, w));
+            }
+        }
+
+        // Se aplica algoritmul Bellman-Ford porning din nodul fictiv
+        auto res = bellman(source, new_n, edges);
+
+        // Daca se identifica un ciclu de cost negativ, problema nu are solutie
+        if (res.has_cycle) {
+            return {true, {}};
+        }
+
+        // In caz contrar, se intoarce structura BellmanFordResult, ce contine vectorul de distante
+        // si vectorul de parinti
+        return {false, res.d};
+    }
+
+    JohnsonResult compute() {
         vector<vector<int>> d(n + 1, vector<int>(n + 1, 0)); // initial toate distantele sunt 0
         vector<vector<int>> p(n + 1, vector<int>(n + 1, 0)); // initial toti parintii sunt 0
 
-        return {false, d,  p};
+        auto [has_cycle, h] = bellman_help(n, adj);
+        if (has_cycle) {
+            // Am intalnit un ciclu de cost negativ, problema nu are solutie.
+            return {true, {}, {}};
+        }
+
+        // Translatare folosind distantele calculate cu BellmanFord pentru a face
+        // toate costurile din graf nenegative.
+        for (int u = 1; u <= n; u++) {
+            for (auto& [v, w] : adj[u]) {
+                w = w + (h[u] - h[v]);
+            }
+        }
+
+        // Se aplica algoritmul lui Dijsktra pornind din fiecare nod al grafului.
+        for (int u = 1; u <= n; u++) {
+            const auto& [d_dijkstra, p_dijkstra] = dijkstra(u, n, adj);
+            for (int v = 1; v <= n; v++) {
+                // daca distanta returnata de Dijkstra este -1, nu exista drum intre
+                // nodul u si nodul v si pun distanta 0, conform conventiei.
+                if (d_dijkstra[v] != -1) {
+                    // daca exista drum intre u si v, trebuie sa fac si translatarea inversa.
+                    d[u][v] = d_dijkstra[v] + (h[v] - h[u]);
+                    p[u][v] = p_dijkstra[v];
+                }
+            }
+        }
+
+        return {false, d, p};
     }
+
 
     void print_output(const JohnsonResult &res) {
         ofstream fout("out");

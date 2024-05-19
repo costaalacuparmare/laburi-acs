@@ -43,26 +43,58 @@ private:
         fin.close();
     }
 
+    // Gasiti distantele minime intre oricare doua noduri, folosind Roy-Floyd
+    // pe graful orientat cu n noduri, m arce stocat in matricea ponderilor w
+    // (declarata mai sus).
+    //
+    // Atentie:
+    // O muchie (x, y, w[x][y]) este reprezentata astfel in matricea ponderilor:
+    //     w[x][y] este costul muchiei de la x la y
+    // Daca nu exista o muchie intre doua noduri x si y, in matricea ponderilor:
+    //     w[x][y] = 0;
+    //
+    // Trebuie sa populati matricea d[][] (declarata mai sus):
+    //     d[x][y] = distanta minima intre nodurile x si y, daca exista drum.
+    //     d[x][y] = 0 daca nu exista drum intre x si y.
+    //          * implicit: d[x][x] = 0 (distanta de la un nod la el insusi).
+    //
     RoyFloydResult compute() {
-        //
-        // TODO: Gasiti distantele minime intre oricare doua noduri, folosind Roy-Floyd
-        // pe graful orientat cu n noduri, m arce stocat in matricea ponderilor w
-        // (declarata mai sus).
-        //
-        // Atentie:
-        // O muchie (x, y, w[x][y]) este reprezentata astfel in matricea ponderilor:
-        //     w[x][y] este costul muchiei de la x la y
-        // Daca nu exista o muchie intre doua noduri x si y, in matricea ponderilor:
-        //     w[x][y] = 0;
-        //
-        // Trebuie sa populati matricea d[][] (declarata mai sus):
-        //     d[x][y] = distanta minima intre nodurile x si y, daca exista drum.
-        //     d[x][y] = 0 daca nu exista drum intre x si y.
-        //          * implicit: d[x][x] = 0 (distanta de la un nod la el insusi).
-        //
+        vector<vector<int>> d(n + 1, vector<int>(n + 1, INT_MAX));
+        vector<vector<int>> p(n + 1, vector<int>(n + 1, -1));
 
-        vector<vector<int>> d(n + 1, vector<int>(n + 1));
-        vector<vector<int>> p(n + 1, vector<int>(n + 1));
+
+        for (int u = 1; u <= n; u++) {
+            for (int v = 1; v <= n; v++) {
+                if (w[u][v] != 0) {
+                    d[u][v] = w[u][v];
+                    p[u][v] = u;
+                }
+                if (u == v) {
+                    d[u][v] = 0;
+                }
+            }
+        }
+
+        for (int k = 1; k <= n; k++) {
+            for (int u = 1; u <= n; u++) {
+                for (int v = 1; v <= n; v++) {
+                    if (d[u][k] != INT_MAX && d[k][v] != INT_MAX) {
+                        if (d[u][v] > d[u][k] + d[k][v]) {
+                            d[u][v] = d[u][k] + d[k][v];
+                            p[u][v] = p[k][v];
+                        }
+                    }
+                }
+            }
+        }
+
+        for (int u = 1; u <= n; u++)
+            for (int v = 1; v <= n; v++) {
+                if (p[u][v] < -1)
+                    p[u][v] = 0;
+                if (d[u][v] == INT_MAX)
+                    d[u][v] = 0;
+            }
 
         return {d, p};
     }
