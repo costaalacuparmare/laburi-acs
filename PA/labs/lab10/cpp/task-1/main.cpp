@@ -118,6 +118,25 @@ private:
         int cost = 0;
         vector<pair<int, int>> mst;
 
+        // Sortam muchiile crescator dupa cost
+        sort(edges.begin(), edges.end(),
+             [](const Edge& a, const Edge& b) {
+            return a.w < b.w;
+        });
+
+        DisjointSet ds(n);
+
+        for (const auto& edge : edges) {
+            int x = edge.node;
+            int y = edge.neigh;
+            int w = edge.w;
+
+            if (ds.setOf(x) != ds.setOf(y)) {
+                cost += w;
+                mst.emplace_back(x, y);
+                ds._union(x, y);
+            }
+        }
         return {cost, mst};
     }
 
