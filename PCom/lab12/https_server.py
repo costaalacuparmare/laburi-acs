@@ -4,7 +4,7 @@ import ssl
 
 html = """HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE html><html><body><h1>Hello, world!</h1></body></html>"""
 
-SERVER_CERT = './server.crt'
+SERVER_CERT = '.server.crt'
 SERVER_PRIVATE = './server.key'
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)

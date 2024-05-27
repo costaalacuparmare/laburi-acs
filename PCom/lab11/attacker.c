@@ -51,9 +51,12 @@ void handle_encrypted_message(int source, char *data, size_t size)
 	switch (source) {
 	case SRC_ALICE:
 		if (!key_retrieved) {
-			// TODO 2. Steal the key from Alice in the first step
-			key_retrieved = 1;
-			return;
+			// Steal the key from Alice in the first step
+            // and store it in the key variable
+            for (int i = 0; i < KEY_SIZE / sizeof(uint32_t); i++) {
+                key[i] = ((uint32_t *)data)[i];
+            }
+            key_retrieved = 1;
 		}
 		puts("ALICE wrote to BOB: ");
 	break;
@@ -64,7 +67,10 @@ void handle_encrypted_message(int source, char *data, size_t size)
 		printf("Unknown source: %d\n", source);
 	}
 	fflush(stdout);
-	// TODO 2. Use the stolen key to decrypt the intercepted message
+    // Decrypt the message using the key and print it
+    uint8_t *decrypted_data = decrypt((uint8_t *) data, (uint32_t *) size, key);
+    hex_dump(decrypted_data, size);
+    printf("Decrypted message: %s\n", decrypted_data);
 }
 
 void handle_dh_message(int source, char *data, size_t size)
@@ -80,33 +86,69 @@ void handle_dh_message(int source, char *data, size_t size)
 	switch (source) {
 	case SRC_ALICE:
 		if (!exchange_done) {
-			// TODO 4.1 Intercept Alice's first message.
+			// Intercept Alice's first message.
 			// Create your own secret, calculate the shared value
 			// and send it to Bob (by overwriting "data")
 			// Calculate the secret key shared with Alice.
 
+            secret = *create_key();
+            key_alice = derive_key(secret);
+            for (int i = 0; i < KEY_SIZE / sizeof(uint32_t); i++) {
+                ((uint32_t *)data)[i] = key_alice[i];
+            }
+            handle_message(source, data, size);
+            exchange_done = 1;
 			return;
 		} else {
-			// TODO 4.3 Use the key for Alice to decrypt the
+			// Use the key for Alice to decrypt the
 			// message and print it
 			// Then use the key for Bob to encrypt it back and
 			// send it to Bob (overwrite "data")
+            uint8_t *decrypted_data = decrypt((uint8_t *)data, (uint32_t *) size, key_alice);
+            hex_dump(decrypted_data, size);
+
 			puts("ALICE wrote to BOB: ");
+            printf("Decrypted message: %s\n", decrypted_data);
+
+            plaintext = (uint8_t *)data;
+            ciphertext = encrypt(plaintext, (uint32_t *) size, key_bob);
+            for (int i = 0; i < size; i++) {
+                data[i] = ciphertext[i];
+            }
+            handle_message(source, data, size);
 		}
 	break;
 	case SRC_BOB:
 		if (!exchange_done) {
-			// TODO 4.2 Intercept Bob's message.
+			// Intercept Bob's message.
 			// send your shared value to Alice (by overwriting "data")
 			// Calculate the secret key shared with Bob.
+
+            secret = *create_key();
+            key_bob = derive_key(secret);
+            for (int i = 0; i < KEY_SIZE / sizeof(uint32_t); i++) {
+                ((uint32_t *)data)[i] = key_bob[i];
+            }
+            handle_message(source, data, size);
 			exchange_done = 1;
 			return;
 		} else {
-			// TODO 4.3 Use the key for Bob to decrypt the
+			// Use the key for Bob to decrypt the
 			// message and print it
 			// Then use the key for Alice to encrypt it back and
 			// send it to Bob (overwrite "data")
-			puts("BOB wrote to ALICE: ");
+            uint8_t *decrypted_data = decrypt((uint8_t *)data,(uint32_t *) size, key_bob);
+            hex_dump(decrypted_data, size);
+
+            puts("BOB wrote to ALICE: ");
+            printf("Decrypted message: %s\n", decrypted_data);
+
+            plaintext = (uint8_t *)data;
+            ciphertext = encrypt(plaintext, (uint32_t *) size, key_alice);
+            for (int i = 0; i < size; i++) {
+                data[i] = ciphertext[i];
+            }
+            handle_message(source, data, size);
 		}
 	break;
 	default:

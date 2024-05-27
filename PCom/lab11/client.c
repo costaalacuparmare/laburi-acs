@@ -50,31 +50,68 @@ void run_client(int sockfd) {
 
 uint32_t *obtain_key_plain(int sockfd)
 {
-	// TODO 1. Generate the key and send it to Bob. Use create_key from tea.h
-	return NULL;
+	// Generate the key and send it to Bob. Use create_key from tea.c
+    // and send_message from utils.c
+    uint32_t *key = create_key();
+
+    struct message msg;
+    memcpy(msg.buffer, key, KEY_SIZE);
+
+    send_message(sockfd, &msg);
+
+    return key;
 }
 
 uint32_t *obtain_key_dh(int sockfd)
 {
-	// TODO 3. Perform DH using the primitives in "include/dh.h". Use derive_key with the
+	// Perform DH using the primitives in "include/dh.h". Use derive_key with the
 	// secret as argument. We do this because the key and the secret don't necessarly have
 	// the same size or structure.
-	return NULL;
+    // mod_pow, generate_key, derive_key
+    int p = 23;
+    uint32_t secret = generate_secret(p);
+
+    return derive_key(secret);
 }
 
 void run_encryption_client(int sockfd) {
 	int res;
 	struct message msg;
 
-	// TODO 3. Comment this and uncomment the next line
-	uint32_t *key = obtain_key_plain(sockfd);
-	/*uint32_t *key = obtain_key_dh(sockfd);*/
+	// Comment this and uncomment the next line
+	//uint32_t *key = obtain_key_plain(sockfd);
+	uint32_t *key = obtain_key_dh(sockfd);
 	while (1) {
-		// TODO 1. just like run_client, read a string, send it to the
+		// just like run_client, read a string, send it to the
 		// sever, then receive a reply and print it
 		// but the request will need to be encrypted and the reply
 		// decrypted
 		// use the primitives in "include/tea.h"
+        char *s = fgets(msg.buffer, sizeof(msg.buffer), stdin);
+        DIE(!s, "fgets");
+
+        // Get rid of the newline character.
+        msg.size = strlen(msg.buffer);
+
+        uint32_t *data = (uint32_t *)msg.buffer;
+
+        if (!strcmp(msg.buffer, "QUIT"))
+            break;
+
+        uint8_t *encrypted_data = encrypt((uint8_t *) data, (uint32_t *) msg.size, key);
+
+        send_message(sockfd, (struct message *)encrypted_data);
+
+        res = recv_message(sockfd, &msg);
+        // decrypt the message
+        uint8_t *decrypted_data = decrypt((uint8_t *) msg.buffer,(uint32_t *) msg.size, key);
+
+        if (res == 0) {
+            puts("Server disconnected!");
+            break;
+        }
+
+        printf("Server reply: %s\n", decrypted_data);
 	}
 
 	destroy_key(key);
@@ -110,9 +147,8 @@ int main(int argc, char *argv[])
 	rc = connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr));
 	DIE(rc < 0, "connect");
 
-	// TODO 1: Comment run_client and uncomment run_ecryption_client
-	run_client(sockfd);
-	/*run_encryption_client(sockfd);*/
+	//run_client(sockfd);
+	run_encryption_client(sockfd);
 
 	// Inchidem conexiunea si socketul creat
 	close(sockfd);

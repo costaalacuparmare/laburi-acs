@@ -51,16 +51,24 @@ void run_server(int sockfd) {
 
 uint32_t *obtain_key_plain(int sockfd)
 {
-	// TODO 1. Get the key from Alice.
-	return NULL;
+	// Get the key from Alice.
+    struct message msg;
+    recv_message(sockfd, &msg);
+    char *key = msg.buffer;
+    return (uint32_t *) key;
+
 }
 
 uint32_t *obtain_key_dh(int sockfd)
 {
-	// TODO 3. Perform DH using the primitives in "include/dh.h". Use derive_key with the
+	// Perform DH using the primitives in "include/dh.h". Use derive_key with the
 	// secret as argument. We do this because the key and the secret don't necessarly have
 	// the same size or structure.
-	return NULL;
+    uint32_t *secret = create_key();
+    struct message msg;
+    recv_message(sockfd, &msg);
+    uint32_t *key = derive_key(*secret);
+    return key;
 }
 
 void run_secure_server(int sockfd)
@@ -68,16 +76,31 @@ void run_secure_server(int sockfd)
 	int res;
 	struct message msg;
 
-	// TODO 3. Comment this and uncomment the next line
-	uint32_t *key = obtain_key_plain(sockfd);
-	/*uint32_t *key = obtain_key_dh(sockfd);*/
+	// Comment this and uncomment the next line
+	// uint32_t *key = obtain_key_plain(sockfd);
+	uint32_t *key = obtain_key_dh(sockfd);
 
 	while (1) {
-		// TODO 1. just like run_server, receive a message, process it,
+		// just like run_server, receive a message, process it,
 		// then send a reply;
 		// but the incoming message will be encrypted so we need to
 		// decrypt and the outgoing reply needs to be encrypted as well.
 		// use the primitives in "include/tea.h"
+        res = recv_message(sockfd, &msg);
+        if (res == 0) {
+            puts("Client disconnected!");
+            break;
+        }
+        uint32_t *data = (uint32_t *)msg.buffer;
+        uint8_t *decrypted_data = decrypt((uint8_t *)data, (uint32_t *) msg.size, key);
+
+        DIE(decrypted_data[msg.size - 1] != '\0', "Non-string request!");
+        printf("Client request: %s\n", (char *)decrypted_data);
+
+        process_request((char *)decrypted_data);
+
+        uint8_t *encrypted_data = encrypt(decrypted_data, (uint32_t *) msg.size, key);
+        send_message(sockfd, (struct message *)encrypted_data);
 	}
 
 	destroy_key(key);
@@ -125,9 +148,9 @@ int main(int argc, char *argv[]) {
 	int clientfd = accept(listenfd, NULL, NULL);
 	DIE(clientfd == -1, "accept");
 
-	// TODO 1. Comment this and uncomment the next line
-	run_server(clientfd);
-	/*run_secure_server(clientfd);*/
+	// Comment this and uncomment the next line
+	//run_server(clientfd);
+	run_secure_server(clientfd);
 
 	close(clientfd);
 	close(listenfd);
