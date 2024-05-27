@@ -54,18 +54,62 @@ private:
         fin.close();
     }
 
+    // Calculati fluxul maxim pe graful orientat dat.
+    // Sursa este nodul 1.
+    // Destinatia este nodul n.
+    //
+    // In adj este stocat graful neorientat obtinut dupa ce se elimina orientarea
+    // arcelor, iar in cap sunt stocate capacitatile arcelor.
+    // De exemplu, un arc (u, v) de capacitate cap va fi tinut astfel:
+    // c[u][v] = cap, adj[u] contine v, adj[v] contine u.
+
+    bool bfs(vector<int>& parent) {
+        vector<bool> visited(n + 1, false);
+        queue<int> q;
+        q.push(1);
+        visited[1] = true;
+        parent[1] = -1;
+
+        while (!q.empty()) {
+            int u = q.front();
+            q.pop();
+
+            for (const auto& v : adj[u]) {
+                if (!visited[v] && c[u][v] > 0) {
+                    q.push(v);
+                    parent[v] = u;
+                    visited[v] = true;
+
+                    if (v == n) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false; // No augmenting path found
+    }
+
+
     int get_result() {
-        //
-        // TODO: Calculati fluxul maxim pe graful orientat dat.
-        // Sursa este nodul 1.
-        // Destinatia este nodul n.
-        //
-        // In adj este stocat graful neorientat obtinut dupa ce se elimina orientarea
-        // arcelor, iar in cap sunt stocate capacitatile arcelor.
-        // De exemplu, un arc (u, v) de capacitate cap va fi tinut astfel:
-        // c[u][v] = cap, adj[u] contine v, adj[v] contine u.
-        //
         int total_flow = 0;
+        vector<int> parent(n + 1);
+
+        while (bfs(parent)) {
+            int path_flow = INF;
+            for (int v = n; v != 1; v = parent[v]) {
+                int u = parent[v];
+                path_flow = min(path_flow, c[u][v]);
+            }
+
+            for (int v = n; v != 1; v = parent[v]) {
+                int u = parent[v];
+                c[u][v] -= path_flow;
+                c[v][u] += path_flow;
+            }
+
+            total_flow += path_flow;
+        }
+
         return total_flow;
     }
 
