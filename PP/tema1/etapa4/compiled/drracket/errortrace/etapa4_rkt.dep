@@ -1,0 +1,1 @@
+("8.12" ta6le ("ce2a3dccc9c892627a837142c5ca531d44315e25" . "bff1f1e704a1e03dc4c2f1678bcfb592bc980c8b") #"/home/costa/Desktop/Poli/PP/tema1/etapa4/collection.rkt" #"/home/costa/Desktop/Poli/PP/tema1/etapa4/suffix-tree-stream.rkt" (collects #"drracket" #"private" #"drracket-errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))
