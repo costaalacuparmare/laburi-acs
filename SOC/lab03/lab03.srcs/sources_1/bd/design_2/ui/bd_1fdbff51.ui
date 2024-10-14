@@ -1,0 +1,40 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.832087",
+   "Default View_TopLeft":"-114,-66",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:10.0 non-TLS
+#  -string -flagsOSRD
+preplace port port-id_pauza_0 -pg 1 -lvl 0 -x -10 -y 150 -defaultsOSRD
+preplace port port-id_reset_0 -pg 1 -lvl 0 -x -10 -y 170 -defaultsOSRD
+preplace port port-id_clk_in_0 -pg 1 -lvl 0 -x -10 -y 320 -defaultsOSRD
+preplace port port-id_clk_out_led_0 -pg 1 -lvl 5 -x 1220 -y 320 -defaultsOSRD
+preplace port port-id_DP_0 -pg 1 -lvl 5 -x 1220 -y 190 -defaultsOSRD
+preplace portBus An_0 -pg 1 -lvl 5 -x 1220 -y 150 -defaultsOSRD
+preplace portBus Seg_0 -pg 1 -lvl 5 -x 1220 -y 170 -defaultsOSRD
+preplace inst bin2bcd_0_0 -pg 1 -lvl 3 -x 780 -y 210 -defaultsOSRD
+preplace inst bin2bcd_0_1 -pg 1 -lvl 3 -x 780 -y 70 -defaultsOSRD
+preplace inst divizor_ceas_0 -pg 1 -lvl 3 -x 780 -y 330 -defaultsOSRD
+preplace inst numarator_59_0_0 -pg 1 -lvl 1 -x 170 -y 230 -defaultsOSRD
+preplace inst numarator_59_0_1 -pg 1 -lvl 2 -x 490 -y 220 -defaultsOSRD
+preplace inst afisare_7seg_0_0 -pg 1 -lvl 4 -x 1080 -y 170 -defaultsOSRD
+preplace netloc afisare_7seg_0_0_An 1 4 1 NJ 150
+preplace netloc afisare_7seg_0_0_DP 1 4 1 NJ 190
+preplace netloc afisare_7seg_0_0_Seg 1 4 1 NJ 170
+preplace netloc bin2bcd_0_0_BCD0 1 3 1 940 160n
+preplace netloc bin2bcd_0_0_BCD1 1 3 1 920 180n
+preplace netloc bin2bcd_0_1_BCD0 1 3 1 960 60n
+preplace netloc bin2bcd_0_1_BCD1 1 3 1 930 80n
+preplace netloc clk_in_0_1 1 0 3 NJ 320 NJ 320 NJ
+preplace netloc divizor_ceas_0_clk_out_led 1 0 5 20 400 N 400 N 400 930J 320 NJ
+preplace netloc divizor_ceas_0_clk_out_seg 1 3 1 950 120n
+preplace netloc numarator_59_0_0_carry_out 1 1 1 N 240
+preplace netloc numarator_59_0_0_valoare_bin 1 1 2 320 70 N
+preplace netloc numarator_59_0_1_valoare_bin 1 2 1 N 210
+preplace netloc pauza_0_1 1 0 2 10J 310 330
+preplace netloc reset_0_1 1 0 4 20J 150 330 140 640 140 N
+levelinfo -pg 1 -10 170 490 780 1080 1220
+pagesize -pg 1 -db -bbox -sgen -120 0 1370 410
+"
+}
+0

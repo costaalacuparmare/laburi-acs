@@ -1,0 +1,4 @@
+Running: xsim.dir/simulare_virgula_mobila_behav/xsimk.exe -simmode gui -wdb simulare_virgula_mobila_behav.wdb -simrunnum 0 -socket 52001
+Design successfully loaded
+Design Loading Memory Usage: 8584 KB (Peak: 8584 KB)
+Design Loading CPU Usage: 15 ms

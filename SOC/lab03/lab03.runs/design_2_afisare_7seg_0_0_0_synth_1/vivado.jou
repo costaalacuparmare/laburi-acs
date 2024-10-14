@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Wed Mar 29 13:16:49 2023
+# Process ID: 16444
+# Current directory: C:/Users/student/laborator_324CB/lab_2/lab3_324CB/lab3_324CB.runs/design_2_afisare_7seg_0_0_0_synth_1
+# Command line: vivado.exe -log design_2_afisare_7seg_0_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_2_afisare_7seg_0_0_0.tcl
+# Log file: C:/Users/student/laborator_324CB/lab_2/lab3_324CB/lab3_324CB.runs/design_2_afisare_7seg_0_0_0_synth_1/design_2_afisare_7seg_0_0_0.vds
+# Journal file: C:/Users/student/laborator_324CB/lab_2/lab3_324CB/lab3_324CB.runs/design_2_afisare_7seg_0_0_0_synth_1\vivado.jou
+# Running On: DESKTOP-1FEJ3MB, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 17019 MB
+#-----------------------------------------------------------
+source design_2_afisare_7seg_0_0_0.tcl -notrace

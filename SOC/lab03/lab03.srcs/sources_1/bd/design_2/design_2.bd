@@ -1,0 +1,356 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0xFB48B90DCB234736",
+      "device": "xc7a100tcsg324-1",
+      "gen_directory": "../../../../lab03.gen/sources_1/bd/design_2",
+      "name": "design_2",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2022.1",
+      "validated": "true"
+    },
+    "design_tree": {
+      "bin2bcd_0_0": "",
+      "bin2bcd_0_1": "",
+      "divizor_ceas_0": "",
+      "numarator_59_0_0": "",
+      "numarator_59_0_1": "",
+      "afisare_7seg_0_0": ""
+    },
+    "ports": {
+      "pauza_0": {
+        "direction": "I"
+      },
+      "reset_0": {
+        "type": "rst",
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_LOW",
+            "value_src": "default"
+          }
+        }
+      },
+      "clk_in_0": {
+        "direction": "I"
+      },
+      "clk_out_led_0": {
+        "direction": "O"
+      },
+      "An_0": {
+        "direction": "O",
+        "left": "7",
+        "right": "0"
+      },
+      "DP_0": {
+        "direction": "O"
+      },
+      "Seg_0": {
+        "direction": "O",
+        "left": "6",
+        "right": "0"
+      }
+    },
+    "components": {
+      "bin2bcd_0_0": {
+        "vlnv": "xilinx.com:module_ref:bin2bcd_0:1.0",
+        "xci_name": "design_2_bin2bcd_0_0_0",
+        "xci_path": "ip\\design_2_bin2bcd_0_0_0\\design_2_bin2bcd_0_0_0.xci",
+        "inst_hier_path": "bin2bcd_0_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "bin2bcd_0",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "valoare_bin": {
+            "direction": "I",
+            "left": "5",
+            "right": "0"
+          },
+          "BCD0": {
+            "direction": "O",
+            "left": "3",
+            "right": "0"
+          },
+          "BCD1": {
+            "direction": "O",
+            "left": "3",
+            "right": "0"
+          }
+        }
+      },
+      "bin2bcd_0_1": {
+        "vlnv": "xilinx.com:module_ref:bin2bcd_0:1.0",
+        "xci_name": "design_2_bin2bcd_0_1_0",
+        "xci_path": "ip\\design_2_bin2bcd_0_1_0\\design_2_bin2bcd_0_1_0.xci",
+        "inst_hier_path": "bin2bcd_0_1",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "bin2bcd_0",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "valoare_bin": {
+            "direction": "I",
+            "left": "5",
+            "right": "0"
+          },
+          "BCD0": {
+            "direction": "O",
+            "left": "3",
+            "right": "0"
+          },
+          "BCD1": {
+            "direction": "O",
+            "left": "3",
+            "right": "0"
+          }
+        }
+      },
+      "divizor_ceas_0": {
+        "vlnv": "xilinx.com:module_ref:divizor_ceas:1.0",
+        "xci_name": "design_2_divizor_ceas_0_0",
+        "xci_path": "ip\\design_2_divizor_ceas_0_0\\design_2_divizor_ceas_0_0.xci",
+        "inst_hier_path": "divizor_ceas_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "divizor_ceas",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk_in": {
+            "direction": "I"
+          },
+          "reset": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "clk_out_led": {
+            "direction": "O"
+          },
+          "clk_out_seg": {
+            "direction": "O"
+          }
+        }
+      },
+      "numarator_59_0_0": {
+        "vlnv": "xilinx.com:module_ref:numarator_59_0:1.0",
+        "xci_name": "design_2_numarator_59_0_0_0",
+        "xci_path": "ip\\design_2_numarator_59_0_0_0\\design_2_numarator_59_0_0_0.xci",
+        "inst_hier_path": "numarator_59_0_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "numarator_59_0",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "reset": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "pauza": {
+            "direction": "I"
+          },
+          "clk_out_led": {
+            "direction": "I"
+          },
+          "valoare_bin": {
+            "direction": "O",
+            "left": "5",
+            "right": "0"
+          },
+          "carry_out": {
+            "direction": "O"
+          }
+        }
+      },
+      "numarator_59_0_1": {
+        "vlnv": "xilinx.com:module_ref:numarator_59_0:1.0",
+        "xci_name": "design_2_numarator_59_0_1_0",
+        "xci_path": "ip\\design_2_numarator_59_0_1_0\\design_2_numarator_59_0_1_0.xci",
+        "inst_hier_path": "numarator_59_0_1",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "numarator_59_0",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "reset": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "pauza": {
+            "direction": "I"
+          },
+          "clk_out_led": {
+            "direction": "I"
+          },
+          "valoare_bin": {
+            "direction": "O",
+            "left": "5",
+            "right": "0"
+          },
+          "carry_out": {
+            "direction": "O"
+          }
+        }
+      },
+      "afisare_7seg_0_0": {
+        "vlnv": "xilinx.com:module_ref:afisare_7seg_0:1.0",
+        "xci_name": "design_2_afisare_7seg_0_0_0",
+        "xci_path": "ip\\design_2_afisare_7seg_0_0_0\\design_2_afisare_7seg_0_0_0.xci",
+        "inst_hier_path": "afisare_7seg_0_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "afisare_7seg_0",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk_out_seg": {
+            "direction": "I"
+          },
+          "reset": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "BCD0": {
+            "direction": "I",
+            "left": "3",
+            "right": "0"
+          },
+          "BCD1": {
+            "direction": "I",
+            "left": "3",
+            "right": "0"
+          },
+          "BCD2": {
+            "direction": "I",
+            "left": "3",
+            "right": "0"
+          },
+          "BCD3": {
+            "direction": "I",
+            "left": "3",
+            "right": "0"
+          },
+          "An": {
+            "direction": "O",
+            "left": "7",
+            "right": "0"
+          },
+          "Seg": {
+            "direction": "O",
+            "left": "6",
+            "right": "0"
+          },
+          "DP": {
+            "direction": "O"
+          }
+        }
+      }
+    },
+    "nets": {
+      "afisare_7seg_0_0_An": {
+        "ports": [
+          "afisare_7seg_0_0/An",
+          "An_0"
+        ]
+      },
+      "afisare_7seg_0_0_DP": {
+        "ports": [
+          "afisare_7seg_0_0/DP",
+          "DP_0"
+        ]
+      },
+      "afisare_7seg_0_0_Seg": {
+        "ports": [
+          "afisare_7seg_0_0/Seg",
+          "Seg_0"
+        ]
+      },
+      "bin2bcd_0_0_BCD0": {
+        "ports": [
+          "bin2bcd_0_0/BCD0",
+          "afisare_7seg_0_0/BCD0"
+        ]
+      },
+      "bin2bcd_0_0_BCD1": {
+        "ports": [
+          "bin2bcd_0_0/BCD1",
+          "afisare_7seg_0_0/BCD1"
+        ]
+      },
+      "bin2bcd_0_1_BCD0": {
+        "ports": [
+          "bin2bcd_0_1/BCD0",
+          "afisare_7seg_0_0/BCD2"
+        ]
+      },
+      "bin2bcd_0_1_BCD1": {
+        "ports": [
+          "bin2bcd_0_1/BCD1",
+          "afisare_7seg_0_0/BCD3"
+        ]
+      },
+      "clk_in_0_1": {
+        "ports": [
+          "clk_in_0",
+          "divizor_ceas_0/clk_in"
+        ]
+      },
+      "divizor_ceas_0_clk_out_led": {
+        "ports": [
+          "divizor_ceas_0/clk_out_led",
+          "clk_out_led_0",
+          "numarator_59_0_0/clk_out_led"
+        ]
+      },
+      "divizor_ceas_0_clk_out_seg": {
+        "ports": [
+          "divizor_ceas_0/clk_out_seg",
+          "afisare_7seg_0_0/clk_out_seg"
+        ]
+      },
+      "numarator_59_0_0_carry_out": {
+        "ports": [
+          "numarator_59_0_0/carry_out",
+          "numarator_59_0_1/clk_out_led"
+        ]
+      },
+      "numarator_59_0_0_valoare_bin": {
+        "ports": [
+          "numarator_59_0_0/valoare_bin",
+          "bin2bcd_0_1/valoare_bin"
+        ]
+      },
+      "numarator_59_0_1_valoare_bin": {
+        "ports": [
+          "numarator_59_0_1/valoare_bin",
+          "bin2bcd_0_0/valoare_bin"
+        ]
+      },
+      "pauza_0_1": {
+        "ports": [
+          "pauza_0",
+          "numarator_59_0_0/pauza",
+          "numarator_59_0_1/pauza"
+        ]
+      },
+      "reset_0_1": {
+        "ports": [
+          "reset_0",
+          "divizor_ceas_0/reset",
+          "numarator_59_0_0/reset",
+          "numarator_59_0_1/reset",
+          "afisare_7seg_0_0/reset"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schema": "xilinx.com:schema:json_instance:1.0",
+  "ip_inst": {
+    "xci_name": "design_1_uat_0_0",
+    "cell_name": "uat_0",
+    "component_reference": "xilinx.com:module_ref:uat:1.0",
+    "ip_revision": "1",
+    "gen_directory": "../../../../../../lab04.gen/sources_1/bd/design_1/ip/design_1_uat_0_0",
+    "parameters": {
+      "component_parameters": {
+        "Component_Name": [ { "value": "design_1_uat_0_0", "resolve_type": "user", "usage": "all" } ]
+      },
+      "project_parameters": {
+        "ARCHITECTURE": [ { "value": "artix7" } ],
+        "BASE_BOARD_PART": [ { "value": "" } ],
+        "BOARD_CONNECTIONS": [ { "value": "" } ],
+        "DEVICE": [ { "value": "xc7a100t" } ],
+        "PACKAGE": [ { "value": "csg324" } ],
+        "PREFHDL": [ { "value": "VERILOG" } ],
+        "SILICON_REVISION": [ { "value": "" } ],
+        "SIMULATOR_LANGUAGE": [ { "value": "MIXED" } ],
+        "SPEEDGRADE": [ { "value": "-1" } ],
+        "STATIC_POWER": [ { "value": "" } ],
+        "TEMPERATURE_GRADE": [ { "value": "" } ],
+        "USE_RDI_CUSTOMIZATION": [ { "value": "TRUE" } ],
+        "USE_RDI_GENERATION": [ { "value": "TRUE" } ]
+      },
+      "runtime_parameters": {
+        "IPCONTEXT": [ { "value": "IP_Integrator" } ],
+        "IPREVISION": [ { "value": "1" } ],
+        "MANAGED": [ { "value": "TRUE" } ],
+        "OUTPUTDIR": [ { "value": "../../../../../../lab04.gen/sources_1/bd/design_1/ip/design_1_uat_0_0" } ],
+        "SELECTEDSIMMODEL": [ { "value": "" } ],
+        "SHAREDDIR": [ { "value": "../../ipshared" } ],
+        "SWVERSION": [ { "value": "2023.1" } ],
+        "SYNTHESISFLOW": [ { "value": "OOC_HIERARCHICAL" } ]
+      }
+    },
+    "boundary": {
+      "ports": {
+        "c0": [ { "direction": "in" } ],
+        "p0": [ { "direction": "in" } ],
+        "g0": [ { "direction": "in" } ],
+        "p1": [ { "direction": "in" } ],
+        "g1": [ { "direction": "in" } ],
+        "p2": [ { "direction": "in" } ],
+        "g2": [ { "direction": "in" } ],
+        "p3": [ { "direction": "in" } ],
+        "g3": [ { "direction": "in" } ],
+        "c1": [ { "direction": "out" } ],
+        "c2": [ { "direction": "out" } ],
+        "c3": [ { "direction": "out" } ],
+        "c4": [ { "direction": "out" } ],
+        "P": [ { "direction": "out" } ],
+        "G": [ { "direction": "out" } ]
+      }
+    }
+  }
+}

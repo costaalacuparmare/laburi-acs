@@ -1,0 +1,13 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../tema2.srcs/sources_1/new/iesire.v" \
+"../../../../tema2.srcs/sources_1/new/intrare.v" \
+"../../../../tema2.srcs/sources_1/new/mijloc.v" \
+"../../../../tema2.srcs/sources_1/new/sumator.v" \
+"../../../../tema2.srcs/sim_1/new/test.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

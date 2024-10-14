@@ -1,0 +1,5 @@
+Time resolution is 1 ps
+WARNING: file ../../input.txt could not be opened
+WARNING: file ../../../input.txt could not be opened
+ERROR: File descriptor (0) passed to $fgets is not valid. Please compile the design with -debug for source location information.
+$stop called at time : 200 ns : File "C:/Users/phony/Desktop/Poli/SOC/lab02_met2/lab02_met2.srcs/sim_1/new/sim_N2.v" Line 52

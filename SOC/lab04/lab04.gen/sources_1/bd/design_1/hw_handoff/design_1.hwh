@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Apr 10 11:41:57 2024" VIVADOVERSION="2023.1">
+
+  <SYSTEMINFO ARCH="artix7" DEVICE="7a100t" NAME="design_1" PACKAGE="csg324" SPEEDGRADE="-1"/>
+
+  <EXTERNALPORTS>
+    <PORT DIR="I" NAME="carry_in_0" SIGIS="undef" SIGNAME="External_Ports_carry_in_0">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="sumator4b_0" PORT="carry_in"/>
+        <CONNECTION INSTANCE="uat_0" PORT="c0"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="c4_0" SIGIS="undef" SIGNAME="uat_0_c4">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="uat_0" PORT="c4"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="15" NAME="a_0" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_a_0">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="intrare_0" PORT="a"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="15" NAME="b_0" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_b_0">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="intrare_0" PORT="b"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="15" NAME="sum_0" RIGHT="0" SIGIS="undef" SIGNAME="iesire_0_sum">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="iesire_0" PORT="sum"/>
+      </CONNECTIONS>
+    </PORT>
+  </EXTERNALPORTS>
+
+  <EXTERNALINTERFACES/>
+
+  <MODULES>
+    <MODULE COREREVISION="1" FULLNAME="/iesire_0" HWVERSION="1.0" INSTANCE="iesire_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="iesire" VLNV="xilinx.com:module_ref:iesire:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_iesire_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="3" NAME="sum0" RIGHT="0" SIGIS="undef" SIGNAME="sumator4b_0_sum">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_0" PORT="sum"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="sum1" RIGHT="0" SIGIS="undef" SIGNAME="sumator4b_1_sum">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_1" PORT="sum"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="sum2" RIGHT="0" SIGIS="undef" SIGNAME="sumator4b_2_sum">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_2" PORT="sum"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="sum3" RIGHT="0" SIGIS="undef" SIGNAME="sumator4b_3_sum">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_3" PORT="sum"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="15" NAME="sum" RIGHT="0" SIGIS="undef" SIGNAME="iesire_0_sum">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="sum_0"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/intrare_0" HWVERSION="1.0" INSTANCE="intrare_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="intrare" VLNV="xilinx.com:module_ref:intrare:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_intrare_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="15" NAME="a" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_a_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="a_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="15" NAME="b" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_b_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="b_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="a0" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_a0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_0" PORT="a"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="a1" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_a1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_1" PORT="a"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="a2" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_a2">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_2" PORT="a"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="a3" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_a3">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_3" PORT="a"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="b0" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_b0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_0" PORT="b"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="b1" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_b1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_1" PORT="b"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="b2" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_b2">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_2" PORT="b"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="b3" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_b3">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_3" PORT="b"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/sumator4b_0" HWVERSION="1.0" INSTANCE="sumator4b_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="sumator4b" VLNV="xilinx.com:module_ref:sumator4b:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_sumator4b_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="3" NAME="a" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_a0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="intrare_0" PORT="a0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="b" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_b0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="intrare_0" PORT="b0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="carry_in" SIGIS="undef" SIGNAME="External_Ports_carry_in_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="carry_in_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="sum" RIGHT="0" SIGIS="undef" SIGNAME="sumator4b_0_sum">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="iesire_0" PORT="sum0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="G" SIGIS="undef" SIGNAME="sumator4b_0_G">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="uat_0" PORT="g0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="P" SIGIS="undef" SIGNAME="sumator4b_0_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="uat_0" PORT="p0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="carry_out" SIGIS="undef"/>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/sumator4b_1" HWVERSION="1.0" INSTANCE="sumator4b_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="sumator4b" VLNV="xilinx.com:module_ref:sumator4b:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_sumator4b_1_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="3" NAME="a" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_a1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="intrare_0" PORT="a1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="b" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_b1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="intrare_0" PORT="b1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="carry_in" SIGIS="undef" SIGNAME="uat_0_c1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="uat_0" PORT="c1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="sum" RIGHT="0" SIGIS="undef" SIGNAME="sumator4b_1_sum">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="iesire_0" PORT="sum1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="G" SIGIS="undef" SIGNAME="sumator4b_1_G">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="uat_0" PORT="g1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="P" SIGIS="undef" SIGNAME="sumator4b_1_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="uat_0" PORT="p1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="carry_out" SIGIS="undef"/>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/sumator4b_2" HWVERSION="1.0" INSTANCE="sumator4b_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="sumator4b" VLNV="xilinx.com:module_ref:sumator4b:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_sumator4b_2_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="3" NAME="a" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_a2">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="intrare_0" PORT="a2"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="b" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_b2">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="intrare_0" PORT="b2"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="carry_in" SIGIS="undef" SIGNAME="uat_0_c2">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="uat_0" PORT="c2"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="sum" RIGHT="0" SIGIS="undef" SIGNAME="sumator4b_2_sum">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="iesire_0" PORT="sum2"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="G" SIGIS="undef" SIGNAME="sumator4b_2_G">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="uat_0" PORT="g2"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="P" SIGIS="undef" SIGNAME="sumator4b_2_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="uat_0" PORT="p2"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="carry_out" SIGIS="undef"/>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/sumator4b_3" HWVERSION="1.0" INSTANCE="sumator4b_3" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="sumator4b" VLNV="xilinx.com:module_ref:sumator4b:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_sumator4b_3_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="3" NAME="a" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_a3">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="intrare_0" PORT="a3"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="b" RIGHT="0" SIGIS="undef" SIGNAME="intrare_0_b3">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="intrare_0" PORT="b3"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="carry_in" SIGIS="undef" SIGNAME="uat_0_c3">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="uat_0" PORT="c3"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="sum" RIGHT="0" SIGIS="undef" SIGNAME="sumator4b_3_sum">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="iesire_0" PORT="sum3"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="G" SIGIS="undef" SIGNAME="sumator4b_3_G">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="uat_0" PORT="g3"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="P" SIGIS="undef" SIGNAME="sumator4b_3_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="uat_0" PORT="p3"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="carry_out" SIGIS="undef"/>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/uat_0" HWVERSION="1.0" INSTANCE="uat_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="uat" VLNV="xilinx.com:module_ref:uat:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_uat_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="c0" SIGIS="undef" SIGNAME="External_Ports_carry_in_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="carry_in_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="p0" SIGIS="undef" SIGNAME="sumator4b_0_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_0" PORT="P"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="g0" SIGIS="undef" SIGNAME="sumator4b_0_G">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_0" PORT="G"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="p1" SIGIS="undef" SIGNAME="sumator4b_1_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_1" PORT="P"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="g1" SIGIS="undef" SIGNAME="sumator4b_1_G">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_1" PORT="G"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="p2" SIGIS="undef" SIGNAME="sumator4b_2_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_2" PORT="P"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="g2" SIGIS="undef" SIGNAME="sumator4b_2_G">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_2" PORT="G"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="p3" SIGIS="undef" SIGNAME="sumator4b_3_P">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_3" PORT="P"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="g3" SIGIS="undef" SIGNAME="sumator4b_3_G">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_3" PORT="G"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="c1" SIGIS="undef" SIGNAME="uat_0_c1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_1" PORT="carry_in"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="c2" SIGIS="undef" SIGNAME="uat_0_c2">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_2" PORT="carry_in"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="c3" SIGIS="undef" SIGNAME="uat_0_c3">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sumator4b_3" PORT="carry_in"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="c4" SIGIS="undef" SIGNAME="uat_0_c4">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="c4_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="P" SIGIS="undef"/>
+        <PORT DIR="O" NAME="G" SIGIS="undef"/>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+  </MODULES>
+
+</EDKSYSTEM>
