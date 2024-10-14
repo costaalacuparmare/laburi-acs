@@ -35,16 +35,24 @@
 
 `SO` Operating Systems (mainly Linux), learning about syscalls, pages, sockets, file descriptors, multithreading, etc.
 
-## Year 2 - Semester 2 (ongoing)
+## Year 2 - Semester 2
 
-`ED` Digital Electronics, ?
+`PA` Projection Algorithms, learning base algortihms and their complexities and how to modify and apply them in C++, including greedy & dynamic programming, MinMax Trees, Graphs, Streams and Trees
 
-`PA` Projection Algorithms, C++
+`PCom` Communication Protocols, C/C++, work in progress
 
-`PCom` Communication Protocols, C/C++
+`PP` Programming Paradigms, racket, huskl, prolog, work in progress
 
-`PP` Programming Paradigms, racket, huskl, prolog
+`SOC` Structure and Operation of Computers, theoretical and practical course in Verilog regarding how the OS Processor and Memory are created and used, from MIPS and RAM to creating machines and counters
 
-`SOC` Structure and Operation of Computers, verilog
+## Year 3 - Semester 1
 
+`EGC` - Computer Graphics, C++
 
+`ISC` - Introduction in Cyber Security, Python, OpenStack, Bash
+
+`LFA` - Formal and Automated Languages, Python
+
+`APD` - Parallel and Distributed Algorithms, C/C++, Java
+
+`RL` - Local Networks, Cisco Packet Tracer, Linux
