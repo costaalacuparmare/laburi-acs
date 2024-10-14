@@ -1,0 +1,7 @@
+# ninja log v5
+0	153	1709536750698489699	CMakeFiles/lab00.dir/constructor.cpp.o	c6a3dc4f52af6b57
+0	153	1709536750698489699	CMakeFiles/lab00.dir/template.cpp.o	51f532c23892ba2d
+160	222	1709535378512871581	lab00	3defefd0d50c1c7e
+1	163	1709536460973356501	CMakeFiles/lab00.dir/class.cpp.o	ee150b184e2b1441
+1	163	1709536460973356501	CMakeFiles/lab00.dir/struct.cpp.o	656e1603ddd01cef
+0	159	1709536460969356731	CMakeFiles/lab00.dir/gigel.cpp.o	ed4fe5ad589e525a
