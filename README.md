@@ -41,7 +41,7 @@
 
 `PCom` Communication Protocols, C/C++, work in progress
 
-`PP` Programming Paradigms, racket, huskl, prolog, work in progress
+`PP` Programming Paradigms, functional programming in racket, haskell and prolog, learning about lambda expressions, list comprehension, functionals (foldl, map, let), pattern matching and predicate backtracking comprehension
 
 `SOC` Structure and Operation of Computers, theoretical and practical course in Verilog regarding how the OS Processor and Memory are created and used, from MIPS and RAM to creating machines and counters
 
