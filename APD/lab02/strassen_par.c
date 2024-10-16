@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <pthread.h>
 
+#define P 8
+
 int N;
 int **a;
 int **b;
@@ -167,58 +169,85 @@ void sub_matrix(int **C, int startCi, int startCj,  int **A, int startAi, int st
 // TODO: creati functii separate pentru calculul matricelor
 // in care sa puneti bucati din codul scris in main
 // warning: a nu se paraleliza in main!
+void *thread_function(void *arg) {
+    int thread_id = *(int *)arg;
+    switch (thread_id) {
+        case 0:
+            // calculul matricei M1
+            add_matrix(AUXM11, 0, 0, a, 0, 0, a, N/2, N/2);
+            add_matrix(AUXM12, 0, 0, b, 0, 0, b, N/2, N/2);
+            mul_matrix(M1, 0, 0, AUXM11, 0, 0, AUXM12, 0, 0);
+            break;
+        case 1:
+            // calculul matricei M2
+            add_matrix(AUXM21, 0,0, a, N/2, 0, a, N/2, N/2);
+            mul_matrix(M2, 0, 0, AUXM21, 0, 0, b, 0, 0);
+            break;
+        case 2:
+            // calculul matricei M3
+            sub_matrix(AUXM31, 0, 0, b, 0, N/2, b, N/2, N/2);
+            mul_matrix(M3, 0, 0, a, 0, 0, AUXM31, 0, 0);
+            break;
+        case 3:
+            // calculul matricei M4
+            sub_matrix(AUXM41, 0, 0, b, N/2, 0, b, 0, 0);
+            mul_matrix(M4, 0, 0, a, N/2, N/2, AUXM41, 0, 0);
+            break;
+        case 4:
+            // calculul matricei M5
+            add_matrix(AUXM51, 0,0, a, 0, 0, a, 0, N/2);
+            mul_matrix(M5, 0, 0, AUXM51, 0, 0, b, N/2, N/2);
+            break;
+        case 5:
+            // calculul matricei M6
+            sub_matrix(AUXM61, 0, 0, a, N/2, 0, a, 0, 0);
+            add_matrix(AUXM62, 0, 0, b, 0, 0, b, 0, N/2);
+            mul_matrix(M6, 0, 0, AUXM61, 0, 0, AUXM62, 0, 0);
+            break;
+        case 6:
+            // calculul matricei M7
+            sub_matrix(AUXM71, 0, 0, a, 0, N/2, a, N/2, N/2);
+            add_matrix(AUXM72, 0, 0, b, N/2, 0, b, N/2, N/2);
+            mul_matrix(M7, 0, 0, AUXM71, 0, 0, AUXM72, 0, 0);
+            break;
+        case 7:
+            // calculul submatricii C1,1
+            add_matrix(c, 0, 0, M1, 0, 0, M4, 0, 0);
+            sub_matrix(c, 0, 0, c, 0, 0, M5, 0, 0);
+            add_matrix(c, 0, 0, c, 0, 0, M7, 0, 0);
+
+            // calculul submatricii C1,2
+            add_matrix(c, 0, N/2, M3, 0, 0, M5, 0, 0);
+
+            // calculul submatricii C2,1
+            add_matrix(c, N/2, 0, M2, 0, 0, M4, 0, 0);
+
+            // calculul submatricii C2,2
+            sub_matrix(c, N/2, N/2, M1, 0, 0, M2, 0, 0);
+            add_matrix(c, N/2, N/2, c, N/2, N/2, M3, 0, 0);
+            add_matrix(c, N/2, N/2, c, N/2, N/2, M6, 0, 0);
+            break;
+    }
+
+    pthread_exit(NULL);
+}
 
 int main(int argc, char *argv[])
 {
     get_args(argc, argv);
     init();
 
-    // calculul matricii M1
-    add_matrix(AUXM11, 0, 0, a, 0, 0, a, N/2, N/2);
-    add_matrix(AUXM12, 0, 0, b, 0, 0, b, N/2, N/2);
-    mul_matrix(M1, 0, 0, AUXM11, 0, 0, AUXM12, 0, 0);
+    pthread_t tid[P];
+    int thread_id[P];
+    int i;
+    for (i = 0; i < P; i++) {
+        thread_id[i] = i;
+        pthread_create(&tid[i], NULL, thread_function, &thread_id[i]);
+    }
 
-    // calculul matricii M2
-    add_matrix(AUXM21, 0,0, a, N/2, 0, a, N/2, N/2);
-    mul_matrix(M2, 0, 0, AUXM21, 0, 0, b, 0, 0);
-
-    // calculul matricii M3
-    sub_matrix(AUXM31, 0, 0, b, 0, N/2, b, N/2, N/2);
-    mul_matrix(M3, 0, 0, a, 0, 0, AUXM31, 0, 0);
-
-    // calculul matricii M4
-    sub_matrix(AUXM41, 0, 0, b, N/2, 0, b, 0, 0);
-    mul_matrix(M4, 0, 0, a, N/2, N/2, AUXM41, 0, 0);
-
-    // calculul matricii M5
-    add_matrix(AUXM51, 0,0, a, 0, 0, a, 0, N/2);
-    mul_matrix(M5, 0, 0, AUXM51, 0, 0, b, N/2, N/2);
-
-    // calculul matricii M6
-    sub_matrix(AUXM61, 0, 0, a, N/2, 0, a, 0, 0);
-    add_matrix(AUXM62, 0, 0, b, 0, 0, b, 0, N/2);
-    mul_matrix(M6, 0, 0, AUXM61, 0, 0, AUXM62, 0, 0);
-
-    // calculul matricii M7
-    sub_matrix(AUXM71, 0, 0, a, 0, N/2, a, N/2, N/2);
-    add_matrix(AUXM72, 0, 0, b, N/2, 0, b, N/2, N/2);
-    mul_matrix(M7, 0, 0, AUXM71, 0, 0, AUXM72, 0, 0);
-
-    // calculul submatricii C1,1
-    add_matrix(c, 0, 0, M1, 0, 0, M4, 0, 0);
-    sub_matrix(c, 0, 0, c, 0, 0, M5, 0, 0);
-    add_matrix(c, 0, 0, c, 0, 0, M7, 0, 0);
-
-    // calculul submatricii C1,2
-    add_matrix(c, 0, N/2, M3, 0, 0, M5, 0, 0);
-
-    // calculul submatricii C2,1
-    add_matrix(c, N/2, 0, M2, 0, 0, M4, 0, 0);
-
-    // calculul submatricii C2,2
-    sub_matrix(c, N/2, N/2, M1, 0, 0, M2, 0, 0);
-    add_matrix(c, N/2, N/2, c, N/2, N/2, M3, 0, 0);
-    add_matrix(c, N/2, N/2, c, N/2, N/2, M6, 0, 0);
+    for (i = 0; i < P; i++) {
+        pthread_join(tid[i], NULL);
+    }
 
     print(c);
 

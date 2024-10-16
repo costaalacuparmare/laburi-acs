@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <pthread.h>
 
+#define MIN(a,b) (((a)<(b))?(a):(b))
+
 int N;
 int P;
 int **a;
@@ -12,19 +14,18 @@ int **c;
 // in interiorul functiei respective
 void *thread_function(void *arg)
 {
-	int thread_id = *(int *)arg;
+    int thread_id = *(int *)arg;
+    int start = thread_id * (double)N / P;
+    int end = MIN((thread_id + 1) * (double)N / P, N);
+    for (int i = 0; i < N; i++) {
+        for (int j = start; j < end; j++) {
+            for (int k = 0; k < N; k++) {
+                c[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
 
-	/*
-	for (i = 0; i < N; i++) {
-		for (j = 0; j < N; j++) {
-			for (k = 0; k < N; k++) {
-				c[i][j] += a[i][k] * b[k][j];
-			}
-		}
-	}
-	*/
-
-	pthread_exit(NULL);
+    pthread_exit(NULL);
 }
 
 void get_args(int argc, char **argv)

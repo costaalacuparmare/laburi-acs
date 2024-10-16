@@ -2,27 +2,31 @@
 #include <stdlib.h>
 #include <pthread.h>
 
+#define MIN(a,b) (((a)<(b))?(a):(b))
+
 int N;
 int P;
 int **a;
 int **b;
 int **c;
+pthread_mutex_t mutex;
 
 // TODO: paralelizati operatia din comentariul din functie
 // in interiorul functiei respective
 void *thread_function(void *arg)
 {
 	int thread_id = *(int *)arg;
-
-	/*
-	for (i = 0; i < N; i++) {
-		for (j = 0; j < N; j++) {
-			for (k = 0; k < N; k++) {
+    int start = thread_id * (double)N / P;
+    int end = MIN((thread_id + 1) * (double)N / P, N);
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			for (int k = start; k < end; k++) {
+                pthread_mutex_lock(&mutex);
 				c[i][j] += a[i][k] * b[k][j];
+                pthread_mutex_unlock(&mutex);
 			}
 		}
 	}
-	*/
 
 	pthread_exit(NULL);
 }
@@ -97,6 +101,7 @@ int main(int argc, char *argv[])
 
 	pthread_t tid[P];
 	int thread_id[P];
+    pthread_mutex_init(&mutex, NULL);
 
 	for (i = 0; i < P; i++) {
 		thread_id[i] = i;
@@ -107,6 +112,7 @@ int main(int argc, char *argv[])
 		pthread_join(tid[i], NULL);
 	}
 
+    pthread_mutex_destroy(&mutex);
 	print(c);
 
 	return 0;
