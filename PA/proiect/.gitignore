@@ -1,1 +1,5 @@
-folder/
+.idea
+__pycache__
+*.hlt
+*.log
+test
