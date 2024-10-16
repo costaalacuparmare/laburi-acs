@@ -39,7 +39,7 @@
 
 `PA` Projection Algorithms, learning base algortihms and their complexities and how to modify and apply them in C++, including greedy & dynamic programming, MinMax Trees, Graphs, Streams and Trees
 
-`PCom` Communication Protocols, C/C++, work in progress
+`PCom` Communication Protocols, OSI Stack developed on every level, theoretical and practical knowledge of each level's protocols (Ethernet, ICMP, IPv4, ARP, TCP, UDP, HTTP/HTTPS), Congestion Control project, C/C++ based
 
 `PP` Programming Paradigms, functional programming in racket, haskell and prolog, learning about lambda expressions, list comprehension, functionals (foldl, map, let), pattern matching and predicate backtracking comprehension
 
