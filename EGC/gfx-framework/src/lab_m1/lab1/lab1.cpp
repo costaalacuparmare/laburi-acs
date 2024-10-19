@@ -14,7 +14,7 @@ using namespace m1;
 
 Lab1::Lab1()
 {
-    // TODO(student): Never forget to initialize class variables!
+    // Never forget to initialize class variables!
     r = 0;
     g = 0;
     b = 0;
@@ -40,7 +40,7 @@ void Lab1::Init()
         meshes[mesh->GetMeshID()] = mesh;
     }
 
-    // TODO(student): Load some more meshes. The value of RESOURCE_PATH::MODELS
+    // Load some more meshes. The value of RESOURCE_PATH::MODELS
     // is actually a path on disk, go there and you will find more meshes.
     {
         Mesh* mesh2 = new Mesh("sphere");
@@ -70,7 +70,7 @@ void Lab1::Update(float deltaTimeSeconds)
 
     // Sets the clear color for the color buffer
 
-    // TODO(student): Generalize the arguments of `glClearColor`.
+    // Generalize the arguments of `glClearColor`.
     // You can, for example, declare three variables in the class header,
     // that will store the color components (red, green, blue).
     glClearColor(r, g, b, 1);
@@ -114,7 +114,7 @@ void Lab1::OnInputUpdate(float deltaTime, int mods)
 {
     // Treat continuous update based on input
 
-    // TODO(student): Add some key hold events that will let you move
+    // Add some key hold events that will let you move
     // a mesh instance on all three axes. You will also need to
     // generalize the position used by `RenderMesh`.
     if (window->KeyHold(GLFW_KEY_UP)) {
@@ -143,14 +143,14 @@ void Lab1::OnInputUpdate(float deltaTime, int mods)
 void Lab1::OnKeyPress(int key, int mods) {
     // Add key press event
     if (key == GLFW_KEY_F) {
-        // TODO(student): Change the values of the color components.
+        // Change the values of the color components.
         // You can use the variables declared in the `Update` function.
         r = 0;
         g = 1;
         b = 1;
     }
 
-    // TODO(student): Add a key press event that will let you cycle
+    // Add a key press event that will let you cycle
     // through at least two meshes, rendered at the same position.
     // You will also need to generalize the mesh name used by `RenderMesh`.
     if (key == GLFW_KEY_G) {
