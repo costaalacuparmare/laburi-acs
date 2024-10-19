@@ -11,6 +11,7 @@ map_size1=$1
 map_size2=$2
 seed=$3
 num_players=$4
+browser=$5
 
 if [ "$num_players" -gt 1 ]; then
     shift 4
@@ -28,7 +29,7 @@ mv "$file_name" utils
 
 cd utils || exit
 
-python3 vis.py firefox "$file_name"
+python3 vis.py "$browser" "$file_name"
 
 rm "$file_name"
 
