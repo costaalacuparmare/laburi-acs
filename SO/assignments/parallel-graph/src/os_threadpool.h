@@ -25,8 +25,8 @@ typedef struct os_threadpool {
 	 * is not empty).
 	 */
 	os_list_node_t head;
-
-	/* TODO: Define threapool / queue synchronization data. */
+	pthread_cond_t cond;
+	pthread_mutex_t mutex;
 } os_threadpool_t;
 
 os_task_t *create_task(void (*f)(void *), void *arg, void (*destroy_arg)(void *));

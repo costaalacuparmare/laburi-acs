@@ -37,17 +37,4 @@ struct statx {
 	uint32_t stx_rdev_minor;
 	uint32_t stx_dev_major;
 	uint32_t stx_dev_minor;
-	uint64_t spare[14];
 };
-
-int fstatat_statx(int fd, const char *restrict path, struct stat *restrict st, int flag)
-{
-	/* TODO: Implement fstatat_statx(). Use statx and makedev above. */
-	return -1;
-}
-
-int fstatat(int fd, const char *restrict path, struct stat *restrict st, int flag)
-{
-	/* TODO: Implement fstatat(). Use fstatat_statx(). */
-	return -1;
-}

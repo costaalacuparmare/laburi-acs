@@ -5,7 +5,6 @@
 
 #include "../util/parser/parser.h"
 
-
 /* Useful macro for handling error codes. */
 #define DIE(assertion, call_description)			\
 	do {							\

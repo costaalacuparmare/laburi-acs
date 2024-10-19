@@ -37,8 +37,9 @@ void enqueue_task(os_threadpool_t *tp, os_task_t *t)
 {
 	assert(tp != NULL);
 	assert(t != NULL);
-
-	/* TODO: Enqueue task to the shared task queue. Use synchronization. */
+	list_add_tail(&tp->head, &t->list);
+	if (list_empty(&tp->head))
+		pthread_cond_signal(&tp->cond);
 }
 
 /*
@@ -61,8 +62,11 @@ os_task_t *dequeue_task(os_threadpool_t *tp)
 {
 	os_task_t *t;
 
-	/* TODO: Dequeue task from the shared task queue. Use synchronization. */
-	return NULL;
+	if (queue_is_empty(tp))
+		return NULL;
+	t = list_entry(tp->head.next, os_task_t, list);
+	list_del(tp->head.next);
+	return t;
 }
 
 /* Loop function for threads */
@@ -73,20 +77,27 @@ static void *thread_loop_function(void *arg)
 	while (1) {
 		os_task_t *t;
 
+		pthread_mutex_lock(&tp->mutex);
 		t = dequeue_task(tp);
 		if (t == NULL)
 			break;
 		t->action(t->argument);
 		destroy_task(t);
+		if (queue_is_empty(tp))
+			pthread_cond_signal(&tp->cond);
+		pthread_mutex_unlock(&tp->mutex);
 	}
-
+	pthread_mutex_unlock(&tp->mutex);
 	return NULL;
 }
 
 /* Wait completion of all threads. This is to be called by the main thread. */
 void wait_for_completion(os_threadpool_t *tp)
 {
-	/* TODO: Wait for all worker threads. Use synchronization. */
+	pthread_mutex_lock(&tp->mutex);
+	if (!queue_is_empty(tp))
+		pthread_cond_wait(&tp->cond, &tp->mutex);
+	pthread_mutex_unlock(&tp->mutex);
 
 	/* Join all worker threads. */
 	for (unsigned int i = 0; i < tp->num_threads; i++)
@@ -104,8 +115,8 @@ os_threadpool_t *create_threadpool(unsigned int num_threads)
 
 	list_init(&tp->head);
 
-	/* TODO: Initialize synchronization data. */
-
+	pthread_mutex_init(&tp->mutex, NULL);
+	pthread_cond_init(&tp->cond, NULL);
 	tp->num_threads = num_threads;
 	tp->threads = malloc(num_threads * sizeof(*tp->threads));
 	DIE(tp->threads == NULL, "malloc");
@@ -122,8 +133,8 @@ void destroy_threadpool(os_threadpool_t *tp)
 {
 	os_list_node_t *n, *p;
 
-	/* TODO: Cleanup synchronization data. */
-
+	pthread_mutex_destroy(&tp->mutex);
+	pthread_cond_destroy(&tp->cond);
 	list_for_each_safe(n, p, &tp->head) {
 		list_del(n);
 		destroy_task(list_entry(n, os_task_t, list));

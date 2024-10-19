@@ -6,6 +6,10 @@
 
 int fstat(int fd, struct stat *st)
 {
-	/* TODO: Implement fstat(). */
+    int ret = syscall(__NR_fstat, fd, st);
+    if (ret >= 0) {
+        return ret;
+    }
+    errno = -ret;
 	return -1;
 }
