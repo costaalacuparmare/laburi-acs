@@ -7,6 +7,7 @@ int N;
 int P;
 int *v;
 int *vQSort;
+pthread_barrier_t barrier;
 
 void compare_vectors(int *a, int *b) {
 	int i;
@@ -79,7 +80,46 @@ void *thread_function(void *arg)
 {
 	int thread_id = *(int *)arg;
 
-	// TODO: implementati aici OETS paralel
+	// implementati aici OETS paralel
+    int start = thread_id * (double) N / P;
+    int end = fmin((thread_id + 1) * (double) N / P, N);
+    if (end < N) {
+        end++;
+    }
+
+    for (int k = 0; k < N; k++) {
+        int i = 0;
+        if (k % 2 == 0) {
+            // par
+            if (start % 2 == 1) {
+                i = 1;
+            }
+            for (i += start; i < end - 1; i += 2) {
+                if (v[i] > v[i + 1]) {
+                    int aux = v[i];
+                    v[i] = v[i + 1];
+                    v[i + 1] = aux;
+                }
+            }
+        } else {
+            // impar
+            i = 0;
+            if (start % 2 == 0) {
+                i = 1;
+            }
+            for (i += start; i < end - 1; i += 2) {
+                if (v[i] > v[i + 1]) {
+                    int aux = v[i];
+                    v[i] = v[i + 1];
+                    v[i + 1] = aux;
+                }
+            }
+
+        }
+
+
+        pthread_barrier_wait(&barrier);
+    }
 
 	pthread_exit(NULL);
 }
@@ -89,9 +129,10 @@ int main(int argc, char *argv[])
 	get_args(argc, argv);
 	init();
 
-	int i, aux;
+	int i;
 	pthread_t tid[P];
 	int thread_id[P];
+    pthread_barrier_init(&barrier, NULL, P);
 
 	// se sorteaza vectorul etalon
 	for (i = 0; i < N; i++)
@@ -109,20 +150,7 @@ int main(int argc, char *argv[])
 		pthread_join(tid[i], NULL);
 	}
 
-	// bubble sort clasic - trebuie transformat in OETS si paralelizat
-	int sorted = 0;
-	while (!sorted) {
-		sorted = 1;
-
-		for (i = 0; i < N-1; i++) {
-			if(v[i] > v[i + 1]) {
-				aux = v[i];
-				v[i] = v[i + 1];
-				v[i + 1] = aux;
-				sorted = 0;
-			}
-		}
-	}
+    pthread_barrier_destroy(&barrier);
 
 	// se afiseaza vectorul etalon
 	// se afiseaza vectorul curent

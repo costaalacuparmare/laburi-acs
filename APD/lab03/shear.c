@@ -9,6 +9,7 @@ int P;
 int *v;
 int *vQSort;
 int **M;
+pthread_barrier_t barrier;
 
 void compare_vectors(int *a, int *b) {
 	int i;
@@ -91,7 +92,6 @@ void init()
 	v = malloc(sizeof(int) * N);
 	vQSort = malloc(sizeof(int) * N);
 	M = malloc(sizeof(int*) * L);
-
 	if (v == NULL || vQSort == NULL || M == NULL) {
 		printf("Eroare la malloc!");
 		exit(1);
@@ -127,7 +127,40 @@ void *thread_function(void *arg)
 {
 	int thread_id = *(int *)arg;
 
-	// TODO: implementati aici shear sort paralel
+	// implementati aici shear sort paralel
+    int i, j, k, aux[L];
+    int start = thread_id * (double) L / P;
+    int end = fmin((thread_id + 1) * (double) L / P, L);
+
+    // shear sort clasic - trebuie paralelizat
+    for (k = 0; k < log(N) + 1; k++) {
+        // se sorteaza liniile pare crescator
+        // se sorteaza liniile impare descrescator
+        for (i = start; i < end; i++) {
+            if (i % 2) {
+                qsort(M[i], L, sizeof(int), cmpdesc);
+            } else {
+                qsort(M[i], L, sizeof(int), cmp);
+            }
+        }
+
+        pthread_barrier_wait(&barrier);
+
+        // se sorteaza coloanele descrescator
+        for (i = start; i < end; i++) {
+            for (j = 0; j < L; j++) {
+                aux[j] = M[j][i];
+            }
+
+            qsort(aux, L, sizeof(int), cmp);
+
+            for (j = 0; j < L; j++) {
+                M[j][i] = aux[j];
+            }
+        }
+
+        pthread_barrier_wait(&barrier);
+    }
 
 	pthread_exit(NULL);
 }
@@ -137,9 +170,10 @@ int main(int argc, char *argv[])
 	get_args(argc, argv);
 	init();
 
-	int i, j, k, aux[L];
+	int i;
 	pthread_t tid[P];
 	int thread_id[P];
+    pthread_barrier_init(&barrier, 0, P);
 
 	// se sorteaza etalonul
 	copy_matrix_in_vector(vQSort, M);
@@ -156,31 +190,7 @@ int main(int argc, char *argv[])
 		pthread_join(tid[i], NULL);
 	}
 
-	// shear sort clasic - trebuie paralelizat
-	for (k = 0; k < log(N) + 1; k++) {
-		// se sorteaza liniile pare crescator
-		// se sorteaza liniile impare descrescator
-		for (i = 0; i < L; i++) {
-			if (i % 2) {
-				qsort(M[i], L, sizeof(int), cmpdesc);
-			} else {
-				qsort(M[i], L, sizeof(int), cmp);
-			}
-		}
-
-		// se sorteaza coloanele descrescator
-		for (i = 0; i < L; i++) {
-			for (j = 0; j < L; j++) {
-				aux[j] = M[j][i];
-			}
-
-			qsort(aux, L, sizeof(int), cmp);
-
-			for (j = 0; j < L; j++) {
-				M[j][i] = aux[j];
-			}
-		}
-	}
+    pthread_barrier_destroy(&barrier);
 
 	// se afiseaza matricea
 	// se afiseaza vectorul etalon
