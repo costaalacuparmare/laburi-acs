@@ -33,7 +33,9 @@ namespace m1
         float translateX, translateY;
         float scaleX, scaleY;
         float angularStep;
-
+        bool downgrade_t;
+        bool downgrade_s;
+        float angularStepbonus;
         // TODO(student): If you need any other class variables, define them here.
 
     };
