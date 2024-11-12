@@ -10,8 +10,11 @@ public class Client extends Thread {
 
     @Override
     public void run() {
-        // TODO
-
+        try {
+            Main.charsSemaphore.acquire();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         if (Main.chairs > 0) {
             // client occupies a seat
             Main.chairs--;
@@ -19,13 +22,18 @@ public class Client extends Thread {
             System.out.println("Client " + id + " is waiting for haircut");
             System.out.println("Available seats: " + Main.chairs);
 
-            // TODO
-
+            Main.clientSemaphore.release();
+            Main.charsSemaphore.release();
+            try {
+                Main.barberSemaphore.acquire();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             System.out.println("Client " + id + " is served by the barber");
 
             Main.leftClients[id] = Main.SERVED_CLIENT;
         } else {
-            // TODO
+            Main.charsSemaphore.release();
             System.out.println("Client " + id + " left unserved");
             Main.leftClients[id] = Main.UNSERVED_CLIENT;
         }

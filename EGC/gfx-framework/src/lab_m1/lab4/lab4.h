@@ -5,7 +5,7 @@
 
 namespace m1
 {
-    class Lab4 : public gfxc::SimpleScene
+    class Lab04 : public gfxc::SimpleScene
     {
      public:
         struct ViewportArea
@@ -19,8 +19,8 @@ namespace m1
             int height;
         };
 
-        Lab4();
-        ~Lab4();
+        Lab04();
+        ~Lab04();
 
         void Init() override;
 
@@ -37,7 +37,7 @@ namespace m1
         void OnMouseBtnRelease(int mouseX, int mouseY, int button, int mods) override;
         void OnMouseScroll(int mouseX, int mouseY, int offsetX, int offsetY) override;
         void OnWindowResize(int width, int height) override;
-
+        void DrawTree(glm::mat4 parentMatrix, int lvl, float height, float scaleB);
         void RenderScene();
      protected:
         glm::mat4 modelMatrix;
@@ -46,6 +46,8 @@ namespace m1
         float angularStepOX, angularStepOY, angularStepOZ;
         GLenum polygonMode;
         ViewportArea miniViewportArea;
+        int level;
+        float radianBonus, scaleBonus;
     };
 }   // namespace m1
 

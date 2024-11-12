@@ -16,17 +16,17 @@ using namespace m1;
  */
 
 
-Lab4::Lab4()
+Lab04::Lab04()
 {
 }
 
 
-Lab4::~Lab4()
+Lab04::~Lab04()
 {
 }
 
 
-void Lab4::Init()
+void Lab04::Init()
 {
     polygonMode = GL_FILL;
 
@@ -49,19 +49,24 @@ void Lab4::Init()
     angularStepOY = 0;
     angularStepOZ = 0;
 
+    // bonus
+    level = 1;
+    radianBonus = M_PI / 6;
+    scaleBonus = 1;
+
     // Sets the resolution of the small viewport
     glm::ivec2 resolution = window->GetResolution();
     miniViewportArea = ViewportArea(50, 50, resolution.x / 5.f, resolution.y / 5.f);
 }
 
-void Lab4::FrameStart()
+void Lab04::FrameStart()
 {
     // Clears the color buffer (using the previously set color) and depth buffer
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Lab4::RenderScene() {
+void Lab04::RenderScene() {
     modelMatrix = glm::mat4(1);
     modelMatrix *= transform3D::Translate(-2.5f, 0.5f, -1.5f);
     modelMatrix *= transform3D::Translate(translateX, translateY, translateZ);
@@ -78,9 +83,36 @@ void Lab4::RenderScene() {
     modelMatrix *= transform3D::RotateOY(angularStepOY);
     modelMatrix *= transform3D::RotateOZ(angularStepOZ);
     RenderMesh(meshes["box"], shaders["VertexNormal"], modelMatrix);
+
+    modelMatrix = glm::mat4(1);
 }
 
-void Lab4::Update(float deltaTimeSeconds)
+void Lab04::DrawTree(glm::mat4 parentMatrix, int lvl, float height, float scaleB) {
+    if (lvl == 0) {
+        return;
+    }
+    float scaleNew = scaleB * 0.7f;
+    float heightNew = height * 2 / 3;
+    modelMatrix = parentMatrix;
+    modelMatrix /= transform3D::Scale(scaleB, height, scaleB);
+    modelMatrix *= transform3D::Translate(0, height * 0.5f, 0);
+    modelMatrix *= transform3D::RotateOZ(radianBonus);
+    modelMatrix *= transform3D::Translate(0, heightNew / 2, 0);
+    modelMatrix *= transform3D::Scale(scaleNew, heightNew, scaleNew);
+    RenderMesh(meshes["box"], shaders["VertexNormal"], modelMatrix);
+    DrawTree(modelMatrix, lvl - 1, heightNew, scaleNew);
+
+    modelMatrix = parentMatrix;
+    modelMatrix *= transform3D::Scale(1 / scaleB, 1 / height, 1 / scaleB);
+    modelMatrix *= transform3D::Translate(0, height * 0.5f, 0);
+    modelMatrix *= transform3D::RotateOZ(-radianBonus);
+    modelMatrix *= transform3D::Translate(0, heightNew / 2, 0);
+    modelMatrix *= transform3D::Scale(scaleNew, heightNew, scaleNew);
+    RenderMesh(meshes["box"], shaders["VertexNormal"], modelMatrix);
+    DrawTree(modelMatrix, lvl - 1, heightNew, scaleNew);
+}
+
+void Lab04::Update(float deltaTimeSeconds)
 {
     glLineWidth(3);
     glPointSize(5);
@@ -90,17 +122,22 @@ void Lab4::Update(float deltaTimeSeconds)
     glm::ivec2 resolution = window->GetResolution();
     glViewport(0, 0, resolution.x, resolution.y);
 
-    RenderScene();
+    modelMatrix = glm::mat4(1);
+    modelMatrix *= transform3D::Translate(0, 2.5f, -10);
+    modelMatrix *= transform3D::Scale(scaleBonus, 5, scaleBonus);
+    RenderMesh(meshes["box"], shaders["VertexNormal"], modelMatrix);
+    DrawTree(modelMatrix, level - 1, 5, scaleBonus);
     DrawCoordinateSystem();
 
     glClear(GL_DEPTH_BUFFER_BIT);
     glViewport(miniViewportArea.x, miniViewportArea.y, miniViewportArea.width, miniViewportArea.height);
 
-    // TODO(student): render the scene again, in the new viewport
+    // render the scene again, in the new viewport
     DrawCoordinateSystem();
+    RenderScene();
 }
 
-void Lab4::FrameEnd()
+void Lab04::FrameEnd()
 {
 }
 
@@ -111,14 +148,60 @@ void Lab4::FrameEnd()
  */
 
 
-void Lab4::OnInputUpdate(float deltaTime, int mods)
+void Lab04::OnInputUpdate(float deltaTime, int mods)
 {
-    // TODO(student): Add transformation logic
+    // Add transformation logic
+    // first transformation
+    if (window->KeyHold(GLFW_KEY_UP)) {
+        translateY += deltaTime;
+    }
+    if (window->KeyHold(GLFW_KEY_DOWN)) {
+        translateY -= deltaTime;
+    }
+    if (window->KeyHold(GLFW_KEY_RIGHT)) {
+        translateX += deltaTime;
+    }
+    if (window->KeyHold(GLFW_KEY_LEFT)) {
+        translateX -= deltaTime;
+    }
+
+    //second cube scaling
+    if (window->KeyHold(GLFW_KEY_1)) {
+        scaleX += deltaTime;
+        scaleY += deltaTime;
+        scaleZ += deltaTime;
+    }
+
+    if (window->KeyHold(GLFW_KEY_2)) {
+        scaleX -= deltaTime;
+        scaleY -= deltaTime;
+        scaleZ -= deltaTime;
+    }
+
+    // third cube rotation
+    if (window->KeyHold(GLFW_KEY_3)) {
+        angularStepOX += deltaTime;
+    }
+    if (window->KeyHold(GLFW_KEY_4)) {
+        angularStepOX -= deltaTime;
+    }
+    if (window->KeyHold(GLFW_KEY_5)) {
+        angularStepOY += deltaTime;
+    }
+    if (window->KeyHold(GLFW_KEY_6)) {
+        angularStepOY -= deltaTime;
+    }
+    if (window->KeyHold(GLFW_KEY_7)) {
+        angularStepOZ += deltaTime;
+    }
+    if (window->KeyHold(GLFW_KEY_8)) {
+        angularStepOZ -= deltaTime;
+    }
 
 }
 
 
-void Lab4::OnKeyPress(int key, int mods)
+void Lab04::OnKeyPress(int key, int mods)
 {
     // Add key press event
     if (key == GLFW_KEY_SPACE)
@@ -136,40 +219,70 @@ void Lab4::OnKeyPress(int key, int mods)
             break;
         }
     }
-    
-    // TODO(student): Add viewport movement and scaling logic
+
+    // Add viewport movement and scaling logic
+
+    if (key == GLFW_KEY_I) {
+        miniViewportArea.y += 10;
+    }
+    if (key == GLFW_KEY_J) {
+        miniViewportArea.x -= 10;
+    }
+    if (key == GLFW_KEY_K) {
+        miniViewportArea.y -= 10;
+    }
+    if (key == GLFW_KEY_L) {
+        miniViewportArea.x += 10;
+    }
+
+    if (key == GLFW_KEY_U) {
+        miniViewportArea.width -= 10;
+        miniViewportArea.height -= 10;
+    }
+    if (key == GLFW_KEY_O) {
+        miniViewportArea.width += 10;
+        miniViewportArea.height += 10;
+    }
+
+    //bonus
+    if (key == GLFW_KEY_M) {
+        level++;
+    }
+    if (key == GLFW_KEY_N) {
+        level--;
+    }
 }
 
 
-void Lab4::OnKeyRelease(int key, int mods)
+void Lab04::OnKeyRelease(int key, int mods)
 {
     // Add key release event
 }
 
 
-void Lab4::OnMouseMove(int mouseX, int mouseY, int deltaX, int deltaY)
+void Lab04::OnMouseMove(int mouseX, int mouseY, int deltaX, int deltaY)
 {
     // Add mouse move event
 }
 
 
-void Lab4::OnMouseBtnPress(int mouseX, int mouseY, int button, int mods)
+void Lab04::OnMouseBtnPress(int mouseX, int mouseY, int button, int mods)
 {
     // Add mouse button press event
 }
 
 
-void Lab4::OnMouseBtnRelease(int mouseX, int mouseY, int button, int mods)
+void Lab04::OnMouseBtnRelease(int mouseX, int mouseY, int button, int mods)
 {
     // Add mouse button release event
 }
 
 
-void Lab4::OnMouseScroll(int mouseX, int mouseY, int offsetX, int offsetY)
+void Lab04::OnMouseScroll(int mouseX, int mouseY, int offsetX, int offsetY)
 {
 }
 
 
-void Lab4::OnWindowResize(int width, int height)
+void Lab04::OnWindowResize(int width, int height)
 {
 }

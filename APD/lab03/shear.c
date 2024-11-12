@@ -132,7 +132,6 @@ void *thread_function(void *arg)
     int start = thread_id * (double) L / P;
     int end = fmin((thread_id + 1) * (double) L / P, L);
 
-    // shear sort clasic - trebuie paralelizat
     for (k = 0; k < log(N) + 1; k++) {
         // se sorteaza liniile pare crescator
         // se sorteaza liniile impare descrescator

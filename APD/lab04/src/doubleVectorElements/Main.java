@@ -1,23 +1,36 @@
 package doubleVectorElements;
 
-public class Main {
+import java.sql.SQLOutput;
+
+public class Main extends Thread {
 
     public static void main(String[] args) {
-        int N = 100000013;
-        int[] v = new int[N];
-        int P = 4; // the program should work for any P <= N
 
-        for (int i = 0; i < N; i++) {
-            v[i] = i;
+
+        for (int i = 0; i < MyThread.N; i++) {
+            MyThread.v[i] = i;
+        }
+
+        Thread[] threads = new Thread[MyThread.P];
+
+        for (int i = 0; i < MyThread.P; i++) {
+            threads[i] = new Thread(new MyThread(i));
+            threads[i].start();
+        }
+
+        for (int i = 0; i < MyThread.P; i++) {
+            try {
+                threads[i].join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         // Parallelize me using P threads
-        for (int i = 0; i < N; i++) {
-            v[i] = v[i] * 2;
-        }
 
-        for (int i = 0; i < N; i++) {
-            if (v[i] != i * 2) {
+
+        for (int i = 0; i < MyThread.N; i++) {
+            if (MyThread.v[i] != i * 2) {
                 System.out.println("Wrong answer");
                 System.exit(1);
             }

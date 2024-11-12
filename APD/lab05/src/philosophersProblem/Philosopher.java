@@ -22,9 +22,9 @@ public class Philosopher implements Runnable {
     @Override
     public void run() {
         synchronized (leftFork) {
-            sleep(); // delay added to make sure the dead-lock is visible
             synchronized (rightFork) {
                 System.out.println("Philosopher " + id + " is eating");
+                sleep();
             }
         }
     }

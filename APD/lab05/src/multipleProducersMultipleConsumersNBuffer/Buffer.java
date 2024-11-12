@@ -11,15 +11,35 @@ public class Buffer {
     }
 
 	public void put(int value) {
-        queue.add(value);        
+        synchronized (this) {
+            try {
+                while (!queue.isEmpty()) {
+                    this.wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            queue.add(value);
+            this.notifyAll();
+        }
 	}
 
 	public int get() {
-        int a = -1;
-        Integer result = queue.poll();
-        if (result != null) {
-            a = result;
+        synchronized (this) {
+            try {
+                while (queue.isEmpty()) {
+                    this.wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            int a = -1;
+            Integer result = queue.poll();
+            if (result != null) {
+                a = result;
+            }
+            this.notifyAll();
+            return a;
         }
-        return a;
 	}
 }

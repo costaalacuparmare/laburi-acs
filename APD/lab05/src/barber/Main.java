@@ -13,7 +13,11 @@ public class Main {
 
     public static int[] leftClients = new int[TOTAL_CLIENTS];
 
-    // TODO: add semaphores
+    // add semaphores
+    public static Semaphore barberSemaphore = new Semaphore(0);
+    public static Semaphore clientSemaphore = new Semaphore(0);
+
+    public static Semaphore charsSemaphore = new Semaphore(1);
 
     public static int clients = TOTAL_CLIENTS;
     public static int chairs = TOTAL_CHAIRS;

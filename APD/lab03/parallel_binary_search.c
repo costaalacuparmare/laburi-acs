@@ -17,6 +17,7 @@ struct my_arg {
 	int *v;
 	int *found;
 };
+pthread_barrier_t barrier;
 
 /*
 void binary_search() {
@@ -41,16 +42,55 @@ void binary_search() {
 
 void *f(void *arg)
 {
-	struct my_arg* data = (struct my_arg*) arg;
+    struct my_arg* data = (struct my_arg*) arg;
 
-	while (*data->keep_running) {
-		int size = *data->right - *data->left;
+    while (*data->keep_running) {
+        int local_left = *data->left;
+        int local_right = *data->right;
+        int size = local_right - local_left;
 
-		// TODO: implementati parallel binary search
-	}
+        if (*data->keep_running == 0) {
+            break;
+        }
 
-	return NULL;
+        int start = local_left + data->id * size / data->P;
+        int end = fmin(local_left + (data->id + 1) * size / data->P, local_right);
+
+        if (start >= end) {
+            printf("Number not found by thread %d\n", data->id);
+            break;
+        }
+
+        for (int i = start; i < end; i++) {
+            if (data->v[i] == data->number) {
+                *data->keep_running = 0; // Signal other threads to stop
+                printf("Number found by thread %d at position %d\n", data->id, i);
+                break;
+            }
+        }
+
+        if (*data->keep_running == 0) {
+            break;
+        }
+
+        pthread_barrier_wait(&barrier);
+
+        if (data->id == 0) {
+            *data->right = local_left + size / 2;
+        } else {
+            *data->left = local_left + size / 2;
+        }
+
+        pthread_barrier_wait(&barrier);
+    }
+
+    pthread_exit(NULL);
 }
+
+
+
+
+
 
 void display_vector(int *v, int size) {
 	int i;
@@ -71,7 +111,6 @@ int main(int argc, char *argv[])
 	void *status;
 	pthread_t *threads;
 	struct my_arg *arguments;
-
 	if (argc < 4) {
 		printf("Usage:\n\t./ex N P number\n");
 		return 1;
@@ -84,8 +123,10 @@ int main(int argc, char *argv[])
 	keep_running = 1;
 	left = 0;
 	right = N;
+    pthread_barrier_init(&barrier, NULL, P);
 
-	v = (int*) malloc(N * sizeof(int));
+
+    v = (int*) malloc(N * sizeof(int));
 	threads = (pthread_t*) malloc(P * sizeof(pthread_t));
 	arguments = (struct my_arg*) malloc(P * sizeof(struct my_arg));
 	found = (int*) malloc(P * sizeof(int));
@@ -123,6 +164,8 @@ int main(int argc, char *argv[])
 			exit(-1);
 		}
 	}
+
+    pthread_barrier_destroy(&barrier);
 
 	free(v);
 	free(threads);

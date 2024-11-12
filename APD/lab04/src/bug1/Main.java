@@ -12,10 +12,12 @@ public class Main {
 		Thread[] threads = new Thread[2];
 		boolean sw = true;
 		for (int j = 0; j < N_ITERATIONS; j++) {
-			MyThread.value = 0;
+
+            // modify run with start to create the race condition
+            MyThread.value = 0;
 			for (int i = 0; i < 2; i++) {
 				threads[i] = new Thread(new MyThread());
-				threads[i].run();
+				threads[i].start();
 			}
 			for (int i = 0; i < 2; i++) {
 				try {

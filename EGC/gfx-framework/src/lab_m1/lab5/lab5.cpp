@@ -43,9 +43,15 @@ void Lab5::Init()
         meshes[mesh->GetMeshID()] = mesh;
     }
 
+    fovY = RADIANS(60);
+    zNear = 0.01f;
+    zFar = 200.0f;
+    ortoWidth = 2.0f;
+    ortoHeight = 2.0f;
+
     // TODO(student): After you implement the changing of the projection
     // parameters, remove hardcodings of these parameters
-    projectionMatrix = glm::perspective(RADIANS(60), window->props.aspectRatio, 0.01f, 200.0f);
+    projectionMatrix = glm::perspective(fovY, window->props.aspectRatio, zNear, zFar);
 
 }
 
@@ -85,11 +91,24 @@ void Lab5::Update(float deltaTimeSeconds)
         RenderMesh(meshes["box"], shaders["Simple"], modelMatrix);
     }
 
-    // TODO(student): Draw more objects with different model matrices.
+    // Draw more objects with different model matrices.
     // Attention! The `RenderMesh()` function overrides the usual
     // `RenderMesh()` that we've been using up until now. This new
     // function uses the view matrix from the camera that you just
     // implemented, and the local projection matrix.
+    {
+        glm::mat4 modelMatrix = glm::mat4(1);
+        modelMatrix = glm::translate(modelMatrix, glm::vec3(-4, 0.5f, 0));
+        modelMatrix = glm::scale(modelMatrix, glm::vec3(1, 2, 1));
+        RenderMesh(meshes["box"], shaders["Simple"], modelMatrix);
+    }
+
+    {
+        glm::mat4 modelMatrix = glm::mat4(1);
+        modelMatrix = glm::translate(modelMatrix, glm::vec3(4, 0.5f, 0));
+        modelMatrix = glm::rotate(modelMatrix, RADIANS(40.0f), glm::vec3(1,0,0));
+        RenderMesh(meshes["box"], shaders["Simple"], modelMatrix);
+    }
 
     // Render the camera target. This is useful for understanding where
     // the rotation point is, when moving in third-person camera mode.
@@ -138,33 +157,33 @@ void Lab5::OnInputUpdate(float deltaTime, int mods)
         float cameraSpeed = 2.0f;
 
         if (window->KeyHold(GLFW_KEY_W)) {
-            // TODO(student): Translate the camera forward
-
+            // Translate the camera forward
+            camera->TranslateForward(cameraSpeed * deltaTime);
         }
 
         if (window->KeyHold(GLFW_KEY_A)) {
-            // TODO(student): Translate the camera to the left
-
+            // Translate the camera to the left
+            camera->TranslateRight(- cameraSpeed * deltaTime);
         }
 
         if (window->KeyHold(GLFW_KEY_S)) {
-            // TODO(student): Translate the camera backward
-
+            // Translate the camera backward
+            camera->TranslateForward( - cameraSpeed * deltaTime);
         }
 
         if (window->KeyHold(GLFW_KEY_D)) {
-            // TODO(student): Translate the camera to the right
-
+            // Translate the camera to the right
+            camera->TranslateRight(cameraSpeed * deltaTime);
         }
 
         if (window->KeyHold(GLFW_KEY_Q)) {
-            // TODO(student): Translate the camera downward
-
+            // Translate the camera downward
+            camera->TranslateUpward(cameraSpeed * deltaTime);
         }
 
         if (window->KeyHold(GLFW_KEY_E)) {
-            // TODO(student): Translate the camera upward
-
+            // Translate the camera upward
+            camera->TranslateUpward(- cameraSpeed * deltaTime);
         }
     }
 
@@ -172,7 +191,26 @@ void Lab5::OnInputUpdate(float deltaTime, int mods)
     // variables you might need in the class header. Inspect this file
     // for any hardcoded projection arguments (can you find any?) and
     // replace them with those extra variables.
+    if (window->KeyHold(GLFW_KEY_F)) {
+        fovY += RADIANS(10) * deltaTime;
 
+        projectionMatrix = glm::perspective(fovY, window->props.aspectRatio, zNear, zFar);
+    }
+    if (window->KeyHold(GLFW_KEY_G)) {
+        fovY -= RADIANS(10) * deltaTime;
+
+        projectionMatrix = glm::perspective(fovY, window->props.aspectRatio, zNear, zFar);
+    }
+    if (window->KeyHold(GLFW_KEY_H)) {
+        ortoHeight += 1.0f *deltaTime;
+        ortoWidth += 1.0f * deltaTime;
+        projectionMatrix = glm::ortho(-ortoWidth, ortoWidth, -ortoHeight, ortoHeight, zNear, zFar);
+    }
+    if (window->KeyHold(GLFW_KEY_J)) {
+        ortoHeight -= 1.0f *deltaTime;
+        ortoWidth -= 1.0f * deltaTime;
+        projectionMatrix = glm::ortho(-ortoWidth, ortoWidth, -ortoHeight, ortoHeight, zNear, zFar);
+    }
 }
 
 
@@ -184,7 +222,13 @@ void Lab5::OnKeyPress(int key, int mods)
         renderCameraTarget = !renderCameraTarget;
     }
     // TODO(student): Switch projections
+    if (window->KeyHold(GLFW_KEY_O)) {
+        projectionMatrix = glm::perspective(fovY, window->props.aspectRatio, zNear, zFar);
+    }
 
+    if (window->KeyHold(GLFW_KEY_P)) {
+        projectionMatrix = glm::ortho(-ortoWidth, ortoWidth, -ortoHeight, ortoHeight, zNear, zFar);
+    }
 }
 
 
@@ -200,23 +244,25 @@ void Lab5::OnMouseMove(int mouseX, int mouseY, int deltaX, int deltaY)
 
     if (window->MouseHold(GLFW_MOUSE_BUTTON_RIGHT))
     {
-        float sensivityOX = 0.001f;
-        float sensivityOY = 0.001f;
+        float sensivityOX = 0.002f;
+        float sensivityOY = 0.002f;
 
         if (window->GetSpecialKeyState() == 0) {
             renderCameraTarget = false;
-            // TODO(student): Rotate the camera in first-person mode around
+            // Rotate the camera in first-person mode around
             // OX and OY using `deltaX` and `deltaY`. Use the sensitivity
             // variables for setting up the rotation speed.
-
+            camera->RotateFirstPerson_OY(-sensivityOY * deltaX);
+            camera->RotateFirstPerson_OX(-sensivityOX * deltaY);
         }
 
         if (window->GetSpecialKeyState() & GLFW_MOD_CONTROL) {
             renderCameraTarget = true;
-            // TODO(student): Rotate the camera in third-person mode around
+            // Rotate the camera in third-person mode around
             // OX and OY using `deltaX` and `deltaY`. Use the sensitivity
             // variables for setting up the rotation speed.
-
+            camera->RotateThirdPerson_OX(-sensivityOX * deltaY);
+            camera->RotateThirdPerson_OY(-sensivityOY * deltaX);
         }
     }
 }

@@ -6,11 +6,20 @@ public class Barber extends Thread {
         int servedClients = 0;
 
         do {
-            // TODO
-
+            try {
+                Main.clientSemaphore.acquire();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            try {
+                Main.charsSemaphore.acquire();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Main.chairs++;
 
-            // TODO
+            Main.barberSemaphore.release();
+            Main.charsSemaphore.release();
 
             try {
                 Thread.sleep(100);

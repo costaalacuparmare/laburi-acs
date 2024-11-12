@@ -8,6 +8,7 @@ int P;
 int *v;
 int *vQSort;
 int *vNew;
+pthread_barrier_t barrier;
 
 void merge(int *source, int start, int mid, int end, int *destination) {
 	int iA = start;
@@ -108,13 +109,32 @@ void print()
 	compare_vectors(v, vQSort);
 }
 
-void *thread_function(void *arg)
-{
-	int thread_id = *(int *)arg;
+void *thread_function(void *arg) {
+    int thread_id = *(int *)arg;
 
-	// implementati aici merge sort paralel
+    int start = thread_id * (double) N / P;
+    int end = fmin((thread_id + 1) * (double) N / P, N);
 
-	pthread_exit(NULL);
+    int i, width, *aux;
+    for (width = 1; width < N; width *= 2) {
+        int local_start = (start / (2 * width)) * (2 * width);
+        int local_end = fmin((end / (2 * width)) * (2 * width), N);
+        for (i = local_start; i < local_end; i += 2 * width) {
+            merge(v, i, i + width, i + 2 * width, vNew);
+        }
+
+        pthread_barrier_wait(&barrier);
+
+        if (thread_id == 0) {
+            aux = v;
+            v = vNew;
+            vNew = aux;
+        }
+
+        pthread_barrier_wait(&barrier);
+    }
+
+    pthread_exit(NULL);
 }
 
 int main(int argc, char *argv[])
@@ -125,6 +145,7 @@ int main(int argc, char *argv[])
 	int i;
 	int thread_id[P];
 	pthread_t tid[P];
+    pthread_barrier_init(&barrier, NULL, P);
 
 	// se sorteaza vectorul etalon
 	for (i = 0; i < N; i++)
@@ -142,17 +163,7 @@ int main(int argc, char *argv[])
 		pthread_join(tid[i], NULL);
 	}
 
-	// merge sort clasic - trebuie paralelizat
-	int width, *aux;
-	for (width = 1; width < N; width = 2 * width) {
-		for (i = 0; i < N; i = i + 2 * width) {
-			merge(v, i, i + width, i + 2 * width, vNew);
-		}
-
-		aux = v;
-		v = vNew;
-		vNew = aux;
-	}
+    pthread_barrier_destroy(&barrier);
 
 	print();
 
