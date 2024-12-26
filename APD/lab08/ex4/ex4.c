@@ -21,6 +21,9 @@ int main (int argc, char *argv[])
 
         // The ROOT process receives an element from any source.
         // Prints the element and the source. HINT: MPI_Status.
+        MPI_Status status;
+        MPI_Recv(&value, 1, MPI_INT, MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, &status);
+        printf("Process [%d] receives %d from [%d].\n", rank, value, status.MPI_SOURCE);
 
     } else {
 
@@ -31,10 +34,9 @@ int main (int argc, char *argv[])
         printf("Process [%d] send %d.\n", rank, value);
 
         // Sends the value to the ROOT process.
-
+        MPI_Send(&value, 1, MPI_INT, ROOT, 0, MPI_COMM_WORLD);
     }
 
     MPI_Finalize();
 
 }
-

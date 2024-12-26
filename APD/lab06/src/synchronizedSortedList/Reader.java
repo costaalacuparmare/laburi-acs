@@ -9,15 +9,17 @@ import java.util.concurrent.Semaphore;
 public class Reader extends Thread {
     private final String filename;
     private final List<Integer> list;
+    private final Semaphore semaphore;
 
-    public Reader(String filename, List<Integer> list) {
+    public Reader(String filename, List<Integer> list, final Semaphore semaphore) {
         super();
         this.filename = filename;
         this.list = list;
+        this.semaphore = semaphore;
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         try {
             Scanner scanner = new Scanner(new File(filename));
             while (scanner.hasNextInt()) {
@@ -25,6 +27,8 @@ public class Reader extends Thread {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } finally {
+            semaphore.release();
         }
     }
 }

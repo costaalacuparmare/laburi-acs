@@ -1,13 +1,25 @@
 package multipleProducersMultipleConsumers;
 
-public class Buffer {
-	int value;
+//Use ArrayBlockingQueue
 
+import java.util.concurrent.ArrayBlockingQueue;
+
+public class Buffer {
+    ArrayBlockingQueue<Integer> buffer = new ArrayBlockingQueue<Integer>(10);
 	void put(int value) {
-		this.value = value;
+        try {
+            buffer.put(value);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 	}
 
 	int get() {
-		return value;
+        try {
+            return buffer.take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return -1;
 	}
 }

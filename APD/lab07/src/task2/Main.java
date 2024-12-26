@@ -1,5 +1,9 @@
 package task2;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Main {
     static int N = 10;
     static int COLORS = 3;
@@ -23,7 +27,7 @@ public class Main {
         }
     }
 
-    private static boolean verifyColors(int[] colors, int step) {
+    public static boolean verifyColors(int[] colors, int step) {
         for (int i = 0; i < step; i++) {
             if (colors[i] == colors[step] && isEdge(i, step))
                 return false;
@@ -49,6 +53,10 @@ public class Main {
 
     public static void main(String[] args) {
         int[] colors = new int[N];
-        colorGraph(colors, 0);
+        int step = 0;
+        AtomicInteger inQueue = new AtomicInteger(0);
+        ExecutorService tpe = Executors.newFixedThreadPool(4);
+        inQueue.incrementAndGet();
+        tpe.submit(new MyRunnable(colors, tpe, inQueue, step));
     }
 }

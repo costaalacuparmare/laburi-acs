@@ -2,13 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main (int argc, char *argv[])
-{
-    int  numtasks, rank;
+int main(int argc, char *argv[]) {
+    int numtasks, rank;
 
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
-    MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     int recv_num;
 
@@ -17,6 +16,15 @@ int main (int argc, char *argv[])
         // First process starts the circle.
         // Generate a random number.
         // Send the number to the next process.
+        srand(42);
+        int num = rand();
+
+        MPI_Status status;
+        MPI_Send(&num, 1, MPI_INT, rank + 1, 0, MPI_COMM_WORLD);
+        MPI_Recv(&recv_num, 1, MPI_INT, numtasks - 1, 0, MPI_COMM_WORLD,
+                 &status);
+        printf("Process with rank [%d], received %d with tag %d.\n",
+               rank, num, status.MPI_TAG);
 
     } else if (rank == numtasks - 1) {
         // Last process close the circle.
@@ -24,12 +32,24 @@ int main (int argc, char *argv[])
         // Increments the number.
         // Sends the number to the first process.
 
+        MPI_Status status;
+        MPI_Recv(&recv_num, 1, MPI_INT, rank - 1, 0, MPI_COMM_WORLD, &status);
+        printf("Process with rank [%d], received %d with tag %d.\n",
+               rank, recv_num, status.MPI_TAG);
+        recv_num++;
+        MPI_Send(&recv_num, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+
     } else {
         // Middle process.
         // Receives the number from the previous process.
         // Increments the number.
         // Sends the number to the next process.
-
+        MPI_Status status;
+        MPI_Recv(&recv_num, 1, MPI_INT, rank - 1, 0, MPI_COMM_WORLD, &status);
+        printf("Process with rank [%d], received %d with tag %d.\n",
+               rank, recv_num, status.MPI_TAG);
+        recv_num++;
+        MPI_Send(&recv_num, 1, MPI_INT, rank + 1, 0, MPI_COMM_WORLD);
     }
 
     MPI_Finalize();

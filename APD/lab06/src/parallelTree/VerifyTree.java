@@ -5,9 +5,10 @@ import java.util.concurrent.CyclicBarrier;
 
 public class VerifyTree implements Runnable {
 	TreeNode tree;
-
-	public VerifyTree(TreeNode tree) {
+    final CyclicBarrier barrier;
+	public VerifyTree(TreeNode tree, final CyclicBarrier barrier) {
 		this.tree = tree;
+        this.barrier = barrier;
 	}
 
 	public boolean isCorrect(TreeNode tree) {
@@ -32,7 +33,13 @@ public class VerifyTree implements Runnable {
 	}
 
 	@Override
-	public void run() {
+	public synchronized void run() {
+        try {
+            barrier.wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 		if (isCorrect(tree))
 			System.out.println("Correct");
 		else

@@ -10,13 +10,16 @@ public class ReadTreePart implements Runnable {
 	TreeNode tree;
 	String fileName;
 
-	public ReadTreePart(TreeNode tree, String fileName) {
+    final CyclicBarrier barrier;
+
+	public ReadTreePart(TreeNode tree, String fileName, final CyclicBarrier barrier) {
 		this.tree = tree;
 		this.fileName = fileName;
+        this.barrier = barrier;
 	}
 
 	@Override
-	public void run() {
+	public synchronized void run() {
 		try {
 			Scanner scanner = new Scanner(new File(fileName));
 			TreeNode treeNode;
@@ -29,11 +32,16 @@ public class ReadTreePart implements Runnable {
 				while (treeNode == null) {
 					treeNode = tree.getNode(root);
 				}
-
 				treeNode.addChild(new TreeNode(child));
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+
+        try {
+            barrier.wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 	}
 }

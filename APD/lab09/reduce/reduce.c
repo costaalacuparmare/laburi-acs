@@ -15,7 +15,14 @@ int main (int argc, char *argv[])
     int value = rank;
 
     for (int i = 2; i <= procs; i *= 2) {
-        // TODO
+        if (rank % i == 0) {
+            int received = 0;
+            MPI_Status status;
+            MPI_Recv(&received, 1, MPI_INT, rank + i / 2, 0, MPI_COMM_WORLD, &status);
+            value += received;
+        } else if (rank % (i / 2) == 0) {
+            MPI_Send(&value, 1, MPI_INT, rank - i / 2, 0, MPI_COMM_WORLD);
+        }
     }
 
     if (rank == MASTER) {

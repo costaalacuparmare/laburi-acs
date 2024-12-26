@@ -1,9 +1,13 @@
 package task3;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Main {
     public static int N = 4;
 
-    private static boolean check(int[] arr, int step) {
+    public static boolean check(int[] arr, int step) {
         for (int i = 0; i <= step; i++) {
             for (int j = i + 1; j <= step; j++) {
                 if (arr[i] == arr[j] || arr[i] + i == arr[j] + j || arr[i] + j == arr[j] + i)
@@ -13,7 +17,7 @@ public class Main {
         return true;
     }
 
-    private static void printQueens(int[] sol) {
+    public static void printQueens(int[] sol) {
         StringBuilder aux = new StringBuilder();
         for (int i = 0; i < sol.length; i++) {
             aux.append("(").append(sol[i] + 1).append(", ").append(i + 1).append("), ");
@@ -38,6 +42,9 @@ public class Main {
     }
     public static void main(String[] args) {
         int[] graph = new int[N];
-        queens(graph, 0);
+        // queens(graph, 0);
+        AtomicInteger inQueue = new AtomicInteger(0);
+        ExecutorService tpe = Executors.newFixedThreadPool(4);
+        tpe.submit(new MyRunnable(graph, tpe, inQueue, 0));
     }
 }

@@ -42,7 +42,7 @@ int main(int argc, char * argv[]) {
 	MPI_Comm_size(MPI_COMM_WORLD, &nProcesses);
 	printf("Hello from %i/%i\n", rank, nProcesses);
 
-	if(rank==0) { // This code is run by a single process
+	if(rank == 0) { // This code is run by a single process
 		int intialValue = -1;
 		int sorted = 0;
 		int aux;
@@ -65,13 +65,42 @@ int main(int argc, char * argv[]) {
 		qsort(vQSort, nProcesses - 1, sizeof(int), cmp);
 
 		// TODO send the vector to rank == 1
+        for (int i = 1; i < nProcesses; i ++) {
+            MPI_Send(&intialValue, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+        }
 
+        for (int i = 1; i < nProcesses; i ++) {
+            MPI_Send(&v[i - 1], 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
+        }
+
+        MPI_Status status;
+        for (int i = 1; i < nProcesses; i++) {
+            MPI_Recv(&v[i - 1], 1, MPI_INT, i, 0, MPI_COMM_WORLD, &status);
+        }
 
 		displayVector(v);
 		compareVectors(v, vQSort);
 	} else {
 		// TODO sort the vector v using N processes (N == nProcesses - 1)
-		
+        MPI_Status status;
+        int initial, newVal;
+
+        MPI_Recv(&initial, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
+
+        for (int i = 0; i < nProcesses; i++) {
+            MPI_Recv(&newVal, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
+            if (newVal == -1) {
+                break;
+            }
+            if (newVal >= initial) {
+                MPI_Send(&newVal, 1, MPI_INT, rank + 1, 0, MPI_COMM_WORLD);
+            } else {
+                MPI_Send(&initial, 1, MPI_INT, rank + 1, 0, MPI_COMM_WORLD);
+                initial = newVal;
+            }
+        }
+
+        MPI_Send(&initial, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
 	}
 
 	MPI_Finalize();
