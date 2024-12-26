@@ -9,8 +9,8 @@ using namespace m1;
 
 
 /*
- *  To find out more about `FrameStart`, `Update`, `FrameEnd`
- *  and the order in which they are called, see `world.cpp`.
+ *  To find out more about FrameStart, Update, FrameEnd
+ *  and the order in which they are called, see world.cpp.
  */
 
 
@@ -60,6 +60,11 @@ void Lab8::Init()
         materialShininess = 30;
         materialKd = 0.5;
         materialKs = 0.5;
+
+        typeOfLight = 0;
+        angleOX = 0;
+        angleOY = 0;
+        cutoffAngle = 45.f;
     }
 }
 
@@ -82,7 +87,7 @@ void Lab8::Update(float deltaTimeSeconds)
         glm::mat4 modelMatrix = glm::mat4(1);
         modelMatrix = glm::translate(modelMatrix, glm::vec3(0, 1, 0));
         // TODO(student): Add or change the object colors
-        RenderSimpleMesh(meshes["sphere"], shaders["LabShader"], modelMatrix);
+        RenderSimpleMesh(meshes["sphere"], shaders["LabShader"], modelMatrix, glm::vec3(1,0,1));
 
     }
 
@@ -92,7 +97,7 @@ void Lab8::Update(float deltaTimeSeconds)
         modelMatrix = glm::rotate(modelMatrix, RADIANS(60.0f), glm::vec3(1, 0, 0));
         modelMatrix = glm::scale(modelMatrix, glm::vec3(0.5f));
         // TODO(student): Add or change the object colors
-        RenderSimpleMesh(meshes["box"], shaders["LabShader"], modelMatrix);
+        RenderSimpleMesh(meshes["box"], shaders["LabShader"], modelMatrix,glm::vec3(1,1,0));
 
     }
 
@@ -109,7 +114,7 @@ void Lab8::Update(float deltaTimeSeconds)
         modelMatrix = glm::translate(modelMatrix, glm::vec3(0, 0.01f, 0));
         modelMatrix = glm::scale(modelMatrix, glm::vec3(0.25f));
         // TODO(student): Add or change the object colors
-        RenderSimpleMesh(meshes["plane"], shaders["LabShader"], modelMatrix);
+        RenderSimpleMesh(meshes["plane"], shaders["LabShader"], modelMatrix),glm::vec3(0.35f,0.5f,0.5f);
 
     }
 
@@ -149,7 +154,7 @@ void Lab8::RenderSimpleMesh(Mesh *mesh, Shader *shader, const glm::mat4 & modelM
     int eye_position = glGetUniformLocation(shader->program, "eye_position");
     glUniform3f(eye_position, eyePosition.x, eyePosition.y, eyePosition.z);
 
-    // Set material property uniforms (shininess, kd, ks, object color) 
+    // Set material property uniforms (shininess, kd, ks, object color)
     int material_shininess = glGetUniformLocation(shader->program, "material_shininess");
     glUniform1i(material_shininess, materialShininess);
 
@@ -163,6 +168,44 @@ void Lab8::RenderSimpleMesh(Mesh *mesh, Shader *shader, const glm::mat4 & modelM
     glUniform3f(object_color, color.r, color.g, color.b);
 
     // TODO(student): Set any other shader uniforms that you need
+    for (int i = 0; i < 2; i++)
+    {
+        lights[i].type = typeOfLight;
+        lights[i].position = lightPosition;
+        lights[i].direction = lightDirection;
+    }
+
+    lights[1].position += glm::vec3(3, 0, 0);
+
+    for (int i = 0; i < 2; i++)
+    {
+        std::string name = std::string("lights[") + std::to_string(i) + std::string("].position");
+        GLuint location = glGetUniformLocation(shader->program, name.c_str());
+        glUniform3fv(location, 1, glm::value_ptr(lights[i].position));
+
+        std::string name1 = std::string("lights[") + std::to_string(i) + std::string("].type");
+        GLuint location1 = glGetUniformLocation(shader->program, name.c_str());
+        glUniform1i(location1,lights[i].type);
+
+        std::string name2 = std::string("lights[") + std::to_string(i) + std::string("].direction");
+        GLuint location2 = glGetUniformLocation(shader->program, name.c_str());
+        glUniform3fv(location2, 1, glm::value_ptr(lights[i].direction));
+
+    }
+
+
+
+    GLint typeoflightLoc = glGetUniformLocation(shader->program, "typeOfLight");
+    glUniform1i(typeoflightLoc, typeOfLight);
+
+    GLint cutoffAngleLoc = glGetUniformLocation(shader->program, "cutoffangle");
+    glUniform1f(cutoffAngleLoc, cutoffAngle);
+
+    GLint angleOXLoc = glGetUniformLocation(shader->program, "angleOX");
+    glUniform1f(angleOXLoc, angleOX);
+
+    GLint angleOYLoc = glGetUniformLocation(shader->program, "angleOY");
+    glUniform1f(angleOYLoc, angleOY);
 
     // Bind model matrix
     GLint loc_model_matrix = glGetUniformLocation(shader->program, "Model");
@@ -186,7 +229,7 @@ void Lab8::RenderSimpleMesh(Mesh *mesh, Shader *shader, const glm::mat4 & modelM
 
 /*
  *  These are callback functions. To find more about callbacks and
- *  how they behave, see `input_controller.h`.
+ *  how they behave, see input_controller.h.
  */
 
 
@@ -210,7 +253,19 @@ void Lab8::OnInputUpdate(float deltaTime, int mods)
         if (window->KeyHold(GLFW_KEY_Q)) lightPosition -= up * deltaTime * speed;
 
         // TODO(student): Set any other keys that you might need
+        if (window->KeyHold(GLFW_KEY_UP)) angleOX += deltaTime * speed;
+        if (window->KeyHold(GLFW_KEY_DOWN)) angleOX -= deltaTime * speed;
+        if (window->KeyHold(GLFW_KEY_LEFT)) angleOY += deltaTime * speed;
+        if (window->KeyHold(GLFW_KEY_RIGHT)) angleOY -= deltaTime * speed;
+        if (window->KeyHold(GLFW_KEY_P)) cutoffAngle += deltaTime * 100;
+        if (window->KeyHold(GLFW_KEY_O)) cutoffAngle -= deltaTime * 100;
 
+        glm::mat4 turn = glm::mat4(1);
+        turn = glm::rotate(turn, angleOY, glm::vec3(0, 1, 0));
+        turn = glm::rotate(turn, angleOX, glm::vec3(1, 0, 0));
+
+        lightDirection = glm::vec3(0, -1, 0);
+        lightDirection = glm::vec3(turn * glm::vec4(lightDirection, 0));
     }
 }
 
@@ -220,6 +275,11 @@ void Lab8::OnKeyPress(int key, int mods)
     // Add key press event
 
     // TODO(student): Set keys that you might need
+    if (key == GLFW_KEY_F) {
+        typeOfLight = (typeOfLight + 1) % 2;
+    }
+
+
 
 }
 

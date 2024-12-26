@@ -16,22 +16,27 @@ uniform vec3 eye_position;
 uniform float material_kd;
 uniform float material_ks;
 uniform int material_shininess;
-
 uniform vec3 object_color;
 
 // Output value to fragment shader
-out vec3 color;
+out vec3 frag_color;
 
 
 void main()
 {
     // TODO(student): Compute world space vectors
+    vec3 world_position = vec3(Model * vec4(v_position, 1.0));
+    vec3 world_normal = normalize((mat3(transpose(inverse(Model)))) * v_normal);
+
+    vec3 L = normalize(light_position - world_position);
+    vec3 V = normalize(eye_position - world_position);
+    vec3 H = normalize(L + V);
 
     // TODO(student): Define ambient light component
     float ambient_light = 0.25;
 
     // TODO(student): Compute diffuse light component
-    float diffuse_light = 0;
+    float diffuse_light = max(dot(world_normal, L), 0.0);
 
     // TODO(student): Compute specular light component
     float specular_light = 0;
@@ -43,13 +48,22 @@ void main()
     // method, which we'll use in the future. Don't mix them up!
     if (diffuse_light > 0)
     {
-
+        specular_light = pow(max(dot(world_normal, H), 0.0), material_shininess);
     }
 
     // TODO(student): Compute light
+    float distance = length(light_position - world_position);
+    float attenuation = 1.0 / (1.0 + 0.09 * distance + 0.032 * distance *
+    distance);
+
+    vec3 light_color = vec3(1, 0, 0);
+
+    vec3 ambient = ambient_light * light_color;
+    vec3 diffuse = material_kd * diffuse_light * light_color;
+    vec3 specular = material_ks * specular_light * vec3(1.0) * light_color;
+
+    frag_color = (attenuation * (diffuse + specular) + ambient) * object_color;
 
     // TODO(student): Send color light output to fragment shader
-    color = vec3(1);
-
     gl_Position = Projection * View * Model * vec4(v_position, 1.0);
 }

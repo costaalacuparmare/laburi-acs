@@ -257,6 +257,14 @@ build CMakeFiles/GFXFramework.dir/src/lab_m1/lab9/lab9.cpp.o: CXX_COMPILER__GFXF
   OBJECT_DIR = CMakeFiles/GFXFramework.dir
   OBJECT_FILE_DIR = CMakeFiles/GFXFramework.dir/src/lab_m1/lab9
 
+build CMakeFiles/GFXFramework.dir/src/lab_m1/tema1/tank.cpp.o: CXX_COMPILER__GFXFramework_unscanned_Debug /home/costa/Desktop/Poli/EGC/gfx-framework/src/lab_m1/tema1/tank.cpp || cmake_object_order_depends_target_GFXFramework
+  DEFINES = -DDEBUG -DGLM_FORCE_SILENT_WARNINGS -DLIBGFXC_EXPORTS -DSOLVED -DWITH_LAB_M1 -D_CRT_SECURE_NO_WARNINGS
+  DEP_FILE = CMakeFiles/GFXFramework.dir/src/lab_m1/tema1/tank.cpp.o.d
+  FLAGS = -g -std=gnu++11 -fPIE -fdiagnostics-color=always -Wall -Wextra -pedantic -Wno-error -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable -Wno-missing-field-initializers -Wno-sign-compare
+  INCLUDES = -I/home/costa/Desktop/Poli/EGC/gfx-framework/deps/api -I/home/costa/Desktop/Poli/EGC/gfx-framework/src
+  OBJECT_DIR = CMakeFiles/GFXFramework.dir
+  OBJECT_FILE_DIR = CMakeFiles/GFXFramework.dir/src/lab_m1/tema1
+
 build CMakeFiles/GFXFramework.dir/src/lab_m1/tema1/tema1.cpp.o: CXX_COMPILER__GFXFramework_unscanned_Debug /home/costa/Desktop/Poli/EGC/gfx-framework/src/lab_m1/tema1/tema1.cpp || cmake_object_order_depends_target_GFXFramework
   DEFINES = -DDEBUG -DGLM_FORCE_SILENT_WARNINGS -DLIBGFXC_EXPORTS -DSOLVED -DWITH_LAB_M1 -D_CRT_SECURE_NO_WARNINGS
   DEP_FILE = CMakeFiles/GFXFramework.dir/src/lab_m1/tema1/tema1.cpp.o.d
@@ -264,6 +272,38 @@ build CMakeFiles/GFXFramework.dir/src/lab_m1/tema1/tema1.cpp.o: CXX_COMPILER__GF
   INCLUDES = -I/home/costa/Desktop/Poli/EGC/gfx-framework/deps/api -I/home/costa/Desktop/Poli/EGC/gfx-framework/src
   OBJECT_DIR = CMakeFiles/GFXFramework.dir
   OBJECT_FILE_DIR = CMakeFiles/GFXFramework.dir/src/lab_m1/tema1
+
+build CMakeFiles/GFXFramework.dir/src/lab_m1/tema1/utils.cpp.o: CXX_COMPILER__GFXFramework_unscanned_Debug /home/costa/Desktop/Poli/EGC/gfx-framework/src/lab_m1/tema1/utils.cpp || cmake_object_order_depends_target_GFXFramework
+  DEFINES = -DDEBUG -DGLM_FORCE_SILENT_WARNINGS -DLIBGFXC_EXPORTS -DSOLVED -DWITH_LAB_M1 -D_CRT_SECURE_NO_WARNINGS
+  DEP_FILE = CMakeFiles/GFXFramework.dir/src/lab_m1/tema1/utils.cpp.o.d
+  FLAGS = -g -std=gnu++11 -fPIE -fdiagnostics-color=always -Wall -Wextra -pedantic -Wno-error -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable -Wno-missing-field-initializers -Wno-sign-compare
+  INCLUDES = -I/home/costa/Desktop/Poli/EGC/gfx-framework/deps/api -I/home/costa/Desktop/Poli/EGC/gfx-framework/src
+  OBJECT_DIR = CMakeFiles/GFXFramework.dir
+  OBJECT_FILE_DIR = CMakeFiles/GFXFramework.dir/src/lab_m1/tema1
+
+build CMakeFiles/GFXFramework.dir/src/lab_m1/tema2/drone.cpp.o: CXX_COMPILER__GFXFramework_unscanned_Debug /home/costa/Desktop/Poli/EGC/gfx-framework/src/lab_m1/tema2/drone.cpp || cmake_object_order_depends_target_GFXFramework
+  DEFINES = -DDEBUG -DGLM_FORCE_SILENT_WARNINGS -DLIBGFXC_EXPORTS -DSOLVED -DWITH_LAB_M1 -D_CRT_SECURE_NO_WARNINGS
+  DEP_FILE = CMakeFiles/GFXFramework.dir/src/lab_m1/tema2/drone.cpp.o.d
+  FLAGS = -g -std=gnu++11 -fPIE -fdiagnostics-color=always -Wall -Wextra -pedantic -Wno-error -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable -Wno-missing-field-initializers -Wno-sign-compare
+  INCLUDES = -I/home/costa/Desktop/Poli/EGC/gfx-framework/deps/api -I/home/costa/Desktop/Poli/EGC/gfx-framework/src
+  OBJECT_DIR = CMakeFiles/GFXFramework.dir
+  OBJECT_FILE_DIR = CMakeFiles/GFXFramework.dir/src/lab_m1/tema2
+
+build CMakeFiles/GFXFramework.dir/src/lab_m1/tema2/tema2.cpp.o: CXX_COMPILER__GFXFramework_unscanned_Debug /home/costa/Desktop/Poli/EGC/gfx-framework/src/lab_m1/tema2/tema2.cpp || cmake_object_order_depends_target_GFXFramework
+  DEFINES = -DDEBUG -DGLM_FORCE_SILENT_WARNINGS -DLIBGFXC_EXPORTS -DSOLVED -DWITH_LAB_M1 -D_CRT_SECURE_NO_WARNINGS
+  DEP_FILE = CMakeFiles/GFXFramework.dir/src/lab_m1/tema2/tema2.cpp.o.d
+  FLAGS = -g -std=gnu++11 -fPIE -fdiagnostics-color=always -Wall -Wextra -pedantic -Wno-error -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable -Wno-missing-field-initializers -Wno-sign-compare
+  INCLUDES = -I/home/costa/Desktop/Poli/EGC/gfx-framework/deps/api -I/home/costa/Desktop/Poli/EGC/gfx-framework/src
+  OBJECT_DIR = CMakeFiles/GFXFramework.dir
+  OBJECT_FILE_DIR = CMakeFiles/GFXFramework.dir/src/lab_m1/tema2
+
+build CMakeFiles/GFXFramework.dir/src/lab_m1/tema2/utils.cpp.o: CXX_COMPILER__GFXFramework_unscanned_Debug /home/costa/Desktop/Poli/EGC/gfx-framework/src/lab_m1/tema2/utils.cpp || cmake_object_order_depends_target_GFXFramework
+  DEFINES = -DDEBUG -DGLM_FORCE_SILENT_WARNINGS -DLIBGFXC_EXPORTS -DSOLVED -DWITH_LAB_M1 -D_CRT_SECURE_NO_WARNINGS
+  DEP_FILE = CMakeFiles/GFXFramework.dir/src/lab_m1/tema2/utils.cpp.o.d
+  FLAGS = -g -std=gnu++11 -fPIE -fdiagnostics-color=always -Wall -Wextra -pedantic -Wno-error -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable -Wno-missing-field-initializers -Wno-sign-compare
+  INCLUDES = -I/home/costa/Desktop/Poli/EGC/gfx-framework/deps/api -I/home/costa/Desktop/Poli/EGC/gfx-framework/src
+  OBJECT_DIR = CMakeFiles/GFXFramework.dir
+  OBJECT_FILE_DIR = CMakeFiles/GFXFramework.dir/src/lab_m1/tema2
 
 build CMakeFiles/GFXFramework.dir/src/main.cpp.o: CXX_COMPILER__GFXFramework_unscanned_Debug /home/costa/Desktop/Poli/EGC/gfx-framework/src/main.cpp || cmake_object_order_depends_target_GFXFramework
   DEFINES = -DDEBUG -DGLM_FORCE_SILENT_WARNINGS -DLIBGFXC_EXPORTS -DSOLVED -DWITH_LAB_M1 -D_CRT_SECURE_NO_WARNINGS
@@ -297,7 +337,7 @@ build CMakeFiles/GFXFramework.dir/src/utils/text_utils.cpp.o: CXX_COMPILER__GFXF
 #############################################
 # Link the executable bin/Debug/GFXFramework
 
-build bin/Debug/GFXFramework: CXX_EXECUTABLE_LINKER__GFXFramework_Debug CMakeFiles/GFXFramework.dir/src/components/camera_input.cpp.o CMakeFiles/GFXFramework.dir/src/components/scene_input.cpp.o CMakeFiles/GFXFramework.dir/src/components/simple_scene.cpp.o CMakeFiles/GFXFramework.dir/src/components/text_renderer.cpp.o CMakeFiles/GFXFramework.dir/src/core/engine.cpp.o CMakeFiles/GFXFramework.dir/src/core/gpu/frame_buffer.cpp.o CMakeFiles/GFXFramework.dir/src/core/gpu/gpu_buffers.cpp.o CMakeFiles/GFXFramework.dir/src/core/gpu/mesh.cpp.o CMakeFiles/GFXFramework.dir/src/core/gpu/shader.cpp.o CMakeFiles/GFXFramework.dir/src/core/gpu/texture2D.cpp.o CMakeFiles/GFXFramework.dir/src/core/managers/texture_manager.cpp.o CMakeFiles/GFXFramework.dir/src/core/window/input_controller.cpp.o CMakeFiles/GFXFramework.dir/src/core/window/window_callbacks.cpp.o CMakeFiles/GFXFramework.dir/src/core/window/window_object.cpp.o CMakeFiles/GFXFramework.dir/src/core/world.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab1/lab1.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab2/lab2.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab3/lab3.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab3/lab3_vis2D.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab3/object2D.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab4/lab4.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab5/lab5.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab6/lab6.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab7/lab7.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab8/lab8.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab9/lab9.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/tema1/tema1.cpp.o CMakeFiles/GFXFramework.dir/src/main.cpp.o CMakeFiles/GFXFramework.dir/src/utils/gl_utils.cpp.o CMakeFiles/GFXFramework.dir/src/utils/text_utils.cpp.o | /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libGLU.so /home/costa/Desktop/Poli/EGC/gfx-framework/deps/prebuilt/GFXComponents/x86_64/GFXComponents.so
+build bin/Debug/GFXFramework: CXX_EXECUTABLE_LINKER__GFXFramework_Debug CMakeFiles/GFXFramework.dir/src/components/camera_input.cpp.o CMakeFiles/GFXFramework.dir/src/components/scene_input.cpp.o CMakeFiles/GFXFramework.dir/src/components/simple_scene.cpp.o CMakeFiles/GFXFramework.dir/src/components/text_renderer.cpp.o CMakeFiles/GFXFramework.dir/src/core/engine.cpp.o CMakeFiles/GFXFramework.dir/src/core/gpu/frame_buffer.cpp.o CMakeFiles/GFXFramework.dir/src/core/gpu/gpu_buffers.cpp.o CMakeFiles/GFXFramework.dir/src/core/gpu/mesh.cpp.o CMakeFiles/GFXFramework.dir/src/core/gpu/shader.cpp.o CMakeFiles/GFXFramework.dir/src/core/gpu/texture2D.cpp.o CMakeFiles/GFXFramework.dir/src/core/managers/texture_manager.cpp.o CMakeFiles/GFXFramework.dir/src/core/window/input_controller.cpp.o CMakeFiles/GFXFramework.dir/src/core/window/window_callbacks.cpp.o CMakeFiles/GFXFramework.dir/src/core/window/window_object.cpp.o CMakeFiles/GFXFramework.dir/src/core/world.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab1/lab1.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab2/lab2.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab3/lab3.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab3/lab3_vis2D.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab3/object2D.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab4/lab4.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab5/lab5.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab6/lab6.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab7/lab7.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab8/lab8.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/lab9/lab9.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/tema1/tank.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/tema1/tema1.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/tema1/utils.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/tema2/drone.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/tema2/tema2.cpp.o CMakeFiles/GFXFramework.dir/src/lab_m1/tema2/utils.cpp.o CMakeFiles/GFXFramework.dir/src/main.cpp.o CMakeFiles/GFXFramework.dir/src/utils/gl_utils.cpp.o CMakeFiles/GFXFramework.dir/src/utils/text_utils.cpp.o | /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libGLU.so /home/costa/Desktop/Poli/EGC/gfx-framework/deps/prebuilt/GFXComponents/x86_64/GFXComponents.so
   FLAGS = -g
   LINK_LIBRARIES = -Wl,-rpath,"\$$ORIGIN"  /usr/lib/x86_64-linux-gnu/libOpenGL.so  /usr/lib/x86_64-linux-gnu/libGLX.so  /usr/lib/x86_64-linux-gnu/libGLU.so  -lGLEW  -lglfw  -lassimp  -lspdlog  -lfreetype  /home/costa/Desktop/Poli/EGC/gfx-framework/deps/prebuilt/GFXComponents/x86_64/GFXComponents.so
   OBJECT_DIR = CMakeFiles/GFXFramework.dir

@@ -8,13 +8,13 @@ namespace m1
 {
     class Lab8 : public gfxc::SimpleScene
     {
-     public:
+    public:
         Lab8();
         ~Lab8();
 
         void Init() override;
 
-     private:
+    private:
         void FrameStart() override;
         void Update(float deltaTimeSeconds) override;
         void FrameEnd() override;
@@ -37,6 +37,18 @@ namespace m1
         float materialKs;
 
         // TODO(student): If you need any other class variables, define them here.
+        GLint typeOfLight;
+        GLfloat angleOX, angleOY;
+        GLfloat cutoffAngle;
+        struct light_source
+        {
+            GLint  type;
+            glm::vec3 position;
+            glm::vec3 color;
+            glm::vec3 direction;
+        };
+
+        struct light_source lights[2];
 
     };
 }   // namespace m1
