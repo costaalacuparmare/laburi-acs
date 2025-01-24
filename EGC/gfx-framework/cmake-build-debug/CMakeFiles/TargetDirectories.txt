@@ -1,3 +1,0 @@
-/home/costa/Desktop/Poli/EGC/gfx-framework/cmake-build-debug/CMakeFiles/GFXFramework.dir
-/home/costa/Desktop/Poli/EGC/gfx-framework/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/costa/Desktop/Poli/EGC/gfx-framework/cmake-build-debug/CMakeFiles/rebuild_cache.dir
