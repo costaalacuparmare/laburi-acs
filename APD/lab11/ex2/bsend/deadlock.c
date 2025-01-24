@@ -19,14 +19,38 @@ int main (int argc, char *argv[])
         for (int i = 0; i < SIZE; i++) {
             num1[i] = 100;
         }
-        MPI_Send(&num1, SIZE, MPI_INT, 1, 0, MPI_COMM_WORLD);
+        int buffer_attached_size = MPI_BSEND_OVERHEAD + SIZE * sizeof(int);
+
+        char *buffered_send = (char *) malloc(buffer_attached_size);
+
+        MPI_Buffer_attach(buffered_send, buffer_attached_size);
+        MPI_Bsend(&num1, SIZE, MPI_INT, 1, 0, MPI_COMM_WORLD);
+
+        printf("Sent from %d\n", rank);
+
         MPI_Recv(&num2, SIZE, MPI_INT, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        printf("Received from %d\n", rank);
+
+        MPI_Buffer_detach(buffered_send, &buffer_attached_size);
+        free(buffered_send);
     } else {
         for (int i = 0; i < SIZE; i++) {
             num2[i] = 200;
         }
-        MPI_Send(&num2, SIZE, MPI_INT, 0, 0, MPI_COMM_WORLD);
+        int buffer_attached_size = MPI_BSEND_OVERHEAD + SIZE * sizeof(int);
+
+        char *buffered_send = (char *) malloc(buffer_attached_size);
+
+        MPI_Buffer_attach(buffered_send, buffer_attached_size);
+        MPI_Bsend(&num2, SIZE, MPI_INT, 0, 0, MPI_COMM_WORLD);
+
+        printf("Sent from %d\n", rank);
+
         MPI_Recv(&num1, SIZE, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        printf("Received from %d\n", rank);
+
+        MPI_Buffer_detach(buffered_send, &buffer_attached_size);
+        free(buffered_send);
     }
 
     MPI_Finalize();

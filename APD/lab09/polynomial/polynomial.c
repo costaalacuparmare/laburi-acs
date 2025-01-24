@@ -16,7 +16,7 @@ int main(int argc, char * argv[]) {
 
     if (rank == MASTER) { // This code is run by a single process
         int polynomialSize, n;
-        int x = 5; // valoarea cu care se calculeaza polinomul - f(5)
+        int x = 1; // valoarea cu care se calculeaza polinomul - f(5)
 
         /*
             in fisierul de intrare formatul este urmatorul:

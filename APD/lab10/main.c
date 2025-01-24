@@ -161,7 +161,7 @@ int get_number_of_nodes(int rank, int leader) {
 		*/
         for (int i = 0; i < num_neigh; i++) {
             MPI_Send(&val, 1, MPI_DOUBLE, neigh[i], 0, MPI_COMM_WORLD);
-            MPI_Recv(&recvd, 1, MPI_DOUBLE, neigh[i], 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            MPI_Recv(&recvd, 1, MPI_DOUBLE, MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
             val = (val + recvd) / 2;
         }
 	}

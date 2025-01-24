@@ -3,7 +3,7 @@
 #include<stdlib.h>
 #include<math.h>
 
-#define N 10000
+#define N 1000
 #define MASTER 0
 
 void compareVectors(int * a, int * b) {
@@ -53,16 +53,15 @@ int main(int argc, char * argv[]) {
 
     if (rank == MASTER) {
         // generate random vector
-        srand(42);
         for (i = 0; i < N; i++) {
-            v[i] = rand() % 200;
+            v[i] = rand() % (N * N);
         }
     }
 
     // send the vector to all processes
     MPI_Bcast(v, N, MPI_INT, MASTER, MPI_COMM_WORLD);
 
-	if(rank == 0) {
+	if (rank == 0) {
 		// DO NOT MODIFY
 		displayVector(v);
 
@@ -72,46 +71,51 @@ int main(int argc, char * argv[]) {
 			vQSort[i] = v[i];
 		qsort(vQSort, N, sizeof(int), cmp);
 
-        // recv the new pozitions
-        for (i = 1; i < nProcesses; i++) {
-            MPI_Recv(pos, N, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-            for (j = 0; j < N; j++) {
-                v[j] = pos[j];
-            }
-        }
+        MPI_Status status;
 
-        // sort the vector v
-        for (i = 0; i < N; i++) {
-            for (j = i + 1; j < N; j++) {
-                if (v[i] > v[j] || (v[i] == v[j] && i > j)) {
-                    int aux = v[i];
-                    v[i] = v[j];
-                    v[j] = aux;
+        // recv the new positions
+
+        // compute the positions
+        int dim = N / nProcesses;
+        for (i = 0; i < dim; i++) {
+            for (j = 0; j < N; j++) {
+                if (v[rank * dim + i] > v[j]) {
+                    pos[rank * dim + i]++;
                 }
             }
         }
+
+        for (i = 1; i < nProcesses; i++) {
+            MPI_Recv(pos + i * dim, dim, MPI_INT, i, 0, MPI_COMM_WORLD, &status);
+        }
+
+        int *vCopy = (int*)malloc(sizeof(int)*N);
+        for (i = 0; i < N; i++) {
+            vCopy[i] = v[i];
+        }
+        // sort the vector v
+        for (i = 0; i < N; i++) {
+            v[pos[i]] = vCopy[i];
+        }
+        free(vCopy);
 
 		displayVector(v);
 		compareVectors(v, vQSort);
 	} else {
 
-        int start = rank * N / nProcesses;
-        int end = (rank + 1) * N / nProcesses;
-        if (rank == nProcesses - 1) {
-            end = N;
-        }
+        int dim = N / nProcesses;
 
         // compute the positions
-        for (int i = start; i < end; i++) {
+        for (int i = 0; i < dim; i++) {
            for (int j = 0; j < N; j++) {
-               if (v[i] > v[j] || (v[i] == v[j] && i > j)) {
-                   pos[i]++;
+               if (v[rank * dim + i] > v[j]) {
+                   pos[rank * dim + i]++;
                }
            }
         }
 
         // send the new positions to process MASTER
-        MPI_Send(pos + start, end - start, MPI_INT, MASTER, 0, MPI_COMM_WORLD);
+        MPI_Send(pos + rank * dim, dim, MPI_INT, MASTER, 0, MPI_COMM_WORLD);
 	}
 
 	MPI_Finalize();
