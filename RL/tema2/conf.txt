@@ -1,0 +1,60 @@
+VLAN4 (Roma, Romulus)
+
+Retea: 10.193.206.0/26
+Roma: 10.193.206.1
+Romulus: 10.193.206.2
+Broadcast: 10.193.206.63
+
+Ipv6
+Retea: 2024:baba:206:193:0004::/96
+Roma: 2024:baba:206:193:0004::1
+Romulus: 2024:baba:206:193:0004::2
+
+VLAN5 (Roma, Milano, Remus)
+
+Retea: 10.193.206.64/26
+Roma: 10.193.206.65
+Milano: 10.193.206.66
+Remus: 10.193.206.67
+Broadcast: 10.193.206.127
+
+Ipv6
+Retea: 2024:baba:206:193:0005::/96
+Roma: 2024:baba:206:193:0005::1
+Milano: 2024:baba:206:193:0005::2
+Remus: 2024:baba:206:193:0005::3
+
+Subretea Milano - Leonardo
+Retea: 10.193.206.128/26
+Milano: 10.193.206.129
+Leonardo: 10.193.206.130
+Broadcast: 10.193.206.191
+
+Subretea Paris - Croissant
+Retea: 10.193.206.192/26
+Paris: 10.193.206.193
+Croissant: 10.193.206.194
+Broadcast: 10.193.206.255
+
+Retea Host - Roma
+Retea: 172.30.133.240/30
+Host: 172.30.133.241
+Roma: 172.30.133.242
+Broadcast: 172.30.133.243
+
+Ipv6
+Retea: fdee:dada:133:121::/64
+Host: fdee:dada:133:121::1
+Roma: fdee:dada:133:121::2
+
+Retea Host - Paris
+Retea: 172.30.133.244/30
+Host: 172.30.133.245
+Paris: 172.30.133.246
+Broadcast: 172.30.133.247
+
+Wireguard
+Retea: 10.204.100.96/30
+Milano: 10.204.100.97
+Paris: 10.204.100.98
+Broadcast: 10.204.100.99
