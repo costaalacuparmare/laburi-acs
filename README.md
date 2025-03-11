@@ -59,7 +59,7 @@
 
 ## Year 3 - Semester 2
 
-`IP` - Program Engineering
+`IP` - Software Engineering
 
 `GPJC` - Game Design
 
@@ -67,6 +67,6 @@
 
 `IA` -  Artificial Intelligence 
 
-`BD` - Databases
+`BD` - Database Programming
 
 `PM` - Microprocessor Design
