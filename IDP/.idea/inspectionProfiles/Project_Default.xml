@@ -1,0 +1,137 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="DuplicatedCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <Languages>
+        <language minSize="191" name="Python" />
+      </Languages>
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="7">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="style" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="LanguageDetectionInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="ignoredPackages">
+        <list>
+          <option value="alabaster" />
+          <option value="appdirs" />
+          <option value="attrs" />
+          <option value="Babel" />
+          <option value="backcall" />
+          <option value="bleach" />
+          <option value="CacheControl" />
+          <option value="certifi" />
+          <option value="chardet" />
+          <option value="click" />
+          <option value="colorama" />
+          <option value="commonmark" />
+          <option value="contextlib2" />
+          <option value="cycler" />
+          <option value="decorator" />
+          <option value="defusedxml" />
+          <option value="distlib" />
+          <option value="distro" />
+          <option value="docutils" />
+          <option value="entrypoints" />
+          <option value="html5lib" />
+          <option value="idna" />
+          <option value="imagesize" />
+          <option value="importlib-metadata" />
+          <option value="ipaddr" />
+          <option value="ipykernel" />
+          <option value="ipython" />
+          <option value="ipython-genutils" />
+          <option value="ipywidgets" />
+          <option value="jedi" />
+          <option value="Jinja2" />
+          <option value="joblib" />
+          <option value="jsonschema" />
+          <option value="jupyter" />
+          <option value="jupyter-client" />
+          <option value="jupyter-console" />
+          <option value="jupyter-core" />
+          <option value="kiwisolver" />
+          <option value="lockfile" />
+          <option value="MarkupSafe" />
+          <option value="matplotlib" />
+          <option value="mistune" />
+          <option value="msgpack" />
+          <option value="nbconvert" />
+          <option value="nbformat" />
+          <option value="notebook" />
+          <option value="numpy" />
+          <option value="packaging" />
+          <option value="pandocfilters" />
+          <option value="parso" />
+          <option value="pep517" />
+          <option value="pexpect" />
+          <option value="pickleshare" />
+          <option value="pip-autoremove" />
+          <option value="progress" />
+          <option value="prometheus-client" />
+          <option value="prompt-toolkit" />
+          <option value="ptyprocess" />
+          <option value="PyAudio" />
+          <option value="pydub" />
+          <option value="Pygments" />
+          <option value="pyparsing" />
+          <option value="pyrsistent" />
+          <option value="python-dateutil" />
+          <option value="pytoml" />
+          <option value="pytz" />
+          <option value="pyzmq" />
+          <option value="qtconsole" />
+          <option value="QtPy" />
+          <option value="recommonmark" />
+          <option value="requests" />
+          <option value="retrying" />
+          <option value="scikit-learn" />
+          <option value="scipy" />
+          <option value="Send2Trash" />
+          <option value="simple-settings" />
+          <option value="six" />
+          <option value="snowballstemmer" />
+          <option value="Sphinx" />
+          <option value="sphinx-rtd-theme" />
+          <option value="sphinxcontrib-applehelp" />
+          <option value="sphinxcontrib-devhelp" />
+          <option value="sphinxcontrib-htmlhelp" />
+          <option value="sphinxcontrib-jsmath" />
+          <option value="sphinxcontrib-qthelp" />
+          <option value="sphinxcontrib-serializinghtml" />
+          <option value="terminado" />
+          <option value="testpath" />
+          <option value="threadpoolctl" />
+          <option value="tinytag" />
+          <option value="tornado" />
+          <option value="traitlets" />
+          <option value="urllib3" />
+          <option value="wcwidth" />
+          <option value="webencodings" />
+          <option value="widgetsnbextension" />
+          <option value="zipp" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N806" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
