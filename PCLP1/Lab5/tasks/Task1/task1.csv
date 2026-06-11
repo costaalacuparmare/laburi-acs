@@ -1,0 +1,19 @@
+﻿1. Se citește un numar intreg n si apoi un vector cu n elemente, numere naturale. Să se afișeze elementele din vector care sunt
+multipli ai ultimului element.
+2. Se citește un numar intreg n si un vector cu n elemente, numere naturale. Să se determine câte elemente ale vectorului
+sunt egale cu diferența dintre cea mai mare și cea mai mică valoare din vector.
+3. Se citește un numar intreg n si un vector cu n elemente, numere naturale. Să se verifice dacă vectorul are elementele ordonate
+strict crescător. Se va afisa 1 in caz afirmativ si 0 in caz contrar.
+4. Se citește un numar intreg n si un vector cu n elemente, numere naturale. Să se verifice dacă toate elementele vectorului au un număr
+ par de cifre. Se va afisa 1 in caz afirmativ si 0 in caz contrar.
+5. Se dau n numere naturale. Adaugati un element x la pozitia k in vectorul dat.
+Ex: n = 5, v = [1, 2, 3, 4, 6], x = 5, k = 4 => [1, 2, 3, 4, 5, 6].
+6. Se da un vector de n elemente. Sa se roteasca vectorul cu k pozitii la stanga.
+Ex: n = 5, v = [1, 2, 3, 4, 5], k = 2 => [3, 4, 5, 1, 2].
+7. Se da un vector de n elemente? De cate ori apare fiecare element intr-un vector dat?
+Ex: [1, 3, 1, 2, 3, 4] 
+se va afisa 
+1 2
+2 1
+3 2
+4 1
