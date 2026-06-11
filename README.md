@@ -1,13 +1,17 @@
-# This is the official (unofficial) UPB Repository of Vlad Constantinescu
-    
->List of descriptions of the courses and when were they taken
+# T# University Politehnic of Bucharest - Coursework Archive (2022 - 2026)
 
+A comprehensive archive of my academic coursework, theoretical foundations, and laboratory projects.
 
 ## Year 1 - Semester 1
 
-`PCLP1` Introduction into C Programming, from loops, types of variables and structures to pointers
+| Course | Subject Area | Core Technologies & Concepts | Repository | Resources |
+| :--- | :--- | :--- | :--- | :--- |
+| **PCLP1** | Intro to C Programming | Loops, memory management, pointers, structs | [View Labs](./PCLP1) | [OCW Page](https://ocw.cs.pub.ro/courses/programare) |
+| **USO** | Linux Operating Systems | CLI, Bash scripting, process management, Regex | [View Labs](./USO) | [OCW Page](https://ocw.cs.pub.ro/courses/uso) |
+| **ALGAED** | Linear Algebra, Geometry Analysis & Differential Ecucations| Matrix transformations, vector spaces, eigenvalues, differential ecuations 1st and 2nd order | [View Notes](./ALGAED) | - |
+| **AMat** | Mathematical Analysis | Sequences, series, partial derivatives, integrals | [View Notes](./AMat) | - |
+| **PL** | Digital Logic Design | Boolean algebra, Karnaugh maps, combinational logic | [View Notes](./PL) | [OCW Page](https://ocw.cs.pub.ro/courses/pl) |
 
-`USO` Using the Linux OS, learning about the CLI and GUI and all about processes, utils, one-liners, bash programming, REGEX
 
 ## Year 1 - Semester 2
 
