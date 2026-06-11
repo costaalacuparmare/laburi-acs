@@ -1,4 +1,4 @@
-# T# University Politehnic of Bucharest - Coursework Archive (2022 - 2026)
+# University Politehnic of Bucharest - Coursework Archive of Constantinescu Vlad (2022 - 2026)
 
 A comprehensive archive of my academic coursework, theoretical foundations, and laboratory projects.
 
@@ -9,7 +9,7 @@ A comprehensive archive of my academic coursework, theoretical foundations, and 
 | **PCLP1** | Intro to C Programming | Loops, memory management, pointers, structs | [View Labs](./PCLP1) | [OCW Page](https://ocw.cs.pub.ro/courses/programare) |
 | **USO** | Linux Operating Systems | CLI, Bash scripting, process management, Regex | [View Labs](./USO) | [OCW Page](https://ocw.cs.pub.ro/courses/uso) |
 | **ALGAED** | Linear Algebra, Geometry Analysis & Differential Ecucations| Matrix transformations, vector spaces, eigenvalues, differential ecuations 1st and 2nd order | [View Notes](./ALGAED) | - |
-| **AMat** | Mathematical Analysis | Sequences, series, partial derivatives, integrals | [View Notes](./AMat) | - |
+| **AMat** | Mathematical Analysis | Sequences, series, partial derivatives, double/ triple integrals, extreme values | [View Notes](./AMat) | - |
 | **PL** | Digital Logic Design | Boolean algebra, Karnaugh maps, combinational logic | [View Notes](./PL) | [OCW Page](https://ocw.cs.pub.ro/courses/pl) |
 
 
